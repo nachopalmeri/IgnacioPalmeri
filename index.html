@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nacho Palmeri — Portfolio & AI Agent Ecosystem</title>
+  <meta name="description" content="Portfolio y visualizador interactivo del ecosistema de agentes IA de Nacho Palmeri. Estudiante de Ingeniería en Sistemas (UADE) y fundador de Pisculichi Labs.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="app-header">
+    <div class="container header-container">
+      <a href="#/" class="logo">
+        <div class="logo-icon"></div>
+        <span class="logo-text">Nacho Palmeri</span>
+        <span class="logo-tag">Pisculichi Labs</span>
+      </a>
+      
+      <nav class="nav-menu">
+        <button class="nav-tab active" data-tab="overview">Overview</button>
+        <button class="nav-tab" data-tab="projects">Proyectos</button>
+        <button class="nav-tab" data-tab="agents">Ecosistema IA</button>
+        <button class="nav-tab" data-tab="vault">Obsidian Vault</button>
+      </nav>
+
+      <div class="header-socials">
+        <a href="https://github.com/nachopalmeri" target="_blank" class="social-link" title="GitHub">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/ignacio-palmeri-64035b378/" target="_blank" class="social-link" title="LinkedIn">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── OVERVIEW TAB ── -->
+  <main id="overview-section" class="view-section active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-tagline">Ingeniería de Sistemas · Pisculichi Labs</div>
+        <h2>Diseño y Construcción de Ecosistemas Inteligentes Autónomos</h2>
+        <p class="hero-description">
+          Soy Nacho Palmeri, estudiante de Ingeniería en Sistemas en la UADE. Diseño agentes de inteligencia artificial y bucles de automejora que resuelven problemas de código, SEO técnico y flujos de estudio locales.
+        </p>
+        <div class="hero-actions">
+          <a href="#/agents" class="btn btn-primary">Ver Ecosistema de Agentes →</a>
+          <a href="https://github.com/nachopalmeri" target="_blank" class="btn btn-secondary">Explorar GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="container">
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-val">19</div>
+          <div class="stat-lbl">Agentes IA Activos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">50+</div>
+          <div class="stat-lbl">Workflows Automatizados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">83</div>
+          <div class="stat-lbl">Skills en el Registro</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">100%</div>
+          <div class="stat-lbl">Automejora Local</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIO AND ACADEMICS -->
+    <section class="container grid-2col">
+      <div class="bio-info">
+        <h3 class="section-title">Sobre Mí & Filosofía</h3>
+        <div class="bio-text">
+          <p>
+            Tengo TDAH, lo que me ha llevado a estructurar mi entorno de desarrollo de una forma sumamente organizada, libre de ruidos innecesarios y guiada por automatizaciones robustas. No creo en el "sludge" de datos ni en el software redundante; mi prioridad siempre es la <strong>elegancia</strong> y la <strong>resolución práctica</strong> de problemas.
+          </p>
+          <p>
+            Mi trabajo se centra en el concepto de <strong>agentes como bucles de mejora continua</strong>. Desarrollo pipelines que detectan fallos, extraen lecciones en archivos markdown locales y reinyectan ese conocimiento de manera dinámica para que la próxima ejecución sea más inteligente. Todo esto sin depender de bases de datos pesadas ni APIs externas de rastreo innecesarias.
+          </p>
+          <p>
+            Actualmente curso mis estudios de Sistemas en la UADE, implementando lo aprendido en mi propio "Ideaverse" en Obsidian y desplegando experimentos mediante herramientas de IA integradas directamente en mi sistema operativo.
+          </p>
+        </div>
+      </div>
+
+      <div class="uade-card">
+        <div class="uade-header">
+          <div class="uade-title">
+            <h4>Estudios en Sistemas</h4>
+            <p>UADE · Universidad Argentina de la Empresa</p>
+          </div>
+          <div class="uade-gpa">Q1 2026</div>
+        </div>
+        
+        <div class="courses-list">
+          <div class="course-item">
+            <div class="course-bullet"></div>
+            <div class="course-info">
+              <h5>Algoritmos y Estructuras de Datos II</h5>
+              <p>Árboles AVL y B+, Teoría de Grafos, Hashing, Complejidad Computacional (O grande), Sorting Avanzado.</p>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-bullet"></div>
+            <div class="course-info">
+              <h5>Programación Orientada a Objetos</h5>
+              <p>Implementación en Java, Polimorfismo, Clases Abstractas, Interfaces, Patrones de Diseño, Entorno Eclipse.</p>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-bullet"></div>
+            <div class="course-info">
+              <h5>Redes de Datos</h5>
+              <p>Modelo OSI, Pilas TCP/IP, Subnetting, Routing estático y dinámico, simulación con Cisco Packet Tracer.</p>
+            </div>
+          </div>
+          <div class="course-item">
+            <div class="course-bullet"></div>
+            <div class="course-info">
+              <h5>Economía & Gestión de Personas</h5>
+              <p>Microeconomía de oferta/demanda, elasticidad de mercado y comportamiento organizacional / liderazgo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="container stack-section">
+      <h3 class="section-title">Radar Tecnológico</h3>
+      <div class="stack-categories">
+        <div class="stack-category">
+          <h4><span class="category-icon adopt"></span> ADOPT (Producción)</h4>
+          <div class="tag-cloud">
+            <span class="tech-badge">Astro</span>
+            <span class="tech-badge">Next.js</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Tailwind CSS</span>
+            <span class="tech-badge">Vercel</span>
+            <span class="tech-badge">SQLite</span>
+            <span class="tech-badge">Git Worktrees</span>
+          </div>
+        </div>
+        <div class="stack-category">
+          <h4><span class="category-icon trial"></span> TRIAL (Evaluación)</h4>
+          <div class="tag-cloud">
+            <span class="tech-badge">Drizzle ORM</span>
+            <span class="tech-badge">Hono</span>
+            <span class="tech-badge">Bun</span>
+            <span class="tech-badge">Supabase</span>
+            <span class="tech-badge">Playwright E2E</span>
+            <span class="tech-badge">Effect-ts</span>
+            <span class="tech-badge">GBrain Daemon</span>
+          </div>
+        </div>
+        <div class="stack-category">
+          <h4><span class="category-icon assess"></span> ASSESS (Backlog)</h4>
+          <div class="tag-cloud">
+            <span class="tech-badge">Rust CLI</span>
+            <span class="tech-badge">Deno 2</span>
+            <span class="tech-badge">Cloudflare Workers</span>
+            <span class="tech-badge">Postgres PGLite</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── PROJECTS TAB ── -->
+  <main id="projects-section" class="view-section">
+    <div class="container projects-container">
+      <h3 class="section-title">Proyectos Destacados</h3>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">agents-system</h4>
+            <span class="project-status status-active">Activo</span>
+          </div>
+          <p class="project-description">
+            Ecosistema multiagente local que opera directamente en Windows. Se integra con Obsidian y corre en background un daemon de automejora (Harness) que detecta excepciones de compilación, escribe lecciones en markdown local y las promueve de forma autónoma a reglas globales.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">TypeScript</span>
+            <span class="project-tag">Playwright</span>
+            <span class="project-tag">PowerShell</span>
+            <span class="project-tag">Markdown Engine</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-link-label">
+              Explorar Ecosistema IA 
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">Q1-2026-UADE Vault</h4>
+            <span class="project-status status-active">Activo</span>
+          </div>
+          <p class="project-description">
+            Bóveda de Obsidian ("Ideaverse") estructurada metodológicamente. Utiliza scripts locales para sincronizar apuntes de materias universitarias, organizar cuestionarios de active recall, estructurar MOCs y vincular podcasts explicativos generados dinámicamente mediante NotebookLM.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Obsidian</span>
+            <span class="project-tag">Active Recall</span>
+            <span class="project-tag">NotebookLM</span>
+            <span class="project-tag">Automation</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-link-label">
+              Ver Estructura de Estudio
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">JobBot</h4>
+            <span class="project-status status-complete">Completado</span>
+          </div>
+          <p class="project-description">
+            Agente autónomo orientado a la búsqueda de empleo. Escanea listados de trabajo en plataformas seleccionadas, cruza requerimientos técnicos contra un perfil de habilidades estructurado, y redacta cartas de motivación y portafolios hiper-personalizados para el reclutador.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">FastAPI</span>
+            <span class="project-tag">LLM Prompts</span>
+            <span class="project-tag">Scraping</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-link-label">
+              Código en GitHub
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">gbrain & Engram</h4>
+            <span class="project-status status-complete">Completado</span>
+          </div>
+          <p class="project-description">
+            Daemons locales independientes. Engram provee almacenamiento en caché semántica en localhost para reducir costes de tokens de LLM. gbrain expone una base de datos vectorial local (PostgreSQL/PGLite) para que los agentes guarden sus memorias sin transferir datos a la nube.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Postgres PGLite</span>
+            <span class="project-tag">Vector Search</span>
+            <span class="project-tag">Local Server</span>
+            <span class="project-tag">Python</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-link-label">
+              Ver Arquitectura
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── AGENT ECOSYSTEM TAB ── -->
+  <main id="agents-section" class="view-section">
+    <div class="container">
+      <div id="eco-viewport">
+        <!-- Interactive background grid -->
+        <div class="eco-grid-bg"></div>
+
+        <!-- Connection lines canvas -->
+        <canvas id="eco-canvas-under" class="eco-canvas"></canvas>
+        <canvas id="eco-canvas-over" class="eco-canvas"></canvas>
+
+        <!-- Transform wrapper for scaled zoom -->
+        <div id="eco-graph-wrapper"></div>
+        
+        <!-- Interactive Subuniverse overlay -->
+        <div id="eco-sub-universe"></div>
+
+        <!-- V7 HUD Stats Badge -->
+        <div id="eco-stats-badge" class="eco-stats-badge">
+          12 Agentes Principales · 50+ Workflows · 83 Skills · Automejora activa
+        </div>
+
+        <!-- Floating panels -->
+        <button id="eco-back-btn"><span>←</span> Volver a la Red</button>
+        <div id="eco-hint" class="eco-hint">Haz click en un agente para explorar su universo · Ejecuta un workflow para ver la red neuronal</div>
+
+        <!-- Stage Controller (top center) -->
+        <div id="eco-stage" class="eco-stage">
+          <div id="eco-stage-badge" class="stage-badge">Director</div>
+          <div id="eco-stage-text" class="stage-text">Enrutando requerimiento de usuario</div>
+          <div id="eco-stage-step" class="stage-step">Paso 1 de 10</div>
+        </div>
+
+        <!-- Bottom Left Node HUD Info -->
+        <div id="eco-hud" class="eco-hud">
+          <div class="hud-header">
+            <div id="eco-hud-dot" class="hud-dot"></div>
+            <div id="eco-hud-name" class="hud-name">Director</div>
+            <div id="eco-hud-role" class="hud-role" style="color: #3b82f6;">Orchestrator</div>
+          </div>
+          <div id="eco-hud-body" class="hud-body">
+            Central nervous system. Routes user intents, coordinates delegation hierarchies, manages local Git commits, checks validation reports, and handles automatic rollbacks on failure.
+          </div>
+          <div id="eco-hud-meta" class="hud-meta">7 sub-nodos · 11 conexiones</div>
+        </div>
+
+        <!-- Bottom Right Workflows Panel -->
+        <div id="eco-wfp" class="eco-wfp">
+          <h3>Workflows Activos</h3>
+          <p>Mira la transferencia de datos y aprendizaje en tiempo real</p>
+          <div id="eco-wf-list" class="wf-list"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── OBSIDIAN VAULT TAB ── -->
+  <main id="vault-section" class="view-section">
+    <div class="container vault-container">
+      <div class="vault-intro">
+        <h3>Mi Ideaverse en Obsidian</h3>
+        <p>
+          Organizo todo mi conocimiento, entregas y preparaciones de parciales usando un vault estructurado con la metodología Atlas. Un daemon local sincroniza mis apuntes, y agentes especializados automatizan cuestionarios de Active Recall.
+        </p>
+      </div>
+
+      <div class="vault-grid">
+        <div class="vault-features">
+          <div class="vault-feature-card">
+            <div class="vault-feature-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <h4>NotebookLM Audio Podcasts</h4>
+            <p>Cada materia cuenta con un cuaderno de NotebookLM vinculado en las notas. Al estudiar, el agente sugiere podcasts de audio generados por IA para reforzar el active recall auditivo.</p>
+          </div>
+
+          <div class="vault-feature-card">
+            <div class="vault-feature-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            </div>
+            <h4>Active Recall Flashcards</h4>
+            <p>Apuntes con metadatos específicos como <code>exam_relevance: high</code> o <code>flashcards_done: false</code>. Los agentes escanean el vault, generan tarjetas de cuestionarios y las inyectan de forma segura.</p>
+          </div>
+
+          <div class="vault-feature-card">
+            <div class="vault-feature-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.27 15C20.35 17.65 17.785 19.5 14.85 19.5c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5c2.723 0 5.103 1.448 6.42 3.633L21 8H16v5"/></svg>
+            </div>
+            <h4>Sincronización Bidireccional</h4>
+            <p>La carpeta <code>.agents/tasks/lessons.md</code> es parte de mi vault. Las lecciones aprendidas en programación se reflejan en mis MOCs de desarrollo y viceversa, centralizando mi crecimiento.</p>
+          </div>
+        </div>
+
+        <div class="vault-preview">
+          <div class="vault-preview-header">
+            <div class="vault-preview-title">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              Efforts/A Q1 2026/AED II/AED2_Clase_6_Grafos.md
+            </div>
+            <div class="window-dots">
+              <div class="window-dot"></div>
+              <div class="window-dot"></div>
+              <div class="window-dot"></div>
+            </div>
+          </div>
+          
+          <div class="vault-preview-content">
+            <div class="md-frontmatter">
+              ---<br>
+              topics: [grafos, bfs, dfs, representacion]<br>
+              exam_relevance: high<br>
+              processed: true<br>
+              flashcards_done: true<br>
+              ---
+            </div>
+            
+            <div class="md-header"># Clase 6: Representación de Grafos & Recorridos</div>
+            
+            <p>
+              Un grafo G = (V, E) consta de un conjunto de vértices V y un conjunto de aristas E. Las dos representaciones principales en memoria son:
+            </p>
+            <br>
+            <p>
+              1. **Matriz de Adyacencia**: Matriz de V x V. Espacio O(V²). Excelente para grafos densos y verificar aristas en O(1).
+            </p>
+            <p>
+              2. **Lista de Adyacencia**: Arreglo de V listas. Espacio O(V + E). Ideal para grafos dispersos.
+            </p>
+
+            <div class="md-header">🚨 Importante para el parcial</div>
+            <p>
+              El profesor enfatizó la diferencia en la complejidad espacial al recorrer grafos dispersos usando BFS: O(V) en lista de adyacencia vs O(V²) si recorremos filas completas de la matriz.
+            </p>
+
+            <div class="md-header">🧪 Auditoría de Comprensión</div>
+            <p>
+              - ¿Por qué DFS utiliza una pila (o recursión) y BFS una cola?<br>
+              - Si un grafo no es conexo, ¿cómo adaptas DFS para visitarlo por completo?
+            </p>
+
+            <div class="md-header">🎙️ Podcast de Audio</div>
+            <p>
+              Puedes escuchar el resumen de esta clase en NotebookLM: <a href="https://notebooklm.google.com/notebook/2e792119-daa3-44d7-8da7-8f31ba60128b?authuser=1" class="md-link" target="_blank">Podcast AED II</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="app-footer">
+    <div class="container footer-container">
+      <div class="footer-text">
+        © 2026 Nacho Palmeri. Construido elegantemente con HTML, CSS, JS y mi Ecosistema IA.
+      </div>
+      <div class="footer-socials">
+        <a href="https://github.com/nachopalmeri" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/ignacio-palmeri-64035b378/" target="_blank">LinkedIn</a>
+        <a href="mailto:ipalmeri@uade.edu.ar">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
