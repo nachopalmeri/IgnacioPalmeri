@@ -16,7 +16,7 @@ Use the **AI Ops Command Center** concept:
 - Keep the positioning: `AI-First Automation Builder & Process Analyst`.
 - Preserve verified content only.
 - Fix JobBot asset so it does not show the PISKU CLI image:
-  - preferred asset: `project-assets/job-bot.webp`;
+  - preferred asset: `project-assets/job-bot.png`;
   - fallback if the image fails: a generated CSS terminal/automation panel labeled `JobBot`, never `project-assets/pisku-cli.png`.
 - Certifications:
   - Red Hat links to Credly.
@@ -52,7 +52,7 @@ Replace static grid/showcase with an interactive carousel:
 - No layout shift on hover.
 - Concrete carousel slides:
   - JobBot:
-    - media: `project-assets/job-bot.webp`;
+    - media: `project-assets/job-bot.png`;
     - proof link: `https://github.com/nachopalmeri/jobbot`;
     - role: `Automation SaaS / AI-first implementation`;
     - stack: `Next.js`, `FastAPI`, `PostgreSQL`, `HMAC`, `Stripe/MercadoPago`;

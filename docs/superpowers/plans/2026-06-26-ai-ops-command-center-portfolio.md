@@ -16,7 +16,7 @@
 - Modify `style.css`: add command-center layout, canvas layers, carousel visuals, responsive states, reduced-motion fallback, and JobBot fallback media styling.
 - Modify `app.js`: add hero canvas animation, carousel state/actions, visibility/reduced-motion pause logic, i18n copy keys, and route-safe initialization.
 - Use existing assets:
-  - `project-assets/job-bot.webp`
+  - `project-assets/job-bot.png`
   - `project-assets/dashboard-franquiciados.PNG`
   - `project-assets/portfolio-v1.png`
   - `project-assets/yo.webp`
@@ -172,7 +172,7 @@ Expected:
 
 - [ ] **Step 2: Add JobBot fallback CSS**
 
-If `job-bot.webp` fails, JS should add `.media-fallback-jobbot`; CSS renders a terminal-like automation panel.
+If `job-bot.png` fails, JS should add `.media-fallback-jobbot`; CSS renders a terminal-like automation panel.
 
 Expected: JobBot never shows PISKU imagery.
 
@@ -216,7 +216,7 @@ Use these exact records:
 ```js
 {
   id: 'jobbot',
-  media: 'project-assets/job-bot.webp',
+  media: 'project-assets/job-bot.png',
   href: 'https://github.com/nachopalmeri/jobbot',
   role: 'Automation SaaS / AI-first implementation',
   stack: ['Next.js', 'FastAPI', 'PostgreSQL', 'HMAC', 'Stripe/MercadoPago'],
@@ -300,7 +300,7 @@ Use Playwright/Chromium:
 - canvas exists and has nonzero painted pixels;
 - carousel has exactly 3 slides;
 - carousel next/prev and keyboard work;
-- JobBot image src is `project-assets/job-bot.webp` or fallback, never `pisku-cli.png`;
+- JobBot image src is `project-assets/job-bot.png` or fallback, never `pisku-cli.png`;
 - no horizontal overflow.
 
 - [ ] **Step 2: Mobile browser check**
