@@ -15,7 +15,9 @@ Use the **AI Ops Command Center** concept:
 ## Content Requirements
 - Keep the positioning: `AI-First Automation Builder & Process Analyst`.
 - Preserve verified content only.
-- Fix JobBot asset so it does not show the PISKU CLI image.
+- Fix JobBot asset so it does not show the PISKU CLI image:
+  - preferred asset: `project-assets/job-bot.webp`;
+  - fallback if the image fails: a generated CSS terminal/automation panel labeled `JobBot`, never `project-assets/pisku-cli.png`.
 - Certifications:
   - Red Hat links to Credly.
   - Claude Code links to Skilljar.
@@ -30,11 +32,15 @@ Use the **AI Ops Command Center** concept:
 ### Hero
 The hero should become an immersive scene:
 
-- Full-bleed animated canvas or lightweight Three.js scene.
+- Full-bleed animated canvas scene implemented locally in `app.js`.
+- Do not add Three.js unless the canvas implementation cannot achieve a nonblank moving scene.
 - Central AI core with moving rings, particles, and agent-node links.
+- Visible proof of multi-agent usage in the hero: at least five labeled nodes around the AI core (`Planner`, `Builder`, `Reviewer`, `Security`, `Docs`) with animated data streams and a small "workflow pulse" state that cycles between them.
 - Text content overlays/anchors cleanly at left.
 - Console and profile/photo become docked command surfaces, not regular cards.
 - Motion should be purposeful and pause/respect reduced motion.
+- Canvas failure fallback: show a static CSS command-center map with the same five labeled nodes and project chips.
+- `prefers-reduced-motion`: disable particle animation, keep a static core, and keep all content visible.
 
 ### Projects Carousel
 Replace static grid/showcase with an interactive carousel:
@@ -44,6 +50,25 @@ Replace static grid/showcase with an interactive carousel:
 - Keyboard buttons, touch/drag support, and accessible labels.
 - Project metadata: role, stack, system value, proof link.
 - No layout shift on hover.
+- Concrete carousel slides:
+  - JobBot:
+    - media: `project-assets/job-bot.webp`;
+    - proof link: `https://github.com/nachopalmeri/jobbot`;
+    - role: `Automation SaaS / AI-first implementation`;
+    - stack: `Next.js`, `FastAPI`, `PostgreSQL`, `HMAC`, `Stripe/MercadoPago`;
+    - system value: asynchronous job-search automation with production security patterns.
+  - FranquiYA:
+    - media: `project-assets/dashboard-franquiciados.PNG`;
+    - proof link: `https://github.com/nachopalmeri/FranquiYA`;
+    - role: `Operations dashboard / process control`;
+    - stack: `TypeScript`, `Dashboard`, `Inventory`, `Cash Flow`, `Audits`;
+    - system value: operational control for stock, invoices, shifts, employees, audits, and cash visibility.
+  - Agents System:
+    - media: `project-assets/portfolio-v1.png`;
+    - proof link: `#/agents`;
+    - role: `Multi-IDE orchestration infrastructure`;
+    - stack: `Claude Code`, `Windsurf`, `Zed`, `PowerShell`, `Bash`, `Symlinks`;
+    - system value: portable prompts, shared context, rules, validation, and local automation across AI development environments.
 
 ### GitHub Activity
 Keep the GitHub activity block but make it feel integrated with the command center:
@@ -58,6 +83,9 @@ Keep current graph concept, but connect the overview visually to it:
 - Reuse the same node/data-stream language.
 - Preserve desktop graph functionality.
 - Preserve mobile inline details.
+- Add/keep an overview proof strip near the hero or carousel showing the orchestration chain:
+  `Intent -> Planner -> Builder -> Reviewer -> Security -> Docs -> Memory`.
+- The proof strip must mention command/context sync across Claude Code, Windsurf, and Zed.
 
 ## Technical Plan Boundaries
 - Keep vanilla HTML/CSS/JS. No build tooling unless unavoidable.
@@ -72,6 +100,13 @@ Keep current graph concept, but connect the overview visually to it:
 - Respect `prefers-reduced-motion`.
 - Maintain no horizontal overflow on mobile.
 - Verify light/dark mode contrast.
+- Hero canvas performance:
+  - cap particle count to a small fixed budget, target <= 90 particles desktop and <= 36 mobile;
+  - pause animation when overview is not visible or document is hidden;
+  - use `requestAnimationFrame`, not timers;
+  - scale for `devicePixelRatio` but cap DPR at 2;
+  - all project images use stable dimensions and lazy loading outside first viewport.
+- No required external runtime dependency for the hero animation.
 
 ## Verification
 - `node --check app.js`.
