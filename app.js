@@ -5,7 +5,7 @@ const UI_COPY = {
     nav: { overview: 'Overview', projects: 'Proyectos', agents: 'Ecosistema IA' },
     hero: {
       tagline: 'AI-First Automation Builder & Process Analyst',
-      title: 'Ignacio Palmeri',
+      title: 'ignaciopalmeri',
       kicker: 'Estudiante de Gestion IT en UADE, enfocado en automatizacion, agentes IA y sistemas que conectan producto, finanzas y operaciones.',
       description: 'Construyo software con alta autonomia usando IA como infraestructura de trabajo: prototipo, valido seguridad y llevo flujos reales a produccion con velocidad.',
       projectsCta: 'Ver proyectos',
@@ -24,11 +24,11 @@ const UI_COPY = {
       welcome: 'Escribi help para explorar mi perfil.',
       prompt: 'Comandos: about, skills, projects, agents, contact, clear',
       unknown: 'Comando no encontrado',
-      about: 'Ignacio Palmeri - estudiante de Gestion IT en UADE y AI-First Builder orientado a automatizacion, procesos y producto.',
+      about: 'ignaciopalmeri - estudiante de Gestion IT en UADE y AI-First Builder orientado a automatizacion, procesos y producto.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering y automatizacion de procesos.',
       projects: 'Proyectos principales: JobBot, FranquiYA, Agents System, Pisculichi Labs, PISKU CLI, FulboTracker, Prode Mundial 2026, DOM y Comida de Barrio.',
       agents: 'Uso IA como infraestructura conectada a flujos de negocio: agentes, contexto, validacion, memoria y automatizacion local.',
-      contact: 'GitHub: @nachopalmeri | LinkedIn: Ignacio Palmeri | Email: ignaciopalmeri1@gmail.com'
+      contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Actividad verificable',
@@ -92,13 +92,13 @@ const UI_COPY = {
       validated: 'Ecosistema visualizado: evidencia revisada',
       system: 'Sistema'
     },
-    footer: { text: '2026 Ignacio Palmeri.', contact: 'Contacto' }
+      footer: { text: '2026 ignaciopalmeri.', contact: 'Contacto' }
   },
   en: {
     nav: { overview: 'Overview', projects: 'Projects', agents: 'AI Ecosystem' },
     hero: {
       tagline: 'AI-First Automation Builder & Process Analyst',
-      title: 'Ignacio Palmeri',
+      title: 'ignaciopalmeri',
       kicker: 'IT Management student at UADE focused on automation, AI agents and systems that connect product, finance and operations.',
       description: 'I build software with high agency using AI as work infrastructure: prototype, validate security and move real workflows to production quickly.',
       projectsCta: 'View projects',
@@ -117,11 +117,11 @@ const UI_COPY = {
       welcome: 'Type help to explore my profile.',
       prompt: 'Commands: about, skills, projects, agents, contact, clear',
       unknown: 'Command not found',
-      about: 'Ignacio Palmeri - IT Management student at UADE and AI-First Builder focused on automation, processes and product.',
+      about: 'ignaciopalmeri - IT Management student at UADE and AI-First Builder focused on automation, processes and product.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering and process automation.',
       projects: 'Main projects: JobBot, FranquiYA, Agents System, Pisculichi Labs, PISKU CLI, FulboTracker, World Cup Predictor 2026, DOM and Comida de Barrio.',
       agents: 'I use AI as infrastructure connected to business workflows: agents, context, validation, memory and local automation.',
-      contact: 'GitHub: @nachopalmeri | LinkedIn: Ignacio Palmeri | Email: ignaciopalmeri1@gmail.com'
+      contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Verifiable activity',
@@ -185,7 +185,7 @@ const UI_COPY = {
       validated: 'Ecosystem visualized: evidence reviewed',
       system: 'System'
     },
-    footer: { text: '2026 Ignacio Palmeri.', contact: 'Contact' }
+      footer: { text: '2026 ignaciopalmeri.', contact: 'Contact' }
   }
 };
 
