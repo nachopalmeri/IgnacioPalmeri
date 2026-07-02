@@ -7,13 +7,13 @@ const UI_COPY = {
       tagline: 'AI-First Automation Builder & Process Analyst',
       title: 'ignaciopalmeri',
       availability: 'Disponible para pasantías / Remote-friendly',
-      kicker: 'Estudiante de Gestión IT en UADE, enfocado en automatización, agentes IA y sistemas que conectan producto, finanzas y operaciones.',
-      description: 'Construyo software con alta autonomía usando IA como infraestructura de trabajo: prototipo, valido seguridad y llevo flujos reales a producción con velocidad.',
+      kicker: 'Estudiante de Gestión IT en UADE, construyendo herramientas reales con Python, automatización de procesos y flujos de IA.',
+      description: 'Busco una oportunidad de pasantía donde pueda aportar automatización, criterio de producto y aprendizaje rápido en equipos reales.',
       projectsCta: 'Ver proyectos',
       agentsCta: 'Explorar ecosistema IA',
       githubCta: 'GitHub',
       cvCta: 'Descargar CV',
-      agentContext: 'Sistema multi-agente local para orquestación de flujos de desarrollo',
+      cvEnCta: 'CV in English →',
       status: 'Disponible para Trainee / Junior',
       locationLabel: 'Ubicación',
       location: 'Buenos Aires, Argentina',
@@ -36,7 +36,7 @@ const UI_COPY = {
     github: {
       eyebrow: 'Actividad verificable',
       title: 'GitHub como bitácora de trabajo',
-      body: 'Actividad publica del perfil nachopalmeri: commits, lenguajes y continuidad real en repositorios.'
+      body: 'Actividad pública del perfil nachopalmeri: commits, lenguajes y continuidad real en repositorios.'
     },
     orchestration: {
       body: 'Stack principal para automatización, producto y despliegue.'
@@ -77,13 +77,8 @@ const UI_COPY = {
     agents: {
       eyebrow: 'Sistema real del repo',
       title: 'Ecosistema de agentes',
-      description: 'Mapa de mi sistema local de trabajo: agentes markdown, workflows versionados, reglas, memoria y gates de validacion. La UI muestra como pienso y controlo el trabajo con IA.',
-      stats: '19 roles reales - Workflows documentados - Memoria local activa',
-      back: 'Volver a la red',
-      hint: 'Click en un agente para explorar - Simula un flujo documentado del sistema',
-      stageIdle: 'Esperando workflow',
-      workflowsTitle: 'Workflows documentados',
-      workflowsBody: 'Diagrama basado en archivos reales de ~/.agents. Visualiza rutas de trabajo; no ejecuta archivos markdown.'
+      description: 'Sistema local de agentes para orquestación de flujos de desarrollo. Cada nodo es un rol especializado que coordina tareas de construcción, revisión y documentación de software.',
+      workflowsTitle: 'Flujos de desarrollo'
     },
     graph: {
       subnodes: 'sub-nodos',
@@ -109,7 +104,7 @@ const UI_COPY = {
       agentsCta: 'Explore AI ecosystem',
       githubCta: 'GitHub',
       cvCta: 'Download CV',
-      agentContext: 'Local multi-agent system for development workflow orchestration',
+      cvEnCta: 'CV in English →',
       status: 'Available for Trainee / Junior roles',
       locationLabel: 'Location',
       location: 'Buenos Aires, Argentina',
@@ -173,13 +168,8 @@ const UI_COPY = {
     agents: {
       eyebrow: 'Real repo system',
       title: 'Agent ecosystem',
-      description: 'A map of my local work system: markdown agents, versioned workflows, rules, memory and validation gates. The UI shows how I think and control AI-assisted work.',
-      stats: '19 real roles - Documented workflows - Active local memory',
-      back: 'Back to network',
-      hint: 'Click an agent to explore - Simulate a documented system flow',
-      stageIdle: 'Waiting for workflow',
-      workflowsTitle: 'Documented workflows',
-      workflowsBody: 'Diagram based on real ~/.agents files. It visualizes work paths; it does not execute markdown files.'
+      description: 'Local agent system for development workflow orchestration. Each node is a specialized role that coordinates software construction, review and documentation tasks.',
+      workflowsTitle: 'Development workflows'
     },
     graph: {
       subnodes: 'sub-nodes',
@@ -1332,7 +1322,7 @@ function initEcosystem() {
   });
   window.addEventListener('resize', resizeCanvas);
   
-  backBtn.addEventListener('click', collapseGraph);
+  backBtn && backBtn.addEventListener('click', collapseGraph);
   ecoVp.addEventListener('click', (e) => {
     if (selectedNodeId && !e.target.closest('.eco-node') && !e.target.closest('.sub-node') && !e.target.closest('#eco-hud')) {
       collapseGraph();
@@ -1359,23 +1349,23 @@ function setupCurrentAgentPortfolioData() {
     director: es ? 'Router central definido por agente-principal.md: elige el workflow minimo, coordina agentes y exige evidencia antes de cerrar.' : 'Central router from agente-principal.md: selects the smallest workflow, coordinates agents and requires evidence before closing.',
     architect: es ? 'Arquitectura AI/RAG production-ready: capas, prompts, evaluacion, seguridad, observabilidad y costo.' : 'Production-ready AI/RAG architecture: layers, prompts, evaluation, security, observability and cost.',
     mcp: es ? 'Disena y audita integraciones MCP, schemas de tools, catalogo, adopcion y limites de permisos.' : 'Designs and audits MCP integrations, tool schemas, catalog, adoption and permission limits.',
-    researcher: es ? 'Investiga documentacion actual, librerias, competidores y alternativas antes de recomendar implementacion.' : 'Researches current docs, libraries, competitors and alternatives before recommending implementation.',
+    researcher: es ? 'Investiga documentación actual, librerías, competidores y alternativas antes de recomendar implementación.' : 'Researches current docs, libraries, competitors and alternatives before recommending implementation.',
     design: es ? 'UI, CSS, responsive, accesibilidad visual, motion y reduccion de AI slop en interfaces.' : 'UI, CSS, responsive behavior, visual accessibility, motion and AI-slop reduction in interfaces.',
     tests: es ? 'Pruebas unitarias, Playwright E2E, coverage, mocks y evidencia de regresion.' : 'Unit tests, Playwright E2E, coverage, mocks and regression evidence.',
     security: es ? 'Revisa secretos, comandos peligrosos, dependencias, permisos MCP/plugin, auth y publicacion segura.' : 'Reviews secrets, dangerous commands, dependencies, MCP/plugin permissions, auth and safe publishing.',
-    docs: es ? 'Documentacion tecnica: README, docstrings, API docs, changelogs, guias y handoffs.' : 'Technical documentation: README, docstrings, API docs, changelogs, guides and handoffs.',
+    docs: es ? 'Documentación técnica: README, docstrings, API docs, changelogs, guías y handoffs.' : 'Technical documentation: README, docstrings, API docs, changelogs, guides and handoffs.',
     obsidian: es ? 'Captura conocimiento durable, MOCs, Zettelkasten, vault review y sincronizacion con memoria local.' : 'Captures durable knowledge, MOCs, Zettelkasten, vault review and local memory sync.',
-    product: es ? 'Scoping de MVP, validacion, venture loop, kill/keep/scale y decisiones de producto AI-first.' : 'MVP scoping, validation, venture loop, kill/keep/scale and AI-first product decisions.',
+    product: es ? 'Scoping de MVP, validación, venture loop, kill/keep/scale y decisiones de producto AI-first.' : 'MVP scoping, validation, venture loop, kill/keep/scale and AI-first product decisions.',
     growth: es ? 'Adquisicion organica con SEO, GEO, AEO, programmatic SEO, local SEO y AI search.' : 'Organic acquisition through SEO, GEO, AEO, programmatic SEO, local SEO and AI search.',
     seo: es ? 'SEO técnico y on-page: meta tags, Open Graph, headings, schema, alt text, sitemap y canonicals.' : 'Technical and on-page SEO: meta tags, Open Graph, headings, schema, alt text, sitemap and canonicals.',
     marketing: es ? 'Estrategia de marketing, posicionamiento, GTM, research de audiencia y veredictos GO/NO-GO/PIVOT.' : 'Marketing strategy, positioning, GTM, audience research and GO/NO-GO/PIVOT verdicts.',
     content: es ? 'Contenido X/LinkedIn/Substack, hooks, voz autentica, contenido multiplataforma y personal branding.' : 'X/LinkedIn/Substack content, hooks, authentic voice, multi-platform content and personal branding.',
     academic: es ? 'Tutor academico para estudio, examenes, conceptos y material que puede sincronizarse con Obsidian.' : 'Academic tutor for study, exams, concepts and material that can sync with Obsidian.',
-    reviewer: es ? 'Revision de codigo, PR policy, riesgos, calidad, simplificacion y residual risks.' : 'Code review, PR policy, risks, quality, simplification and residual risks.',
-    release: es ? 'Commits, changelogs, release checklist, validacion de instalacion y publicacion reproducible.' : 'Commits, changelogs, release checklist, install validation and reproducible publishing.',
+    reviewer: es ? 'Revisión de código, PR policy, riesgos, calidad, simplificación y residual risks.' : 'Code review, PR policy, risks, quality, simplification and residual risks.',
+    release: es ? 'Commits, changelogs, release checklist, validación de instalación y publicación reproducible.' : 'Commits, changelogs, release checklist, install validation and reproducible publishing.',
     kickoff: es ? 'Arranque liviano de proyectos: primer milestone, intensidad de proceso y estructura minima viable.' : 'Lean project kickoff: first milestone, process intensity and minimum viable structure.',
     pruner: es ? 'Simplifica prompts, workflows y agentes para reducir costo de contexto sin perder calidad.' : 'Simplifies prompts, workflows and agents to reduce context cost without losing quality.',
-    user: es ? 'Pedidos, specs, revisiones de UI y activaciones de workflow entran como lenguaje natural.' : 'Requests, specs, UI reviews and workflow activations enter as natural language.',
+    user: es ? 'Pedidos, specs, feedback de UI y activaciones de workflow entran como lenguaje natural.' : 'Requests, specs, UI reviews and workflow activations enter as natural language.',
     rules: es ? 'AGENTS.md, rules/*.md y workflows/index.md definen limites, routing, permisos y estilo.' : 'AGENTS.md, rules/*.md and workflows/index.md define limits, routing, permissions and style.',
     memory: es ? 'Lessons markdown, Tech Radar y developer_growth.md usados como memoria local versionada.' : 'Markdown lessons, Tech Radar and developer_growth.md used as versioned local memory.',
     gate: es ? 'Validation.md: no se declara listo sin diff, tests, build, logs, screenshot, fuente o limitacion explicita.' : 'Validation.md: nothing is called done without diff, tests, build, logs, screenshot, source or explicit limitation.',
@@ -1477,7 +1467,7 @@ function setupCurrentAgentPortfolioData() {
       step('principal', 'architect', '[Architecture]', es ? 'Definiendo profundidad tecnica para la tarea' : 'Choosing technical depth for the task'),
       step('architect', 'researcher', '[Docs]', es ? 'Verificando docs actuales y alternativas' : 'Checking current docs and alternatives'),
       step('principal', 'design', '[UI]', es ? 'Refinando interaccion responsive y estados visuales' : 'Refining responsive interaction and visual states'),
-      step('design', 'tests', '[QA path]', es ? 'Preparando superficie de validacion visible' : 'Preparing user-facing validation surface'),
+      step('design', 'tests', '[QA path]', es ? 'Preparando superficie de validación visible' : 'Preparing user-facing validation surface'),
       step('tests', 'security', '[Risk]', es ? 'Chequeando regresion, secretos y comportamiento riesgoso' : 'Checking regression, secrets and risky behavior'),
       step('security', 'gate', '[Evidence]', es ? 'Enviando evidencia a validation.md' : 'Sending evidence to validation.md'),
       step('gate', 'principal', '[Report]', es ? 'Reportando resultado verificado y riesgos residuales' : 'Reporting verified outcome and residual risks', '#10b981')
@@ -1517,10 +1507,10 @@ function setupCurrentAgentPortfolioData() {
       step('design', 'tests', '[Responsive]', es ? 'Probando desktop, tablet y mobile' : 'Testing desktop, tablet and mobile'),
       step('tests', 'gate', '[Evidence]', es ? 'Guardando evidencia antes de cerrar' : 'Saving evidence before closing', '#10b981')
     ]),
-    workflow('parallel-agents', es ? 'Parallel Agents' : 'Parallel Agents', true, es ? 'Director -> tareas independientes -> revision -> integracion' : 'Director -> independent tasks -> review -> integration', [
+    workflow('parallel-agents', es ? 'Parallel Agents' : 'Parallel Agents', true, es ? 'Director -> tareas independientes -> revisión -> integración' : 'Director -> independent tasks -> review -> integration', [
       step('principal', 'researcher', '[Research]', es ? 'Investigacion independiente de opciones' : 'Independent options research'),
       step('principal', 'design', '[Design]', es ? 'Exploracion visual independiente' : 'Independent visual exploration'),
-      step('principal', 'security', '[Risk]', es ? 'Revision de riesgos en paralelo' : 'Parallel risk review'),
+      step('principal', 'security', '[Risk]', es ? 'Revisión de riesgos en paralelo' : 'Parallel risk review'),
       step('reviewer', 'principal', '[Integrate]', es ? 'Integrando conclusiones con criterio humano' : 'Integrating conclusions with human judgment', '#10b981')
     ]),
     workflow('tech-radar', es ? 'Decision Tech Radar' : 'Tech Radar Decision', false, es ? 'Necesidad -> Radar -> Research -> Architect -> Adopt / Trial / Assess / Hold' : 'Need -> Radar -> Research -> Architect -> Adopt / Trial / Assess / Hold', [
@@ -1568,9 +1558,9 @@ function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null)
       seo: 'SEO TÉCNICO',
       security: 'SEGURIDAD / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
-      reviewer: 'REVISION / CALIDAD',
+      reviewer: 'REVISIÓN / CALIDAD',
       obsidian: 'VAULT / MEMORIA',
-      docs: 'DOCUMENTACION TECNICA',
+      docs: 'DOCUMENTACIÓN TÉCNICA',
       product: 'PRODUCTO / MVP',
       design: 'UI / VISUAL / CSS',
       marketing: 'MARKETING / GTM',
@@ -1689,32 +1679,34 @@ function buildNodes() {
     node.el = nodeEl;
   });
 
-  // Build workflows UI list
-  wfList.innerHTML = '';
-  workflowsData.forEach(wf => {
-    const wfEl = document.createElement('button');
-    wfEl.type = 'button';
-    wfEl.className = `wf-item ${wf.isLoop ? 'loop' : ''}`;
-    wfEl.setAttribute('aria-pressed', 'false');
-    wfEl.setAttribute('aria-label', `${wf.name}: ${wf.desc}`);
-    wfEl.innerHTML = `
-      <div>
-        <div class="wf-name">${wf.name}</div>
-        <div class="wf-desc">${wf.desc}</div>
-      </div>
-      <div class="wf-play-btn">
-        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </div>
-    `;
-    
-    wfEl.addEventListener('click', (e) => {
-      e.stopPropagation();
-      runWorkflow(wf);
+  // Workflow controls are optional; the simplified public view keeps only the graph.
+  if (wfList) {
+    wfList.innerHTML = '';
+    workflowsData.forEach(wf => {
+      const wfEl = document.createElement('button');
+      wfEl.type = 'button';
+      wfEl.className = `wf-item ${wf.isLoop ? 'loop' : ''}`;
+      wfEl.setAttribute('aria-pressed', 'false');
+      wfEl.setAttribute('aria-label', `${wf.name}: ${wf.desc}`);
+      wfEl.innerHTML = `
+        <div>
+          <div class="wf-name">${wf.name}</div>
+          <div class="wf-desc">${wf.desc}</div>
+        </div>
+        <div class="wf-play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      `;
+
+      wfEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        runWorkflow(wf);
+      });
+
+      wfList.appendChild(wfEl);
+      wf.uiEl = wfEl;
     });
-    
-    wfList.appendChild(wfEl);
-    wf.uiEl = wfEl;
-  });
+  }
   
   // Stagger nodes entrance
   setTimeout(() => {
@@ -1883,10 +1875,10 @@ function expandNode(nodeId) {
   ecoGraphWrapper.style.transform = `scale(1.8) translate(${targetX}px, ${targetY}px)`;
   
   // Update view states
-  backBtn.classList.add('active');
-  statsBadge.classList.add('faded');
-  wfpPanel.classList.add('faded');
-  ecoHint.classList.add('faded');
+  backBtn && backBtn.classList.add('active');
+  statsBadge && statsBadge.classList.add('faded');
+  wfpPanel && wfpPanel.classList.add('faded');
+  ecoHint && ecoHint.classList.add('faded');
   
   // Stagger node updates (selected vs faded)
   nodesData.forEach(n => {
@@ -1911,10 +1903,10 @@ function collapseGraph() {
   // Reset zoom transform
   ecoGraphWrapper.style.transform = 'scale(1) translate(0px, 0px)';
   
-  backBtn.classList.remove('active');
-  statsBadge.classList.remove('faded');
-  wfpPanel.classList.remove('faded');
-  ecoHint.classList.remove('faded');
+  backBtn && backBtn.classList.remove('active');
+  statsBadge && statsBadge.classList.remove('faded');
+  wfpPanel && wfpPanel.classList.remove('faded');
+  ecoHint && ecoHint.classList.remove('faded');
   
   nodesData.forEach(n => {
     if (!n.el) return;
@@ -1985,8 +1977,8 @@ function runWorkflow(wf) {
     }
   });
   
-  statsBadge.classList.add('faded');
-  ecoHint.classList.add('faded');
+  statsBadge && statsBadge.classList.add('faded');
+  ecoHint && ecoHint.classList.add('faded');
   executeWorkflowStep(0);
 }
 
@@ -2019,13 +2011,17 @@ function stopWorkflow() {
     }
   });
   
-  statsBadge.classList.remove('faded');
-  ecoHint.classList.remove('faded');
+  statsBadge && statsBadge.classList.remove('faded');
+  ecoHint && ecoHint.classList.remove('faded');
 }
 
 function executeWorkflowStep(stepIndex) {
   if (!activeWorkflow) return;
-  
+  if (!stagePanel || !stageBadge || !stageText || !stageStep) {
+    activeWfParticles = [];
+    return;
+  }
+
   const seq = activeWorkflow.seq;
   
   // If workflow completes
