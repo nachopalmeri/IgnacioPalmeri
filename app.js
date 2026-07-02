@@ -6,13 +6,16 @@ const UI_COPY = {
     hero: {
       tagline: 'AI-First Automation Builder & Process Analyst',
       title: 'ignaciopalmeri',
-      kicker: 'Estudiante de Gestion IT en UADE, enfocado en automatizacion, agentes IA y sistemas que conectan producto, finanzas y operaciones.',
-      description: 'Construyo software con alta autonomia usando IA como infraestructura de trabajo: prototipo, valido seguridad y llevo flujos reales a produccion con velocidad.',
+      availability: 'Disponible para pasantías / Remote-friendly',
+      kicker: 'Estudiante de Gestión IT en UADE, enfocado en automatización, agentes IA y sistemas que conectan producto, finanzas y operaciones.',
+      description: 'Construyo software con alta autonomía usando IA como infraestructura de trabajo: prototipo, valido seguridad y llevo flujos reales a producción con velocidad.',
       projectsCta: 'Ver proyectos',
       agentsCta: 'Explorar ecosistema IA',
       githubCta: 'GitHub',
+      cvCta: 'Descargar CV',
+      agentContext: 'Sistema multi-agente local para orquestación de flujos de desarrollo',
       status: 'Disponible para Trainee / Junior',
-      locationLabel: 'Ubicacion',
+      locationLabel: 'Ubicación',
       location: 'Buenos Aires, Argentina',
       focusLabel: 'Foco',
       focus: 'Python - Bots - Dashboards - Product/Fintech',
@@ -21,51 +24,51 @@ const UI_COPY = {
     },
     console: {
       title: 'ignacio@portfolio',
-      welcome: 'Escribi help para explorar mi perfil.',
+      welcome: 'Escribí help para explorar mi perfil.',
       prompt: 'Comandos: about, skills, projects, agents, contact, clear',
       unknown: 'Comando no encontrado',
-      about: 'ignaciopalmeri - estudiante de Gestion IT en UADE y AI-First Builder orientado a automatizacion, procesos y producto.',
-      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering y automatizacion de procesos.',
-      projects: 'Proyectos principales: JobBot, FranquiYA, Agents System, Pisculichi Labs, PISKU CLI, FulboTracker, Prode Mundial 2026, DOM y Comida de Barrio.',
-      agents: 'Uso IA como infraestructura conectada a flujos de negocio: agentes, contexto, validacion, memoria y automatizacion local.',
+      about: 'ignaciopalmeri - estudiante de Gestión IT en UADE y AI-First Builder orientado a automatización, procesos y producto.',
+      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering y automatización de procesos.',
+      projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo, Pisculichi Labs, PISKU CLI, FulboTracker, DOM y Comida de Barrio.',
+      agents: 'Uso IA como infraestructura conectada a flujos de negocio: agentes, contexto, validación, memoria y automatización local.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Actividad verificable',
-      title: 'GitHub como bitacora de trabajo',
+      title: 'GitHub como bitácora de trabajo',
       body: 'Actividad publica del perfil nachopalmeri: commits, lenguajes y continuidad real en repositorios.'
     },
     orchestration: {
-      body: 'Command/context sync entre Claude Code, Windsurf y Zed.'
+      body: 'Stack principal para automatización, producto y despliegue.'
     },
     about: {
-      title: 'Sobre mi',
-      p1: 'Estudio Gestion de Tecnologia de la Informacion en UADE y opero como un AI-First Builder.',
-      p2: 'Uso asistentes avanzados como Claude Code, Cursor y Aider como motor interno para prototipar, asegurar y desplegar software a maxima velocidad. Mi foco esta en la interseccion de sistemas, finanzas y flujos de negocio.',
-      p3: 'Leo sobre comportamiento y estrategia porque en la era de la IA el valor no esta en la sintaxis del codigo, sino en conectar ideas con soluciones de mercado.'
+      title: 'Sobre mí',
+      p1: 'Estudio Gestión de Tecnología de la Información en UADE y opero como un AI-First Builder.',
+      p2: 'Uso asistentes avanzados como Claude Code, Cursor y Aider como motor interno para prototipar, asegurar y desplegar software a máxima velocidad. Mi foco está en la intersección de sistemas, finanzas y flujos de negocio.',
+      p3: 'Leo sobre comportamiento y estrategia porque en la era de la IA el valor no está en la sintaxis del código, sino en conectar ideas con soluciones de mercado.'
     },
     certifications: {
       title: 'Certificaciones',
-      c1: { title: 'Red Hat RH124 / System Administrator', body: 'Linux, administracion de sistemas y fundamentos operativos.' },
+      c1: { title: 'Red Hat RH124 / System Administrator', body: 'Linux, administración de sistemas y fundamentos operativos.' },
       c2: { title: 'Cisco CCNA 1', body: 'Redes, TCP/IP, subnetting y fundamentos de infraestructura.' },
-      c3: { title: 'Claude Code in Action', body: 'Uso de IA en flujos de desarrollo, revision y documentacion.' }
+      c3: { title: 'Claude Code in Action', body: 'Uso de IA en flujos de desarrollo, revisión y documentación.' }
     },
     stack: { title: 'Stack y herramientas', core: 'Uso principal', product: 'Producto y datos', ai: 'AI-assisted workflows' },
     projects: {
       title: 'Proyectos destacados',
       github: 'Ver GitHub',
-      status: { active: 'Activo', public: 'Publico', demo: 'Demo', local: 'Local' },
+      status: { active: 'Activo', public: 'Público', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Agents System - Multi-IDE Orchestration Infrastructure',
-      jobbot: 'SaaS de automatizacion con dashboard Next.js, backend FastAPI/PostgreSQL, cookies httpOnly, webhooks HMAC y pagos con Stripe/MercadoPago. Disenado con flujos AI-first para pasar de idea a produccion con criterios de seguridad.',
-      franquiya: 'Dashboard operativo para stock, facturas, turnos, empleados y auditorias. Un sistema de gestion practico orientado a procesos reales, control de caja e inventario.',
-      agents: 'Infraestructura local para estandarizar reglas, prompts portables y contexto entre Claude Code, Windsurf y Zed. Automatizacion con PowerShell/Bash y symlinks para optimizar el entorno de desarrollo.',
-      roleJobbot: 'Automation SaaS / implementacion AI-first',
+      jobbot: 'SaaS de automatización con dashboard Next.js, backend FastAPI/PostgreSQL, cookies httpOnly, webhooks HMAC y pagos con Stripe/MercadoPago. Diseñado con flujos AI-first para pasar de idea a producción con criterios de seguridad.',
+      franquiya: 'Dashboard operativo para stock, facturas, turnos, empleados y auditorías. Un sistema de gestión práctico orientado a procesos reales, control de caja e inventario.',
+      agents: 'Infraestructura local para estandarizar reglas, prompts portables y contexto entre Claude Code, Windsurf y Zed. Automatización con PowerShell/Bash y symlinks para optimizar el entorno de desarrollo.',
+      roleJobbot: 'Automation SaaS / implementación AI-first',
       roleFranquiya: 'Dashboard operativo / control de procesos',
-      roleAgents: 'Infraestructura multi-IDE de orquestacion',
-      valueJobbot: 'Automatizacion asincronica de busqueda laboral con patrones de seguridad de produccion.',
-      valueFranquiya: 'Control operativo de stock, facturas, turnos, empleados, auditorias y visibilidad de caja.',
-      valueAgents: 'Prompts portables, contexto compartido, reglas, validacion y automatizacion local entre entornos de desarrollo IA.',
+      roleAgents: 'Infraestructura multi-IDE de orquestación',
+      valueJobbot: 'Automatización asincrónica de búsqueda laboral con patrones de seguridad de producción.',
+      valueFranquiya: 'Control operativo de stock, facturas, turnos, empleados, auditorías y visibilidad de caja.',
+      valueAgents: 'Prompts portables, contexto compartido, reglas, validación y automatización local entre entornos de desarrollo IA.',
       proof: 'Ver prueba',
       open: 'Abrir proyecto',
       repo: 'Ver repo',
@@ -99,11 +102,14 @@ const UI_COPY = {
     hero: {
       tagline: 'AI-First Automation Builder & Process Analyst',
       title: 'ignaciopalmeri',
+      availability: 'Available for remote internships / GMT-3',
       kicker: 'IT Management student at UADE focused on automation, AI agents and systems that connect product, finance and operations.',
       description: 'I build software with high agency using AI as work infrastructure: prototype, validate security and move real workflows to production quickly.',
       projectsCta: 'View projects',
       agentsCta: 'Explore AI ecosystem',
       githubCta: 'GitHub',
+      cvCta: 'Download CV',
+      agentContext: 'Local multi-agent system for development workflow orchestration',
       status: 'Available for Trainee / Junior roles',
       locationLabel: 'Location',
       location: 'Buenos Aires, Argentina',
@@ -119,7 +125,7 @@ const UI_COPY = {
       unknown: 'Command not found',
       about: 'ignaciopalmeri - IT Management student at UADE and AI-First Builder focused on automation, processes and product.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering and process automation.',
-      projects: 'Main projects: JobBot, FranquiYA, Agents System, Pisculichi Labs, PISKU CLI, FulboTracker, World Cup Predictor 2026, DOM and Comida de Barrio.',
+      projects: 'Main projects: JobBot, Sports Predictive Analytics Engine, Pisculichi Labs, PISKU CLI, FulboTracker, DOM and Comida de Barrio.',
       agents: 'I use AI as infrastructure connected to business workflows: agents, context, validation, memory and local automation.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
@@ -129,7 +135,7 @@ const UI_COPY = {
       body: 'Public activity from the nachopalmeri profile: commits, languages and real continuity across repositories.'
     },
     orchestration: {
-      body: 'Command/context sync across Claude Code, Windsurf and Zed.'
+      body: 'Core stack for automation, product and deployment.'
     },
     about: {
       title: 'About me',
@@ -151,7 +157,7 @@ const UI_COPY = {
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Agents System - Multi-IDE Orchestration Infrastructure',
       jobbot: 'Automation SaaS with a Next.js dashboard, FastAPI/PostgreSQL backend, httpOnly cookies, HMAC-signed webhooks and Stripe/MercadoPago payments. Designed with AI-first workflows to move from idea to production with security standards.',
-      franquiya: 'Operations dashboard for stock, invoices, shifts, employees and audits. A practical management system for real processes, cash control and inventory.',
+      franquiya: 'Operations dashboard for stock, invoices, shifts, employees and audits. A hands-on management system for real processes, cash control and inventory.',
       agents: 'Local infrastructure to standardize rules, portable prompts and context across Claude Code, Windsurf and Zed. PowerShell/Bash automation and symlinks to optimize the engineering workspace.',
       roleJobbot: 'Automation SaaS / AI-first implementation',
       roleFranquiya: 'Operations dashboard / process control',
@@ -332,86 +338,56 @@ const FEATURED_PROJECTS = [
     status: 'ACTIVE',
     kind: { es: 'Automation SaaS', en: 'Automation SaaS' },
     description: {
-      es: 'SaaS de automatizacion laboral con dashboard, backend Python/FastAPI y flujos asincronicos para alertas, postulaciones y operacion segura.',
+      es: 'SaaS de automatización laboral con dashboard, backend Python/FastAPI y flujos asincrónicos para alertas, postulaciones y operación segura.',
       en: 'Job-search automation SaaS with dashboard, Python/FastAPI backend and asynchronous flows for alerts, applications and secure operations.'
     },
     value: {
-      es: 'Idea a produccion con foco en seguridad, pagos/webhooks y experiencia operativa.',
+      es: 'Idea a producción con foco en seguridad, pagos/webhooks y experiencia operativa.',
       en: 'Idea to production with focus on security, payments/webhooks and operational experience.'
     },
     problem: {
-      es: 'Automatizar busqueda laboral sin perder control sobre seguridad, pagos y webhooks.',
+      es: 'Automatizar búsqueda laboral sin perder control sobre seguridad, pagos y webhooks.',
       en: 'Automate job search without losing control over security, payments and webhooks.'
     },
     role: {
-      es: 'Full-stack builder: dashboard, backend, autenticacion, webhooks y despliegue.',
+      es: 'Full-stack builder: dashboard, backend, autenticación, webhooks y despliegue.',
       en: 'Full-stack builder: dashboard, backend, authentication, webhooks and deployment.'
     },
     evidence: {
-      es: 'Demuestra criterio de producto SaaS, backend Python y patrones de produccion.',
+      es: 'Demuestra criterio de producto SaaS, backend Python y patrones de producción.',
       en: 'Shows SaaS product judgment, Python backend work and production patterns.'
     },
     stack: ['Python', 'FastAPI', 'Next.js', 'PostgreSQL', 'Webhooks']
   },
   {
-    id: 'franquiya',
-    title: 'FranquiYA',
-    repo: 'https://github.com/nachopalmeri/FranquiYA',
-    href: 'https://franqui-ya.vercel.app',
-    media: 'project-assets/dashboard-franquiciados.PNG',
-    status: 'PUBLIC',
-    kind: { es: 'Operations Dashboard', en: 'Operations Dashboard' },
+    id: 'motor-estadistico',
+    title: 'Motor Estadístico Predictivo',
+    repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
+    href: 'https://prode-mundial-2026-ten-omega.vercel.app',
+    media: 'project-assets/prode-mundial-2026.png',
+    status: 'LIVE',
+    kind: { es: 'Analytics de deportes', en: 'Sports analytics' },
     description: {
-      es: 'Sistema de gestion para stock, facturas, turnos, empleados y auditorias, pensado desde procesos reales de franquicias.',
-      en: 'Management system for stock, invoices, shifts, employees and audits, designed around real franchise operations.'
+      es: 'Motor Python para predicciones deportivas, lógica estadística y participación recurrente sobre eventos de alto interés.',
+      en: 'Python engine for sports predictions, statistical logic and recurring participation around high-interest events.'
     },
     value: {
-      es: 'Control de caja, inventario y tareas repetibles en una interfaz de negocio concreta.',
-      en: 'Cash, inventory and repeatable task control in a concrete business interface.'
+      es: 'Analytics deportivo empaquetado como producto desplegado, con reglas claras y experiencia simple.',
+      en: 'Sports analytics packaged as a deployed product with clear rules and a simple experience.'
     },
     problem: {
-      es: 'Ordenar operaciones de franquicia con stock, caja, auditorias y turnos en un solo flujo.',
-      en: 'Organize franchise operations with stock, cash, audits and shifts in one flow.'
+      es: 'Transformar datos y predicciones deportivas en una experiencia usable para usuarios no técnicos.',
+      en: 'Turn sports data and predictions into a usable experience for non-technical users.'
     },
     role: {
-      es: 'Diseno de producto operativo, modelado de procesos y UI de gestion.',
-      en: 'Operational product design, process modeling and management UI.'
+      es: 'Modelado de reglas, lógica Python, deploy y experiencia de participación.',
+      en: 'Rule modeling, Python logic, deployment and participation experience.'
     },
     evidence: {
-      es: 'Conecta tecnologia con procesos reales: inventario, caja y repeticion diaria.',
-      en: 'Connects technology with real processes: inventory, cash and daily repetition.'
+      es: 'Demuestra análisis, lógica de producto y ejecución rápida sobre un caso social con reglas claras.',
+      en: 'Shows analysis, product logic and fast execution on a social use case with clear rules.'
     },
-    stack: ['TypeScript', 'Inventory', 'Audits', 'Cash Flow']
-  },
-  {
-    id: 'agents',
-    title: 'Agents System',
-    repo: 'https://github.com/nachopalmeri/agents-system',
-    href: '#/agents',
-    media: 'project-assets/agents-system.png',
-    status: 'LOCAL',
-    kind: { es: 'Multi-IDE AI Infrastructure', en: 'Multi-IDE AI Infrastructure' },
-    description: {
-      es: 'Sistema real en ~/.agents con AGENTS.md, agentes markdown, workflows, memoria local y reglas para trabajar con Claude Code, Windsurf y Zed.',
-      en: 'Real ~/.agents system with AGENTS.md, markdown agents, workflows, local memory and rules for Claude Code, Windsurf and Zed.'
-    },
-    value: {
-      es: 'IA tratada como infraestructura de trabajo: contexto, validacion, routing y evidencia.',
-      en: 'AI treated as work infrastructure: context, validation, routing and evidence.'
-    },
-    problem: {
-      es: 'Evitar caos de prompts sueltos y llevar IA a un sistema portable entre IDEs.',
-      en: 'Avoid loose-prompt chaos and turn AI into a portable system across IDEs.'
-    },
-    role: {
-      es: 'Arquitectura local de agentes, workflows, memoria, reglas y validacion.',
-      en: 'Local architecture for agents, workflows, memory, rules and validation.'
-    },
-    evidence: {
-      es: 'Demuestra criterio para operar IA con trazabilidad, limites y evidence gates.',
-      en: 'Shows judgment for operating AI with traceability, limits and evidence gates.'
-    },
-    stack: ['Claude Code', 'Windsurf', 'Zed', 'PowerShell', 'Workflows']
+    stack: ['Python', 'Analytics', 'Vercel', 'Game Logic']
   },
   {
     id: 'pisculichi',
@@ -420,21 +396,21 @@ const FEATURED_PROJECTS = [
     href: 'https://polytools-omega.vercel.app',
     media: 'project-assets/polymarktporyect.PNG',
     status: 'BETA',
-    kind: { es: 'Prediction Markets OS', en: 'Prediction Markets OS' },
+    kind: { es: 'Contexto de agencia', en: 'Agency context' },
     description: {
-      es: 'Builder ecosystem para mercados predictivos: alertas, bots y herramientas de portfolio para operar informacion en tiempo real.',
+      es: 'Laboratorio de producto y automatización para mercados predictivos, bots, alertas y herramientas de portfolio.',
       en: 'Builder ecosystem for prediction markets: alerts, bots and portfolio tools for real-time information operations.'
     },
     value: {
-      es: 'Une producto, finanzas y automatizacion en un laboratorio desplegado.',
+      es: 'Contexto de agencia: une producto, finanzas y automatización en un laboratorio desplegado.',
       en: 'Connects product, finance and automation in a deployed lab.'
     },
     problem: {
-      es: 'Convertir informacion de mercados predictivos en herramientas accionables.',
+      es: 'Convertir información de mercados predictivos en herramientas accionables.',
       en: 'Turn prediction-market information into actionable tools.'
     },
     role: {
-      es: 'Producto experimental, automatizacion, bots y experiencia web.',
+      es: 'Producto experimental, automatización, bots y experiencia web.',
       en: 'Experimental product, automation, bots and web experience.'
     },
     evidence: {
@@ -456,15 +432,15 @@ const FEATURED_PROJECTS = [
       en: 'CLI-style interface for a spending/savings control product with a strong identity and direct experience.'
     },
     value: {
-      es: 'Explora una forma distinta de empaquetar producto financiero sin caer en landing generica.',
+      es: 'Explora una forma distinta de empaquetar producto financiero sin caer en landing genérica.',
       en: 'Explores a different way to package a finance product without a generic landing.'
     },
     problem: {
-      es: 'Presentar gestion de gasto/ahorro con una interfaz recordable y directa.',
+      es: 'Presentar gestión de gasto/ahorro con una interfaz recordable y directa.',
       en: 'Present spending/savings control with a memorable, direct interface.'
     },
     role: {
-      es: 'Direccion de producto, copy, experiencia CLI y despliegue web.',
+      es: 'Dirección de producto, copy, experiencia CLI y despliegue web.',
       en: 'Product direction, copy, CLI experience and web deployment.'
     },
     evidence: {
@@ -482,7 +458,7 @@ const FEATURED_PROJECTS = [
     status: 'PUBLIC',
     kind: { es: 'Sports Product', en: 'Sports Product' },
     description: {
-      es: 'Producto para trackear partidos, torneos y dinamicas entre amigos, con foco en experiencia social simple.',
+      es: 'Producto para trackear partidos, torneos y dinámicas entre amigos, con foco en experiencia social simple.',
       en: 'Product for tracking matches, tournaments and friend-group dynamics with a simple social experience.'
     },
     value: {
@@ -490,7 +466,7 @@ const FEATURED_PROJECTS = [
       en: 'Turns an informal activity into a measurable and shareable flow.'
     },
     problem: {
-      es: 'Transformar partidos entre amigos en registro, dinamica social y seguimiento.',
+      es: 'Transformar partidos entre amigos en registro, dinámica social y seguimiento.',
       en: 'Turn friend-group matches into records, social dynamics and tracking.'
     },
     role: {
@@ -504,36 +480,6 @@ const FEATURED_PROJECTS = [
     stack: ['HTML', 'Product UX', 'Sports', 'Vercel']
   },
   {
-    id: 'prode',
-    title: 'Prode Mundial 2026',
-    repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
-    href: 'https://prode-mundial-2026-ten-omega.vercel.app',
-    media: 'project-assets/prode-mundial-2026.png',
-    status: 'LIVE',
-    kind: { es: 'Game / Prediction App', en: 'Game / Prediction App' },
-    description: {
-      es: 'Aplicacion Python desplegada para predicciones del Mundial 2026, parte de la linea de productos sociales y deportivos.',
-      en: 'Deployed Python app for 2026 World Cup predictions, part of the social and sports product line.'
-    },
-    value: {
-      es: 'Usa logica de producto y participacion recurrente sobre un evento global.',
-      en: 'Uses product logic and recurring engagement around a global event.'
-    },
-    problem: {
-      es: 'Crear una experiencia de predicciones simple para un evento de alto interes.',
-      en: 'Create a simple prediction experience for a high-interest event.'
-    },
-    role: {
-      es: 'Logica de juego, deploy Python y experiencia de participacion.',
-      en: 'Game logic, Python deploy and participation experience.'
-    },
-    evidence: {
-      es: 'Demuestra ejecucion rapida sobre un caso social con reglas claras.',
-      en: 'Shows fast execution on a social use case with clear rules.'
-    },
-    stack: ['Python', 'Vercel', 'Game Logic', 'Prediction']
-  },
-  {
     id: 'comidadebarrio',
     title: 'Comida de Barrio',
     repo: 'https://github.com/nachopalmeri/comidadebarrio',
@@ -542,7 +488,7 @@ const FEATURED_PROJECTS = [
     status: 'PUBLIC',
     kind: { es: 'Local Commerce', en: 'Local Commerce' },
     description: {
-      es: 'Experimento web para comercio gastronomico local, enfocado en oferta clara, marca y conversion simple.',
+      es: 'Experimento web para comercio gastronómico local, enfocado en oferta clara, marca y conversión simple.',
       en: 'Web experiment for local food commerce, focused on clear offer, brand and simple conversion.'
     },
     value: {
@@ -550,11 +496,11 @@ const FEATURED_PROJECTS = [
       en: 'Shows judgment for turning small businesses into usable digital presences.'
     },
     problem: {
-      es: 'Dar presencia digital concreta a un comercio gastronomico local.',
+      es: 'Dar presencia digital concreta a un comercio gastronómico local.',
       en: 'Give a local food business a concrete digital presence.'
     },
     role: {
-      es: 'Landing, mensaje comercial, direccion visual y conversion simple.',
+      es: 'Landing, mensaje comercial, dirección visual y conversión simple.',
       en: 'Landing page, commercial message, visual direction and simple conversion.'
     },
     evidence: {
@@ -572,11 +518,11 @@ const FEATURED_PROJECTS = [
     status: 'PUBLIC',
     kind: { es: 'Sports Landing', en: 'Sports Landing' },
     description: {
-      es: 'Landing visual para experiencia deportiva, con foco en narrativa, CTA y presentacion de propuesta.',
+      es: 'Landing visual para experiencia deportiva, con foco en narrativa, CTA y presentación de propuesta.',
       en: 'Visual landing for a sports experience, focused on narrative, CTA and offer presentation.'
     },
     value: {
-      es: 'Prueba de direccion visual y conversion en un contexto no tecnico.',
+      es: 'Prueba de dirección visual y conversión en un contexto no técnico.',
       en: 'Visual direction and conversion practice in a non-technical context.'
     },
     problem: {
@@ -584,7 +530,7 @@ const FEATURED_PROJECTS = [
       en: 'Communicate a sports offer with narrative, visual impact and CTA.'
     },
     role: {
-      es: 'Direccion visual, estructura de landing y experiencia responsive.',
+      es: 'Dirección visual, estructura de landing y experiencia responsive.',
       en: 'Visual direction, landing structure and responsive experience.'
     },
     evidence: {
@@ -602,11 +548,11 @@ const FEATURED_PROJECTS = [
     status: 'PUBLIC',
     kind: { es: 'Commerce Landing', en: 'Commerce Landing' },
     description: {
-      es: 'Sitio comercial desplegado para una marca de productos dulces, dentro de la linea de landing/producto para negocios reales.',
+      es: 'Sitio comercial desplegado para una marca de productos dulces, dentro de la línea de landing/producto para negocios reales.',
       en: 'Deployed commercial site for a sweets brand, part of the landing/product line for real businesses.'
     },
     value: {
-      es: 'Practica de empaquetado visual, mensaje y despliegue rapido.',
+      es: 'Práctica de empaquetado visual, mensaje y despliegue rápido.',
       en: 'Practice in visual packaging, messaging and fast deployment.'
     },
     problem: {
@@ -614,7 +560,7 @@ const FEATURED_PROJECTS = [
       en: 'Turn a sweets brand into a clear web storefront.'
     },
     role: {
-      es: 'Brand landing, copy comercial, presentacion visual y deploy.',
+      es: 'Brand landing, copy comercial, presentación visual y deploy.',
       en: 'Brand landing, commercial copy, visual presentation and deploy.'
     },
     evidence: {
@@ -801,7 +747,7 @@ function renderProjectCarousel() {
         <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
           <strong>${escapeHtml(project.title)}</strong>
-          <small>${escapeHtml(projectField(project, 'evidence'))}</small>
+          <small>${escapeHtml(projectField(project, 'description'))}</small>
         </span>
         <span class="archive-tags">${project.stack.slice(0, 3).map(item => `<em>${escapeHtml(item)}</em>`).join('')}</span>
         <span class="archive-open">${escapeHtml(getCopy('projects.open'))}</span>
@@ -1421,7 +1367,7 @@ function setupCurrentAgentPortfolioData() {
     obsidian: es ? 'Captura conocimiento durable, MOCs, Zettelkasten, vault review y sincronizacion con memoria local.' : 'Captures durable knowledge, MOCs, Zettelkasten, vault review and local memory sync.',
     product: es ? 'Scoping de MVP, validacion, venture loop, kill/keep/scale y decisiones de producto AI-first.' : 'MVP scoping, validation, venture loop, kill/keep/scale and AI-first product decisions.',
     growth: es ? 'Adquisicion organica con SEO, GEO, AEO, programmatic SEO, local SEO y AI search.' : 'Organic acquisition through SEO, GEO, AEO, programmatic SEO, local SEO and AI search.',
-    seo: es ? 'SEO tecnico y on-page: meta tags, Open Graph, headings, schema, alt text, sitemap y canonicals.' : 'Technical and on-page SEO: meta tags, Open Graph, headings, schema, alt text, sitemap and canonicals.',
+    seo: es ? 'SEO técnico y on-page: meta tags, Open Graph, headings, schema, alt text, sitemap y canonicals.' : 'Technical and on-page SEO: meta tags, Open Graph, headings, schema, alt text, sitemap and canonicals.',
     marketing: es ? 'Estrategia de marketing, posicionamiento, GTM, research de audiencia y veredictos GO/NO-GO/PIVOT.' : 'Marketing strategy, positioning, GTM, audience research and GO/NO-GO/PIVOT verdicts.',
     content: es ? 'Contenido X/LinkedIn/Substack, hooks, voz autentica, contenido multiplataforma y personal branding.' : 'X/LinkedIn/Substack content, hooks, authentic voice, multi-platform content and personal branding.',
     academic: es ? 'Tutor academico para estudio, examenes, conceptos y material que puede sincronizarse con Obsidian.' : 'Academic tutor for study, exams, concepts and material that can sync with Obsidian.',
@@ -1553,13 +1499,13 @@ function setupCurrentAgentPortfolioData() {
     workflow('review-loop', es ? 'Review Loop multiagente' : 'Multiagent Review Loop', true, es ? 'Crear -> Criticar -> Red Team -> Roadmap -> Re-evaluar' : 'Create -> Critique -> Red Team -> Roadmap -> Re-evaluate', [
       step('principal', 'architect', '[Create]', es ? 'Borrador inicial con contexto real' : 'Drafting initial solution with real context'),
       step('architect', 'reviewer', '[Critique]', es ? 'Buscando contradicciones, riesgos y falta de tests' : 'Finding contradictions, risks and missing tests'),
-      step('reviewer', 'security', '[Red Team]', es ? 'Atacando modos de falla y automatizacion insegura' : 'Attacking failure modes and unsafe automation', '#ef4444'),
+      step('reviewer', 'security', '[Red Team]', es ? 'Atacando modos de falla y automatización insegura' : 'Attacking failure modes and unsafe automation', '#ef4444'),
       step('security', 'pruner', '[Simplify]', es ? 'Quitando proceso que no cambia el resultado' : 'Removing process that does not change the outcome'),
       step('pruner', 'principal', '[Roadmap]', es ? 'Devolviendo fases ejecutables y criterios de exito' : 'Returning executable phases and success criteria'),
       step('principal', 'gate', '[Re-evaluate]', es ? 'Verificando si las criticas originales quedaron resueltas' : 'Checking whether original critiques are resolved')
     ]),
     workflow('obsidian-flow', es ? 'Obsidian Knowledge Sync' : 'Obsidian Knowledge Sync', false, es ? 'Decision -> Docs -> Obsidian Brain -> MOC / Retro / Lesson' : 'Decision -> Docs -> Obsidian Brain -> MOC / Retro / Lesson', [
-      step('principal', 'docs', '[Decision]', es ? 'Capturando decision, retro o aprendizaje tecnico' : 'Capturing decision, retro or technical learning'),
+      step('principal', 'docs', '[Decision]', es ? 'Capturando decisión, retro o aprendizaje técnico' : 'Capturing decision, retro or technical learning'),
       step('docs', 'obsidian', '[Vault]', es ? 'Eligiendo tipo de nota y ruta en Obsidian' : 'Choosing Obsidian note type and path'),
       step('obsidian', 'memory', '[Learning]', es ? 'Conectando lesson local con conocimiento durable' : 'Connecting local lesson with durable knowledge'),
       step('academic', 'obsidian', '[Study]', es ? 'Guardando material academico cuando aplica' : 'Saving academic material when it applies'),
@@ -1619,7 +1565,7 @@ function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null)
       architect: 'RAG / SISTEMAS LLM',
       researcher: 'RESEARCH / DOCS',
       growth: 'SEO / GEO / AEO',
-      seo: 'SEO TECNICO',
+      seo: 'SEO TÉCNICO',
       security: 'SEGURIDAD / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
       reviewer: 'REVISION / CALIDAD',
