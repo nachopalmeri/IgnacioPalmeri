@@ -604,6 +604,7 @@ window.handleProjectMediaError = function handleProjectMediaError(img) {
 
 function projectImage(project, index, variant = 'mission') {
   const alt = `${project.title} screenshot`;
+  const loading = variant === 'preview' || index === 0 ? 'eager' : 'lazy';
   const dataset = [
     `data-project-title="${escapeHtml(project.title)}"`,
     `data-project-kind="${escapeHtml(projectField(project, 'kind'))}"`,
@@ -614,7 +615,7 @@ function projectImage(project, index, variant = 'mission') {
     <img
       src="${project.media}"
       alt="${escapeHtml(alt)}"
-      loading="${index === 0 ? 'eager' : 'lazy'}"
+      loading="${loading}"
       decoding="async"
       onerror="handleProjectMediaError(this)"
       ${dataset}
@@ -651,41 +652,10 @@ function renderProjectCarousel() {
 
   if (carousel) {
     carousel.innerHTML = `
-      <div class="project-deck-shell">
-        <div class="project-deck-rail" role="tablist" aria-label="Project selector"></div>
-        <div class="project-deck-viewport">
-          <div class="project-active-panel" aria-live="polite"></div>
-        </div>
+      <div class="featured-project-grid" aria-label="Featured projects">
+        ${FEATURED_PROJECTS.slice(0, 3).map((project, index) => renderProjectPreview(project, index, 'active')).join('')}
       </div>
     `;
-    const rail = carousel.querySelector('.project-deck-rail');
-    const panel = carousel.querySelector('.project-active-panel');
-    FEATURED_PROJECTS.forEach((project, index) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = `project-rail-item ${index === activeProjectIndex ? 'active' : ''}`;
-      button.setAttribute('role', 'tab');
-      button.setAttribute('aria-selected', String(index === activeProjectIndex));
-      button.setAttribute('aria-controls', 'project-carousel');
-      button.dataset.projectIndex = String(index);
-      button.innerHTML = `
-        <span class="project-rail-thumb">
-          ${projectImage(project, index, 'thumb')}
-        </span>
-        <span class="project-rail-index">${String(index + 1).padStart(2, '0')}</span>
-        <span>
-          <strong>${escapeHtml(project.title)}</strong>
-          <small>${escapeHtml(projectField(project, 'kind'))}</small>
-        </span>
-      `;
-      button.addEventListener('click', () => setActiveProject(index));
-      button.addEventListener('mouseenter', () => setProjectHover(index));
-      button.addEventListener('focus', () => setProjectHover(index));
-      button.addEventListener('mouseleave', clearProjectHover);
-      button.addEventListener('blur', clearProjectHover);
-      rail.appendChild(button);
-    });
-    panel.innerHTML = renderProjectPreview(FEATURED_PROJECTS[activeProjectIndex], activeProjectIndex, 'active');
   }
 
   if (archive) {
@@ -702,7 +672,9 @@ function renderProjectCarousel() {
       </a>
     `).join('');
   }
-  setActiveProject(activeProjectIndex, false);
+  if (carousel && carousel.querySelector('.project-active-panel')) {
+    setActiveProject(activeProjectIndex, false);
+  }
 }
 
 function setActiveProject(index, focus = true) {
@@ -733,36 +705,6 @@ function clearProjectHover() {
 
 function setupProjectCarousel() {
   renderProjectCarousel();
-  const prev = document.getElementById('project-prev');
-  const next = document.getElementById('project-next');
-  const carousel = document.getElementById('project-carousel');
-  if (!carousel) return;
-
-  prev && prev.addEventListener('click', () => setActiveProject(activeProjectIndex - 1));
-  next && next.addEventListener('click', () => setActiveProject(activeProjectIndex + 1));
-  carousel.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      setActiveProject(activeProjectIndex - 1);
-    }
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      setActiveProject(activeProjectIndex + 1);
-    }
-  });
-
-  let startX = null;
-  carousel.addEventListener('pointerdown', (event) => {
-    startX = event.clientX;
-    carousel.setPointerCapture(event.pointerId);
-  });
-  carousel.addEventListener('pointerup', (event) => {
-    if (startX === null) return;
-    const delta = event.clientX - startX;
-    startX = null;
-    if (Math.abs(delta) > 40) setActiveProject(activeProjectIndex + (delta < 0 ? 1 : -1));
-  });
-  window.addEventListener('resize', () => setActiveProject(activeProjectIndex, false));
 }
 
 function setupThreeAiOpsHero(canvas, hero, nodes, reduceMotion) {
