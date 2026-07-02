@@ -7,13 +7,13 @@ const UI_COPY = {
       tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
       availability: 'Disponible para pasantías y roles trainee',
-      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas desplegadas con Python, FastAPI, automatización de procesos y asistentes de IA.',
-      description: 'Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y capacidad real de convertir procesos repetitivos en software útil.',
-      projectsCta: 'Ver proyectos',
+      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas con IA para automatizar procesos reales de negocio.',
+      description: 'Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y evidencia concreta de trabajo desplegado.',
+      caseStudyCta: 'Ver JobBot case study',
       agentsCta: 'Ver sistema de trabajo',
-      githubCta: 'GitHub',
       cvCta: 'Descargar CV',
       cvEnCta: 'CV in English →',
+      contactCta: 'Contactar',
       status: 'Disponible para Trainee / Junior',
       locationLabel: 'Ubicación',
       location: 'Buenos Aires, Argentina',
@@ -29,22 +29,45 @@ const UI_COPY = {
       unknown: 'Comando no encontrado',
       about: 'ignaciopalmeri - estudiante de Gestión IT en UADE que combina experiencia operativa, producto y automatización para construir software útil.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos y desarrollo asistido por IA.',
-      projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo y Pisculichi Labs.',
+      projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo y 8 proyectos desplegados.',
       agents: 'Uso asistentes de IA como parte de un flujo ordenado: plan, construcción, revisión, pruebas, documentación y publicación.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Actividad verificable',
       title: 'Repos que se pueden revisar',
-      body: 'Prueba pública de trabajo: demos, repositorios, decisiones técnicas y continuidad visible.'
+      body: 'Prueba pública de trabajo: demos, repositorios, decisiones técnicas y continuidad visible en JobBot, el motor predictivo y Pisculichi Labs.'
     },
     orchestration: {
-      body: 'Señales rápidas para recruiters: proyectos desplegados, backend real y contexto operativo.'
+      body: 'Señales rápidas para recruiters: JobBot, 8 proyectos visibles, backend real y contexto operativo.'
     },
     proof: {
-      shipped: { label: 'Proyectos desplegados', body: 'JobBot y motor predictivo con demos públicas.' },
+      shipped: { label: 'Proyectos desplegados', body: 'JobBot, motor predictivo y 8 proyectos visibles.' },
       stack: { label: 'Stack defendible', body: 'Python, FastAPI, PostgreSQL, Linux, GitHub Actions.' },
       ops: { label: 'Contexto operativo', body: 'Caja, inventario, auditorías, soporte y mejora de procesos.' }
+    },
+    jobbot: {
+      eyebrow: 'Case study principal',
+      title: 'JobBot: evidencia de un producto full-stack',
+      intro: 'Construido como proyecto full-stack para demostrar backend, producto y despliegue, no como claim inflado de seniority.',
+      problemLabel: 'Problema',
+      solutionLabel: 'Solución',
+      architectureLabel: 'Arquitectura',
+      stackLabel: 'Stack',
+      decisionsLabel: 'Decisiones técnicas',
+      proofLabel: 'Prueba visible',
+      nextLabel: 'Próximos pasos',
+      demoLabel: 'Demo',
+      repoLabel: 'Repo',
+      readmeLabel: 'README',
+      cvLabel: 'CV',
+      problem: 'Automatizar la búsqueda laboral sin perder control sobre autenticación, pagos, webhooks y notificaciones.',
+      solution: 'Dashboard en Next.js + API en FastAPI con auth segura, persistencia, webhooks y notificaciones por Telegram.',
+      architecture: 'Next.js dashboard -> FastAPI API -> PostgreSQL -> Auth cookies -> Webhooks -> Stripe/MercadoPago -> Telegram',
+      stack: 'Next.js, FastAPI, PostgreSQL, cookies seguras, webhooks, Telegram y pagos.',
+      decisions: 'Separar UI y API, validar flujos sensibles del lado servidor y dejar trazabilidad de pagos y notificaciones.',
+      proof: 'Demo pública, repo, README y CV vinculan el proyecto con evidencia verificable.',
+      next: 'Sumar observabilidad, mejorar onboarding y endurecer permisos por rol.'
     },
     about: {
       title: 'Sobre mí',
@@ -61,6 +84,7 @@ const UI_COPY = {
     stack: { title: 'Stack y herramientas', core: 'Core técnico', product: 'Producto y operaciones', ai: 'AI-assisted development' },
     projects: {
       title: 'Proyectos destacados',
+      archiveTitle: 'Archivo de 8 proyectos',
       github: 'Ver GitHub',
       status: { active: 'Activo', public: 'Público', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
@@ -109,13 +133,13 @@ const UI_COPY = {
       tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
       availability: 'Available for internships and trainee roles',
-      kicker: 'IT Management student at UADE. I build deployed tools with Python, FastAPI, process automation and AI assistants.',
-      description: 'I am looking for an internship or trainee role where I can contribute operational judgment, fast learning and the ability to turn repetitive workflows into useful software.',
-      projectsCta: 'View projects',
+      kicker: 'IT Management student at UADE. I build AI-powered tools that automate real business workflows.',
+      description: 'I am looking for an internship or trainee role where I can contribute operational judgment, fast learning and visible shipped work.',
+      caseStudyCta: 'View JobBot case study',
       agentsCta: 'View workflow system',
-      githubCta: 'GitHub',
       cvCta: 'Download CV',
       cvEnCta: 'CV in English →',
+      contactCta: 'Contact me',
       status: 'Available for Trainee / Junior roles',
       locationLabel: 'Location',
       location: 'Buenos Aires, Argentina',
@@ -131,22 +155,45 @@ const UI_COPY = {
       unknown: 'Command not found',
       about: 'ignaciopalmeri - IT Management student at UADE combining operations, product and automation to build useful software.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, process automation and AI-assisted development.',
-      projects: 'Main projects: JobBot, Sports Predictive Analytics Engine and Pisculichi Labs.',
+      projects: 'Main projects: JobBot, Sports Predictive Analytics Engine and 8 deployed projects.',
       agents: 'I use AI assistants inside an ordered workflow: planning, building, review, tests, documentation and shipping.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Verifiable activity',
       title: 'Repos you can review',
-      body: 'Public proof of work: demos, repositories, technical decisions and visible continuity.'
+      body: 'Public proof of work: demos, repositories, technical decisions and visible continuity in JobBot, the predictive engine and Pisculichi Labs.'
     },
     orchestration: {
-      body: 'Fast recruiter signals: deployed projects, real backend work and operations context.'
+      body: 'Fast recruiter signals: JobBot, 8 visible projects, real backend work and operations context.'
     },
     proof: {
-      shipped: { label: 'Deployed projects', body: 'JobBot and predictive engine with public demos.' },
+      shipped: { label: 'Deployed projects', body: 'JobBot, predictive engine and 8 visible projects.' },
       stack: { label: 'Defensible stack', body: 'Python, FastAPI, PostgreSQL, Linux, GitHub Actions.' },
       ops: { label: 'Operations context', body: 'Cash handling, inventory, audits, support and process improvement.' }
+    },
+    jobbot: {
+      eyebrow: 'Main case study',
+      title: 'JobBot: evidence of a full-stack product',
+      intro: 'Built as a full-stack project to demonstrate backend, product and deployment, not as an inflated seniority claim.',
+      problemLabel: 'Problem',
+      solutionLabel: 'Solution',
+      architectureLabel: 'Architecture',
+      stackLabel: 'Stack',
+      decisionsLabel: 'Technical decisions',
+      proofLabel: 'Visible proof',
+      nextLabel: 'Next steps',
+      demoLabel: 'Demo',
+      repoLabel: 'Repo',
+      readmeLabel: 'README',
+      cvLabel: 'CV',
+      problem: 'Automate job search without losing control over authentication, payments, webhooks and notifications.',
+      solution: 'Next.js dashboard + FastAPI API with secure auth, persistence, webhooks and Telegram notifications.',
+      architecture: 'Next.js dashboard -> FastAPI API -> PostgreSQL -> Auth cookies -> Webhooks -> Stripe/MercadoPago -> Telegram',
+      stack: 'Next.js, FastAPI, PostgreSQL, secure cookies, webhooks, Telegram and payments.',
+      decisions: 'Keep UI and API separate, validate sensitive flows on the server and leave traceability for payments and notifications.',
+      proof: 'Public demo, repo, README and CV link the project to verifiable evidence.',
+      next: 'Add observability, improve onboarding and harden role permissions.'
     },
     about: {
       title: 'About me',
@@ -163,6 +210,7 @@ const UI_COPY = {
     stack: { title: 'Stack and tools', core: 'Technical core', product: 'Product and operations', ai: 'AI-assisted development' },
     projects: {
       title: 'Featured projects',
+      archiveTitle: '8-project archive',
       github: 'View GitHub',
       status: { active: 'Active', public: 'Public', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
@@ -403,8 +451,8 @@ const FEATURED_PROJECTS = [
       en: 'Full-stack builder: dashboard, backend, authentication, webhooks and deployment.'
     },
     evidence: {
-      es: 'Prueba a agregar: diagrama auth/webhooks/pagos, video de 90 segundos y README con decisiones.',
-      en: 'Proof to add: auth/webhooks/payments diagram, 90-second video and README with decisions.'
+      es: 'Demo, repo, auth por cookies, webhooks, pagos y Telegram.',
+      en: 'Demo, repo, cookie auth, webhooks, payments and Telegram.'
     },
     stack: ['Python', 'FastAPI', 'Next.js', 'PostgreSQL', 'Webhooks']
   },
@@ -433,15 +481,15 @@ const FEATURED_PROJECTS = [
       en: 'Rule modeling, Python logic, deployment and participation experience.'
     },
     evidence: {
-      es: 'Prueba a agregar: diagrama de pipeline, explicación del modelo, limitaciones y refresh log.',
-      en: 'Proof to add: pipeline diagram, model explanation, limitations and refresh log.'
+      es: 'Demo, repo, motor Python, Monte Carlo y dashboard.',
+      en: 'Demo, repo, Python engine, Monte Carlo and dashboard.'
     },
     stack: ['Python', 'Analytics', 'Vercel', 'Game Logic']
   },
   {
     id: 'pisculichi',
     title: 'Pisculichi Labs',
-    repo: 'https://github.com/nachopalmeri/a',
+    repo: 'https://github.com/nachopalmeri/pisculabs',
     href: 'https://polytools-omega.vercel.app',
     media: 'project-assets/polymarktporyect.PNG',
     status: 'BETA',
@@ -463,8 +511,8 @@ const FEATURED_PROJECTS = [
       en: 'Experimental product, automation, bots and web experience.'
     },
     evidence: {
-      es: 'Prueba a agregar: qué es, qué no es, screenshots de 2-3 experimentos y próximos pasos.',
-      en: 'Proof to add: what it is, what it is not, screenshots of 2-3 experiments and next steps.'
+      es: 'Demo, repo pisculabs, alcance experimental y alertas.',
+      en: 'Demo, pisculabs repo, experimental scope and alerts.'
     },
     stack: ['HTML', 'Telegram Bot', 'Prediction Markets', 'Alerts']
   },
@@ -493,8 +541,8 @@ const FEATURED_PROJECTS = [
       en: 'Product direction, copy, CLI experience and web deployment.'
     },
     evidence: {
-      es: 'Demuestra criterio de empaque, narrativa y UX fuera del molde de landing.',
-      en: 'Shows packaging, narrative and UX judgment beyond generic landing pages.'
+      es: 'Demo pública y repo; empaqueta UX financiera en formato CLI.',
+      en: 'Public demo and repo; packages finance UX in CLI form.'
     },
     stack: ['Python', 'CLI', 'Finance UX', 'Landing']
   },
@@ -523,8 +571,8 @@ const FEATURED_PROJECTS = [
       en: 'Social product, simple data structure and clear interface.'
     },
     evidence: {
-      es: 'Muestra sensibilidad para productos pequenos con uso recurrente.',
-      en: 'Shows sensitivity for small products with recurring use.'
+      es: 'Demo pública y repo; producto social para seguimiento recurrente.',
+      en: 'Public demo and repo; social product for recurring tracking.'
     },
     stack: ['HTML', 'Product UX', 'Sports', 'Vercel']
   },
@@ -553,8 +601,8 @@ const FEATURED_PROJECTS = [
       en: 'Landing page, commercial message, visual direction and simple conversion.'
     },
     evidence: {
-      es: 'Muestra criterio para resolver necesidades reales sin sobredisenar.',
-      en: 'Shows judgment for solving real needs without overdesigning.'
+      es: 'Demo pública y repo; landing comercial para negocio local.',
+      en: 'Public demo and repo; commercial landing for a local business.'
     },
     stack: ['HTML', 'Local Business', 'Landing', 'Vercel']
   },
@@ -583,8 +631,8 @@ const FEATURED_PROJECTS = [
       en: 'Visual direction, landing structure and responsive experience.'
     },
     evidence: {
-      es: 'Demuestra amplitud para construir interfaces no solo tecnicas.',
-      en: 'Shows range for building interfaces beyond technical dashboards.'
+      es: 'Demo pública y repo; narrativa visual y CTA para oferta deportiva.',
+      en: 'Public demo and repo; visual narrative and CTA for a sports offer.'
     },
     stack: ['HTML', 'Sports', 'Landing', 'Vercel']
   },
@@ -613,8 +661,8 @@ const FEATURED_PROJECTS = [
       en: 'Brand landing, commercial copy, visual presentation and deploy.'
     },
     evidence: {
-      es: 'Muestra velocidad para entregar sitios simples con criterio comercial.',
-      en: 'Shows speed delivering simple sites with commercial judgment.'
+      es: 'Demo pública y repo; brand landing con conversion clara.',
+      en: 'Public demo and repo; brand landing with clear conversion.'
     },
     stack: ['HTML', 'Commerce', 'Brand', 'Vercel']
   }
@@ -685,12 +733,13 @@ function renderProjectPreview(project, index, mode = 'active') {
         <h3>${escapeHtml(project.title)}</h3>
         <p>${escapeHtml(projectField(project, 'description'))}</p>
         <dl class="project-proof-points">
+          <div><dt>${currentLang === 'es' ? 'Problema' : 'Problem'}</dt><dd>${escapeHtml(projectField(project, 'problem'))}</dd></div>
           <div><dt>${currentLang === 'es' ? 'Rol' : 'Role'}</dt><dd>${escapeHtml(projectField(project, 'role'))}</dd></div>
           <div><dt>${currentLang === 'es' ? 'Prueba' : 'Proof'}</dt><dd>${escapeHtml(projectField(project, 'evidence'))}</dd></div>
         </dl>
         <div class="project-preview-tags">${project.stack.slice(0, 4).map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
         <div class="project-preview-links">
-          <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
+          <a class="carousel-proof" href="${project.href}" target="_blank" rel="noopener noreferrer">${currentLang === 'es' ? 'Demo' : 'Demo'}</a>
           <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
         </div>
       </div>
@@ -712,17 +761,27 @@ function renderProjectCarousel() {
   }
 
   if (archive) {
-    archive.innerHTML = FEATURED_PROJECTS.slice(0, 3).map((project, index) => `
-      <a class="archive-row" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>
+    archive.innerHTML = FEATURED_PROJECTS.map((project, index) => `
+      <article class="archive-row" data-project-id="${project.id}">
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
         <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
           <strong>${escapeHtml(project.title)}</strong>
           <small>${escapeHtml(projectField(project, 'description'))}</small>
+          <em class="archive-problem"><span>${currentLang === 'es' ? 'Problema' : 'Problem'}</span>${escapeHtml(projectField(project, 'problem'))}</em>
         </span>
-        <span class="archive-tags">${project.stack.slice(0, 3).map(item => `<em>${escapeHtml(item)}</em>`).join('')}</span>
-        <span class="archive-open">${escapeHtml(getCopy('projects.open'))}</span>
-      </a>
+        <span class="archive-proof">
+          <span>${currentLang === 'es' ? 'Rol' : 'Role'}</span>
+          <strong>${escapeHtml(projectField(project, 'role'))}</strong>
+          <span>${currentLang === 'es' ? 'Prueba' : 'Proof'}</span>
+          <strong>${escapeHtml(projectField(project, 'evidence'))}</strong>
+        </span>
+        <span class="archive-tags">${project.stack.slice(0, 4).map(item => `<em>${escapeHtml(item)}</em>`).join('')}</span>
+        <span class="archive-links">
+          <a class="archive-open" href="${project.href}" target="_blank" rel="noopener noreferrer">${currentLang === 'es' ? 'Demo' : 'Demo'}</a>
+          <a class="archive-open subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
+        </span>
+      </article>
     `).join('');
   }
 }

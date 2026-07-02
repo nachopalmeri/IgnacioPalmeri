@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio de ignaciopalmeri: automatización, producto, soporte operativo y proyectos desplegados con evidencia real.">
   <meta property="og:title" content="ignaciopalmeri - Junior AI Automation & Product Engineer">
   <meta property="og:description" content="Portfolio de ignaciopalmeri: automatización, producto, soporte operativo y proyectos desplegados con evidencia real.">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -71,9 +71,9 @@
             Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y capacidad real de convertir procesos repetitivos en software útil.
           </p>
           <div class="hero-actions">
-            <a href="#/projects" class="btn btn-primary" data-i18n="hero.projectsCta">Ver proyectos</a>
+            <a href="#jobbot-case-study" class="btn btn-primary" data-i18n="hero.caseStudyCta">Ver JobBot case study</a>
             <a href="/cv/palmeri_cv_local_es.pdf" download class="btn btn-secondary" data-i18n="hero.cvCta">Descargar CV</a>
-            <a href="https://github.com/nachopalmeri" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-i18n="hero.githubCta">GitHub</a>
+            <a href="mailto:ignaciopalmeri1@gmail.com" class="btn btn-link" data-i18n="hero.contactCta">Contactar</a>
           </div>
           <aside class="hero-command hero-dock" aria-label="Profile signal">
             <figure class="hero-portrait">
@@ -101,6 +101,52 @@
           <strong data-i18n="proof.ops.body">Caja, inventario, auditorías, soporte y mejora de procesos.</strong>
         </div>
         <p data-i18n="orchestration.body">Stack principal para automatización, producto y despliegue.</p>
+      </div>
+    </section>
+
+    <section id="jobbot-case-study" class="container jobbot-case-study" aria-labelledby="jobbot-case-study-title">
+      <div class="case-study-shell">
+        <div class="case-study-header">
+          <p class="eyebrow" data-i18n="jobbot.eyebrow">Case study principal</p>
+          <h2 id="jobbot-case-study-title" data-i18n="jobbot.title">JobBot: evidencia de un producto full-stack</h2>
+          <p class="case-study-intro" data-i18n="jobbot.intro">Construido como proyecto full-stack para demostrar backend, producto y despliegue, no como claim inflado de seniority.</p>
+          <div class="case-study-links" aria-label="JobBot proof links">
+            <a class="btn btn-primary" href="https://jobbot-lime.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="jobbot.demoLabel">Demo</a>
+            <a class="btn btn-secondary" href="https://github.com/nachopalmeri/jobbot" target="_blank" rel="noopener noreferrer" data-i18n="jobbot.repoLabel">Repo</a>
+            <a class="btn btn-secondary" href="README.md" target="_blank" rel="noopener noreferrer" data-i18n="jobbot.readmeLabel">README</a>
+            <a class="btn btn-link" href="/cv/palmeri_cv_local_es.pdf" download data-i18n="jobbot.cvLabel">CV</a>
+          </div>
+        </div>
+        <div class="jobbot-grid">
+          <article>
+            <span data-i18n="jobbot.problemLabel">Problema</span>
+            <p data-i18n="jobbot.problem">Automatizar la búsqueda laboral sin perder control sobre autenticación, pagos, webhooks y notificaciones.</p>
+          </article>
+          <article>
+            <span data-i18n="jobbot.solutionLabel">Solución</span>
+            <p data-i18n="jobbot.solution">Dashboard en Next.js + API en FastAPI con auth segura, persistencia, webhooks y notificaciones por Telegram.</p>
+          </article>
+          <article class="jobbot-architecture">
+            <span data-i18n="jobbot.architectureLabel">Arquitectura</span>
+            <div class="jobbot-diagram" data-i18n="jobbot.architecture">Next.js dashboard → FastAPI API → PostgreSQL → Auth cookies → Webhooks → Stripe/MercadoPago → Telegram</div>
+          </article>
+          <article>
+            <span data-i18n="jobbot.decisionsLabel">Decisiones técnicas</span>
+            <p data-i18n="jobbot.decisions">Separar UI y API, validar flujos sensibles del lado servidor y dejar trazabilidad de pagos y notificaciones.</p>
+          </article>
+          <article>
+            <span data-i18n="jobbot.proofLabel">Prueba visible</span>
+            <p data-i18n="jobbot.proof">Demo pública, repo, README y CV vinculan el proyecto con evidencia verificable.</p>
+          </article>
+          <article>
+            <span data-i18n="jobbot.nextLabel">Próximos pasos</span>
+            <p data-i18n="jobbot.next">Sumar observabilidad, mejorar onboarding y endurecer permisos por rol.</p>
+          </article>
+        </div>
+        <div class="jobbot-stack">
+          <span data-i18n="jobbot.stackLabel">Stack</span>
+          <strong data-i18n="jobbot.stack">Next.js, FastAPI, PostgreSQL, cookies seguras, webhooks, Telegram y pagos.</strong>
+        </div>
       </div>
     </section>
 
@@ -258,7 +304,7 @@
   <main id="projects-section" class="view-section">
     <div class="container projects-container">
       <div class="section-heading-row">
-        <h2 class="section-title" data-i18n="projects.title">Proyectos destacados</h2>
+        <h2 class="section-title" data-i18n="projects.archiveTitle">Archivo de 8 proyectos</h2>
         <a href="https://github.com/nachopalmeri" target="_blank" rel="noopener noreferrer" class="section-link" data-i18n="projects.github">Ver GitHub</a>
       </div>
 

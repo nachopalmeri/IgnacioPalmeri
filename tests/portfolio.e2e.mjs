@@ -89,6 +89,7 @@ async function main() {
       await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
       await page.waitForSelector('#overview-section .hero h1');
       await page.waitForFunction(() => document.querySelectorAll('#overview-section .featured-project-grid .project-preview').length === 3);
+      await page.waitForSelector('#jobbot-case-study');
       await page.waitForSelector('#overview-section .hero-description');
       if (state.errors.length) throw new Error(`pageerror: ${state.errors[0].message}`);
       if (state.consoleErrors.length) throw new Error(`console error: ${state.consoleErrors[0]}`);
@@ -116,7 +117,24 @@ async function main() {
       await page.getByRole('button', { name: 'Proyectos' }).click();
       await page.waitForSelector('#projects-section.view-section.active');
       const archiveRows = await page.locator('#project-archive .archive-row').count();
-      if (archiveRows !== 3) throw new Error(`expected 3 archive rows, got ${archiveRows}`);
+      if (archiveRows !== 8) throw new Error(`expected 8 archive rows, got ${archiveRows}`);
+      const archiveTitle = await page.locator('[data-i18n="projects.archiveTitle"]').textContent();
+      if (!archiveTitle || !archiveTitle.includes('8')) {
+        throw new Error(`unexpected archive title: ${archiveTitle}`);
+      }
+
+      const jobbotDemoLink = await page.locator('#jobbot-case-study a[href="https://jobbot-lime.vercel.app"]').count();
+      if (jobbotDemoLink !== 1) throw new Error('missing JobBot demo link');
+      const jobbotReadmeLink = await page.locator('#jobbot-case-study a[href="README.md"]').count();
+      if (jobbotReadmeLink !== 1) throw new Error('missing JobBot README link');
+
+      const bodyText = await page.locator('body').textContent();
+      if (bodyText && (bodyText.includes('Prueba a agregar') || bodyText.includes('Proof to add'))) {
+        throw new Error('placeholder evidence text still present');
+      }
+
+      const pisculabsHref = await page.locator('#project-archive .archive-row', { hasText: 'Pisculichi Labs' }).locator('a[href*="pisculabs"]').count();
+      if (pisculabsHref !== 1) throw new Error('Pisculichi Labs repo was not updated to pisculabs');
 
       await page.getByRole('button', { name: 'Sistema de trabajo' }).click();
       await page.waitForSelector('#agents-section.view-section.active');
@@ -133,6 +151,10 @@ async function main() {
       if (!cvResponse.ok()) throw new Error(`CV ES returned ${cvResponse.status()}`);
       const cvEnResponse = await page.request.get(`http://127.0.0.1:${port}/cv/palmeri_cv_startups_en.pdf`);
       if (!cvEnResponse.ok()) throw new Error(`CV EN returned ${cvEnResponse.status()}`);
+      const readmeResponse = await page.request.get(`http://127.0.0.1:${port}/README.md`);
+      if (!readmeResponse.ok()) throw new Error(`README returned ${readmeResponse.status()}`);
+      const faviconResponse = await page.request.get(`http://127.0.0.1:${port}/favicon.svg`);
+      if (!faviconResponse.ok()) throw new Error(`favicon returned ${faviconResponse.status()}`);
     });
 
     await withPage(browser, { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } , async (page, state) => {
@@ -141,6 +163,8 @@ async function main() {
       if (state.errors.length) throw new Error(`pageerror mobile: ${state.errors[0].message}`);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
       if (!overflow) throw new Error('horizontal overflow detected on mobile');
+      const mobileCtas = await page.locator('.hero-actions .btn').count();
+      if (mobileCtas < 3) throw new Error(`expected hero CTAs on mobile, got ${mobileCtas}`);
 
       await page.goto(`http://127.0.0.1:${port}/#/agents`, { waitUntil: 'networkidle' });
       await page.waitForSelector('#agents-section.view-section.active');
