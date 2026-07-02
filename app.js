@@ -2,15 +2,15 @@
 
 const UI_COPY = {
   es: {
-    nav: { overview: 'Overview', projects: 'Proyectos', agents: 'Ecosistema IA' },
+    nav: { overview: 'Overview', projects: 'Proyectos', agents: 'Sistema de trabajo' },
     hero: {
-      tagline: 'AI-First Automation Builder & Process Analyst',
+      tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
-      availability: 'Disponible para pasantías / Remote-friendly',
-      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas reales con Python, automatización de procesos y agentes de IA.',
-      description: 'Busco una pasantía donde pueda aportar automatización, criterio de producto y aprendizaje rápido en equipos reales de ingeniería.',
+      availability: 'Disponible para pasantías y roles trainee',
+      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas desplegadas con Python, FastAPI, automatización de procesos y asistentes de IA.',
+      description: 'Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y capacidad real de convertir procesos repetitivos en software útil.',
       projectsCta: 'Ver proyectos',
-      agentsCta: 'Explorar ecosistema IA',
+      agentsCta: 'Ver sistema de trabajo',
       githubCta: 'GitHub',
       cvCta: 'Descargar CV',
       cvEnCta: 'CV in English →',
@@ -27,25 +27,30 @@ const UI_COPY = {
       welcome: 'Escribí help para explorar mi perfil.',
       prompt: 'Comandos: about, skills, projects, agents, contact, clear',
       unknown: 'Comando no encontrado',
-      about: 'ignaciopalmeri - estudiante de Gestión IT en UADE y AI-First Builder orientado a automatización, procesos y producto.',
-      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering y automatización de procesos.',
+      about: 'ignaciopalmeri - estudiante de Gestión IT en UADE que combina experiencia operativa, producto y automatización para construir software útil.',
+      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos y desarrollo asistido por IA.',
       projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo y Pisculichi Labs.',
-      agents: 'Uso IA como infraestructura conectada a flujos de negocio: agentes, contexto, validación, memoria y automatización local.',
+      agents: 'Uso asistentes de IA como parte de un flujo ordenado: plan, construcción, revisión, pruebas, documentación y publicación.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Actividad verificable',
-      title: 'GitHub como bitácora de trabajo',
-      body: 'Actividad pública del perfil nachopalmeri: commits, repositorios y continuidad real en el tiempo.'
+      title: 'Repos que se pueden revisar',
+      body: 'Prueba pública de trabajo: demos, repositorios, decisiones técnicas y continuidad visible.'
     },
     orchestration: {
-      body: 'Stack principal para automatización, producto y despliegue.'
+      body: 'Señales rápidas para recruiters: proyectos desplegados, backend real y contexto operativo.'
+    },
+    proof: {
+      shipped: { label: 'Proyectos desplegados', body: 'JobBot y motor predictivo con demos públicas.' },
+      stack: { label: 'Stack defendible', body: 'Python, FastAPI, PostgreSQL, Linux, GitHub Actions.' },
+      ops: { label: 'Contexto operativo', body: 'Caja, inventario, auditorías, soporte y mejora de procesos.' }
     },
     about: {
       title: 'Sobre mí',
-      p1: 'Estudio Gestión de Tecnología de la Información en UADE y opero como un AI-First Builder.',
-      p2: 'Uso asistentes avanzados como Claude Code, Cursor y Aider como motor interno para prototipar, asegurar y desplegar software a máxima velocidad. Mi foco está en la intersección de sistemas, finanzas y flujos de negocio.',
-      p3: 'Leo sobre comportamiento y estrategia porque en la era de la IA el valor no está en la sintaxis del código, sino en conectar ideas con soluciones de mercado.'
+      p1: 'Soy estudiante de Gestión de Tecnología de la Información en UADE y estoy construyendo mi primera experiencia profesional en tecnología. Mi diferencial es combinar experiencia operativa real, criterio de producto y herramientas técnicas para detectar procesos repetitivos y convertirlos en software útil.',
+      p2: 'Trabajo con Python, FastAPI, SQL, Linux, Git y asistentes de IA para construir dashboards, bots, automatizaciones y prototipos desplegados. No busco parecer senior: busco demostrar que puedo aprender rápido, documentar decisiones y entregar trabajo revisable.',
+      p3: 'Mi experiencia en atención al cliente y operaciones me dio contexto sobre presión, caja, inventario, auditorías, comunicación y mejora de procesos. Quiero llevar esa base a soporte IT, QA trainee, automatización, pasantías tech o equipos startup.'
     },
     certifications: {
       title: 'Certificaciones',
@@ -53,22 +58,22 @@ const UI_COPY = {
       c2: { title: 'Cisco CCNA 1', body: 'Redes, TCP/IP, subnetting y fundamentos de infraestructura.' },
       c3: { title: 'Claude Code in Action', body: 'Uso de IA en flujos de desarrollo, revisión y documentación.' }
     },
-    stack: { title: 'Stack y herramientas', core: 'Uso principal', product: 'Producto y datos', ai: 'AI-Assisted Development' },
+    stack: { title: 'Stack y herramientas', core: 'Core técnico', product: 'Producto y operaciones', ai: 'AI-assisted development' },
     projects: {
       title: 'Proyectos destacados',
       github: 'Ver GitHub',
       status: { active: 'Activo', public: 'Público', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
-      agentsTitle: 'Agents System - Multi-IDE Orchestration Infrastructure',
-      jobbot: 'SaaS de automatización con dashboard Next.js, backend FastAPI/PostgreSQL, cookies httpOnly, webhooks HMAC y pagos con Stripe/MercadoPago. Diseñado con flujos AI-first para pasar de idea a producción con criterios de seguridad.',
-      franquiya: 'Dashboard operativo para stock, facturas, turnos, empleados y auditorías. Un sistema de gestión práctico orientado a procesos reales, control de caja e inventario.',
-      agents: 'Infraestructura local para estandarizar reglas, prompts portables y contexto entre Claude Code, Windsurf y Zed. Automatización con PowerShell/Bash y symlinks para optimizar el entorno de desarrollo.',
+      agentsTitle: 'Workflow System - AI-assisted project process',
+      jobbot: 'Full-stack automation SaaS para flujos de búsqueda laboral. Hecho con Next.js, FastAPI, PostgreSQL, autenticación segura, webhooks, notificaciones Telegram y pagos integrados. Muestra criterio backend, producto y disciplina de despliegue.',
+      franquiya: 'Motor de analytics en Python para predicciones deportivas, lógica de probabilidad y flujos de datos tipo mercado. Agrega fuentes, modela escenarios y actualiza un dashboard desplegado para usuarios no técnicos.',
+      agents: 'Laboratorio experimental para bots, alertas, herramientas de mercados predictivos y sistemas de portfolio. Muestra exploración de dominios, prototipado rápido y conexión entre finanzas, automatización e interfaces web.',
       roleJobbot: 'Automation SaaS / implementación AI-first',
-      roleFranquiya: 'Dashboard operativo / control de procesos',
-      roleAgents: 'Infraestructura multi-IDE de orquestación',
-      valueJobbot: 'Automatización asincrónica de búsqueda laboral con patrones de seguridad de producción.',
-      valueFranquiya: 'Control operativo de stock, facturas, turnos, empleados, auditorías y visibilidad de caja.',
-      valueAgents: 'Prompts portables, contexto compartido, reglas, validación y automatización local entre entornos de desarrollo IA.',
+      roleFranquiya: 'Analytics / producto desplegado',
+      roleAgents: 'Laboratorio de producto / prototipado rápido',
+      valueJobbot: 'Next.js + FastAPI + PostgreSQL, auth segura, webhooks, Telegram y pagos.',
+      valueFranquiya: 'Python, fuentes múltiples, matrices Poisson, simulaciones Monte Carlo y dashboard.',
+      valueAgents: 'Bots, alertas y experimentos web con alcance explícito de prototipo.',
       proof: 'Ver prueba',
       open: 'Abrir proyecto',
       repo: 'Ver repo',
@@ -76,9 +81,15 @@ const UI_COPY = {
     },
     agents: {
       eyebrow: 'Sistema real del repo',
-      title: 'Ecosistema de agentes',
-      description: 'Sistema local de agentes especializados para orquestar flujos de desarrollo: construcción, revisión y documentación de software.',
-      workflowsTitle: 'Flujos de desarrollo'
+      title: 'Sistema de trabajo',
+      description: 'Sistema local que uso para construir, revisar y documentar proyectos con asistentes de IA. No es un producto: es mi forma de trabajar con más orden, pruebas y contexto.',
+      workflowsTitle: 'Flujos de trabajo',
+      proofTitle: 'Cómo lo uso en proyectos reales',
+      proofBody: 'El grafo muestra roles de trabajo, no cargos ni claims senior. La señal útil es el método: planear, construir, revisar, probar y documentar.',
+      workflow1: { label: 'JobBot feature', body: 'Planifico el flujo, implemento backend/frontend, reviso seguridad y documento decisiones.' },
+      workflow2: { label: 'Portfolio verification', body: 'Uso Playwright, chequeos móviles y pruebas de localStorage bloqueado antes de publicar.' },
+      workflow3: { label: 'README handoff', body: 'Convierto decisiones técnicas en setup, diagramas, limitaciones y próximos pasos.' },
+      steps: { plan: 'Plan', build: 'Build', review: 'Review', test: 'Test', ship: 'Ship' }
     },
     graph: {
       subnodes: 'sub-nodos',
@@ -93,15 +104,15 @@ const UI_COPY = {
       footer: { text: '2026 ignaciopalmeri.', contact: 'Contacto' }
   },
   en: {
-    nav: { overview: 'Overview', projects: 'Projects', agents: 'AI Ecosystem' },
+    nav: { overview: 'Overview', projects: 'Projects', agents: 'Workflow System' },
     hero: {
-      tagline: 'AI-First Automation Builder & Process Analyst',
+      tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
-      availability: 'Available for remote internships / GMT-3',
-      kicker: 'IT Management student at UADE. I build real tools with Python, process automation and AI agents.',
-      description: 'I am looking for an internship where I can contribute automation, product judgment and fast learning in real engineering teams.',
+      availability: 'Available for internships and trainee roles',
+      kicker: 'IT Management student at UADE. I build deployed tools with Python, FastAPI, process automation and AI assistants.',
+      description: 'I am looking for an internship or trainee role where I can contribute operational judgment, fast learning and the ability to turn repetitive workflows into useful software.',
       projectsCta: 'View projects',
-      agentsCta: 'Explore AI ecosystem',
+      agentsCta: 'View workflow system',
       githubCta: 'GitHub',
       cvCta: 'Download CV',
       cvEnCta: 'CV in English →',
@@ -118,25 +129,30 @@ const UI_COPY = {
       welcome: 'Type help to explore my profile.',
       prompt: 'Commands: about, skills, projects, agents, contact, clear',
       unknown: 'Command not found',
-      about: 'ignaciopalmeri - IT Management student at UADE and AI-First Builder focused on automation, processes and product.',
-      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering and process automation.',
+      about: 'ignaciopalmeri - IT Management student at UADE combining operations, product and automation to build useful software.',
+      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, process automation and AI-assisted development.',
       projects: 'Main projects: JobBot, Sports Predictive Analytics Engine and Pisculichi Labs.',
-      agents: 'I use AI as infrastructure connected to business workflows: agents, context, validation, memory and local automation.',
+      agents: 'I use AI assistants inside an ordered workflow: planning, building, review, tests, documentation and shipping.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Verifiable activity',
-      title: 'GitHub as a work log',
-      body: 'Public activity from the nachopalmeri profile: commits, repositories and real continuity over time.'
+      title: 'Repos you can review',
+      body: 'Public proof of work: demos, repositories, technical decisions and visible continuity.'
     },
     orchestration: {
-      body: 'Core stack for automation, product and deployment.'
+      body: 'Fast recruiter signals: deployed projects, real backend work and operations context.'
+    },
+    proof: {
+      shipped: { label: 'Deployed projects', body: 'JobBot and predictive engine with public demos.' },
+      stack: { label: 'Defensible stack', body: 'Python, FastAPI, PostgreSQL, Linux, GitHub Actions.' },
+      ops: { label: 'Operations context', body: 'Cash handling, inventory, audits, support and process improvement.' }
     },
     about: {
       title: 'About me',
-      p1: 'I study IT Management at UADE and operate as an AI-First Builder.',
-      p2: 'I use advanced assistants like Claude Code, Cursor and Aider as an internal engine to prototype, secure and deploy software at high speed. My focus is the intersection of systems, finance and business workflows.',
-      p3: 'I read about behavior and strategy because in the AI era the value is not code syntax, but the ability to connect ideas with market-ready solutions.'
+      p1: 'I am an IT Management student at UADE building my first professional path in technology. My edge is combining real operations experience, product judgment and technical tools to spot repetitive processes and turn them into useful software.',
+      p2: 'I work with Python, FastAPI, SQL, Linux, Git and AI assistants to build dashboards, bots, automations and deployed prototypes. I am not trying to look senior; I want to show that I can learn fast, document decisions and ship reviewable work.',
+      p3: 'My customer service and operations background gave me context around pressure, cash handling, inventory, audits, communication and process improvement. I want to bring that base into IT support, QA trainee, automation, internships or startup teams.'
     },
     certifications: {
       title: 'Certifications',
@@ -144,22 +160,22 @@ const UI_COPY = {
       c2: { title: 'Cisco CCNA 1', body: 'Networking, TCP/IP, subnetting and infrastructure fundamentals.' },
       c3: { title: 'Claude Code in Action', body: 'AI usage in development, review and documentation workflows.' }
     },
-    stack: { title: 'Stack and tools', core: 'Core tools', product: 'Product and data', ai: 'AI-Assisted Development' },
+    stack: { title: 'Stack and tools', core: 'Technical core', product: 'Product and operations', ai: 'AI-assisted development' },
     projects: {
       title: 'Featured projects',
       github: 'View GitHub',
       status: { active: 'Active', public: 'Public', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
-      agentsTitle: 'Agents System - Multi-IDE Orchestration Infrastructure',
-      jobbot: 'Automation SaaS with a Next.js dashboard, FastAPI/PostgreSQL backend, httpOnly cookies, HMAC-signed webhooks and Stripe/MercadoPago payments. Designed with AI-first workflows to move from idea to production with security standards.',
-      franquiya: 'Operations dashboard for stock, invoices, shifts, employees and audits. A hands-on management system for real processes, cash control and inventory.',
-      agents: 'Local infrastructure to standardize rules, portable prompts and context across Claude Code, Windsurf and Zed. PowerShell/Bash automation and symlinks to optimize the engineering workspace.',
+      agentsTitle: 'Workflow System - AI-assisted project process',
+      jobbot: 'Full-stack automation SaaS for job-search workflows. Built with Next.js, FastAPI, PostgreSQL, secure auth, webhook handling, Telegram notifications and payment integrations. Shows backend judgment, product thinking and deployment discipline.',
+      franquiya: 'Python analytics engine for sports predictions, probability logic and market-style data workflows. It aggregates sources, models scenarios and updates a deployed dashboard for non-technical users.',
+      agents: 'Experimental product lab for bots, alerts, prediction-market tools and portfolio systems. Shows domain exploration, fast prototyping and the ability to connect finance, automation and web interfaces.',
       roleJobbot: 'Automation SaaS / AI-first implementation',
-      roleFranquiya: 'Operations dashboard / process control',
-      roleAgents: 'Multi-IDE orchestration infrastructure',
-      valueJobbot: 'Asynchronous job-search automation with production security patterns.',
-      valueFranquiya: 'Operational control for stock, invoices, shifts, employees, audits, and cash visibility.',
-      valueAgents: 'Portable prompts, shared context, rules, validation, and local automation across AI development environments.',
+      roleFranquiya: 'Analytics / deployed product',
+      roleAgents: 'Product lab / rapid prototyping',
+      valueJobbot: 'Next.js + FastAPI + PostgreSQL, secure auth, webhooks, Telegram and payments.',
+      valueFranquiya: 'Python, multiple sources, Poisson matrices, Monte Carlo simulations and dashboard.',
+      valueAgents: 'Bots, alerts and web experiments with explicit prototype scope.',
       proof: 'View proof',
       open: 'Open project',
       repo: 'View repo',
@@ -167,9 +183,15 @@ const UI_COPY = {
     },
     agents: {
       eyebrow: 'Real repo system',
-      title: 'Agent ecosystem',
-      description: 'Local system of specialized agents to orchestrate development flows: software construction, review and documentation.',
-      workflowsTitle: 'Development workflows'
+      title: 'Workflow system',
+      description: 'A local working system I use to build, review and document projects with AI assistants. It is not a product; it is my workflow for keeping context, tests and decisions organized.',
+      workflowsTitle: 'Workflows',
+      proofTitle: 'How I use it on real projects',
+      proofBody: 'The graph shows working roles, not job titles or senior claims. The useful signal is the method: plan, build, review, test and document.',
+      workflow1: { label: 'JobBot feature', body: 'I plan the flow, implement backend/frontend, review security and document decisions.' },
+      workflow2: { label: 'Portfolio verification', body: 'I use Playwright, mobile checks and blocked-localStorage tests before publishing.' },
+      workflow3: { label: 'README handoff', body: 'I turn technical decisions into setup steps, diagrams, limitations and next steps.' },
+      steps: { plan: 'Plan', build: 'Build', review: 'Review', test: 'Test', ship: 'Ship' }
     },
     graph: {
       subnodes: 'sub-nodes',
@@ -185,8 +207,41 @@ const UI_COPY = {
   }
 };
 
-let currentLang = localStorage.getItem('portfolio-lang') || 'es';
-let currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
+const STORAGE_FALLBACK = new Map();
+
+function safeStorageGet(key, fallback) {
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) return STORAGE_FALLBACK.has(key) ? STORAGE_FALLBACK.get(key) : fallback;
+    const value = window.localStorage.getItem(key);
+    return value === null ? fallback : value;
+  } catch {
+    return STORAGE_FALLBACK.has(key) ? STORAGE_FALLBACK.get(key) : fallback;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(key, value);
+      return;
+    }
+  } catch {
+    // Fall through to the in-memory fallback.
+  }
+  STORAGE_FALLBACK.set(key, value);
+}
+
+function secureExternalLinks(root = document) {
+  root.querySelectorAll('a[target="_blank"]').forEach((anchor) => {
+    const rel = new Set((anchor.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+    rel.add('noopener');
+    rel.add('noreferrer');
+    anchor.setAttribute('rel', Array.from(rel).join(' '));
+  });
+}
+
+let currentLang = safeStorageGet('portfolio-lang', 'es');
+let currentTheme = safeStorageGet('portfolio-theme', 'dark');
 
 function getCopy(path, lang = currentLang) {
   return path.split('.').reduce((value, key) => value && value[key], UI_COPY[lang]) || path;
@@ -195,12 +250,16 @@ function getCopy(path, lang = currentLang) {
 function applyStaticCopy() {
   document.documentElement.lang = currentLang;
   document.documentElement.dataset.theme = currentTheme;
+  document.title = currentLang === 'es'
+    ? 'ignaciopalmeri - Junior AI Automation & Product Engineer'
+    : 'ignaciopalmeri - Junior AI Automation & Product Engineer';
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = getCopy(el.dataset.i18n);
   });
   document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.langBtn === currentLang);
   });
+  secureExternalLinks(document);
   resetTerminal();
   if (document.getElementById('project-carousel')) renderProjectCarousel();
 }
@@ -302,7 +361,7 @@ function setupPreferenceControls() {
   document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
     btn.addEventListener('click', () => {
       currentLang = btn.dataset.langBtn;
-      localStorage.setItem('portfolio-lang', currentLang);
+      safeStorageSet('portfolio-lang', currentLang);
       applyStaticCopy();
       rebuildLocalizedEcosystem();
     });
@@ -312,7 +371,7 @@ function setupPreferenceControls() {
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('portfolio-theme', currentTheme);
+      safeStorageSet('portfolio-theme', currentTheme);
       applyStaticCopy();
     });
   }
@@ -328,12 +387,12 @@ const FEATURED_PROJECTS = [
     status: 'ACTIVE',
     kind: { es: 'Automation SaaS', en: 'Automation SaaS' },
     description: {
-      es: 'SaaS de automatización laboral con dashboard, backend Python/FastAPI y flujos asincrónicos para alertas, postulaciones y operación segura.',
-      en: 'Job-search automation SaaS with dashboard, Python/FastAPI backend and asynchronous flows for alerts, applications and secure operations.'
+      es: 'Full-stack automation SaaS para flujos de búsqueda laboral. Hecho con Next.js, FastAPI, PostgreSQL, autenticación segura, webhooks, notificaciones Telegram y pagos integrados.',
+      en: 'Full-stack automation SaaS for job-search workflows. Built with Next.js, FastAPI, PostgreSQL, secure auth, webhook handling, Telegram notifications and payment integrations.'
     },
     value: {
-      es: 'Idea a producción con foco en seguridad, pagos/webhooks y experiencia operativa.',
-      en: 'Idea to production with focus on security, payments/webhooks and operational experience.'
+      es: 'Muestra criterio backend, pensamiento de producto y disciplina de despliegue.',
+      en: 'Shows backend judgment, product thinking and deployment discipline.'
     },
     problem: {
       es: 'Automatizar búsqueda laboral sin perder control sobre seguridad, pagos y webhooks.',
@@ -344,8 +403,8 @@ const FEATURED_PROJECTS = [
       en: 'Full-stack builder: dashboard, backend, authentication, webhooks and deployment.'
     },
     evidence: {
-      es: 'Demuestra criterio de producto SaaS, backend Python y patrones de producción.',
-      en: 'Shows SaaS product judgment, Python backend work and production patterns.'
+      es: 'Prueba a agregar: diagrama auth/webhooks/pagos, video de 90 segundos y README con decisiones.',
+      en: 'Proof to add: auth/webhooks/payments diagram, 90-second video and README with decisions.'
     },
     stack: ['Python', 'FastAPI', 'Next.js', 'PostgreSQL', 'Webhooks']
   },
@@ -358,12 +417,12 @@ const FEATURED_PROJECTS = [
     status: 'LIVE',
     kind: { es: 'Analytics de deportes', en: 'Sports analytics' },
     description: {
-      es: 'Motor Python para predicciones deportivas, lógica estadística y participación recurrente sobre eventos de alto interés.',
-      en: 'Python engine for sports predictions, statistical logic and recurring participation around high-interest events.'
+      es: 'Motor de analytics en Python para predicciones deportivas, lógica de probabilidad y flujos de datos tipo mercado. Agrega fuentes, modela escenarios y actualiza un dashboard desplegado.',
+      en: 'Python analytics engine for sports predictions, probability logic and market-style data workflows. It aggregates sources, models scenarios and updates a deployed dashboard.'
     },
     value: {
-      es: 'Analytics deportivo empaquetado como producto desplegado, con reglas claras y experiencia simple.',
-      en: 'Sports analytics packaged as a deployed product with clear rules and a simple experience.'
+      es: 'Python, múltiples fuentes, matrices Poisson, simulaciones Monte Carlo y dashboard para usuarios no técnicos.',
+      en: 'Python, multiple sources, Poisson matrices, Monte Carlo simulations and a dashboard for non-technical users.'
     },
     problem: {
       es: 'Transformar datos y predicciones deportivas en una experiencia usable para usuarios no técnicos.',
@@ -374,8 +433,8 @@ const FEATURED_PROJECTS = [
       en: 'Rule modeling, Python logic, deployment and participation experience.'
     },
     evidence: {
-      es: 'Demuestra análisis, lógica de producto y ejecución rápida sobre un caso social con reglas claras.',
-      en: 'Shows analysis, product logic and fast execution on a social use case with clear rules.'
+      es: 'Prueba a agregar: diagrama de pipeline, explicación del modelo, limitaciones y refresh log.',
+      en: 'Proof to add: pipeline diagram, model explanation, limitations and refresh log.'
     },
     stack: ['Python', 'Analytics', 'Vercel', 'Game Logic']
   },
@@ -386,14 +445,14 @@ const FEATURED_PROJECTS = [
     href: 'https://polytools-omega.vercel.app',
     media: 'project-assets/polymarktporyect.PNG',
     status: 'BETA',
-    kind: { es: 'Contexto de agencia', en: 'Agency context' },
+    kind: { es: 'Product lab', en: 'Product lab' },
     description: {
-      es: 'Laboratorio de producto y automatización para mercados predictivos, bots, alertas y herramientas de portfolio.',
-      en: 'Builder ecosystem for prediction markets: alerts, bots and portfolio tools for real-time information operations.'
+      es: 'Laboratorio experimental para bots, alertas, herramientas de mercados predictivos y sistemas de portfolio. Muestra exploración de dominios y prototipado rápido.',
+      en: 'Experimental product lab for bots, alerts, prediction-market tools and portfolio systems. Shows domain exploration and fast prototyping.'
     },
     value: {
-      es: 'Contexto de agencia: une producto, finanzas y automatización en un laboratorio desplegado.',
-      en: 'Connects product, finance and automation in a deployed lab.'
+      es: 'Conecta finanzas, automatización e interfaces web con alcance explícito de prototipo.',
+      en: 'Connects finance, automation and web interfaces with explicit prototype scope.'
     },
     problem: {
       es: 'Convertir información de mercados predictivos en herramientas accionables.',
@@ -404,8 +463,8 @@ const FEATURED_PROJECTS = [
       en: 'Experimental product, automation, bots and web experience.'
     },
     evidence: {
-      es: 'Muestra capacidad de explorar dominios nuevos y empaquetarlos en producto.',
-      en: 'Shows ability to explore new domains and package them as product.'
+      es: 'Prueba a agregar: qué es, qué no es, screenshots de 2-3 experimentos y próximos pasos.',
+      en: 'Proof to add: what it is, what it is not, screenshots of 2-3 experiments and next steps.'
     },
     stack: ['HTML', 'Telegram Bot', 'Prediction Markets', 'Alerts']
   },
@@ -624,11 +683,15 @@ function renderProjectPreview(project, index, mode = 'active') {
       <div class="project-preview-copy">
         <div class="project-preview-kicker">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</div>
         <h3>${escapeHtml(project.title)}</h3>
-        <p>${escapeHtml(projectField(project, 'value'))}</p>
+        <p>${escapeHtml(projectField(project, 'description'))}</p>
+        <dl class="project-proof-points">
+          <div><dt>${currentLang === 'es' ? 'Rol' : 'Role'}</dt><dd>${escapeHtml(projectField(project, 'role'))}</dd></div>
+          <div><dt>${currentLang === 'es' ? 'Prueba' : 'Proof'}</dt><dd>${escapeHtml(projectField(project, 'evidence'))}</dd></div>
+        </dl>
         <div class="project-preview-tags">${project.stack.slice(0, 4).map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
         <div class="project-preview-links">
-          <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
-          <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
+          <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
+          <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
         </div>
       </div>
     </article>
@@ -649,8 +712,8 @@ function renderProjectCarousel() {
   }
 
   if (archive) {
-    archive.innerHTML = FEATURED_PROJECTS.map((project, index) => `
-      <a class="archive-row" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noreferrer"'}>
+    archive.innerHTML = FEATURED_PROJECTS.slice(0, 3).map((project, index) => `
+      <a class="archive-row" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
         <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
@@ -752,6 +815,12 @@ function setupThreeAiOpsHero(canvas, hero, nodes, reduceMotion) {
     labelCanvas.width = 256;
     labelCanvas.height = 74;
     const labelCtx = labelCanvas.getContext('2d');
+    if (!labelCtx) {
+      const fallbackMaterial = new THREE.SpriteMaterial({ color: 0x10b981, transparent: true, opacity: 0.12 });
+      const fallbackSprite = new THREE.Sprite(fallbackMaterial);
+      fallbackSprite.scale.set(0.9, 0.24, 1);
+      return fallbackSprite;
+    }
     labelCtx.fillStyle = 'rgba(9,9,11,0.82)';
     roundedCanvasRect(labelCtx, 12, 12, 232, 46, 23);
     labelCtx.fill();
@@ -855,6 +924,11 @@ function setupAiOpsHero() {
     }
   }
   const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    hero.classList.add('no-canvas');
+    canvas.hidden = true;
+    return;
+  }
   let width = 0;
   let height = 0;
   let particles = [];
@@ -1066,6 +1140,7 @@ let ecoVp, ecoGraphWrapper, ecoSubUniverse;
 let hudElement, hudDot, hudName, hudRole, hudBody, hudMeta;
 let wfpPanel, wfList, stagePanel, stageBadge, stageText, stageStep;
 let backBtn, ecoHint, statsBadge;
+let ecoGraphicsReady = false;
 
 let nodesData = [];
 let linksData = [];
@@ -1130,9 +1205,6 @@ function initEcosystem() {
   // Get DOM Elements
   canvasUnder = document.getElementById('eco-canvas-under');
   canvasOver = document.getElementById('eco-canvas-over');
-  ctxUnder = canvasUnder.getContext('2d');
-  ctxOver = canvasOver.getContext('2d');
-  
   ecoVp = document.getElementById('eco-viewport');
   ecoGraphWrapper = document.getElementById('eco-graph-wrapper');
   ecoSubUniverse = document.getElementById('eco-sub-universe');
@@ -1156,6 +1228,14 @@ function initEcosystem() {
   ecoHint = document.getElementById('eco-hint');
   statsBadge = document.getElementById('eco-stats-badge');
 
+  ecoGraphicsReady = Boolean(canvasUnder && canvasOver);
+  ctxUnder = ecoGraphicsReady ? canvasUnder.getContext('2d') : null;
+  ctxOver = ecoGraphicsReady ? canvasOver.getContext('2d') : null;
+  ecoGraphicsReady = Boolean(ecoGraphicsReady && ctxUnder && ctxOver);
+  if (!ecoGraphicsReady && ecoVp) {
+    ecoVp.classList.add('no-canvas');
+  }
+
   // Load Data
   setupCurrentAgentPortfolioData();
   
@@ -1164,12 +1244,14 @@ function initEcosystem() {
   
   // Event listeners
   resizeCanvas();
-  // Re-measure after the browser paints the now-visible section
-  requestAnimationFrame(() => {
-    resizeCanvas();
-    requestAnimationFrame(resizeCanvas);
-  });
-  window.addEventListener('resize', resizeCanvas);
+  if (ecoGraphicsReady) {
+    // Re-measure after the browser paints the now-visible section
+    requestAnimationFrame(() => {
+      resizeCanvas();
+      requestAnimationFrame(resizeCanvas);
+    });
+    window.addEventListener('resize', resizeCanvas);
+  }
   
   backBtn && backBtn.addEventListener('click', collapseGraph);
   ecoVp.addEventListener('click', (e) => {
@@ -1179,34 +1261,24 @@ function initEcosystem() {
   });
 
   ecoInitialized = true;
-  startEcosystemLoop();
+  if (ecoGraphicsReady) startEcosystemLoop();
 }
-
-function setupData() {
-  setupCurrentAgentPortfolioData();
-}
-
-
-function setupRealPortfolioData() {
-  setupCurrentAgentPortfolioData();
-}
-
 
 function setupCurrentAgentPortfolioData() {
   const es = currentLang === 'es';
   const g = {
-    director: es ? 'Coordina prioridades, revisa evidencia y mantiene el rumbo del sistema.' : 'Coordinates priorities, reviews evidence and keeps the system on track.',
-    architect: es ? 'Diseña arquitecturas listas para producción con foco en seguridad, observabilidad y costo.' : 'Designs production-ready architectures with focus on security, observability and cost.',
-    mcp: es ? 'Evalúa integraciones MCP, contratos de herramientas y límites de permisos.' : 'Evaluates MCP integrations, tool contracts and permission limits.',
+    director: es ? 'Ordena prioridades, define el siguiente paso y mantiene evidencia visible.' : 'Orders priorities, defines the next step and keeps evidence visible.',
+    architect: es ? 'Baja una idea a arquitectura simple: datos, API, UI, riesgos y despliegue.' : 'Turns an idea into simple architecture: data, API, UI, risks and deployment.',
+    mcp: es ? 'Evalúa herramientas, permisos e integraciones antes de sumarlas al flujo.' : 'Reviews tools, permissions and integrations before adding them to the workflow.',
     researcher: es ? 'Investiga documentación y alternativas antes de proponer una implementación.' : 'Researches documentation and alternatives before proposing an implementation.',
     design: es ? 'Cuida responsive, accesibilidad visual, motion y claridad de interfaz.' : 'Cares about responsive behavior, visual accessibility, motion and interface clarity.',
     tests: es ? 'Cobertura, Playwright, regresión y evidencia verificable.' : 'Coverage, Playwright, regression and verifiable evidence.',
     security: es ? 'Secretos, dependencias, permisos y publicación segura.' : 'Secrets, dependencies, permissions and safe publishing.',
     docs: es ? 'Documentación técnica clara: README, guías, API docs y handoff.' : 'Clear technical documentation: README, guides, API docs and handoff.',
     obsidian: es ? 'Memoria local, MOCs, notas y captura durable de conocimiento.' : 'Local memory, MOCs, notes and durable knowledge capture.',
-    product: es ? 'MVP scoping, validación y decisiones de producto orientadas a impacto.' : 'MVP scoping, validation and product decisions oriented to impact.',
-    growth: es ? 'SEO, GEO, AEO y crecimiento orgánico con criterio práctico.' : 'SEO, GEO, AEO and organic growth with practical judgment.',
-    seo: es ? 'SEO técnico y on-page: estructura, metadata, schema y accesibilidad.' : 'Technical and on-page SEO: structure, metadata, schema and accessibility.',
+    product: es ? 'Define alcance, usuario, prueba mínima y próximos pasos concretos.' : 'Defines scope, user, minimum proof and concrete next steps.',
+    growth: es ? 'Ajusta posicionamiento, claridad de oferta y canales de búsqueda.' : 'Improves positioning, offer clarity and search channels.',
+    seo: es ? 'Revisa estructura, metadata, Open Graph y accesibilidad básica.' : 'Reviews structure, metadata, Open Graph and basic accessibility.',
     marketing: es ? 'Posicionamiento, GTM y research de audiencia.' : 'Positioning, GTM and audience research.',
     content: es ? 'Contenido multiplataforma con voz propia y consistencia.' : 'Multi-platform content with a consistent voice.',
     academic: es ? 'Apoyo de estudio, conceptos y material para repasar.' : 'Study support, concepts and review material.',
@@ -1216,20 +1288,20 @@ function setupCurrentAgentPortfolioData() {
     pruner: es ? 'Reduce complejidad y costo de contexto sin perder calidad.' : 'Reduces complexity and context cost without losing quality.',
     user: es ? 'Entrada externa y pedidos en lenguaje natural.' : 'External input and requests in natural language.',
     rules: es ? 'Reglas globales, permisos y estilo del sistema.' : 'Global rules, permissions and system style.',
-    memory: es ? 'Memoria local versionada para lecciones y patrones útiles.' : 'Versioned local memory for lessons and useful patterns.',
+    memory: es ? 'Notas locales para no perder decisiones, lecciones y patrones útiles.' : 'Local notes for preserving decisions, lessons and useful patterns.',
     gate: es ? 'Criterios de validación y evidencia antes de cerrar una tarea.' : 'Validation criteria and evidence before closing a task.',
     harness: es ? 'Captura correcciones y mejora el sistema con feedback.' : 'Captures corrections and improves the system with feedback.',
     techradar: es ? 'Radar ADOPT/TRIAL/ASSESS/HOLD para decisiones de stack.' : 'ADOPT/TRIAL/ASSESS/HOLD radar for stack decisions.'
   };
 
   nodesData = [
-    agentNode('principal', 'Director', 'agente-principal.md', g.director, 'agent-assets/director.jpg', 50, 48, 'principal', [
+    agentNode('principal', es ? 'Plan' : 'Plan', 'workflow-planning', g.director, 'agent-assets/director.jpg', 50, 48, 'principal', [
       sub('workflows/index.md', 'workflow'), sub('Agent Routing', 'workflow'), sub('validation.md', 'rules'), sub('session_checkpoint.md', 'memory'), sub('Release Manager', 'workflow')
     ]),
-    agentNode('mcp', 'MCP Architect', 'agente-mcp-architect.md', g.mcp, 'agent-assets/mcp.jpg', 50, 15, 'mcp', [
+    agentNode('mcp', es ? 'Tools' : 'Tools', 'tooling-check', g.mcp, 'agent-assets/mcp.jpg', 50, 15, 'mcp', [
       sub('mcp_catalog.md', 'workflow'), sub('mcp_adoption.md', 'workflow'), sub('mcp_security.md', 'rules'), sub('Tool Schemas', 'tool')
     ]),
-    agentNode('architect', 'AI Architect', 'agente-ai-architect.md', g.architect, 'agent-assets/architect.jpg', 67, 21, 'architect', [
+    agentNode('architect', es ? 'Architecture' : 'Architecture', 'simple-architecture', g.architect, 'agent-assets/architect.jpg', 67, 21, 'architect', [
       sub('ai_production.md', 'workflow'), sub('Prompt Registry', 'memory'), sub('Evaluations', 'rules'), sub('Cost Control', 'rules')
     ]),
     agentNode('researcher', 'Researcher', 'agente-researcher.md', g.researcher, 'agent-assets/researcher.jpg', 81, 33, 'researcher', [
@@ -1238,13 +1310,13 @@ function setupCurrentAgentPortfolioData() {
     agentNode('design', 'Designer', 'agente-design.md', g.design, 'agent-assets/designer.jpg', 32, 24, 'design', [
       sub('Responsive Gate', 'rules'), sub('AI Slop Test', 'rules'), sub('world-class-web.md', 'workflow'), sub('Accessibility Gate', 'rules')
     ]),
-    agentNode('product', 'Product', 'agente-product-founder.md', g.product, 'agent-assets/product.jpg', 18, 42, 'product', [
+    agentNode('product', 'Product', 'product-scope', g.product, 'agent-assets/product.jpg', 18, 42, 'product', [
       sub('venture_loop.md', 'workflow'), sub('MVP Scope', 'rules'), sub('Kill / Keep / Scale', 'rules'), sub('Product Evidence', 'memory')
     ]),
     agentNode('docs', 'Docs', 'agente-docs.md', g.docs, 'agent-assets/docs.jpg', 22, 64, 'docs', [
       sub('README', 'tool'), sub('API Docs', 'workflow'), sub('Changelog', 'memory'), sub('Handoff', 'workflow')
     ]),
-    agentNode('obsidian', 'Obsidian Brain', 'agente-obsidian-brain.md', g.obsidian, 'agent-assets/content.jpg', 18, 63, 'obsidian', [
+    agentNode('obsidian', 'Notes', 'local-notes', g.obsidian, 'agent-assets/content.jpg', 18, 63, 'obsidian', [
       sub('obsidian_sync.md', 'workflow'), sub('vault_review.md', 'workflow'), sub('MOCs', 'memory'), sub('Lessons', 'memory')
     ]),
     agentNode('tests', 'QA', 'agente-tests.md', g.tests, 'agent-assets/qa.jpg', 40, 83, 'tests', [
@@ -1253,10 +1325,10 @@ function setupCurrentAgentPortfolioData() {
     agentNode('security', 'Security', 'agente-security-auditor.md', g.security, 'agent-assets/security.jpg', 63, 74, 'security', [
       sub('Secret Scan', 'tool'), sub('mcp_security.md', 'workflow'), sub('Permission Boundaries', 'rules'), sub('Repo Safety', 'workflow')
     ]),
-    agentNode('growth', 'Growth', 'agente-growth-seo-geo.md', g.growth, 'agent-assets/growth.jpg', 82, 60, 'growth', [
+    agentNode('growth', 'Positioning', 'positioning', g.growth, 'agent-assets/growth.jpg', 82, 60, 'growth', [
       sub('seo_geo_growth.md', 'workflow'), sub('AEO / GEO', 'rules'), sub('Opportunity Map', 'memory'), sub('Programmatic SEO', 'workflow')
     ]),
-    agentNode('seo', 'SEO Tech', 'agente-seo.md', g.seo, 'agent-assets/seo.jpg', 90, 48, 'seo', [
+    agentNode('seo', 'SEO', 'seo-check', g.seo, 'agent-assets/seo.jpg', 90, 48, 'seo', [
       sub('Meta Tags', 'tool'), sub('Open Graph', 'tool'), sub('Schema Markup', 'tool'), sub('Canonical URLs', 'rules')
     ]),
     agentNode('marketing', 'Marketing', 'agente-marketing-strategist.md', g.marketing, 'agent-assets/marketing.jpg', 88, 70, 'marketing', [
@@ -1268,16 +1340,16 @@ function setupCurrentAgentPortfolioData() {
     agentNode('academic', 'Academic Tutor', 'agente-academic-tutor.md', g.academic, 'agent-assets/academic-tutor.jpg', 11, 73, 'academic', [
       sub('academic_tutor.md', 'workflow'), sub('Exam Prep', 'workflow'), sub('Flashcards', 'memory'), sub('Obsidian Sync', 'workflow')
     ]),
-    agentNode('reviewer', 'Code Reviewer', 'agente-code-reviewer.md', g.reviewer, 'agent-assets/code-reviewer.jpg', 46, 89, 'reviewer', [
+    agentNode('reviewer', 'Review', 'code-review', g.reviewer, 'agent-assets/code-reviewer.jpg', 46, 89, 'reviewer', [
       sub('pr_code_review.md', 'workflow'), sub('Residual Risks', 'rules'), sub('Scope Check', 'rules'), sub('Review Verdict', 'memory')
     ]),
-    agentNode('release', 'Release Manager', 'agente-release-manager.md', g.release, 'agent-assets/release-manager.jpg', 28, 90, 'release', [
+    agentNode('release', 'Ship', 'release-check', g.release, 'agent-assets/release-manager.jpg', 28, 90, 'release', [
       sub('pr_policy.md', 'workflow'), sub('Changelog', 'memory'), sub('Install Checks', 'tool'), sub('Release Checklist', 'rules')
     ]),
-    agentNode('kickoff', 'Kickoff Architect', 'kickoff-architect.md', g.kickoff, 'agent-assets/kickoff-architect.jpg', 15, 15, 'kickoff', [
+    agentNode('kickoff', 'Kickoff', 'project-kickoff', g.kickoff, 'agent-assets/kickoff-architect.jpg', 15, 15, 'kickoff', [
       sub('project_kickoff_lean.md', 'workflow'), sub('First Milestone', 'rules'), sub('Intensity Level', 'rules')
     ]),
-    agentNode('pruner', 'Workflow Pruner', 'workflow-pruner.md', g.pruner, 'agent-assets/workflow-pruner.jpg', 63, 87, 'pruner', [
+    agentNode('pruner', 'Simplify', 'workflow-pruning', g.pruner, 'agent-assets/workflow-pruner.jpg', 63, 87, 'pruner', [
       sub('Simplify System', 'workflow'), sub('Token Cost', 'memory'), sub('Delete / Keep', 'rules')
     ]),
     systemNode('user', 'User', es ? 'Entrada externa' : 'External input', g.user, 'user', 92, 22, 'system', []),
@@ -1399,44 +1471,44 @@ function getNodeLayer(id) {
 function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null) {
   const roleLabels = currentLang === 'es'
     ? {
-      principal: 'ORQUESTADOR / CORE DEV',
-      mcp: 'INTEGRACION DE TOOLS',
-      architect: 'RAG / SISTEMAS LLM',
+      principal: 'PLAN / EVIDENCIA',
+      mcp: 'TOOLS / PERMISOS',
+      architect: 'API / DATOS / RIESGO',
       researcher: 'RESEARCH / DOCS',
-      growth: 'SEO / GEO / AEO',
-      seo: 'SEO TÉCNICO',
+      growth: 'POSICIONAMIENTO',
+      seo: 'SEO / METADATA',
       security: 'SEGURIDAD / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
       reviewer: 'REVISIÓN / CALIDAD',
-      obsidian: 'VAULT / MEMORIA',
+      obsidian: 'NOTAS / MEMORIA',
       docs: 'DOCUMENTACIÓN TÉCNICA',
       product: 'PRODUCTO / MVP',
       design: 'UI / VISUAL / CSS',
       marketing: 'MARKETING / GTM',
       content: 'CONTENIDO / PERSONAL BRAND',
       academic: 'TUTOR ACADEMICO',
-      release: 'RELEASE / PUBLICACION',
+      release: 'PUBLICACIÓN',
       kickoff: 'KICKOFF / MILESTONE',
       pruner: 'SIMPLIFICACION / TOKENS'
     }
     : {
-      principal: 'ORCHESTRATOR / CORE DEV',
-      mcp: 'TOOL INTEGRATION',
-      architect: 'RAG / LLM SYSTEMS',
+      principal: 'PLANNING / EVIDENCE',
+      mcp: 'TOOLS / PERMISSIONS',
+      architect: 'API / DATA / RISK',
       researcher: 'RESEARCH / DOCS',
-      growth: 'SEO / GEO / AEO',
-      seo: 'ON-PAGE / TECHNICAL SEO',
+      growth: 'POSITIONING',
+      seo: 'SEO / METADATA',
       security: 'GUARDIAN / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
       reviewer: 'PR REVIEW / QUALITY',
-      obsidian: 'VAULT / MEMORY',
+      obsidian: 'NOTES / MEMORY',
       docs: 'TECHNICAL DOCUMENTATION',
       product: 'FOUNDER / MVP BUILDER',
       design: 'UI / VISUAL / CSS',
       marketing: 'MARKETING / GTM',
       content: 'CONTENT / PERSONAL BRAND',
       academic: 'ACADEMIC TUTOR',
-      release: 'RELEASE / PUBLISHING',
+      release: 'PUBLISHING',
       kickoff: 'KICKOFF / MILESTONE',
       pruner: 'SIMPLIFICATION / TOKENS'
     };
@@ -1607,15 +1679,17 @@ function resizeCanvas() {
   // Use the CSS-defined fallback size to ensure canvas is properly sized.
   width = rect.width || ecoVp.offsetWidth || 1200;
   height = rect.height || ecoVp.offsetHeight || 720;
-  
+  if (!ecoGraphicsReady) return;
   const ratio = Math.max(1, window.devicePixelRatio || 1);
   [canvasUnder, canvasOver].forEach((canvas) => {
+    if (!canvas) return;
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
   });
   [ctxUnder, ctxOver].forEach((ctx) => {
+    if (!ctx) return;
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
   });
 }
@@ -1969,6 +2043,7 @@ function executeWorkflowStep(stepIndex) {
 // ═══════════════════ CANVAS RENDER LOOP ═══════════════════
 
 function renderEcosystem(timestamp) {
+  if (!ecoGraphicsReady || !ctxUnder || !ctxOver) return;
   // Clear buffers
   ctxUnder.clearRect(0, 0, width, height);
   ctxOver.clearRect(0, 0, width, height);
@@ -2162,6 +2237,7 @@ function renderEcosystem(timestamp) {
 }
 
 function startEcosystemLoop() {
+  if (!ecoGraphicsReady) return;
   if (animationFrameId) cancelAnimationFrame(animationFrameId);
   animationFrameId = requestAnimationFrame(renderEcosystem);
 }

@@ -1,0 +1,13 @@
+{
+  "name": "tiamat-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test:syntax": "node --check app.js",
+    "test:e2e": "node tests/portfolio.e2e.mjs",
+    "verify": "npm run test:syntax && npm run test:e2e"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}
