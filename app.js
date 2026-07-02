@@ -561,17 +561,10 @@ const FEATURED_PROJECTS = [
   }
 ];
 
-let activeProjectIndex = 0;
-let hoveredProjectIndex = null;
-
 function projectField(project, field) {
   const value = project[field];
   if (!value || typeof value === 'string') return value || '';
   return value[currentLang] || value.es || value.en || '';
-}
-
-function normalizeProjectIndex(index) {
-  return (index + FEATURED_PROJECTS.length) % FEATURED_PROJECTS.length;
 }
 
 function projectMediaFallbackMarkup(project, kind, label) {
@@ -628,9 +621,6 @@ function renderProjectPreview(project, index, mode = 'active') {
   const previewClass = mode === 'hover' ? 'hover' : 'active';
   return `
     <article class="project-preview ${previewClass}" data-project-id="${project.id}">
-      <div class="project-preview-media">
-        ${projectImage(project, index, 'preview')}
-      </div>
       <div class="project-preview-copy">
         <div class="project-preview-kicker">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</div>
         <h3>${escapeHtml(project.title)}</h3>
@@ -672,35 +662,6 @@ function renderProjectCarousel() {
       </a>
     `).join('');
   }
-  if (carousel && carousel.querySelector('.project-active-panel')) {
-    setActiveProject(activeProjectIndex, false);
-  }
-}
-
-function setActiveProject(index, focus = true) {
-  const carousel = document.getElementById('project-carousel');
-  if (!carousel) return;
-  activeProjectIndex = normalizeProjectIndex(index);
-  hoveredProjectIndex = null;
-  const railItems = Array.from(carousel.querySelectorAll('.project-rail-item'));
-  railItems.forEach((item, itemIndex) => {
-    item.classList.toggle('active', itemIndex === activeProjectIndex);
-    item.setAttribute('aria-selected', String(itemIndex === activeProjectIndex));
-  });
-  const panel = carousel.querySelector('.project-active-panel');
-  if (panel) {
-    panel.innerHTML = renderProjectPreview(FEATURED_PROJECTS[activeProjectIndex], activeProjectIndex, 'active');
-  }
-  if (focus) carousel.focus({ preventScroll: true });
-}
-
-function setProjectHover(index) {
-  hoveredProjectIndex = normalizeProjectIndex(index);
-  setActiveProject(hoveredProjectIndex, false);
-}
-
-function clearProjectHover() {
-  hoveredProjectIndex = null;
 }
 
 function setupProjectCarousel() {
