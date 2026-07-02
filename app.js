@@ -7,8 +7,8 @@ const UI_COPY = {
       tagline: 'AI-First Automation Builder & Process Analyst',
       title: 'ignaciopalmeri',
       availability: 'Disponible para pasantías / Remote-friendly',
-      kicker: 'Estudiante de Gestión IT en UADE, construyendo herramientas reales con Python, automatización de procesos y flujos de IA.',
-      description: 'Busco una oportunidad de pasantía donde pueda aportar automatización, criterio de producto y aprendizaje rápido en equipos reales.',
+      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas reales con Python, automatización de procesos y agentes de IA.',
+      description: 'Busco una pasantía donde pueda aportar automatización, criterio de producto y aprendizaje rápido en equipos reales de ingeniería.',
       projectsCta: 'Ver proyectos',
       agentsCta: 'Explorar ecosistema IA',
       githubCta: 'GitHub',
@@ -29,14 +29,14 @@ const UI_COPY = {
       unknown: 'Comando no encontrado',
       about: 'ignaciopalmeri - estudiante de Gestión IT en UADE y AI-First Builder orientado a automatización, procesos y producto.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering y automatización de procesos.',
-      projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo, Pisculichi Labs, PISKU CLI, FulboTracker, DOM y Comida de Barrio.',
+      projects: 'Proyectos principales: JobBot, Motor Estadístico Predictivo y Pisculichi Labs.',
       agents: 'Uso IA como infraestructura conectada a flujos de negocio: agentes, contexto, validación, memoria y automatización local.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Actividad verificable',
       title: 'GitHub como bitácora de trabajo',
-      body: 'Actividad pública del perfil nachopalmeri: commits, lenguajes y continuidad real en repositorios.'
+      body: 'Actividad pública del perfil nachopalmeri: commits, repositorios y continuidad real en el tiempo.'
     },
     orchestration: {
       body: 'Stack principal para automatización, producto y despliegue.'
@@ -53,7 +53,7 @@ const UI_COPY = {
       c2: { title: 'Cisco CCNA 1', body: 'Redes, TCP/IP, subnetting y fundamentos de infraestructura.' },
       c3: { title: 'Claude Code in Action', body: 'Uso de IA en flujos de desarrollo, revisión y documentación.' }
     },
-    stack: { title: 'Stack y herramientas', core: 'Uso principal', product: 'Producto y datos', ai: 'AI-assisted workflows' },
+    stack: { title: 'Stack y herramientas', core: 'Uso principal', product: 'Producto y datos', ai: 'AI-Assisted Development' },
     projects: {
       title: 'Proyectos destacados',
       github: 'Ver GitHub',
@@ -77,7 +77,7 @@ const UI_COPY = {
     agents: {
       eyebrow: 'Sistema real del repo',
       title: 'Ecosistema de agentes',
-      description: 'Sistema local de agentes para orquestación de flujos de desarrollo. Cada nodo es un rol especializado que coordina tareas de construcción, revisión y documentación de software.',
+      description: 'Sistema local de agentes especializados para orquestar flujos de desarrollo: construcción, revisión y documentación de software.',
       workflowsTitle: 'Flujos de desarrollo'
     },
     graph: {
@@ -98,8 +98,8 @@ const UI_COPY = {
       tagline: 'AI-First Automation Builder & Process Analyst',
       title: 'ignaciopalmeri',
       availability: 'Available for remote internships / GMT-3',
-      kicker: 'IT Management student at UADE focused on automation, AI agents and systems that connect product, finance and operations.',
-      description: 'I build software with high agency using AI as work infrastructure: prototype, validate security and move real workflows to production quickly.',
+      kicker: 'IT Management student at UADE. I build real tools with Python, process automation and AI agents.',
+      description: 'I am looking for an internship where I can contribute automation, product judgment and fast learning in real engineering teams.',
       projectsCta: 'View projects',
       agentsCta: 'Explore AI ecosystem',
       githubCta: 'GitHub',
@@ -120,14 +120,14 @@ const UI_COPY = {
       unknown: 'Command not found',
       about: 'ignaciopalmeri - IT Management student at UADE and AI-First Builder focused on automation, processes and product.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, AI Agent Orchestration, MCP, Context Engineering and process automation.',
-      projects: 'Main projects: JobBot, Sports Predictive Analytics Engine, Pisculichi Labs, PISKU CLI, FulboTracker, DOM and Comida de Barrio.',
+      projects: 'Main projects: JobBot, Sports Predictive Analytics Engine and Pisculichi Labs.',
       agents: 'I use AI as infrastructure connected to business workflows: agents, context, validation, memory and local automation.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
     github: {
       eyebrow: 'Verifiable activity',
       title: 'GitHub as a work log',
-      body: 'Public activity from the nachopalmeri profile: commits, languages and real continuity across repositories.'
+      body: 'Public activity from the nachopalmeri profile: commits, repositories and real continuity over time.'
     },
     orchestration: {
       body: 'Core stack for automation, product and deployment.'
@@ -144,7 +144,7 @@ const UI_COPY = {
       c2: { title: 'Cisco CCNA 1', body: 'Networking, TCP/IP, subnetting and infrastructure fundamentals.' },
       c3: { title: 'Claude Code in Action', body: 'AI usage in development, review and documentation workflows.' }
     },
-    stack: { title: 'Stack and tools', core: 'Core tools', product: 'Product and data', ai: 'AI-assisted workflows' },
+    stack: { title: 'Stack and tools', core: 'Core tools', product: 'Product and data', ai: 'AI-Assisted Development' },
     projects: {
       title: 'Featured projects',
       github: 'View GitHub',
@@ -168,7 +168,7 @@ const UI_COPY = {
     agents: {
       eyebrow: 'Real repo system',
       title: 'Agent ecosystem',
-      description: 'Local agent system for development workflow orchestration. Each node is a specialized role that coordinates software construction, review and documentation tasks.',
+      description: 'Local system of specialized agents to orchestrate development flows: software construction, review and documentation.',
       workflowsTitle: 'Development workflows'
     },
     graph: {
@@ -1346,31 +1346,31 @@ function setupRealPortfolioData() {
 function setupCurrentAgentPortfolioData() {
   const es = currentLang === 'es';
   const g = {
-    director: es ? 'Router central definido por agente-principal.md: elige el workflow minimo, coordina agentes y exige evidencia antes de cerrar.' : 'Central router from agente-principal.md: selects the smallest workflow, coordinates agents and requires evidence before closing.',
-    architect: es ? 'Arquitectura AI/RAG production-ready: capas, prompts, evaluacion, seguridad, observabilidad y costo.' : 'Production-ready AI/RAG architecture: layers, prompts, evaluation, security, observability and cost.',
-    mcp: es ? 'Disena y audita integraciones MCP, schemas de tools, catalogo, adopcion y limites de permisos.' : 'Designs and audits MCP integrations, tool schemas, catalog, adoption and permission limits.',
-    researcher: es ? 'Investiga documentación actual, librerías, competidores y alternativas antes de recomendar implementación.' : 'Researches current docs, libraries, competitors and alternatives before recommending implementation.',
-    design: es ? 'UI, CSS, responsive, accesibilidad visual, motion y reduccion de AI slop en interfaces.' : 'UI, CSS, responsive behavior, visual accessibility, motion and AI-slop reduction in interfaces.',
-    tests: es ? 'Pruebas unitarias, Playwright E2E, coverage, mocks y evidencia de regresion.' : 'Unit tests, Playwright E2E, coverage, mocks and regression evidence.',
-    security: es ? 'Revisa secretos, comandos peligrosos, dependencias, permisos MCP/plugin, auth y publicacion segura.' : 'Reviews secrets, dangerous commands, dependencies, MCP/plugin permissions, auth and safe publishing.',
-    docs: es ? 'Documentación técnica: README, docstrings, API docs, changelogs, guías y handoffs.' : 'Technical documentation: README, docstrings, API docs, changelogs, guides and handoffs.',
-    obsidian: es ? 'Captura conocimiento durable, MOCs, Zettelkasten, vault review y sincronizacion con memoria local.' : 'Captures durable knowledge, MOCs, Zettelkasten, vault review and local memory sync.',
-    product: es ? 'Scoping de MVP, validación, venture loop, kill/keep/scale y decisiones de producto AI-first.' : 'MVP scoping, validation, venture loop, kill/keep/scale and AI-first product decisions.',
-    growth: es ? 'Adquisicion organica con SEO, GEO, AEO, programmatic SEO, local SEO y AI search.' : 'Organic acquisition through SEO, GEO, AEO, programmatic SEO, local SEO and AI search.',
-    seo: es ? 'SEO técnico y on-page: meta tags, Open Graph, headings, schema, alt text, sitemap y canonicals.' : 'Technical and on-page SEO: meta tags, Open Graph, headings, schema, alt text, sitemap and canonicals.',
-    marketing: es ? 'Estrategia de marketing, posicionamiento, GTM, research de audiencia y veredictos GO/NO-GO/PIVOT.' : 'Marketing strategy, positioning, GTM, audience research and GO/NO-GO/PIVOT verdicts.',
-    content: es ? 'Contenido X/LinkedIn/Substack, hooks, voz autentica, contenido multiplataforma y personal branding.' : 'X/LinkedIn/Substack content, hooks, authentic voice, multi-platform content and personal branding.',
-    academic: es ? 'Tutor academico para estudio, examenes, conceptos y material que puede sincronizarse con Obsidian.' : 'Academic tutor for study, exams, concepts and material that can sync with Obsidian.',
-    reviewer: es ? 'Revisión de código, PR policy, riesgos, calidad, simplificación y residual risks.' : 'Code review, PR policy, risks, quality, simplification and residual risks.',
-    release: es ? 'Commits, changelogs, release checklist, validación de instalación y publicación reproducible.' : 'Commits, changelogs, release checklist, install validation and reproducible publishing.',
-    kickoff: es ? 'Arranque liviano de proyectos: primer milestone, intensidad de proceso y estructura minima viable.' : 'Lean project kickoff: first milestone, process intensity and minimum viable structure.',
-    pruner: es ? 'Simplifica prompts, workflows y agentes para reducir costo de contexto sin perder calidad.' : 'Simplifies prompts, workflows and agents to reduce context cost without losing quality.',
-    user: es ? 'Pedidos, specs, feedback de UI y activaciones de workflow entran como lenguaje natural.' : 'Requests, specs, UI reviews and workflow activations enter as natural language.',
-    rules: es ? 'AGENTS.md, rules/*.md y workflows/index.md definen limites, routing, permisos y estilo.' : 'AGENTS.md, rules/*.md and workflows/index.md define limits, routing, permissions and style.',
-    memory: es ? 'Lessons markdown, Tech Radar y developer_growth.md usados como memoria local versionada.' : 'Markdown lessons, Tech Radar and developer_growth.md used as versioned local memory.',
-    gate: es ? 'Validation.md: no se declara listo sin diff, tests, build, logs, screenshot, fuente o limitacion explicita.' : 'Validation.md: nothing is called done without diff, tests, build, logs, screenshot, source or explicit limitation.',
-    harness: es ? 'Feedback loop: captura correcciones, detecta patrones y propone promover lecciones.' : 'Feedback loop: captures corrections, detects patterns and proposes lesson promotion.',
-    techradar: es ? 'Memoria ADOPT/TRIAL/ASSESS/HOLD consultada antes de proponer decisiones de stack.' : 'ADOPT/TRIAL/ASSESS/HOLD memory checked before proposing stack decisions.'
+    director: es ? 'Coordina prioridades, revisa evidencia y mantiene el rumbo del sistema.' : 'Coordinates priorities, reviews evidence and keeps the system on track.',
+    architect: es ? 'Diseña arquitecturas listas para producción con foco en seguridad, observabilidad y costo.' : 'Designs production-ready architectures with focus on security, observability and cost.',
+    mcp: es ? 'Evalúa integraciones MCP, contratos de herramientas y límites de permisos.' : 'Evaluates MCP integrations, tool contracts and permission limits.',
+    researcher: es ? 'Investiga documentación y alternativas antes de proponer una implementación.' : 'Researches documentation and alternatives before proposing an implementation.',
+    design: es ? 'Cuida responsive, accesibilidad visual, motion y claridad de interfaz.' : 'Cares about responsive behavior, visual accessibility, motion and interface clarity.',
+    tests: es ? 'Cobertura, Playwright, regresión y evidencia verificable.' : 'Coverage, Playwright, regression and verifiable evidence.',
+    security: es ? 'Secretos, dependencias, permisos y publicación segura.' : 'Secrets, dependencies, permissions and safe publishing.',
+    docs: es ? 'Documentación técnica clara: README, guías, API docs y handoff.' : 'Clear technical documentation: README, guides, API docs and handoff.',
+    obsidian: es ? 'Memoria local, MOCs, notas y captura durable de conocimiento.' : 'Local memory, MOCs, notes and durable knowledge capture.',
+    product: es ? 'MVP scoping, validación y decisiones de producto orientadas a impacto.' : 'MVP scoping, validation and product decisions oriented to impact.',
+    growth: es ? 'SEO, GEO, AEO y crecimiento orgánico con criterio práctico.' : 'SEO, GEO, AEO and organic growth with practical judgment.',
+    seo: es ? 'SEO técnico y on-page: estructura, metadata, schema y accesibilidad.' : 'Technical and on-page SEO: structure, metadata, schema and accessibility.',
+    marketing: es ? 'Posicionamiento, GTM y research de audiencia.' : 'Positioning, GTM and audience research.',
+    content: es ? 'Contenido multiplataforma con voz propia y consistencia.' : 'Multi-platform content with a consistent voice.',
+    academic: es ? 'Apoyo de estudio, conceptos y material para repasar.' : 'Study support, concepts and review material.',
+    reviewer: es ? 'Revisión de código, riesgos y calidad antes de integrar cambios.' : 'Code review, risks and quality before merging changes.',
+    release: es ? 'Changelog, validación de instalación y publicación reproducible.' : 'Changelog, install validation and reproducible publishing.',
+    kickoff: es ? 'Arranque liviano de proyectos con primer hito claro.' : 'Lightweight project kickoff with a clear first milestone.',
+    pruner: es ? 'Reduce complejidad y costo de contexto sin perder calidad.' : 'Reduces complexity and context cost without losing quality.',
+    user: es ? 'Entrada externa y pedidos en lenguaje natural.' : 'External input and requests in natural language.',
+    rules: es ? 'Reglas globales, permisos y estilo del sistema.' : 'Global rules, permissions and system style.',
+    memory: es ? 'Memoria local versionada para lecciones y patrones útiles.' : 'Versioned local memory for lessons and useful patterns.',
+    gate: es ? 'Criterios de validación y evidencia antes de cerrar una tarea.' : 'Validation criteria and evidence before closing a task.',
+    harness: es ? 'Captura correcciones y mejora el sistema con feedback.' : 'Captures corrections and improves the system with feedback.',
+    techradar: es ? 'Radar ADOPT/TRIAL/ASSESS/HOLD para decisiones de stack.' : 'ADOPT/TRIAL/ASSESS/HOLD radar for stack decisions.'
   };
 
   nodesData = [
@@ -1844,14 +1844,12 @@ function showHUD(node) {
   hudRole.style.color = col.c;
   hudBody.textContent = node.desc;
   
-  const connectionCount = linksData.filter(l => l.from === node.id || l.to === node.id).length;
-  const sourceMeta = node.source ? `<br><span style="opacity:.72">${node.source}</span>` : '';
+  const sourceMeta = node.source ? `<span style="opacity:.72">${escapeHtml(node.source)}</span>` : '';
   hudMeta.innerHTML = `
     <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:${col.c}; margin-right:6px;"></span>
-    ${node.layer === 'core' ? (currentLang === 'es' ? 'Nucleo' : 'Core') : node.layer === 'execution' ? (currentLang === 'es' ? 'Ejecucion' : 'Execution') : (currentLang === 'es' ? 'Especialista' : 'Specialist')} -
-    ${node.subs.length} ${getCopy('graph.subnodes')} - ${connectionCount} ${getCopy('graph.connections')}
+    ${node.layer === 'core' ? (currentLang === 'es' ? 'Núcleo' : 'Core') : node.layer === 'execution' ? (currentLang === 'es' ? 'Ejecución' : 'Execution') : (currentLang === 'es' ? 'Especialista' : 'Specialist')}
+    ${sourceMeta ? ` - ${sourceMeta}` : ''}
   `;
-  hudMeta.innerHTML += sourceMeta;
   hudElement.classList.add('active');
 }
 
