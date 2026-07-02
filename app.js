@@ -644,15 +644,6 @@ function renderProjectPreview(project, index, mode = 'active') {
   `;
 }
 
-function syncProjectPreview(carousel) {
-  const preview = carousel.querySelector('.project-hover-summary');
-  if (!preview) return;
-  const projectIndex = hoveredProjectIndex !== null ? hoveredProjectIndex : activeProjectIndex;
-  const project = FEATURED_PROJECTS[projectIndex];
-  preview.innerHTML = renderProjectPreview(project, projectIndex, hoveredProjectIndex !== null ? 'hover' : 'active');
-  preview.dataset.state = hoveredProjectIndex !== null ? 'hover' : 'active';
-}
-
 function renderProjectCarousel() {
   const carousel = document.getElementById('project-carousel');
   const archive = document.getElementById('project-archive');
@@ -663,12 +654,12 @@ function renderProjectCarousel() {
       <div class="project-deck-shell">
         <div class="project-deck-rail" role="tablist" aria-label="Project selector"></div>
         <div class="project-deck-viewport">
-          <div class="project-hover-summary" aria-live="polite"></div>
+          <div class="project-active-panel" aria-live="polite"></div>
         </div>
       </div>
     `;
     const rail = carousel.querySelector('.project-deck-rail');
-    const viewport = carousel.querySelector('.project-deck-viewport');
+    const panel = carousel.querySelector('.project-active-panel');
     FEATURED_PROJECTS.forEach((project, index) => {
       const button = document.createElement('button');
       button.type = 'button';
@@ -694,40 +685,7 @@ function renderProjectCarousel() {
       button.addEventListener('blur', clearProjectHover);
       rail.appendChild(button);
     });
-    viewport.insertAdjacentHTML('beforeend', `
-      <div class="project-viewport-stage">
-        ${FEATURED_PROJECTS.map((project, index) => `
-      <article class="project-mission ${index === activeProjectIndex ? 'active' : ''}" data-project-id="${project.id}">
-        <div class="mission-visual">
-          ${projectImage(project, index, 'mission')}
-          <div class="mission-scanline" aria-hidden="true"></div>
-        </div>
-        <div class="mission-copy">
-          <div class="mission-status">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</div>
-          <h3>${escapeHtml(project.title)}</h3>
-          <p class="mission-problem">${escapeHtml(projectField(project, 'problem'))}</p>
-          <div class="mission-evidence-grid">
-            <div>
-              <span>${currentLang === 'es' ? 'Mi rol' : 'My role'}</span>
-              <strong>${escapeHtml(projectField(project, 'role'))}</strong>
-            </div>
-            <div>
-              <span>${currentLang === 'es' ? 'Evidencia' : 'Evidence'}</span>
-              <strong>${escapeHtml(projectField(project, 'evidence'))}</strong>
-            </div>
-          </div>
-          <p class="mission-value">${escapeHtml(projectField(project, 'value'))}</p>
-          <div class="carousel-stack">${project.stack.map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
-          <div class="mission-actions">
-            <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
-            <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
-          </div>
-        </div>
-      </article>
-    `).join('')}
-      </div>
-    `);
-    syncProjectPreview(carousel);
+    panel.innerHTML = renderProjectPreview(FEATURED_PROJECTS[activeProjectIndex], activeProjectIndex, 'active');
   }
 
   if (archive) {
@@ -752,37 +710,25 @@ function setActiveProject(index, focus = true) {
   if (!carousel) return;
   activeProjectIndex = normalizeProjectIndex(index);
   hoveredProjectIndex = null;
-  const missions = Array.from(carousel.querySelectorAll('.project-mission'));
   const railItems = Array.from(carousel.querySelectorAll('.project-rail-item'));
-  missions.forEach((mission, slideIndex) => {
-    mission.classList.toggle('active', slideIndex === activeProjectIndex);
-    mission.setAttribute('aria-hidden', String(slideIndex !== activeProjectIndex));
-  });
   railItems.forEach((item, itemIndex) => {
     item.classList.toggle('active', itemIndex === activeProjectIndex);
     item.setAttribute('aria-selected', String(itemIndex === activeProjectIndex));
   });
-  syncProjectPreview(carousel);
+  const panel = carousel.querySelector('.project-active-panel');
+  if (panel) {
+    panel.innerHTML = renderProjectPreview(FEATURED_PROJECTS[activeProjectIndex], activeProjectIndex, 'active');
+  }
   if (focus) carousel.focus({ preventScroll: true });
 }
 
 function setProjectHover(index) {
-  const carousel = document.getElementById('project-carousel');
-  if (!carousel) return;
   hoveredProjectIndex = normalizeProjectIndex(index);
-  const railItems = Array.from(carousel.querySelectorAll('.project-rail-item'));
-  railItems.forEach((item, itemIndex) => {
-    item.classList.toggle('previewed', itemIndex === hoveredProjectIndex);
-  });
-  syncProjectPreview(carousel);
+  setActiveProject(hoveredProjectIndex, false);
 }
 
 function clearProjectHover() {
-  const carousel = document.getElementById('project-carousel');
-  if (!carousel) return;
   hoveredProjectIndex = null;
-  carousel.querySelectorAll('.project-rail-item').forEach((item) => item.classList.remove('previewed'));
-  syncProjectPreview(carousel);
 }
 
 function setupProjectCarousel() {
