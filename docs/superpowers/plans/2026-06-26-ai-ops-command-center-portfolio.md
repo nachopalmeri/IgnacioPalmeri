@@ -1,5 +1,7 @@
 # AI Ops Command Center Portfolio Implementation Plan
 
+> Status: superseded by the recruiter-evidence iteration. This plan is kept as design history. The current implementation intentionally favors JobBot as the case study, Motor Estadistico Predictivo and Pisculichi Labs as featured projects, all 8 projects in the archive, and a static accessible grid instead of the earlier carousel/deck concept.
+
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build an immersive AI Ops Command Center portfolio with animated hero, project carousel, multi-agent proof, and correct JobBot media.

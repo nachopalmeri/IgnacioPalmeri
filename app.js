@@ -66,7 +66,7 @@ const UI_COPY = {
       architecture: 'Next.js dashboard -> FastAPI API -> PostgreSQL -> Auth cookies -> Webhooks -> Stripe/MercadoPago -> Telegram',
       stack: 'Next.js, FastAPI, PostgreSQL, cookies seguras, webhooks, Telegram y pagos.',
       decisions: 'Separar UI y API, validar flujos sensibles del lado servidor y dejar trazabilidad de pagos y notificaciones.',
-      proof: 'Demo pública, repo, README y CV vinculan el proyecto con evidencia verificable.',
+      proof: 'Demo pública, repo de JobBot, README técnico y CV vinculan el proyecto con evidencia verificable.',
       next: 'Sumar observabilidad, mejorar onboarding y endurecer permisos por rol.'
     },
     about: {
@@ -90,21 +90,21 @@ const UI_COPY = {
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Workflow System - AI-assisted project process',
       jobbot: 'Full-stack automation SaaS para flujos de búsqueda laboral. Hecho con Next.js, FastAPI, PostgreSQL, autenticación segura, webhooks, notificaciones Telegram y pagos integrados. Muestra criterio backend, producto y disciplina de despliegue.',
-      franquiya: 'Motor de analytics en Python para predicciones deportivas, lógica de probabilidad y flujos de datos tipo mercado. Agrega fuentes, modela escenarios y actualiza un dashboard desplegado para usuarios no técnicos.',
-      agents: 'Laboratorio experimental para bots, alertas, herramientas de mercados predictivos y sistemas de portfolio. Muestra exploración de dominios, prototipado rápido y conexión entre finanzas, automatización e interfaces web.',
+      motor: 'Motor de analytics en Python para predicciones deportivas, lógica de probabilidad y flujos de datos tipo mercado. Agrega fuentes, modela escenarios y actualiza un dashboard desplegado para usuarios no técnicos.',
+      pisculichi: 'Laboratorio experimental para bots, alertas, herramientas de mercados predictivos y sistemas de portfolio. Muestra exploración de dominios, prototipado rápido y conexión entre finanzas, automatización e interfaces web.',
       roleJobbot: 'Automation SaaS / implementación AI-first',
-      roleFranquiya: 'Analytics / producto desplegado',
-      roleAgents: 'Laboratorio de producto / prototipado rápido',
+      roleMotor: 'Analytics / producto desplegado',
+      rolePisculichi: 'Laboratorio de producto / prototipado rápido',
       valueJobbot: 'Next.js + FastAPI + PostgreSQL, auth segura, webhooks, Telegram y pagos.',
-      valueFranquiya: 'Python, fuentes múltiples, matrices Poisson, simulaciones Monte Carlo y dashboard.',
-      valueAgents: 'Bots, alertas y experimentos web con alcance explícito de prototipo.',
+      valueMotor: 'Python, fuentes múltiples, matrices Poisson, simulaciones Monte Carlo y dashboard.',
+      valuePisculichi: 'Bots, alertas y experimentos web con alcance explícito de prototipo.',
       proof: 'Ver prueba',
       open: 'Abrir proyecto',
       repo: 'Ver repo',
       exploreAgents: 'Explorar ecosistema'
     },
     agents: {
-      eyebrow: 'Sistema real del repo',
+      eyebrow: 'Sistema local de trabajo',
       title: 'Sistema de trabajo',
       description: 'Sistema local que uso para construir, revisar y documentar proyectos con asistentes de IA. No es un producto: es mi forma de trabajar con más orden, pruebas y contexto.',
       workflowsTitle: 'Flujos de trabajo',
@@ -192,7 +192,7 @@ const UI_COPY = {
       architecture: 'Next.js dashboard -> FastAPI API -> PostgreSQL -> Auth cookies -> Webhooks -> Stripe/MercadoPago -> Telegram',
       stack: 'Next.js, FastAPI, PostgreSQL, secure cookies, webhooks, Telegram and payments.',
       decisions: 'Keep UI and API separate, validate sensitive flows on the server and leave traceability for payments and notifications.',
-      proof: 'Public demo, repo, README and CV link the project to verifiable evidence.',
+      proof: 'Public demo, JobBot repo, technical README and CV link the project to verifiable evidence.',
       next: 'Add observability, improve onboarding and harden role permissions.'
     },
     about: {
@@ -216,21 +216,21 @@ const UI_COPY = {
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Workflow System - AI-assisted project process',
       jobbot: 'Full-stack automation SaaS for job-search workflows. Built with Next.js, FastAPI, PostgreSQL, secure auth, webhook handling, Telegram notifications and payment integrations. Shows backend judgment, product thinking and deployment discipline.',
-      franquiya: 'Python analytics engine for sports predictions, probability logic and market-style data workflows. It aggregates sources, models scenarios and updates a deployed dashboard for non-technical users.',
-      agents: 'Experimental product lab for bots, alerts, prediction-market tools and portfolio systems. Shows domain exploration, fast prototyping and the ability to connect finance, automation and web interfaces.',
+      motor: 'Python analytics engine for sports predictions, probability logic and market-style data workflows. It aggregates sources, models scenarios and updates a deployed dashboard for non-technical users.',
+      pisculichi: 'Experimental product lab for bots, alerts, prediction-market tools and portfolio systems. Shows domain exploration, fast prototyping and the ability to connect finance, automation and web interfaces.',
       roleJobbot: 'Automation SaaS / AI-first implementation',
-      roleFranquiya: 'Analytics / deployed product',
-      roleAgents: 'Product lab / rapid prototyping',
+      roleMotor: 'Analytics / deployed product',
+      rolePisculichi: 'Product lab / rapid prototyping',
       valueJobbot: 'Next.js + FastAPI + PostgreSQL, secure auth, webhooks, Telegram and payments.',
-      valueFranquiya: 'Python, multiple sources, Poisson matrices, Monte Carlo simulations and dashboard.',
-      valueAgents: 'Bots, alerts and web experiments with explicit prototype scope.',
+      valueMotor: 'Python, multiple sources, Poisson matrices, Monte Carlo simulations and dashboard.',
+      valuePisculichi: 'Bots, alerts and web experiments with explicit prototype scope.',
       proof: 'View proof',
       open: 'Open project',
       repo: 'View repo',
       exploreAgents: 'Explore ecosystem'
     },
     agents: {
-      eyebrow: 'Real repo system',
+      eyebrow: 'Local work system',
       title: 'Workflow system',
       description: 'A local working system I use to build, review and document projects with AI assistants. It is not a product; it is my workflow for keeping context, tests and decisions organized.',
       workflowsTitle: 'Workflows',
@@ -1355,76 +1355,76 @@ function setupCurrentAgentPortfolioData() {
 
   nodesData = [
     agentNode('principal', es ? 'Plan' : 'Plan', 'workflow-planning', g.director, 'agent-assets/director.jpg', 50, 48, 'principal', [
-      sub('workflows/index.md', 'workflow'), sub('Agent Routing', 'workflow'), sub('validation.md', 'rules'), sub('session_checkpoint.md', 'memory'), sub('Release Manager', 'workflow')
+      sub('Workflow registry', 'workflow'), sub('Agent routing', 'workflow'), sub('Validation gate', 'rules'), sub('Session checkpoint', 'memory'), sub('Release manager', 'workflow')
     ]),
     agentNode('mcp', es ? 'Tools' : 'Tools', 'tooling-check', g.mcp, 'agent-assets/mcp.jpg', 50, 15, 'mcp', [
-      sub('mcp_catalog.md', 'workflow'), sub('mcp_adoption.md', 'workflow'), sub('mcp_security.md', 'rules'), sub('Tool Schemas', 'tool')
+      sub('Tool catalog', 'workflow'), sub('Adoption review', 'workflow'), sub('Permission review', 'rules'), sub('Tool schemas', 'tool')
     ]),
     agentNode('architect', es ? 'Architecture' : 'Architecture', 'simple-architecture', g.architect, 'agent-assets/architect.jpg', 67, 21, 'architect', [
-      sub('ai_production.md', 'workflow'), sub('Prompt Registry', 'memory'), sub('Evaluations', 'rules'), sub('Cost Control', 'rules')
+      sub('AI architecture notes', 'workflow'), sub('Prompt registry', 'memory'), sub('Evaluations', 'rules'), sub('Cost control', 'rules')
     ]),
-    agentNode('researcher', 'Researcher', 'agente-researcher.md', g.researcher, 'agent-assets/researcher.jpg', 81, 33, 'researcher', [
-      sub('Current Docs', 'tool'), sub('Library Research', 'workflow'), sub('Repo Grep', 'tool'), sub('Options Brief', 'memory')
+    agentNode('researcher', 'Researcher', 'research-agent', g.researcher, 'agent-assets/researcher.jpg', 81, 33, 'researcher', [
+      sub('Current docs', 'tool'), sub('Library research', 'workflow'), sub('Repo grep', 'tool'), sub('Options brief', 'memory')
     ]),
-    agentNode('design', 'Designer', 'agente-design.md', g.design, 'agent-assets/designer.jpg', 32, 24, 'design', [
-      sub('Responsive Gate', 'rules'), sub('AI Slop Test', 'rules'), sub('world-class-web.md', 'workflow'), sub('Accessibility Gate', 'rules')
+    agentNode('design', 'Designer', 'design-review', g.design, 'agent-assets/designer.jpg', 32, 24, 'design', [
+      sub('Responsive gate', 'rules'), sub('AI slop test', 'rules'), sub('Design quality pass', 'workflow'), sub('Accessibility gate', 'rules')
     ]),
     agentNode('product', 'Product', 'product-scope', g.product, 'agent-assets/product.jpg', 18, 42, 'product', [
-      sub('venture_loop.md', 'workflow'), sub('MVP Scope', 'rules'), sub('Kill / Keep / Scale', 'rules'), sub('Product Evidence', 'memory')
+      sub('Venture loop', 'workflow'), sub('MVP scope', 'rules'), sub('Kill / Keep / Scale', 'rules'), sub('Product evidence', 'memory')
     ]),
-    agentNode('docs', 'Docs', 'agente-docs.md', g.docs, 'agent-assets/docs.jpg', 22, 64, 'docs', [
-      sub('README', 'tool'), sub('API Docs', 'workflow'), sub('Changelog', 'memory'), sub('Handoff', 'workflow')
+    agentNode('docs', 'Docs', 'documentation', g.docs, 'agent-assets/docs.jpg', 22, 64, 'docs', [
+      sub('README', 'tool'), sub('API docs', 'workflow'), sub('Changelog', 'memory'), sub('Handoff', 'workflow')
     ]),
     agentNode('obsidian', 'Notes', 'local-notes', g.obsidian, 'agent-assets/content.jpg', 18, 63, 'obsidian', [
-      sub('obsidian_sync.md', 'workflow'), sub('vault_review.md', 'workflow'), sub('MOCs', 'memory'), sub('Lessons', 'memory')
+      sub('Obsidian sync', 'workflow'), sub('Vault review', 'workflow'), sub('MOCs', 'memory'), sub('Lessons', 'memory')
     ]),
-    agentNode('tests', 'QA', 'agente-tests.md', g.tests, 'agent-assets/qa.jpg', 40, 83, 'tests', [
-      sub('Playwright E2E', 'tool'), sub('Unit Tests', 'tool'), sub('Coverage', 'rules'), sub('Regression Evidence', 'memory')
+    agentNode('tests', 'QA', 'verification', g.tests, 'agent-assets/qa.jpg', 40, 83, 'tests', [
+      sub('Playwright E2E', 'tool'), sub('Unit tests', 'tool'), sub('Coverage', 'rules'), sub('Regression evidence', 'memory')
     ]),
-    agentNode('security', 'Security', 'agente-security-auditor.md', g.security, 'agent-assets/security.jpg', 63, 74, 'security', [
-      sub('Secret Scan', 'tool'), sub('mcp_security.md', 'workflow'), sub('Permission Boundaries', 'rules'), sub('Repo Safety', 'workflow')
+    agentNode('security', 'Security', 'security-review', g.security, 'agent-assets/security.jpg', 63, 74, 'security', [
+      sub('Secret scan', 'tool'), sub('MCP security review', 'workflow'), sub('Permission boundaries', 'rules'), sub('Repo safety', 'workflow')
     ]),
     agentNode('growth', 'Positioning', 'positioning', g.growth, 'agent-assets/growth.jpg', 82, 60, 'growth', [
-      sub('seo_geo_growth.md', 'workflow'), sub('AEO / GEO', 'rules'), sub('Opportunity Map', 'memory'), sub('Programmatic SEO', 'workflow')
+      sub('SEO / GEO growth', 'workflow'), sub('AEO / GEO', 'rules'), sub('Opportunity map', 'memory'), sub('Programmatic SEO', 'workflow')
     ]),
     agentNode('seo', 'SEO', 'seo-check', g.seo, 'agent-assets/seo.jpg', 90, 48, 'seo', [
       sub('Meta Tags', 'tool'), sub('Open Graph', 'tool'), sub('Schema Markup', 'tool'), sub('Canonical URLs', 'rules')
     ]),
-    agentNode('marketing', 'Marketing', 'agente-marketing-strategist.md', g.marketing, 'agent-assets/marketing.jpg', 88, 70, 'marketing', [
-      sub('marketing.md', 'workflow'), sub('GTM', 'workflow'), sub('GO / NO-GO / PIVOT', 'rules'), sub('Audience Research', 'memory')
+    agentNode('marketing', 'Marketing', 'marketing-strategy', g.marketing, 'agent-assets/marketing.jpg', 88, 70, 'marketing', [
+      sub('Marketing brief', 'workflow'), sub('GTM', 'workflow'), sub('GO / NO-GO / PIVOT', 'rules'), sub('Audience research', 'memory')
     ]),
-    agentNode('content', 'X Content', 'agente-x-content-strategist.md', g.content, 'agent-assets/x-content.jpg', 75, 85, 'content', [
-      sub('x_content_system.md', 'workflow'), sub('LinkedIn', 'tool'), sub('Substack', 'tool'), sub('Authentic Voice', 'rules')
+    agentNode('content', 'X Content', 'content-strategy', g.content, 'agent-assets/x-content.jpg', 75, 85, 'content', [
+      sub('Content system', 'workflow'), sub('LinkedIn', 'tool'), sub('Substack', 'tool'), sub('Authentic voice', 'rules')
     ]),
-    agentNode('academic', 'Academic Tutor', 'agente-academic-tutor.md', g.academic, 'agent-assets/academic-tutor.jpg', 11, 73, 'academic', [
-      sub('academic_tutor.md', 'workflow'), sub('Exam Prep', 'workflow'), sub('Flashcards', 'memory'), sub('Obsidian Sync', 'workflow')
+    agentNode('academic', 'Academic Tutor', 'academic-support', g.academic, 'agent-assets/academic-tutor.jpg', 11, 73, 'academic', [
+      sub('Academic tutor', 'workflow'), sub('Exam prep', 'workflow'), sub('Flashcards', 'memory'), sub('Obsidian sync', 'workflow')
     ]),
     agentNode('reviewer', 'Review', 'code-review', g.reviewer, 'agent-assets/code-reviewer.jpg', 46, 89, 'reviewer', [
-      sub('pr_code_review.md', 'workflow'), sub('Residual Risks', 'rules'), sub('Scope Check', 'rules'), sub('Review Verdict', 'memory')
+      sub('PR code review', 'workflow'), sub('Residual risks', 'rules'), sub('Scope check', 'rules'), sub('Review verdict', 'memory')
     ]),
     agentNode('release', 'Ship', 'release-check', g.release, 'agent-assets/release-manager.jpg', 28, 90, 'release', [
-      sub('pr_policy.md', 'workflow'), sub('Changelog', 'memory'), sub('Install Checks', 'tool'), sub('Release Checklist', 'rules')
+      sub('PR policy', 'workflow'), sub('Changelog', 'memory'), sub('Install checks', 'tool'), sub('Release checklist', 'rules')
     ]),
     agentNode('kickoff', 'Kickoff', 'project-kickoff', g.kickoff, 'agent-assets/kickoff-architect.jpg', 15, 15, 'kickoff', [
-      sub('project_kickoff_lean.md', 'workflow'), sub('First Milestone', 'rules'), sub('Intensity Level', 'rules')
+      sub('Lean kickoff', 'workflow'), sub('First milestone', 'rules'), sub('Intensity level', 'rules')
     ]),
     agentNode('pruner', 'Simplify', 'workflow-pruning', g.pruner, 'agent-assets/workflow-pruner.jpg', 63, 87, 'pruner', [
-      sub('Simplify System', 'workflow'), sub('Token Cost', 'memory'), sub('Delete / Keep', 'rules')
+      sub('Simplify system', 'workflow'), sub('Token cost', 'memory'), sub('Delete / Keep', 'rules')
     ]),
     systemNode('user', 'User', es ? 'Entrada externa' : 'External input', g.user, 'user', 92, 22, 'system', []),
-    systemNode('rules', 'AGENTS.md', es ? 'Reglas globales' : 'Global rules', g.rules, 'rules', 41, 38, 'system', [
-      sub('rules/*.md', 'rules'), sub('workflows/index.md', 'workflow'), sub('Permissions', 'rules'), sub('Chat-first', 'rules')
+    systemNode('rules', 'Rules', es ? 'Reglas globales' : 'Global rules', g.rules, 'rules', 41, 38, 'system', [
+      sub('Rule set', 'rules'), sub('Workflow registry', 'workflow'), sub('Permissions', 'rules'), sub('Chat-first', 'rules')
     ]),
     systemNode('memory', 'Memory', es ? 'Lessons / Tech Radar' : 'Lessons / Tech Radar', g.memory, 'memory', 42, 60, 'obsidian', [
-      sub('Local Lessons', 'memory'), sub('Global Lessons', 'memory'), sub('promote_lesson.md', 'workflow'), sub('developer_growth.md', 'memory')
+      sub('Local lessons', 'memory'), sub('Global lessons', 'memory'), sub('Promote lesson', 'workflow'), sub('Developer growth', 'memory')
     ]),
-    systemNode('gate', 'Validation', 'validation.md', g.gate, 'gate', 58, 58, 'gate', [
-      sub('Evidence Levels', 'rules'), sub('Scope Check', 'workflow'), sub('Residual Risks', 'rules'), sub('Human Verdict', 'rules')
+    systemNode('gate', 'Validation', 'Evidence gate', g.gate, 'gate', 58, 58, 'gate', [
+      sub('Evidence levels', 'rules'), sub('Scope check', 'workflow'), sub('Residual risks', 'rules'), sub('Human verdict', 'rules')
     ]),
     systemNode('harness', 'Harness', es ? 'Feedback loop' : 'Feedback loop', g.harness, 'harness', 50, 68, 'harness', [
-      sub('feedback_loop.md', 'workflow'), sub('Capture', 'workflow'), sub('Analyze', 'workflow'), sub('Promote Proposal', 'workflow')
+      sub('Feedback loop', 'workflow'), sub('Capture', 'workflow'), sub('Analyze', 'workflow'), sub('Promote proposal', 'workflow')
     ]),
-    systemNode('techradar', 'Tech Radar', 'memory/tech_radar.md', g.techradar, 'rules', 62, 38, 'system', [
+    systemNode('techradar', 'Tech Radar', 'Decision memory', g.techradar, 'rules', 62, 38, 'system', [
       sub('ADOPT', 'rules'), sub('TRIAL', 'rules'), sub('ASSESS', 'rules'), sub('HOLD', 'rules')
     ])
   ];
@@ -1449,13 +1449,13 @@ function setupCurrentAgentPortfolioData() {
       step('principal', 'design', '[UI]', es ? 'Refinando interaccion responsive y estados visuales' : 'Refining responsive interaction and visual states'),
       step('design', 'tests', '[QA path]', es ? 'Preparando superficie de validación visible' : 'Preparing user-facing validation surface'),
       step('tests', 'security', '[Risk]', es ? 'Chequeando regresion, secretos y comportamiento riesgoso' : 'Checking regression, secrets and risky behavior'),
-      step('security', 'gate', '[Evidence]', es ? 'Enviando evidencia a validation.md' : 'Sending evidence to validation.md'),
+      step('security', 'gate', '[Evidence]', es ? 'Enviando evidencia al gate de validación' : 'Sending evidence to the validation gate'),
       step('gate', 'principal', '[Report]', es ? 'Reportando resultado verificado y riesgos residuales' : 'Reporting verified outcome and residual risks', '#10b981')
     ]),
     workflow('validation', es ? 'Validation Gate' : 'Validation Gate', false, es ? 'Diff / tests / build / logs / screenshot -> reporte honesto' : 'Diff / tests / build / logs / screenshot -> honest report', [
       step('principal', 'tests', '[Checks]', es ? 'Ejecutando verificacion relevante para el cambio' : 'Running relevant verification for the change'),
       step('tests', 'security', '[Risk]', es ? 'Revisando regresion y riesgos del cambio' : 'Reviewing regression and change risk'),
-      step('security', 'gate', '[Evidence]', es ? 'Consolidando evidencia en validation.md' : 'Consolidating evidence in validation.md'),
+      step('security', 'gate', '[Evidence]', es ? 'Consolidando evidencia en el gate de validación' : 'Consolidating evidence in the validation gate'),
       step('gate', 'principal', '[Report]', es ? 'Reportando resultado y limitaciones explicitas' : 'Reporting result and explicit limitations', '#10b981')
     ]),
     workflow('learning-loop', es ? 'Harness Learning Loop' : 'Harness Learning Loop', true, es ? 'Correccion -> Harness -> Lessons -> Patron -> promocion humana' : 'Correction -> Harness -> Lessons -> Pattern -> human promotion', [
@@ -1463,7 +1463,7 @@ function setupCurrentAgentPortfolioData() {
       step('principal', 'harness', '[Watch]', es ? 'Harness detecta senal de routing, output, scope o calidad' : 'Harness detects routing, output, scope or quality signals'),
       step('harness', 'memory', '[Capture]', es ? 'Guardando lesson local en markdown' : 'Writing local lesson to markdown', '#a855f7'),
       step('memory', 'harness', '[Analyze]', es ? 'Buscando patrones repetidos y estado candidato' : 'Checking repeated patterns and candidate status', '#a855f7'),
-      step('harness', 'principal', '[Proposal]', es ? 'Preparando propuesta promote_lesson.md si hay evidencia' : 'Preparing promote_lesson.md proposal when evidence exists'),
+      step('harness', 'principal', '[Proposal]', es ? 'Preparando propuesta de aprendizaje si hay evidencia' : 'Preparing a learning proposal when evidence exists'),
       step('principal', 'user', '[Human OK]', es ? 'La promocion global espera confirmacion humana explicita' : 'Global promotion waits for explicit human confirmation', '#10b981')
     ]),
     workflow('review-loop', es ? 'Review Loop multiagente' : 'Multiagent Review Loop', true, es ? 'Crear -> Criticar -> Red Team -> Roadmap -> Re-evaluar' : 'Create -> Critique -> Red Team -> Roadmap -> Re-evaluate', [

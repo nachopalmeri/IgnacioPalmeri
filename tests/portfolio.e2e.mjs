@@ -16,6 +16,7 @@ const mimeTypes = {
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
   '.pdf': 'application/pdf'
 };
 
@@ -27,6 +28,12 @@ function serveFile(res, filePath) {
 
 const server = http.createServer(async (req, res) => {
   try {
+    if (/%2e%2e|%2f|%5c/i.test(req.url || '')) {
+      res.statusCode = 403;
+      res.end('Forbidden');
+      return;
+    }
+
     const requestUrl = new URL(req.url || '/', `http://127.0.0.1:${port}`);
     const pathname = decodeURIComponent(requestUrl.pathname);
     const relativePath = pathname === '/' ? 'index.html' : pathname.slice(1);
@@ -34,7 +41,8 @@ const server = http.createServer(async (req, res) => {
     const rootResolved = path.resolve(rootDir);
     const fileResolved = path.resolve(filePath);
 
-    if (!fileResolved.startsWith(rootResolved)) {
+    const relativeToRoot = path.relative(rootResolved, fileResolved);
+    if (relativeToRoot.startsWith('..') || path.isAbsolute(relativeToRoot)) {
       res.statusCode = 403;
       res.end('Forbidden');
       return;
@@ -62,6 +70,30 @@ const server = http.createServer(async (req, res) => {
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function assertOk(page, url, label) {
+  const response = await page.request.get(url, {
+    headers: { 'User-Agent': 'PortfolioVerification/1.0' },
+    timeout: 15000
+  });
+  if (!response.ok()) throw new Error(`${label} returned ${response.status()} for ${url}`);
+}
+
+function requestRawStatus(rawPath) {
+  return new Promise((resolve, reject) => {
+    const request = http.request({
+      hostname: '127.0.0.1',
+      port,
+      path: rawPath,
+      method: 'GET'
+    }, (response) => {
+      response.resume();
+      response.on('end', () => resolve(response.statusCode));
+    });
+    request.on('error', reject);
+    request.end();
+  });
 }
 
 async function withPage(browser, options, run) {
@@ -125,8 +157,10 @@ async function main() {
 
       const jobbotDemoLink = await page.locator('#jobbot-case-study a[href="https://jobbot-lime.vercel.app"]').count();
       if (jobbotDemoLink !== 1) throw new Error('missing JobBot demo link');
-      const jobbotReadmeLink = await page.locator('#jobbot-case-study a[href="README.md"]').count();
+      const jobbotReadmeHref = 'https://github.com/nachopalmeri/jobbot#readme';
+      const jobbotReadmeLink = await page.locator(`#jobbot-case-study a[href="${jobbotReadmeHref}"]`).count();
       if (jobbotReadmeLink !== 1) throw new Error('missing JobBot README link');
+      await assertOk(page, jobbotReadmeHref, 'JobBot README link');
 
       const bodyText = await page.locator('body').textContent();
       if (bodyText && (bodyText.includes('Prueba a agregar') || bodyText.includes('Proof to add'))) {
@@ -135,6 +169,20 @@ async function main() {
 
       const pisculabsHref = await page.locator('#project-archive .archive-row', { hasText: 'Pisculichi Labs' }).locator('a[href*="pisculabs"]').count();
       if (pisculabsHref !== 1) throw new Error('Pisculichi Labs repo was not updated to pisculabs');
+
+      const projectLinks = await page.locator('#project-archive a[href^="https://"]').evaluateAll((links) =>
+        [...new Set(links.map((link) => link.href))]
+      );
+      for (const href of projectLinks) {
+        await assertOk(page, href, `project link`);
+      }
+
+      const projectImages = await page.locator('#project-archive img, #overview-section .project-preview img').evaluateAll((images) =>
+        [...new Set(images.map((img) => img.getAttribute('src')).filter(Boolean))]
+      );
+      for (const src of projectImages) {
+        await assertOk(page, `http://127.0.0.1:${port}/${src}`, `project image`);
+      }
 
       await page.getByRole('button', { name: 'Sistema de trabajo' }).click();
       await page.waitForSelector('#agents-section.view-section.active');
@@ -155,6 +203,10 @@ async function main() {
       if (!readmeResponse.ok()) throw new Error(`README returned ${readmeResponse.status()}`);
       const faviconResponse = await page.request.get(`http://127.0.0.1:${port}/favicon.svg`);
       if (!faviconResponse.ok()) throw new Error(`favicon returned ${faviconResponse.status()}`);
+      const traversalStatus = await requestRawStatus('/%2e%2e/package.json');
+      if (traversalStatus !== 403 && traversalStatus !== 404) {
+        throw new Error(`path traversal request returned ${traversalStatus}`);
+      }
     });
 
     await withPage(browser, { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } , async (page, state) => {

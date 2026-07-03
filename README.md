@@ -1,6 +1,6 @@
 # ignaciopalmeri portfolio
 
-Personal portfolio for `ignaciopalmeri` built as a vanilla HTML/CSS/JS site. The goal is to present interview-ready evidence: shipped projects, a visible JobBot case study, a full 8-project archive, and a working local agent/workflow system.
+Personal portfolio for `ignaciopalmeri` built as a vanilla HTML/CSS/JS site. The goal is to present interview-ready evidence: shipped projects, a visible JobBot case study, a full 8-project archive, and a transparent local workflow system.
 
 ## Stack
 
@@ -16,7 +16,7 @@ Personal portfolio for `ignaciopalmeri` built as a vanilla HTML/CSS/JS site. The
 - A JobBot case study with problem, solution, architecture, stack, decisions and proof links
 - Three featured projects on the overview page
 - An 8-project archive on the projects tab
-- A workflow/agents tab backed by real local outputs
+- A workflow/agents tab that explains the local work system without presenting it as a product
 - English and Spanish copy
 - CV downloads and live outbound links
 
@@ -28,15 +28,20 @@ Personal portfolio for `ignaciopalmeri` built as a vanilla HTML/CSS/JS site. The
 - `tests/portfolio.e2e.mjs` - local browser verification
 - `cv/` - downloadable CV PDFs
 - `project-assets/` - screenshots and project visuals
+- `agent-assets/` - visual assets for the workflow-system graph
+- `docs/superpowers/` - historical plans and specs; superseded docs are marked explicitly
+- `.atl/` - local agent/skill registry metadata, not deployed
+- `.vercelignore` - deployment exclusions for local-only files
 
 ## Run locally
 
 ```bash
 npm install
+npx playwright install chromium
 npm run verify
 ```
 
-For manual preview, serve the repository root with any static server and open `index.html`.
+For manual preview, serve the repository root with any static server and open `http://127.0.0.1:<port>/`. Do not rely on `file://` preview because root-relative CV links and route behavior are meant for static hosting.
 
 ## Tests
 
@@ -52,7 +57,8 @@ The E2E suite checks:
 - 3 featured projects in the overview
 - 8 projects in the archive
 - agent/workflow proof visibility
-- CV, README and favicon availability
+- CV, external project links, project media, README and favicon availability
+- basic path traversal rejection in the local test server
 - behavior when `localStorage` is blocked
 
 ## Deploy
@@ -64,13 +70,14 @@ The site is intended for Vercel static hosting. The repository contains only sta
 - Keep the implementation vanilla to stay easy to inspect and deploy.
 - Favor visible evidence over inflated claims.
 - Keep the overview focused on 3 projects, but expose the full archive on the projects tab.
-- Treat the agents tab as a work system, not as a product pitch.
+- Treat the agents tab as a work-system explanation, not as a product pitch or proof of shipped infrastructure.
 
 ## Limitations
 
 - There is no framework-based component system.
 - Project data is embedded in `app.js`.
-- The workflow graph is visual proof of process, not a backend service.
+- The workflow graph is a visual explanation of process, not a backend service or a deployed agent product.
+- Some historical docs describe earlier directions such as FranquiYA and an interactive carousel; those files are kept as design history and marked as superseded.
 
 ## Next steps
 

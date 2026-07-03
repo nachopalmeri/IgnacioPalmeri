@@ -1,5 +1,7 @@
 # AI Ops Command Center Portfolio Redesign
 
+> Status: superseded by the recruiter-evidence iteration. The live implementation now uses a static featured-project grid, a JobBot case study, an 8-project archive, and a local workflow-system graph. Historical mentions of FranquiYA, Agents System as a featured project, and an interactive carousel describe an earlier design direction, not the current acceptance criteria.
+
 ## Objective
 Redesign Ignacio Palmeri's portfolio into a memorable AI-first builder portfolio that feels like a live command center, not a generic landing page. The experience must prove autonomy, process thinking, agent orchestration, and production-oriented automation.
 
