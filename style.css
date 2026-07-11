@@ -625,6 +625,7 @@ nav.nav-menu {
 
 .hero-agent-map {
   position: relative;
+  isolation: isolate;
   z-index: 1;
   min-height: 286px;
   margin: 12px 18px 0;
@@ -640,14 +641,25 @@ nav.nav-menu {
   position: absolute;
   inset: 16px;
   border: 1px solid rgba(255,255,255,0.055);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-agent-map .ai-ops-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .agent-node {
   position: absolute;
+  z-index: 2;
   display: grid;
   place-items: center;
   min-width: 74px;
-  min-height: 42px;
+  min-height: 44px;
   padding: 8px 10px;
   border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
   background: color-mix(in srgb, var(--bg-card) 74%, transparent);
@@ -663,6 +675,31 @@ nav.nav-menu {
   appearance: none;
   font: inherit;
   transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.agent-node[style*="--ops-x"] {
+  left: calc(var(--ops-x) * 100%);
+  top: calc(var(--ops-y) * 100%);
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+}
+
+.agent-node[style*="--ops-x"]:hover,
+.agent-node[style*="--ops-x"]:focus-visible,
+.agent-node[style*="--ops-x"].active {
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.agent-node.projection-hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hero-agent-map.projection-fallback .agent-node,
+.hero-agent-map.no-canvas .agent-node {
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .agent-node:hover,
@@ -798,6 +835,57 @@ nav.nav-menu {
   font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.hero-ops-action {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  margin-top: 7px;
+  padding: 10px 12px;
+  border-top: 1px solid color-mix(in srgb, var(--accent-green) 38%, var(--border));
+  background: linear-gradient(90deg, rgba(16,185,129,0.09), transparent);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.hero-ops-action > span:first-child {
+  color: var(--accent-green);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.hero-ops-action strong {
+  font-family: var(--font-display);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.hero-ops-action > span:last-child {
+  color: var(--accent-green);
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.hero-ops-action:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .hero-system-feed {
@@ -4774,6 +4862,12 @@ footer.app-footer {
   }
 }
 
+@media (max-width: 900px) {
+  .hero-agent-map {
+    min-height: 250px;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 42px 0 34px;
@@ -4840,7 +4934,7 @@ footer.app-footer {
   }
   .agent-node {
     min-width: 62px;
-    min-height: 36px;
+    min-height: 44px;
     padding: 7px 8px;
     font-size: 9px;
   }
@@ -5169,6 +5263,16 @@ footer.app-footer {
   }
 }
 
+@media (max-width: 640px) {
+  .hero-agent-map {
+    min-height: 220px;
+  }
+
+  .hero-ops-action {
+    width: 100%;
+  }
+}
+
 @media (max-width: 420px) {
   .ai-ops-canvas {
     display: none;
@@ -5210,6 +5314,13 @@ footer.app-footer {
   }
   .ai-ops-fallback {
     display: grid;
+  }
+  .agent-node,
+  .agent-node.projection-hidden {
+    visibility: visible;
+    pointer-events: auto;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
   .project-carousel-section,
   .github-activity,

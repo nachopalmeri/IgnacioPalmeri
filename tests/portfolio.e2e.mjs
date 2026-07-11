@@ -164,6 +164,60 @@ async function main() {
       if (!heroText || !heroText.includes('Junior AI Automation')) {
         throw new Error(`unexpected hero text: ${heroText}`);
       }
+      const operationsNavigation = page.locator('.hero-agent-map[role="navigation"]');
+      if (await operationsNavigation.count() !== 1) {
+        throw new Error('operations navigation missing');
+      }
+      const operationsLabelId = await operationsNavigation.getAttribute('aria-labelledby');
+      if (operationsLabelId !== 'hero-ops-map-title') {
+        throw new Error(`operations navigation label mismatch: ${operationsLabelId}`);
+      }
+      const operationsTitle = page.locator('#hero-ops-map-title');
+      if (await operationsTitle.count() !== 1 || !await operationsTitle.isVisible()) {
+        throw new Error('operations navigation title missing or hidden');
+      }
+      if (await operationsNavigation.locator('#ai-ops-canvas[aria-hidden="true"]').count() !== 1) {
+        throw new Error('operations canvas missing from navigation');
+      }
+      const operationNodes = operationsNavigation.locator('[data-ops-node]');
+      const operationNodeCount = await operationNodes.count();
+      if (operationNodeCount !== 5) {
+        throw new Error(`expected exactly 5 operations buttons, got ${operationNodeCount}`);
+      }
+      const pressedOperationCount = await operationsNavigation.locator('[data-ops-node][aria-pressed="true"]').count();
+      if (pressedOperationCount !== 1) {
+        throw new Error(`expected exactly 1 pressed operations button, got ${pressedOperationCount}`);
+      }
+      if (await page.locator('.hero-ops-detail[aria-live]').count() !== 0) {
+        throw new Error('operations detail must not be a live region');
+      }
+      if (await page.locator('#hero-ops-action').count() !== 1) {
+        throw new Error('operations action cue missing');
+      }
+      if (await page.locator('#hero-ops-status[role="status"][aria-live="polite"]').count() !== 1) {
+        throw new Error('operations status region missing');
+      }
+      const operationNodeRects = await operationNodes.evaluateAll((nodes) => nodes.map((node) => ({
+        key: node.dataset.opsNode,
+        width: node.getBoundingClientRect().width,
+        height: node.getBoundingClientRect().height
+      })));
+      const undersizedOperationNode = operationNodeRects.find(({ width, height }) => width < 44 || height < 44);
+      if (undersizedOperationNode) {
+        throw new Error(`operations node ${undersizedOperationNode.key} is smaller than 44x44: ${undersizedOperationNode.width}x${undersizedOperationNode.height}`);
+      }
+      const keyboardOperationKeys = [];
+      await page.locator('[data-ops-node="jobbot"]').focus();
+      keyboardOperationKeys.push(await page.evaluate(() => document.activeElement?.dataset.opsNode));
+      for (let index = 0; index < 4; index += 1) {
+        await page.keyboard.press('Tab');
+        keyboardOperationKeys.push(await page.evaluate(() => document.activeElement?.dataset.opsNode));
+      }
+      const uniqueKeyboardOperationKeys = [...new Set(keyboardOperationKeys.filter(Boolean))].sort();
+      const expectedKeyboardOperationKeys = ['agents', 'jobbot', 'labs', 'prode', 'proof'];
+      if (JSON.stringify(uniqueKeyboardOperationKeys) !== JSON.stringify(expectedKeyboardOperationKeys)) {
+        throw new Error(`operations keyboard reachability mismatch: ${JSON.stringify(uniqueKeyboardOperationKeys)}`);
+      }
       await page.locator('[data-ops-node="jobbot"]').click();
       await page.waitForFunction(() => {
         const title = document.querySelector('#jobbot-case-title');

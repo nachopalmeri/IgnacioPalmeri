@@ -53,7 +53,6 @@
   <main id="overview-section" class="view-section active">
     <section class="hero ai-ops-hero">
       <div class="hero-glow"></div>
-      <canvas id="ai-ops-canvas" class="ai-ops-canvas" aria-hidden="true"></canvas>
       <div class="ai-ops-fallback" aria-hidden="true">
         <span>Python</span>
         <span>FastAPI</span>
@@ -81,9 +80,10 @@
         <aside class="hero-system-panel" aria-label="Live workflow system preview">
           <div class="hero-system-topline">
             <span data-i18n="hero.systemKicker">AI Operations Room</span>
-            <strong data-i18n="hero.systemTitle">Proyectos, agentes y pruebas conectadas</strong>
+            <strong id="hero-ops-map-title" data-i18n="hero.systemTitle">Proyectos, agentes y pruebas conectadas</strong>
           </div>
-          <div class="hero-agent-map" aria-label="Interactive AI operations map">
+          <nav class="hero-agent-map" role="navigation" aria-labelledby="hero-ops-map-title">
+            <canvas id="ai-ops-canvas" class="ai-ops-canvas" aria-hidden="true"></canvas>
             <button class="agent-node agent-node-principal active" type="button" data-ops-node="jobbot" aria-pressed="true">JobBot</button>
             <button class="agent-node agent-node-plan" type="button" data-ops-node="agents" aria-pressed="false">Agents</button>
             <button class="agent-node agent-node-build" type="button" data-ops-node="prode" aria-pressed="false">Prode</button>
@@ -94,8 +94,8 @@
             <span class="agent-line agent-line-c"></span>
             <span class="agent-packet agent-packet-one"></span>
             <span class="agent-packet agent-packet-two"></span>
-          </div>
-          <div class="hero-ops-detail" aria-live="polite">
+          </nav>
+          <div class="hero-ops-detail">
             <span id="hero-ops-kicker">LIVE CASE</span>
             <strong id="hero-ops-title">JobBot</strong>
             <p id="hero-ops-body">Prototipo full-stack para automatizar búsqueda laboral con backend, auth, webhooks, Telegram y pagos.</p>
@@ -104,7 +104,13 @@
               <span>FastAPI</span>
               <span>PostgreSQL</span>
             </div>
+            <a id="hero-ops-action" class="hero-ops-action" href="#jobbot-case-title">
+              <span id="hero-ops-destination">CASE STUDY</span>
+              <strong data-ops-action-label>Abrir caso JobBot</strong>
+              <span aria-hidden="true">-&gt;</span>
+            </a>
           </div>
+          <p id="hero-ops-status" class="sr-only" role="status" aria-live="polite"></p>
           <div class="hero-system-feed">
             <div>
               <span>01</span>
@@ -603,6 +609,7 @@
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O" crossorigin="anonymous"></script>
+  <script src="hero-operations.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
