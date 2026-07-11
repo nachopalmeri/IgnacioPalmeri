@@ -121,6 +121,17 @@ async function testMissingDestination() {
   assert.equal(coordinator.snapshot().state, 'idle');
 }
 
+async function testMissingDestinationSupersedesPendingActivation() {
+  const { coordinator, focuses, navigations, errors } = harness();
+  const prodeActivation = coordinator.activate('prode');
+  const missingActivation = coordinator.activate('missing');
+  focuses[0].operation.resolve();
+  await Promise.all([prodeActivation, missingActivation]);
+  assert.deepEqual(navigations, []);
+  assert.deepEqual(errors, [{ code: 'missing-destination', key: 'missing' }]);
+  assert.equal(coordinator.snapshot().state, 'idle');
+}
+
 async function testNavigationFailure() {
   const { coordinator, focuses, errors } = harness({ navigationResult: false });
   const activation = coordinator.activate('prode');
@@ -148,6 +159,7 @@ await testExactlyOnce('reduced-motion');
 await testHardCancel('route-change');
 await testHardCancel('destroy');
 await testMissingDestination();
+await testMissingDestinationSupersedesPendingActivation();
 await testNavigationFailure();
 await testStateSequence();
 

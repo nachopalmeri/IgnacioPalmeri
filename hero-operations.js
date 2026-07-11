@@ -98,13 +98,13 @@
 
     async function activate(key) {
       if (destroyed) return;
+      cancelCurrent('superseded');
       if (!hasDestination(key)) {
         report('missing-destination', key);
         finishIdle();
         return;
       }
 
-      cancelCurrent('superseded');
       const transaction = {
         id: ++nextId,
         key,
