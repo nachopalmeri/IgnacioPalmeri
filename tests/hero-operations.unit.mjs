@@ -33,9 +33,10 @@ function deferred() {
   return { promise, resolve, reject };
 }
 
-function harness({ navigationResult = true } = {}) {
+function harness({ navigationResult = true, deferNavigation = false } = {}) {
   const focuses = [];
   const navigations = [];
+  const routeEffects = [];
   const states = [];
   const errors = [];
   const focus = (key, { signal }) => {
@@ -56,14 +57,32 @@ function harness({ navigationResult = true } = {}) {
     initialKey: 'jobbot',
     hasDestination: (key) => ['jobbot', 'prode', 'labs'].includes(key),
     focus,
-    navigate: async (key) => {
+    navigate: async (key, { signal, transactionId } = {}) => {
       navigations.push(key);
+      if (deferNavigation) {
+        const operation = deferred();
+        navigations[navigations.length - 1] = {
+          key,
+          signal,
+          transactionId,
+          operation,
+        };
+        await operation.promise;
+      }
+      if (!signal?.aborted) routeEffects.push(key);
       return navigationResult;
     },
     onStateChange: (state) => states.push(state),
     onError: (error) => errors.push(error),
   });
-  return { coordinator, focuses, navigations, states, errors };
+  return {
+    coordinator,
+    focuses,
+    navigations,
+    routeEffects,
+    states,
+    errors,
+  };
 }
 
 function testPreviewState() {
@@ -92,6 +111,55 @@ async function testSupersede() {
   await Promise.all([jobbotActivation, prodeActivation]);
   assert.deepEqual(navigations, ['prode']);
   assert.equal(coordinator.snapshot().state, 'idle');
+}
+
+async function testPendingNavigationSupersede() {
+  const { coordinator, focuses, navigations, routeEffects } = harness({
+    deferNavigation: true,
+  });
+  const prodeActivation = coordinator.activate('prode');
+  focuses[0].operation.resolve();
+  await Promise.resolve();
+  const labsActivation = coordinator.activate('labs');
+  assert.ok(navigations[0].signal, 'navigation receives an abort signal');
+  assert.equal(navigations[0].transactionId, 1);
+  assert.equal(navigations[0].signal.aborted, true);
+  navigations[0].operation.resolve();
+  await prodeActivation;
+  assert.equal(coordinator.snapshot().state, 'focusing');
+  assert.equal(coordinator.snapshot().committedKey, 'labs');
+  focuses[1].operation.resolve();
+  await Promise.resolve();
+  assert.equal(navigations[1].transactionId, 2);
+  navigations[1].operation.resolve();
+  await labsActivation;
+  assert.deepEqual(routeEffects, ['labs']);
+  assert.equal(coordinator.snapshot().state, 'idle');
+}
+
+async function testRouteSettledIgnoresStaleTransaction() {
+  const { coordinator, focuses, navigations } = harness({
+    deferNavigation: true,
+  });
+  const prodeActivation = coordinator.activate('prode');
+  focuses[0].operation.resolve();
+  await Promise.resolve();
+  const labsActivation = coordinator.activate('labs');
+  focuses[1].operation.resolve();
+  await Promise.resolve();
+  const prodeTransactionId = navigations[0].transactionId;
+  const labsTransactionId = navigations[1].transactionId;
+  assert.notEqual(prodeTransactionId, labsTransactionId);
+
+  coordinator.routeSettled(prodeTransactionId, true);
+  assert.equal(coordinator.snapshot().state, 'navigating');
+  assert.equal(coordinator.snapshot().committedKey, 'labs');
+  coordinator.routeSettled(labsTransactionId, true);
+  assert.equal(coordinator.snapshot().state, 'idle');
+
+  navigations[0].operation.resolve();
+  navigations[1].operation.resolve();
+  await Promise.all([prodeActivation, labsActivation]);
 }
 
 async function testExactlyOnce(reason) {
@@ -141,6 +209,36 @@ async function testNavigationFailure() {
   assert.equal(coordinator.snapshot().state, 'idle');
 }
 
+async function testFocusFailure() {
+  const { coordinator, focuses, errors } = harness();
+  const activation = coordinator.activate('prode');
+  focuses[0].operation.reject(new Error('focus failed'));
+  await activation;
+  assert.deepEqual(errors, [{ code: 'focus-failed', key: 'prode' }]);
+  assert.equal(coordinator.snapshot().state, 'idle');
+}
+
+async function testDestroyFreezesCoordinator() {
+  const { coordinator, focuses, navigations, routeEffects } = harness({
+    deferNavigation: true,
+  });
+  const activation = coordinator.activate('labs');
+  focuses[0].operation.resolve();
+  await Promise.resolve();
+  coordinator.destroy();
+  const destroyedSnapshot = coordinator.snapshot();
+
+  coordinator.preview('prode');
+  await coordinator.activate('prode');
+  coordinator.renderCurrent();
+  assert.deepEqual(coordinator.snapshot(), destroyedSnapshot);
+
+  navigations[0].operation.resolve();
+  await activation;
+  assert.deepEqual(routeEffects, []);
+  assert.deepEqual(coordinator.snapshot(), destroyedSnapshot);
+}
+
 async function testStateSequence() {
   const { coordinator, focuses, states } = harness();
   const activation = coordinator.activate('prode');
@@ -154,6 +252,10 @@ async function testStateSequence() {
 
 testPreviewState();
 await testSupersede();
+await testDestroyFreezesCoordinator();
+await testFocusFailure();
+await testRouteSettledIgnoresStaleTransaction();
+await testPendingNavigationSupersede();
 await testExactlyOnce('webgl-unavailable');
 await testExactlyOnce('reduced-motion');
 await testHardCancel('route-change');

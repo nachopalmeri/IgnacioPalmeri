@@ -61,7 +61,10 @@
 
       let ok = false;
       try {
-        ok = await navigate(transaction.key);
+        ok = await navigate(transaction.key, {
+          signal: transaction.navigationAbort.signal,
+          transactionId: transaction.id,
+        });
       } catch {
         ok = false;
       }
@@ -77,6 +80,7 @@
 
       transaction.cameraAbort.abort(reason);
       if (hardReasons.has(reason)) {
+        transaction.navigationAbort.abort(reason);
         if (current && current.id === transaction.id) current = null;
         finishIdle();
       }
@@ -109,6 +113,7 @@
         id: ++nextId,
         key,
         cameraAbort: new AbortController(),
+        navigationAbort: new AbortController(),
         navigationCommitted: false,
       };
       current = transaction;
@@ -124,11 +129,10 @@
         const reason = error?.cause || transaction.cameraAbort.signal.reason;
         if (error?.name === 'AbortError' && bypassReasons.has(reason)) {
           await commitNavigation(transaction);
-        } else if (
-          current &&
-          current.id === transaction.id &&
-          !hardReasons.has(reason)
-        ) {
+        } else if (current && current.id === transaction.id) {
+          if (error?.name !== 'AbortError') {
+            report('focus-failed', transaction.key);
+          }
           finishIdle(transaction);
         }
       }
@@ -138,14 +142,14 @@
       cancelCurrent(reason);
     }
 
-    function routeSettled(ok) {
-      if (!current) return;
+    function routeSettled(transactionId, ok) {
+      if (!current || current.id !== transactionId) return;
       if (!ok) report('navigation-failed', current.key);
       finishIdle(current);
     }
 
     function renderCurrent() {
-      emit();
+      if (!destroyed) emit();
       return previewKey || committedKey;
     }
 
