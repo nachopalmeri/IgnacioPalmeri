@@ -10,7 +10,7 @@
   <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,15 +24,15 @@
       </a>
 
       <nav class="nav-menu" aria-label="Primary navigation">
-        <button class="nav-tab active" data-tab="overview" data-i18n="nav.overview">Overview</button>
+        <button class="nav-tab active" data-tab="overview" data-i18n="nav.overview" aria-current="page">Inicio</button>
         <button class="nav-tab" data-tab="projects" data-i18n="nav.projects">Proyectos</button>
         <button class="nav-tab" data-tab="agents" data-i18n="nav.agents">Sistema de trabajo</button>
       </nav>
 
       <div class="header-actions">
         <div class="toggle-group" aria-label="Language selector">
-          <button class="toggle-btn active" data-lang-btn="es">ES</button>
-          <button class="toggle-btn" data-lang-btn="en">EN</button>
+          <button class="toggle-btn active" data-lang-btn="es" aria-pressed="true">ES</button>
+          <button class="toggle-btn" data-lang-btn="en" aria-pressed="false">EN</button>
         </div>
         <button id="theme-toggle" class="icon-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
           <span class="theme-icon theme-sun"></span>
@@ -69,31 +69,74 @@
           <div class="hero-tagline" data-i18n="hero.tagline">Junior AI Automation & Product Engineer</div>
           <p class="hero-availability" data-i18n="hero.availability">Disponible para pasantías y roles trainee</p>
           <h1 data-i18n="hero.title">ignaciopalmeri</h1>
-          <p class="hero-kicker" data-i18n="hero.kicker">Estudiante de Gestión IT en UADE. Construyo herramientas desplegadas con Python, FastAPI, automatización de procesos y asistentes de IA.</p>
+          <p class="hero-kicker" data-i18n="hero.kicker">Construyo automatizaciones y productos pequeños con IA, backend y criterio operativo.</p>
           <p class="hero-description" data-i18n="hero.description">
-            Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y capacidad real de convertir procesos repetitivos en software útil.
+            Estudio Gestión IT en UADE y busco mi primer rol en IA, automatización o producto. Mi portfolio funciona como una sala de operaciones: proyectos desplegados, agentes, decisiones y pruebas visibles.
           </p>
           <div class="hero-actions">
             <a href="#/projects" class="btn btn-primary" data-i18n="hero.projectsCta">Ver proyectos</a>
             <a href="/cv/palmeri_cv_local_es.pdf" download class="btn btn-secondary" data-i18n="hero.cvCta">Descargar CV</a>
-            <a href="https://github.com/nachopalmeri" target="_blank" rel="noopener noreferrer" class="btn btn-link" data-i18n="hero.githubCta">GitHub</a>
           </div>
-          <aside class="hero-command hero-dock" aria-label="Profile signal">
-            <figure class="hero-portrait">
-              <img src="project-assets/yo.webp" alt="ignaciopalmeri">
-            </figure>
-            <div class="profile-status" data-i18n="hero.status">Disponible para Trainee / Junior</div>
-            <div class="hero-cv-actions">
-              <a class="btn btn-primary hero-cv-link" href="/cv/palmeri_cv_local_es.pdf" download data-i18n="hero.cvCta">Descargar CV</a>
-              <a class="hero-cv-secondary" href="/cv/palmeri_cv_startups_en.pdf" download data-i18n="hero.cvEnCta">CV in English →</a>
-            </div>
-          </aside>
         </div>
+        <aside class="hero-system-panel" aria-label="Live workflow system preview">
+          <div class="hero-system-topline">
+            <span data-i18n="hero.systemKicker">AI Operations Room</span>
+            <strong data-i18n="hero.systemTitle">Proyectos, agentes y pruebas conectadas</strong>
+          </div>
+          <div class="hero-agent-map" aria-label="Interactive AI operations map">
+            <button class="agent-node agent-node-principal active" type="button" data-ops-node="jobbot" aria-pressed="true">JobBot</button>
+            <button class="agent-node agent-node-plan" type="button" data-ops-node="agents" aria-pressed="false">Agents</button>
+            <button class="agent-node agent-node-build" type="button" data-ops-node="prode" aria-pressed="false">Prode</button>
+            <button class="agent-node agent-node-review" type="button" data-ops-node="labs" aria-pressed="false">Labs</button>
+            <button class="agent-node agent-node-ship" type="button" data-ops-node="proof" aria-pressed="false">Proof</button>
+            <span class="agent-line agent-line-a"></span>
+            <span class="agent-line agent-line-b"></span>
+            <span class="agent-line agent-line-c"></span>
+            <span class="agent-packet agent-packet-one"></span>
+            <span class="agent-packet agent-packet-two"></span>
+          </div>
+          <div class="hero-ops-detail" aria-live="polite">
+            <span id="hero-ops-kicker">LIVE CASE</span>
+            <strong id="hero-ops-title">JobBot</strong>
+            <p id="hero-ops-body">Prototipo full-stack para automatizar búsqueda laboral con backend, auth, webhooks, Telegram y pagos.</p>
+            <div id="hero-ops-stack" class="hero-ops-stack">
+              <span>Next.js</span>
+              <span>FastAPI</span>
+              <span>PostgreSQL</span>
+            </div>
+          </div>
+          <div class="hero-system-feed">
+            <div>
+              <span>01</span>
+              <strong data-i18n="hero.feedOneTitle">JobBot feature</strong>
+              <p data-i18n="hero.feedOneBody">Planifico, implemento backend/frontend y verifico deploy.</p>
+            </div>
+            <div>
+              <span>02</span>
+              <strong data-i18n="hero.feedTwoTitle">Portfolio verification</strong>
+              <p data-i18n="hero.feedTwoBody">Playwright, mobile checks y revisión visual antes de publicar.</p>
+            </div>
+            <div>
+              <span>03</span>
+              <strong data-i18n="hero.feedThreeTitle">README handoff</strong>
+              <p data-i18n="hero.feedThreeBody">Convierto decisiones técnicas en setup y próximos pasos.</p>
+            </div>
+          </div>
+          <div class="hero-identity-chip">
+            <figure class="hero-portrait">
+              <img src="project-assets/yo.webp" alt="ignaciopalmeri" width="116" height="116">
+            </figure>
+            <div>
+              <span data-i18n="hero.status">Disponible para Trainee / Junior</span>
+              <strong>Buenos Aires / UADE</strong>
+            </div>
+          </div>
+        </aside>
       </div>
       <div class="container proof-strip" aria-label="Recruiter proof signals">
         <div class="proof-item">
           <span data-i18n="proof.shipped.label">Proyectos desplegados</span>
-          <strong data-i18n="proof.shipped.body">JobBot, Agents System y motor predictivo.</strong>
+          <strong data-i18n="proof.shipped.body">JobBot, Agents System y dashboard de probabilidades.</strong>
         </div>
         <div class="proof-item">
           <span data-i18n="proof.stack.label">Stack defendible</span>
@@ -107,17 +150,163 @@
       </div>
     </section>
 
-    <section class="container grid-2col about-section">
-      <div class="bio-info">
-        <h2 class="section-title" data-i18n="about.title">Sobre mí</h2>
-        <div class="bio-text">
-          <p data-i18n="about.p1">Estudio Gestión IT en UADE y estoy construyendo mi primera experiencia profesional en tecnología. Mezclo criterio de producto y contexto operativo para convertir procesos repetitivos en software útil.</p>
-          <p data-i18n="about.p2">Trabajo con Python, FastAPI, SQL, Linux, Git y asistentes de IA para construir dashboards, bots, automatizaciones y prototipos desplegados. Me importa más entregar trabajo revisable que parecer senior.</p>
-          <p data-i18n="about.p3">Mi experiencia en atención al cliente y operaciones me dio presión real, caja, inventario y auditorías. Quiero llevar esa base a soporte IT, QA trainee, automatización o startups.</p>
-        </div>
+    <section class="container workflow-ledger-section" aria-labelledby="workflow-ledger-title">
+      <div class="section-heading-row">
+        <h2 id="workflow-ledger-title" class="section-title" data-i18n="workflowLedger.title">Cómo trabajo con agentes</h2>
+        <p class="section-deck" data-i18n="workflowLedger.body">No vendo “agentes” como magia: los uso como rutas de trabajo verificables.</p>
+        <a href="#/agents" class="section-link" data-i18n="workflowLedger.cta">Ver sistema completo</a>
+      </div>
+      <div class="workflow-ledger" aria-label="Agent workflow proof">
+        <article>
+          <span data-i18n="workflowLedger.trigger">Trigger</span>
+          <strong>Feature request</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.agent">Agent</span>
+          <strong>Architect + Builder</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.output">Output</span>
+          <strong>Plan + implementation</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.proof">Proof</span>
+          <strong>Tests / demo</strong>
+        </article>
+        <article>
+          <span data-i18n="workflowLedger.trigger">Trigger</span>
+          <strong>UI iteration</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.agent">Agent</span>
+          <strong>Designer + Critic</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.output">Output</span>
+          <strong>Screenshot review</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.proof">Proof</span>
+          <strong>Mobile check</strong>
+        </article>
+        <article>
+          <span data-i18n="workflowLedger.trigger">Trigger</span>
+          <strong>Release</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.agent">Agent</span>
+          <strong>Verifier</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.output">Output</span>
+          <strong>Checklist</strong>
+          <em>-></em>
+          <span data-i18n="workflowLedger.proof">Proof</span>
+          <strong>Live URL</strong>
+        </article>
       </div>
     </section>
 
+    <section class="container jobbot-case-section" aria-labelledby="jobbot-case-title">
+      <div class="jobbot-case-hero">
+        <div class="jobbot-case-copy">
+          <p class="eyebrow" data-i18n="jobbotCase.eyebrow">Case study principal</p>
+          <h2 id="jobbot-case-title" data-i18n="jobbotCase.title">JobBot: de tarea repetitiva a producto full-stack</h2>
+          <p data-i18n="jobbotCase.body">Lo uso como prueba central porque junta lo que quiero aportar en mi primer rol: entender una operación real, convertirla en flujo de producto y dejar evidencia técnica revisable.</p>
+          <div class="jobbot-case-actions">
+            <a href="https://jobbot-lime.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="jobbotCase.demo">Abrir demo</a>
+            <a href="https://github.com/nachopalmeri/jobbot" target="_blank" rel="noopener noreferrer" data-i18n="jobbotCase.repo">Ver repo</a>
+            <a href="/cv/palmeri_cv_local_es.pdf" download data-i18n="jobbotCase.cv">Descargar CV</a>
+          </div>
+        </div>
+        <figure class="jobbot-case-screen">
+          <img src="project-assets/job-bot.png" alt="JobBot dashboard screenshot" width="1280" height="720" loading="eager" decoding="async">
+        </figure>
+      </div>
+      <div class="jobbot-case-grid">
+        <article>
+          <span data-i18n="jobbotCase.problemLabel">Problema</span>
+          <p data-i18n="jobbotCase.problem">Buscar oportunidades, registrar avances y responder a tiempo se vuelve repetitivo. La automatización sirve solo si mantiene control sobre usuarios, pagos, webhooks y notificaciones.</p>
+        </article>
+        <article>
+          <span data-i18n="jobbotCase.solutionLabel">Solución</span>
+          <p data-i18n="jobbotCase.solution">Dashboard web, API en FastAPI, persistencia, autenticación, webhooks, Telegram y pagos integrados como prototipo desplegado.</p>
+        </article>
+        <article class="jobbot-architecture-card">
+          <span data-i18n="jobbotCase.architectureLabel">Arquitectura</span>
+          <div class="jobbot-architecture" aria-label="JobBot architecture">
+            <strong>Next.js</strong>
+            <em>-></em>
+            <strong>FastAPI</strong>
+            <em>-></em>
+            <strong>PostgreSQL</strong>
+            <em>-></em>
+            <strong>Webhooks</strong>
+            <em>-></em>
+            <strong>Telegram</strong>
+          </div>
+        </article>
+        <article class="jobbot-decisions-card">
+          <span data-i18n="jobbotCase.decisionLabel">Decisiones</span>
+          <ul>
+            <li data-i18n="jobbotCase.decisionOne">Separar UI y API para poder razonar sobre seguridad, datos y experiencia sin mezclar responsabilidades.</li>
+            <li data-i18n="jobbotCase.decisionTwo">Usar webhooks y notificaciones para mostrar integración real con servicios externos, no solo CRUD.</li>
+            <li data-i18n="jobbotCase.decisionThree">Documentar demo, repo, stack y próximos pasos para que un dev pueda auditar el alcance.</li>
+          </ul>
+        </article>
+        <article class="jobbot-proof-card">
+          <span data-i18n="jobbotCase.proofLabel">Prueba visible</span>
+          <div>
+            <strong data-i18n="jobbotCase.proofOne">Demo pública</strong>
+            <strong data-i18n="jobbotCase.proofTwo">Repositorio revisable</strong>
+            <strong data-i18n="jobbotCase.proofThree">CV y portfolio conectados</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container signal-stations-section" aria-labelledby="signal-stations-title">
+      <div class="section-heading-row">
+        <p class="eyebrow" data-i18n="signalStations.eyebrow">Estaciones de evidencia</p>
+        <h2 id="signal-stations-title" class="section-title" data-i18n="signalStations.title">Tres señales más para distintos públicos</h2>
+        <p class="section-deck" data-i18n="signalStations.body">Después del caso principal, estas piezas muestran rango: datos, producto experimental y prueba verificable.</p>
+      </div>
+      <div class="signal-stations-grid">
+        <article id="signal-prode" class="signal-station-card">
+          <figure>
+            <img src="project-assets/prode-mundial-2026.png" alt="Sports Probability Dashboard screenshot" width="1280" height="720" loading="lazy" decoding="async">
+          </figure>
+          <div>
+            <span data-i18n="signalStations.prodeLabel">Datos / simulación</span>
+            <h3 data-i18n="signalStations.prodeTitle">Sports Probability Dashboard</h3>
+            <p data-i18n="signalStations.prodeBody">Modelo de probabilidades con Python, escenarios deportivos y una interfaz desplegada para usuarios no técnicos.</p>
+            <strong data-i18n="signalStations.prodeProof">Prueba: demo pública + repositorio + lógica inspeccionable.</strong>
+            <a href="https://prode-mundial-2026-ten-omega.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="signalStations.open">Abrir</a>
+          </div>
+        </article>
+        <article id="signal-labs" class="signal-station-card">
+          <figure>
+            <img src="project-assets/polymarktporyect.PNG" alt="Pisculichi Labs screenshot" width="1280" height="720" loading="lazy" decoding="async">
+          </figure>
+          <div>
+            <span data-i18n="signalStations.labsLabel">Producto experimental</span>
+            <h3 data-i18n="signalStations.labsTitle">Pisculichi Labs</h3>
+            <p data-i18n="signalStations.labsBody">Laboratorio de bots, alertas y herramientas para mercados predictivos. Muestra exploración rápida sin vender humo.</p>
+            <strong data-i18n="signalStations.labsProof">Prueba: beta desplegada + experimentos de automatización.</strong>
+            <a href="https://polytools-omega.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="signalStations.open">Abrir</a>
+          </div>
+        </article>
+        <article id="signal-proof" class="signal-station-card signal-station-proof">
+          <figure aria-hidden="true">
+            <div class="proof-signal-map">
+              <span>GitHub</span>
+              <span>CV</span>
+              <span>Playwright</span>
+              <span>Agents</span>
+            </div>
+          </figure>
+          <div>
+            <span data-i18n="signalStations.proofLabel">Verificación</span>
+            <h3 data-i18n="signalStations.proofTitle">Evidencia revisable</h3>
+            <p data-i18n="signalStations.proofBody">GitHub, CV, capturas, tests Playwright y rutas de agentes conectan el relato con artefactos concretos.</p>
+            <strong data-i18n="signalStations.proofProof">Prueba: navegador verificado, repos públicos y CV descargable.</strong>
+            <a href="#github-activity-title" data-i18n="signalStations.inspect">Inspeccionar</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <section class="container project-carousel-section" aria-labelledby="project-carousel-title">
       <div class="section-heading-row">
@@ -128,7 +317,7 @@
         <div class="project-static-fallback" aria-label="Featured projects fallback">
           <a class="project-static-card" href="https://jobbot-lime.vercel.app" target="_blank" rel="noopener noreferrer">
             <span class="project-static-kicker">JobBot</span>
-            <strong>Full-stack automation SaaS</strong>
+            <strong>Full-stack automation prototype</strong>
             <p>Next.js, FastAPI, PostgreSQL, auth, webhooks, Telegram y pagos.</p>
             <div class="project-static-tags">
               <span>Python</span>
@@ -149,9 +338,9 @@
             <span class="project-static-link">Explorar sistema</span>
           </a>
           <a class="project-static-card" href="https://prode-mundial-2026-ten-omega.vercel.app" target="_blank" rel="noopener noreferrer">
-            <span class="project-static-kicker">Motor Estadístico Predictivo</span>
-            <strong>Sports analytics engine</strong>
-            <p>Python, fuentes múltiples, matrices Poisson y dashboard.</p>
+            <span class="project-static-kicker">Sports Probability Dashboard</span>
+            <strong>Probability dashboard</strong>
+            <p>Python, escenarios deportivos y dashboard desplegado.</p>
             <div class="project-static-tags">
               <span>Python</span>
               <span>Analytics</span>
@@ -171,6 +360,58 @@
             <span class="project-static-link">Abrir proyecto</span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="container about-intelligence-section" aria-labelledby="about-title">
+      <canvas id="about-network-canvas" class="about-network-canvas" aria-hidden="true"></canvas>
+      <div class="about-intelligence-copy">
+        <p class="eyebrow" data-i18n="about.eyebrow">Estudiante IT orientado a automatización operativa</p>
+        <h2 id="about-title" class="section-title" data-i18n="about.title">Sobre mí</h2>
+        <p class="about-thesis" data-i18n="about.thesis">Convierto operaciones repetitivas en software pequeño, desplegado y revisable.</p>
+        <div class="bio-text">
+          <p data-i18n="about.p1">Estudio Gestión IT en UADE y estoy construyendo mi primera experiencia profesional en tecnología. Uso IA para acelerar la implementación, pero el valor que busco desarrollar está en decidir qué vale la pena construir y cómo hacerlo útil.</p>
+          <p data-i18n="about.p2">Me interesa la intersección entre software, economía, incentivos y comportamiento humano. Leo y estudio fuera de la programación porque los buenos productos no nacen solo de sintaxis: nacen de entender sistemas, usuarios y restricciones.</p>
+          <p data-i18n="about.p3">Mi experiencia en atención al cliente y operaciones me dio presión real, caja, inventario y auditorías. Quiero llevar esa base a soporte IT, QA trainee, automatización o startups donde pueda convertir procesos repetitivos en software revisable.</p>
+        </div>
+      </div>
+      <aside class="about-signal-panel" aria-label="Working thesis">
+        <span data-i18n="about.panelKicker">Modelo de trabajo</span>
+        <strong data-i18n="about.panelTitle">Código + sistemas + contexto de negocio</strong>
+        <p data-i18n="about.panelBody">La IA vuelve más rápida la producción de código. Mi foco es aprender a orquestar herramientas, criterio técnico y contexto humano para construir soluciones que tengan sentido.</p>
+        <div class="about-signal-route" aria-hidden="true">
+          <span>Intent</span>
+          <span>System</span>
+          <span>Market</span>
+          <span>Ship</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="container certifications-section" aria-labelledby="certifications-title">
+      <div class="section-heading-row">
+        <h2 id="certifications-title" class="section-title" data-i18n="certifications.title">Certificaciones</h2>
+        <p class="section-deck" data-i18n="certifications.body">Credenciales verificables y aprendizaje aplicado para sostener lo que muestro en proyectos.</p>
+      </div>
+      <div class="certification-grid">
+        <a class="certification-card" href="https://www.credly.com/badges/761f7f8d-41c7-4e1e-8dda-1e29830e4e85" target="_blank" rel="noopener noreferrer">
+          <span class="certification-status" data-i18n="certifications.verified">Verificada</span>
+          <strong data-i18n="certifications.redhat.title">Red Hat</strong>
+          <p data-i18n="certifications.redhat.body">Base Linux, terminal, permisos y administración de sistemas para trabajar con entornos reales.</p>
+          <span class="certification-link" data-i18n="certifications.open">Ver credencial</span>
+        </a>
+        <a class="certification-card" href="https://verify.skilljar.com/c/tco79gkq8a9k" target="_blank" rel="noopener noreferrer">
+          <span class="certification-status" data-i18n="certifications.verified">Verificada</span>
+          <strong data-i18n="certifications.claude.title">Claude Code</strong>
+          <p data-i18n="certifications.claude.body">Uso de asistentes de IA para desarrollo, revisión, contexto de repo y flujos de implementación verificables.</p>
+          <span class="certification-link" data-i18n="certifications.open">Ver credencial</span>
+        </a>
+        <article class="certification-card certification-card-static">
+          <span class="certification-status" data-i18n="certifications.visible">Visible</span>
+          <strong data-i18n="certifications.cisco.title">Cisco CCNA 1</strong>
+          <p data-i18n="certifications.cisco.body">Fundamentos de redes, direccionamiento, conectividad y troubleshooting para comprender infraestructura.</p>
+          <span class="certification-link" data-i18n="certifications.noLink">Sin link público directo</span>
+        </article>
       </div>
     </section>
 
@@ -292,13 +533,13 @@
 
       <div id="eco-viewport">
         <div class="eco-grid-bg"></div>
-        <canvas id="eco-canvas-under" class="eco-canvas"></canvas>
-        <canvas id="eco-canvas-over" class="eco-canvas"></canvas>
+        <canvas id="eco-canvas-under" class="eco-canvas" aria-hidden="true"></canvas>
+        <canvas id="eco-canvas-over" class="eco-canvas" aria-hidden="true"></canvas>
         <div id="eco-graph-wrapper"></div>
         <div id="eco-sub-universe"></div>
 
         <div id="eco-stats-badge" class="eco-stats-badge" data-i18n="agents.stats">
-          19 roles reales - Workflows documentados - Memoria local activa
+          19 módulos de workflow - Rutas documentadas - Memoria local activa
         </div>
 
         <button id="eco-back-btn"><span>&larr;</span> <span data-i18n="agents.back">Volver a la red</span></button>
@@ -340,7 +581,7 @@
   <button id="console-launcher" class="console-launcher" type="button" aria-expanded="false" aria-controls="console-chat" aria-label="Abrir consola">
     <span aria-hidden="true">$</span>
   </button>
-  <section id="console-chat" class="console-chat" aria-hidden="true" aria-label="Portfolio console">
+  <section id="console-chat" class="console-chat" aria-hidden="true" aria-label="Portfolio console" inert>
     <div class="terminal-card">
       <div class="terminal-topbar">
         <span></span><span></span><span></span>

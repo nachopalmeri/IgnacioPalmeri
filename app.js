@@ -2,19 +2,30 @@
 
 const UI_COPY = {
   es: {
-    nav: { overview: 'Overview', projects: 'Proyectos', agents: 'Sistema de trabajo' },
+    nav: { overview: 'Inicio', projects: 'Proyectos', agents: 'Sistema de trabajo' },
     hero: {
       tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
       availability: 'Disponible para pasantías y roles trainee',
-      kicker: 'Estudiante de Gestión IT en UADE. Construyo herramientas desplegadas con Python, FastAPI, automatización de procesos y asistentes de IA.',
-      description: 'Busco una pasantía o rol trainee donde pueda aportar criterio operativo, aprendizaje rápido y capacidad real de convertir procesos repetitivos en software útil.',
+      kicker: 'Construyo automatizaciones y productos pequeños con IA, backend y criterio operativo.',
+      description: 'Estudio Gestión IT en UADE y busco mi primer rol en IA, automatización o producto. Mi portfolio funciona como una sala de operaciones: proyectos desplegados, agentes, decisiones y pruebas visibles.',
       projectsCta: 'Ver proyectos',
       agentsCta: 'Ver sistema de trabajo',
       githubCta: 'GitHub',
       cvCta: 'Descargar CV',
       cvEnCta: 'CV in English →',
       status: 'Disponible para Trainee / Junior',
+      systemKicker: 'AI Operations Room',
+      systemTitle: 'Proyectos, agentes y pruebas conectadas',
+      feedOneTitle: 'JobBot feature',
+      feedOneBody: 'Planifico, implemento backend/frontend y verifico deploy.',
+      feedTwoTitle: 'Portfolio verification',
+      feedTwoBody: 'Playwright, mobile checks y revision visual antes de publicar.',
+      feedThreeTitle: 'README handoff',
+      feedThreeBody: 'Convierto decisiones tecnicas en setup y proximos pasos.',
+      labKicker: 'Prueba viva',
+      labTitle: 'JobBot -> tests -> agentes -> deploy',
+      labBody: 'Proyectos visibles, repos revisables y rutas de trabajo que muestran cÃ³mo construyo.',
       locationLabel: 'Ubicación',
       location: 'Buenos Aires, Argentina',
       focusLabel: 'Foco',
@@ -29,7 +40,7 @@ const UI_COPY = {
       unknown: 'Comando no encontrado',
       about: 'ignaciopalmeri - estudiante de Gestión IT en UADE que combina experiencia operativa, producto y automatización para construir software útil.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos y desarrollo asistido por IA.',
-      projects: 'Proyectos principales: JobBot, Agents System, Motor Estadístico Predictivo y Pisculichi Labs. El archivo completo muestra 9 piezas desplegadas o revisables.',
+      projects: 'Proyectos principales: JobBot, Agents System, Sports Probability Dashboard y Pisculichi Labs. El archivo completo muestra 9 piezas desplegadas o revisables.',
       agents: 'Uso asistentes de IA como parte de un flujo ordenado: plan, construcción, revisión, pruebas, documentación y publicación.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
@@ -42,15 +53,40 @@ const UI_COPY = {
       body: 'Evidencia visible.'
     },
     proof: {
-      shipped: { label: 'Proyectos', body: 'JobBot, Agents System y motor predictivo.' },
+      shipped: { label: 'Proyectos', body: 'JobBot, Agents System y dashboard de probabilidades.' },
       stack: { label: 'Stack', body: 'Python, FastAPI, PostgreSQL, Linux.' },
       ops: { label: 'Operaciones', body: 'Caja, inventario y auditorías.' }
     },
     about: {
+      eyebrow: 'Estudiante IT orientado a automatización operativa',
       title: 'Sobre mí',
-      p1: 'Estudio Gestión IT en UADE y estoy construyendo mi primera experiencia profesional en tecnología. Mezclo criterio de producto y contexto operativo para convertir procesos repetitivos en software útil.',
-      p2: 'Trabajo con Python, FastAPI, SQL, Linux, Git y asistentes de IA para construir dashboards, bots, automatizaciones y prototipos desplegados. Me importa más entregar trabajo revisable que parecer senior.',
-      p3: 'Mi experiencia en atención al cliente y operaciones me dio presión real, caja, inventario y auditorías. Quiero llevar esa base a soporte IT, QA trainee, automatización o startups.'
+      thesis: 'Convierto operaciones repetitivas en software pequeño, desplegado y revisable.',
+      p1: 'Estudio Gestión IT en UADE y estoy construyendo mi primera experiencia profesional en tecnología. Uso IA para acelerar la implementación, pero el valor que busco desarrollar está en decidir qué vale la pena construir y cómo hacerlo útil.',
+      p2: 'Me interesa la intersección entre software, economía, incentivos y comportamiento humano. Leo y estudio fuera de la programación porque los buenos productos no nacen solo de sintaxis: nacen de entender sistemas, usuarios y restricciones.',
+      p3: 'Mi experiencia en atención al cliente y operaciones me dio presión real, caja, inventario y auditorías. Quiero llevar esa base a soporte IT, QA trainee, automatización o startups donde pueda convertir procesos repetitivos en software revisable.',
+      panelKicker: 'Modelo de trabajo',
+      panelTitle: 'Código + sistemas + contexto de negocio',
+      panelBody: 'La IA vuelve más rápida la producción de código. Mi foco es aprender a orquestar herramientas, criterio técnico y contexto humano para construir soluciones que tengan sentido.'
+    },
+    certifications: {
+      title: 'Certificaciones',
+      body: 'Credenciales verificables y aprendizaje aplicado para sostener lo que muestro en proyectos.',
+      verified: 'Verificada',
+      visible: 'Visible',
+      open: 'Ver credencial',
+      noLink: 'Sin link público directo',
+      redhat: {
+        title: 'Red Hat',
+        body: 'Base Linux, terminal, permisos y administración de sistemas para trabajar con entornos reales.'
+      },
+      claude: {
+        title: 'Claude Code',
+        body: 'Uso de asistentes de IA para desarrollo, revisión, contexto de repo y flujos de implementación verificables.'
+      },
+      cisco: {
+        title: 'Cisco CCNA 1',
+        body: 'Fundamentos de redes, direccionamiento, conectividad y troubleshooting para comprender infraestructura.'
+      }
     },
     stack: { title: 'Stack y herramientas', core: 'Core técnico', product: 'Producto y operaciones', ai: 'IA aplicada' },
     projects: {
@@ -60,12 +96,12 @@ const UI_COPY = {
       archiveBody: 'El archivo completa el rango: CLI, deportes, comercio local y landings.',
       github: 'Ver GitHub',
       status: { active: 'Activo', public: 'Público', demo: 'Demo', local: 'Local' },
-      jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
+      jobbotTitle: 'JobBot - Automation prototype',
       agentsTitle: 'Sistema de trabajo - flujo con IA',
-      jobbot: 'SaaS para búsquedas laborales. Next.js, FastAPI, PostgreSQL, auth, webhooks y pagos.',
-      franquiya: 'Motor en Python para predicciones deportivas y dashboard.',
+      jobbot: 'Prototipo para búsquedas laborales. Next.js, FastAPI, PostgreSQL, auth, webhooks y pagos.',
+      franquiya: 'Dashboard en Python para probabilidades deportivas y escenarios.',
       agents: 'Laboratorio para bots, alertas y herramientas web.',
-      roleJobbot: 'Automation SaaS / implementación AI-first',
+      roleJobbot: 'Prototipo de automatización / implementación',
       roleFranquiya: 'Analytics / producto desplegado',
       roleAgents: 'Laboratorio de producto / prototipado rápido',
       valueJobbot: 'Next.js + FastAPI + PostgreSQL, auth segura, webhooks, Telegram y pagos.',
@@ -87,7 +123,7 @@ const UI_COPY = {
       workflow1: { label: 'JobBot feature', body: 'Plan, build, review y documentación.' },
       workflow2: { label: 'Portfolio verification', body: 'Playwright, mobile checks y localStorage.' },
       workflow3: { label: 'README handoff', body: 'Setup, diagramas y próximos pasos.' },
-      stats: '19 roles reales - Workflows documentados - Memoria local activa',
+      stats: '19 módulos de workflow - Rutas documentadas - Memoria local activa',
       back: 'Volver a la red',
       hint: 'Click en un agente para explorar - Simula una ruta documentada',
       stageIdle: 'Esperando workflow',
@@ -111,14 +147,25 @@ const UI_COPY = {
       tagline: 'Junior AI Automation & Product Engineer',
       title: 'ignaciopalmeri',
       availability: 'Available for internships and trainee roles',
-      kicker: 'IT Management student at UADE. I build deployed tools with Python, FastAPI, process automation and AI assistants.',
-      description: 'I am looking for an internship or trainee role where I can contribute operational judgment, fast learning and the ability to turn repetitive workflows into useful software.',
+      kicker: 'I build small AI automations and products with backend, product judgment and operational context.',
+      description: 'I am an IT Management student at UADE looking for my first role in AI, automation or product. This portfolio works like an operations room: shipped projects, agents, decisions and visible proof.',
       projectsCta: 'View projects',
       agentsCta: 'View workflow system',
       githubCta: 'GitHub',
       cvCta: 'Download CV',
       cvEnCta: 'CV in English →',
       status: 'Available for Trainee / Junior roles',
+      systemKicker: 'AI Operations Room',
+      systemTitle: 'Connected projects, agents and proof',
+      feedOneTitle: 'JobBot feature',
+      feedOneBody: 'I plan, implement backend/frontend and verify deployment.',
+      feedTwoTitle: 'Portfolio verification',
+      feedTwoBody: 'Playwright, mobile checks and visual review before publishing.',
+      feedThreeTitle: 'README handoff',
+      feedThreeBody: 'I turn technical decisions into setup and next steps.',
+      labKicker: 'Live proof',
+      labTitle: 'JobBot -> tests -> agents -> deploy',
+      labBody: 'Visible projects, reviewable repos and workflow routes that show how I build.',
       locationLabel: 'Location',
       location: 'Buenos Aires, Argentina',
       focusLabel: 'Focus',
@@ -133,7 +180,7 @@ const UI_COPY = {
       unknown: 'Command not found',
       about: 'ignaciopalmeri - IT Management student at UADE combining operations, product and automation to build useful software.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos e IA aplicada.',
-      projects: 'Main projects: JobBot, Agents System, Sports Predictive Analytics Engine and Pisculichi Labs. The full archive shows 9 deployed or reviewable pieces.',
+      projects: 'Main projects: JobBot, Agents System, Sports Probability Dashboard and Pisculichi Labs. The full archive shows 9 deployed or reviewable pieces.',
       agents: 'I use AI assistants inside an ordered workflow: planning, building, review, tests, documentation and shipping.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
     },
@@ -146,15 +193,40 @@ const UI_COPY = {
       body: 'Visible proof.'
     },
     proof: {
-      shipped: { label: 'Projects', body: 'JobBot, Agents System and predictive engine.' },
+      shipped: { label: 'Projects', body: 'JobBot, Agents System and probability dashboard.' },
       stack: { label: 'Stack', body: 'Python, FastAPI, PostgreSQL, Linux.' },
       ops: { label: 'Operations', body: 'Cash handling, inventory and audits.' }
     },
     about: {
       title: 'About me',
-      p1: 'I am an IT Management student at UADE building my first professional path in technology. I combine product judgment and operational context to turn repetitive processes into useful software.',
-      p2: 'I work with Python, FastAPI, SQL, Linux, Git and AI assistants to build dashboards, bots, automations and deployed prototypes. I care more about shipping reviewable work than looking senior.',
-      p3: 'My customer service and operations background gave me real pressure, cash handling, inventory and audits. I want to bring that base into IT support, QA trainee, automation or startups.'
+      eyebrow: 'IT student focused on operational automation',
+      thesis: 'I turn repetitive operations into small, deployed and reviewable software.',
+      p1: 'I am an IT Management student at UADE building my first professional path in technology. I use AI to move faster, but the value I want to develop is deciding what is worth building and how to make it useful.',
+      p2: 'I am interested in the intersection of software, economics, incentives and human behavior. I study beyond programming because strong products are not only syntax: they come from understanding systems, users and constraints.',
+      p3: 'My customer service and operations background gave me real pressure, cash handling, inventory and audits. I want to bring that base into IT support, QA trainee, automation or startups where I can turn repetitive processes into reviewable software.',
+      panelKicker: 'Operating model',
+      panelTitle: 'Code + systems + business context',
+      panelBody: 'AI makes code production faster. My focus is learning how to orchestrate tools, technical judgment and human context into solutions that make sense.'
+    },
+    certifications: {
+      title: 'Certifications',
+      body: 'Verified credentials and applied learning that support the work shown in projects.',
+      verified: 'Verified',
+      visible: 'Visible',
+      open: 'View credential',
+      noLink: 'No direct public link',
+      redhat: {
+        title: 'Red Hat',
+        body: 'Linux, terminal, permissions and system administration fundamentals for working with real environments.'
+      },
+      claude: {
+        title: 'Claude Code',
+        body: 'AI-assisted development workflows for repo context, review, implementation and verifiable delivery.'
+      },
+      cisco: {
+        title: 'Cisco CCNA 1',
+        body: 'Networking fundamentals, addressing, connectivity and troubleshooting for understanding infrastructure.'
+      }
     },
     stack: { title: 'Stack and tools', core: 'Technical core', product: 'Product and operations', ai: 'Applied AI' },
     projects: {
@@ -164,12 +236,12 @@ const UI_COPY = {
       archiveBody: 'The first four are the core. The rest shows range: CLI, sports, local commerce and deployed landing pages.',
       github: 'View GitHub',
       status: { active: 'Active', public: 'Public', demo: 'Demo', local: 'Local' },
-      jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
+      jobbotTitle: 'JobBot - Automation prototype',
       agentsTitle: 'Workflow system - AI-fluent process',
-      jobbot: 'Full-stack automation SaaS for job-search workflows. Built with Next.js, FastAPI, PostgreSQL, secure auth, webhook handling, Telegram notifications and payment integrations. Shows backend judgment, product thinking and deployment discipline.',
-      franquiya: 'Python analytics engine for sports predictions, probability logic and market-style data workflows. It aggregates sources, models scenarios and updates a deployed dashboard for non-technical users.',
+      jobbot: 'Full-stack automation prototype for job-search workflows. Includes API, dashboard, authentication, webhooks, Telegram notifications and payment integrations.',
+      franquiya: 'Sports probability dashboard built with Python logic, multiple sources and a deployed interface for reviewing match scenarios.',
       agents: 'Experimental product lab for bots, alerts, prediction-market tools and portfolio systems. Shows domain exploration, fast prototyping and the ability to connect finance, automation and web interfaces.',
-      roleJobbot: 'Automation SaaS / AI-first implementation',
+      roleJobbot: 'Automation prototype / implementation',
       roleFranquiya: 'Analytics / deployed product',
       roleAgents: 'Product lab / rapid prototyping',
       valueJobbot: 'Next.js + FastAPI + PostgreSQL, secure auth, webhooks, Telegram and payments.',
@@ -191,7 +263,7 @@ const UI_COPY = {
       workflow1: { label: 'JobBot feature', body: 'Plan, build, review and document.' },
       workflow2: { label: 'Portfolio verification', body: 'Playwright, mobile checks and localStorage.' },
       workflow3: { label: 'README handoff', body: 'Setup, diagrams and next steps.' },
-      stats: '19 real roles - Documented workflows - Local memory active',
+      stats: '19 workflow modules - Documented routes - Local memory active',
       back: 'Back to graph',
       hint: 'Click an agent to inspect it - Simulate a route',
       stageIdle: 'Waiting for workflow',
@@ -209,6 +281,110 @@ const UI_COPY = {
     },
       footer: { text: '2026 ignaciopalmeri.', contact: 'Contact' }
   }
+};
+
+UI_COPY.es.workflowLedger = {
+  title: 'Como trabajo con agentes',
+  body: 'No vendo agentes como magia: los uso como rutas de trabajo verificables.',
+  cta: 'Ver sistema completo',
+  trigger: 'Trigger',
+  agent: 'Agente',
+  output: 'Output',
+  proof: 'Proof'
+};
+
+UI_COPY.en.workflowLedger = {
+  title: 'How I work with agents',
+  body: 'I do not sell agents as magic: I use them as verifiable workflow routes.',
+  cta: 'View full system',
+  trigger: 'Trigger',
+  agent: 'Agent',
+  output: 'Output',
+  proof: 'Proof'
+};
+
+UI_COPY.es.jobbotCase = {
+  eyebrow: 'Case study principal',
+  title: 'JobBot: de tarea repetitiva a producto full-stack',
+  body: 'Lo uso como prueba central porque junta lo que quiero aportar en mi primer rol: entender una operación real, convertirla en flujo de producto y dejar evidencia técnica revisable.',
+  problemLabel: 'Problema',
+  problem: 'Buscar oportunidades, registrar avances y responder a tiempo se vuelve repetitivo. La automatización sirve solo si mantiene control sobre usuarios, pagos, webhooks y notificaciones.',
+  solutionLabel: 'Solución',
+  solution: 'Dashboard web, API en FastAPI, persistencia, autenticación, webhooks, Telegram y pagos integrados como prototipo desplegado.',
+  architectureLabel: 'Arquitectura',
+  decisionLabel: 'Decisiones',
+  decisionOne: 'Separar UI y API para poder razonar sobre seguridad, datos y experiencia sin mezclar responsabilidades.',
+  decisionTwo: 'Usar webhooks y notificaciones para mostrar integración real con servicios externos, no solo CRUD.',
+  decisionThree: 'Documentar demo, repo, stack y próximos pasos para que un dev pueda auditar el alcance.',
+  proofLabel: 'Prueba visible',
+  proofOne: 'Demo pública',
+  proofTwo: 'Repositorio revisable',
+  proofThree: 'CV y portfolio conectados',
+  demo: 'Abrir demo',
+  repo: 'Ver repo',
+  cv: 'Descargar CV'
+};
+
+UI_COPY.en.jobbotCase = {
+  eyebrow: 'Main case study',
+  title: 'JobBot: from repetitive task to full-stack product',
+  body: 'I use it as the central proof because it combines what I want to bring to my first role: understanding an operation, turning it into a product flow and leaving reviewable technical evidence.',
+  problemLabel: 'Problem',
+  problem: 'Finding opportunities, tracking progress and responding on time becomes repetitive. Automation only helps if it keeps control over users, payments, webhooks and notifications.',
+  solutionLabel: 'Solution',
+  solution: 'Web dashboard, FastAPI backend, persistence, authentication, webhooks, Telegram and payments integrated as a deployed prototype.',
+  architectureLabel: 'Architecture',
+  decisionLabel: 'Decisions',
+  decisionOne: 'Separate UI and API so security, data and UX can be reasoned about without mixing responsibilities.',
+  decisionTwo: 'Use webhooks and notifications to show real integration with external services, beyond CRUD.',
+  decisionThree: 'Document demo, repo, stack and next steps so another developer can audit the scope.',
+  proofLabel: 'Visible proof',
+  proofOne: 'Public demo',
+  proofTwo: 'Reviewable repository',
+  proofThree: 'CV and portfolio connected',
+  demo: 'Open demo',
+  repo: 'View repo',
+  cv: 'Download CV'
+};
+
+UI_COPY.es.signalStations = {
+  eyebrow: 'Estaciones de evidencia',
+  title: 'Tres señales más para distintos públicos',
+  body: 'Después del caso principal, estas piezas muestran rango: datos, producto experimental y prueba verificable.',
+  prodeLabel: 'Datos / simulación',
+  prodeTitle: 'Sports Probability Dashboard',
+  prodeBody: 'Modelo de probabilidades con Python, escenarios deportivos y una interfaz desplegada para usuarios no técnicos.',
+  prodeProof: 'Prueba: demo pública + repositorio + lógica inspeccionable.',
+  labsLabel: 'Producto experimental',
+  labsTitle: 'Pisculichi Labs',
+  labsBody: 'Laboratorio de bots, alertas y herramientas para mercados predictivos. Muestra exploración rápida sin vender humo.',
+  labsProof: 'Prueba: beta desplegada + experimentos de automatización.',
+  proofLabel: 'Verificación',
+  proofTitle: 'Evidencia revisable',
+  proofBody: 'GitHub, CV, capturas, tests Playwright y rutas de agentes conectan el relato con artefactos concretos.',
+  proofProof: 'Prueba: navegador verificado, repos públicos y CV descargable.',
+  open: 'Abrir',
+  inspect: 'Inspeccionar'
+};
+
+UI_COPY.en.signalStations = {
+  eyebrow: 'Evidence stations',
+  title: 'Three more signals for different audiences',
+  body: 'After the main case, these pieces show range: data, experimental product work and verifiable proof.',
+  prodeLabel: 'Data / simulation',
+  prodeTitle: 'Sports Probability Dashboard',
+  prodeBody: 'Probability model with Python, sports scenarios and a deployed interface for non-technical users.',
+  prodeProof: 'Proof: public demo + repository + inspectable logic.',
+  labsLabel: 'Experimental product',
+  labsTitle: 'Pisculichi Labs',
+  labsBody: 'Lab for bots, alerts and prediction-market tools. Shows fast exploration without overclaiming.',
+  labsProof: 'Proof: deployed beta + automation experiments.',
+  proofLabel: 'Verification',
+  proofTitle: 'Reviewable evidence',
+  proofBody: 'GitHub, CV, screenshots, Playwright tests and agent routes connect the story to concrete artifacts.',
+  proofProof: 'Proof: browser-verified UI, public repos and downloadable CV.',
+  open: 'Open',
+  inspect: 'Inspect'
 };
 
 const STORAGE_FALLBACK = new Map();
@@ -247,6 +423,79 @@ function secureExternalLinks(root = document) {
 let currentLang = safeStorageGet('portfolio-lang', 'es');
 let currentTheme = safeStorageGet('portfolio-theme', 'dark');
 
+const HERO_OPERATIONS = {
+  jobbot: {
+    es: {
+      kicker: 'LIVE CASE',
+      title: 'JobBot',
+      body: 'Prototipo full-stack para automatizar búsqueda laboral con backend, auth, webhooks, Telegram y pagos.',
+      stack: ['Next.js', 'FastAPI', 'PostgreSQL']
+    },
+    en: {
+      kicker: 'LIVE CASE',
+      title: 'JobBot',
+      body: 'Full-stack prototype for job-search automation with backend, auth, webhooks, Telegram and payments.',
+      stack: ['Next.js', 'FastAPI', 'PostgreSQL']
+    }
+  },
+  agents: {
+    es: {
+      kicker: 'WORKFLOW SYSTEM',
+      title: 'Agents System',
+      body: 'Mapa de trabajo con agentes para planear, construir, revisar, probar y documentar entregas reales.',
+      stack: ['Agents', 'Playwright', 'Docs']
+    },
+    en: {
+      kicker: 'WORKFLOW SYSTEM',
+      title: 'Agents System',
+      body: 'Agent workflow map for planning, building, reviewing, testing and documenting real deliveries.',
+      stack: ['Agents', 'Playwright', 'Docs']
+    }
+  },
+  prode: {
+    es: {
+      kicker: 'DATA PRODUCT',
+      title: 'Sports Probability',
+      body: 'Dashboard de probabilidades con Python, escenarios, simulaciones y visualización para usuarios no técnicos.',
+      stack: ['Python', 'Analytics', 'Vercel']
+    },
+    en: {
+      kicker: 'DATA PRODUCT',
+      title: 'Sports Probability',
+      body: 'Probability dashboard with Python, scenarios, simulations and visualization for non-technical users.',
+      stack: ['Python', 'Analytics', 'Vercel']
+    }
+  },
+  labs: {
+    es: {
+      kicker: 'PRODUCT LAB',
+      title: 'Pisculichi Labs',
+      body: 'Experimentos con bots, alertas, mercados predictivos e interfaces web con alcance de prototipo.',
+      stack: ['Bots', 'Markets', 'Alerts']
+    },
+    en: {
+      kicker: 'PRODUCT LAB',
+      title: 'Pisculichi Labs',
+      body: 'Experiments with bots, alerts, prediction markets and web interfaces with explicit prototype scope.',
+      stack: ['Bots', 'Markets', 'Alerts']
+    }
+  },
+  proof: {
+    es: {
+      kicker: 'VISIBLE PROOF',
+      title: 'Repos, CV y tests',
+      body: 'La experiencia no se queda en claims: muestra demos, repos, capturas, CV y verificación con navegador.',
+      stack: ['GitHub', 'CV', 'Tests']
+    },
+    en: {
+      kicker: 'VISIBLE PROOF',
+      title: 'Repos, CV and tests',
+      body: 'The experience does not stop at claims: it shows demos, repos, screenshots, CV and browser verification.',
+      stack: ['GitHub', 'CV', 'Tests']
+    }
+  }
+};
+
 function getCopy(path, lang = currentLang) {
   return path.split('.').reduce((value, key) => value && value[key], UI_COPY[lang]) || path;
 }
@@ -261,11 +510,14 @@ function applyStaticCopy() {
     el.textContent = getCopy(el.dataset.i18n);
   });
   document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.langBtn === currentLang);
+    const isActive = btn.dataset.langBtn === currentLang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
   });
   secureExternalLinks(document);
   resetTerminal();
   if (document.getElementById('project-carousel')) renderProjectCarousel();
+  updateHeroOperationDetail(document.querySelector('[data-ops-node].active')?.dataset.opsNode || 'jobbot');
 }
 
 function rebuildLocalizedEcosystem() {
@@ -346,11 +598,14 @@ function setupFloatingConsole() {
   function setOpen(open) {
     panel.classList.toggle('open', open);
     panel.setAttribute('aria-hidden', String(!open));
+    if ('inert' in panel) panel.inert = !open;
+    else panel.toggleAttribute('inert', !open);
     launcher.setAttribute('aria-expanded', String(open));
     launcher.classList.toggle('active', open);
     if (open && input) setTimeout(() => input.focus({ preventScroll: true }), 80);
   }
 
+  setOpen(false);
   launcher.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
   close && close.addEventListener('click', () => setOpen(false));
   document.addEventListener('keydown', (event) => {
@@ -389,22 +644,22 @@ const FEATURED_PROJECTS = [
     href: 'https://jobbot-lime.vercel.app',
     media: 'project-assets/job-bot.png',
     status: 'ACTIVE',
-    kind: { es: 'Automation SaaS', en: 'Automation SaaS' },
+    kind: { es: 'Automation prototype', en: 'Automation prototype' },
     description: {
-      es: 'Full-stack SaaS para búsquedas laborales. Next.js, FastAPI, PostgreSQL, auth, webhooks y pagos.',
-      en: 'Full-stack SaaS for job searches. Next.js, FastAPI, PostgreSQL, auth, webhooks and payments.'
+      es: 'Prototipo full-stack para automatizar búsquedas laborales. Next.js, FastAPI, PostgreSQL, auth, webhooks y pagos.',
+      en: 'Full-stack prototype for job-search automation. Next.js, FastAPI, PostgreSQL, auth, webhooks and payments.'
     },
     value: {
-      es: 'Muestra criterio backend, pensamiento de producto y disciplina de despliegue.',
-      en: 'Shows backend judgment, product thinking and deployment discipline.'
+      es: 'Incluye API, dashboard, autenticación, webhooks, Telegram y despliegue público.',
+      en: 'Includes API, dashboard, authentication, webhooks, Telegram and public deployment.'
     },
     problem: {
       es: 'Automatizar búsqueda laboral sin perder control sobre seguridad, pagos y webhooks.',
       en: 'Automate job search without losing control over security, payments and webhooks.'
     },
     role: {
-      es: 'Full-stack builder: dashboard, backend, autenticación, webhooks y despliegue.',
-      en: 'Full-stack builder: dashboard, backend, authentication, webhooks and deployment.'
+      es: 'Implementación: dashboard, backend, autenticación, webhooks y despliegue.',
+      en: 'Implementation: dashboard, backend, authentication, webhooks and deployment.'
     },
     evidence: {
       es: 'Demo pública, repo revisable y stack claro: API, dashboard, auth, webhooks, pagos y Telegram.',
@@ -444,23 +699,23 @@ const FEATURED_PROJECTS = [
   },
   {
     id: 'motor-estadistico',
-    title: 'Motor Estadístico Predictivo',
+    title: 'Sports Probability Dashboard',
     repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
     href: 'https://prode-mundial-2026-ten-omega.vercel.app',
     media: 'project-assets/prode-mundial-2026.png',
     status: 'LIVE',
     kind: { es: 'Analytics de deportes', en: 'Sports analytics' },
     description: {
-      es: 'Motor en Python para predicciones deportivas, probabilidad y dashboard.',
-      en: 'Python engine for sports predictions, probability and dashboard.'
+      es: 'Dashboard en Python para probabilidades deportivas, escenarios y visualización.',
+      en: 'Python dashboard for sports probabilities, scenarios and visualization.'
     },
     value: {
       es: 'Python, múltiples fuentes, matrices Poisson, simulaciones Monte Carlo y dashboard para usuarios no técnicos.',
       en: 'Python, multiple sources, Poisson matrices, Monte Carlo simulations and a dashboard for non-technical users.'
     },
     problem: {
-      es: 'Transformar datos y predicciones deportivas en una experiencia usable para usuarios no técnicos.',
-      en: 'Turn sports data and predictions into a usable experience for non-technical users.'
+      es: 'Transformar datos deportivos y escenarios en una experiencia usable para usuarios no técnicos.',
+      en: 'Turn sports data and scenarios into a usable experience for non-technical users.'
     },
     role: {
       es: 'Modelado de reglas, lógica Python, deploy y experiencia de participación.',
@@ -701,6 +956,8 @@ function projectImage(project, index, variant = 'mission') {
     <img
       src="${project.media}"
       alt="${escapeHtml(alt)}"
+      width="1280"
+      height="720"
       loading="${loading}"
       decoding="async"
       onerror="handleProjectMediaError(this)"
@@ -763,6 +1020,78 @@ function renderProjectCarousel() {
       </a>
     `).join('');
   }
+}
+
+function updateHeroOperationDetail(key = 'jobbot') {
+  const item = HERO_OPERATIONS[key]?.[currentLang] || HERO_OPERATIONS.jobbot[currentLang];
+  const kicker = document.getElementById('hero-ops-kicker');
+  const title = document.getElementById('hero-ops-title');
+  const body = document.getElementById('hero-ops-body');
+  const stack = document.getElementById('hero-ops-stack');
+  if (!kicker || !title || !body || !stack) return;
+
+  kicker.textContent = item.kicker;
+  title.textContent = item.title;
+  body.textContent = item.body;
+  stack.innerHTML = item.stack.map((label) => `<span>${escapeHtml(label)}</span>`).join('');
+}
+
+function focusPortfolioTarget(target, highlightTarget = target) {
+  const element = typeof target === 'string' ? document.querySelector(target) : target;
+  const highlight = typeof highlightTarget === 'string' ? document.querySelector(highlightTarget) : highlightTarget;
+  if (!element) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  element.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  if (highlight) {
+    highlight.classList.remove('section-focus-pulse');
+    // Restart the animation if the same target is selected repeatedly.
+    void highlight.offsetWidth;
+    highlight.classList.add('section-focus-pulse');
+    window.setTimeout(() => highlight.classList.remove('section-focus-pulse'), 1400);
+  }
+}
+
+function navigateHeroOperation(key) {
+  const targets = {
+    jobbot: ['#jobbot-case-title', '.jobbot-case-section'],
+    prode: ['#signal-prode', '#signal-prode'],
+    labs: ['#signal-labs', '#signal-labs'],
+    proof: ['#signal-proof', '#signal-proof']
+  };
+
+  if (key === 'agents') {
+    window.location.hash = '#/agents';
+    return;
+  }
+
+  const [target, highlight] = targets[key] || targets.jobbot;
+  focusPortfolioTarget(target, highlight);
+}
+
+function setupHeroOperations() {
+  const buttons = Array.from(document.querySelectorAll('[data-ops-node]'));
+  if (!buttons.length) return;
+
+  function activate(button) {
+    buttons.forEach((item) => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    updateHeroOperationDetail(button.dataset.opsNode);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activate(button);
+      navigateHeroOperation(button.dataset.opsNode);
+    });
+    button.addEventListener('mouseenter', () => activate(button));
+    button.addEventListener('focus', () => activate(button));
+  });
+
+  updateHeroOperationDetail(buttons.find((button) => button.classList.contains('active'))?.dataset.opsNode || 'jobbot');
 }
 
 function setupProjectCarousel() {
@@ -1114,10 +1443,128 @@ function setupAiOpsHero() {
   window.addEventListener('portfolio-tab-change', start);
 }
 
+function setupAboutNetwork() {
+  const canvas = document.getElementById('about-network-canvas');
+  const section = document.querySelector('.about-intelligence-section');
+  if (!canvas || !section) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    canvas.hidden = true;
+    return;
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const labels = ['AI', 'Ops', 'Market', 'Users', 'Systems', 'Ship'];
+  let width = 0;
+  let height = 0;
+  let ratio = 1;
+  let frameId = null;
+  let running = false;
+  let points = [];
+
+  function resize() {
+    const rect = section.getBoundingClientRect();
+    width = Math.max(1, rect.width);
+    height = Math.max(260, rect.height);
+    ratio = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const count = width < 720 ? 18 : 30;
+    points = Array.from({ length: count }, (_, index) => ({
+      x: width * (0.1 + Math.random() * 0.8),
+      y: height * (0.12 + Math.random() * 0.76),
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: 1.2 + Math.random() * 2.4,
+      label: index < labels.length ? labels[index] : ''
+    }));
+  }
+
+  function draw(time = 0) {
+    ctx.clearRect(0, 0, width, height);
+    const pulse = reduceMotion.matches ? 0 : Math.sin(time * 0.0014) * 0.5 + 0.5;
+    ctx.lineWidth = 1;
+
+    points.forEach((point) => {
+      if (!reduceMotion.matches) {
+        point.x += point.vx;
+        point.y += point.vy;
+        if (point.x < 20 || point.x > width - 20) point.vx *= -1;
+        if (point.y < 20 || point.y > height - 20) point.vy *= -1;
+      }
+    });
+
+    for (let i = 0; i < points.length; i += 1) {
+      for (let j = i + 1; j < points.length; j += 1) {
+        const a = points[i];
+        const b = points[j];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        if (distance > 165) continue;
+        const alpha = Math.max(0, 1 - distance / 165) * 0.18;
+        ctx.strokeStyle = `rgba(16,185,129,${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+
+    points.forEach((point, index) => {
+      const isKey = Boolean(point.label);
+      const radius = point.r + (isKey ? pulse * 1.8 : 0);
+      ctx.fillStyle = isKey ? 'rgba(16,185,129,0.28)' : 'rgba(237,237,237,0.26)';
+      ctx.strokeStyle = isKey ? 'rgba(16,185,129,0.72)' : 'rgba(255,255,255,0.18)';
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, radius + (isKey ? 5 : 0), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = index % 3 === 0 ? 'rgba(59,130,246,0.7)' : 'rgba(237,237,237,0.82)';
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      if (point.label) {
+        ctx.fillStyle = 'rgba(237,237,237,0.72)';
+        ctx.font = '700 10px IBM Plex Sans, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(point.label, point.x, point.y - 12);
+      }
+    });
+
+    if (!reduceMotion.matches && running) frameId = requestAnimationFrame(draw);
+  }
+
+  function shouldRun() {
+    return !reduceMotion.matches && document.visibilityState === 'visible' && document.getElementById('overview-section')?.classList.contains('active');
+  }
+
+  function start() {
+    running = shouldRun();
+    if (frameId) cancelAnimationFrame(frameId);
+    if (running) frameId = requestAnimationFrame(draw);
+    else draw(0);
+  }
+
+  resize();
+  start();
+  window.addEventListener('resize', () => {
+    resize();
+    start();
+  });
+  document.addEventListener('visibilitychange', start);
+  reduceMotion.addEventListener('change', start);
+  window.addEventListener('hashchange', start);
+  window.addEventListener('portfolio-tab-change', start);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   setupPreferenceControls();
   setupProjectCarousel();
+  setupHeroOperations();
   setupAiOpsHero();
+  setupAboutNetwork();
   // Navigation tabs
   const navTabs = document.querySelectorAll('.nav-tab');
   const viewSections = document.querySelectorAll('.view-section');
@@ -1125,7 +1572,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function switchTab(tabId) {
     // Update tabs active state
     navTabs.forEach(tab => {
-      tab.classList.toggle('active', tab.getAttribute('data-tab') === tabId);
+      const isActive = tab.getAttribute('data-tab') === tabId;
+      tab.classList.toggle('active', isActive);
+      if (isActive) tab.setAttribute('aria-current', 'page');
+      else tab.removeAttribute('aria-current');
     });
 
     // Update section active state
@@ -1192,6 +1642,8 @@ let hoveredNodeId = null;
 let activeWorkflow = null;
 let workflowTimeout = null;
 let animationFrameId = null;
+const ecoReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let ecoReduceMotionListenerAttached = false;
 
 // Colors
 const ACCENT_COLORS = {
@@ -1292,6 +1744,13 @@ function initEcosystem() {
   }
   
   backBtn && backBtn.addEventListener('click', collapseGraph);
+  if (!ecoReduceMotionListenerAttached) {
+    ecoReduceMotion.addEventListener('change', () => {
+      if (ecoReduceMotion.matches) stopEcosystemLoop();
+      else if (document.getElementById('agents-section')?.classList.contains('active')) startEcosystemLoop();
+    });
+    ecoReduceMotionListenerAttached = true;
+  }
   ecoVp.addEventListener('click', (e) => {
     if (selectedNodeId && !e.target.closest('.eco-node') && !e.target.closest('.sub-node') && !e.target.closest('#eco-hud')) {
       collapseGraph();
@@ -2259,12 +2718,17 @@ function renderEcosystem(timestamp) {
     }
   }
   
-  animationFrameId = requestAnimationFrame(renderEcosystem);
+  if (!ecoReduceMotion.matches) animationFrameId = requestAnimationFrame(renderEcosystem);
 }
 
 function startEcosystemLoop() {
   if (!ecoGraphicsReady) return;
   if (animationFrameId) cancelAnimationFrame(animationFrameId);
+  if (ecoReduceMotion.matches) {
+    animationFrameId = null;
+    renderEcosystem(0);
+    return;
+  }
   animationFrameId = requestAnimationFrame(renderEcosystem);
 }
 
