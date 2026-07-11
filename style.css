@@ -677,7 +677,7 @@ nav.nav-menu {
   transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.agent-node[style*="--ops-x"] {
+.hero-agent-map.is-projected .agent-node {
   left: calc(var(--ops-x) * 100%);
   top: calc(var(--ops-y) * 100%);
   right: auto;
@@ -685,19 +685,21 @@ nav.nav-menu {
   transform: translate(-50%, -50%);
 }
 
-.agent-node[style*="--ops-x"]:hover,
-.agent-node[style*="--ops-x"]:focus-visible,
-.agent-node[style*="--ops-x"].active {
+.hero-agent-map.is-projected .agent-node:hover,
+.hero-agent-map.is-projected .agent-node:focus-visible,
+.hero-agent-map.is-projected .agent-node.active {
   transform: translate(-50%, -50%) scale(1.04);
 }
 
-.agent-node.projection-hidden {
+.agent-node.is-projection-hidden {
+  opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.hero-agent-map.projection-fallback .agent-node,
-.hero-agent-map.no-canvas .agent-node {
+.hero-agent-map.is-fallback .agent-node,
+.ai-ops-hero.no-canvas .agent-node {
+  opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
@@ -839,7 +841,7 @@ nav.nav-menu {
 
 .hero-ops-action {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
   min-height: 48px;
@@ -852,6 +854,8 @@ nav.nav-menu {
 }
 
 .hero-ops-action > span:first-child {
+  grid-column: 1 / -1;
+  grid-row: 1;
   color: var(--accent-green);
   font-family: var(--font-display);
   font-size: 9px;
@@ -860,12 +864,16 @@ nav.nav-menu {
 }
 
 .hero-ops-action strong {
+  grid-column: 1;
+  grid-row: 2;
   font-family: var(--font-display);
   font-size: 12px;
   line-height: 1.25;
 }
 
 .hero-ops-action > span:last-child {
+  grid-column: 2;
+  grid-row: 2;
   color: var(--accent-green);
   font-family: var(--font-display);
   font-size: 18px;
@@ -5316,7 +5324,8 @@ footer.app-footer {
     display: grid;
   }
   .agent-node,
-  .agent-node.projection-hidden {
+  .agent-node.is-projection-hidden {
+    opacity: 1;
     visibility: visible;
     pointer-events: auto;
     animation-duration: 0.01ms !important;

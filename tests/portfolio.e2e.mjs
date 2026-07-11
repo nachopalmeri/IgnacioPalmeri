@@ -206,6 +206,62 @@ async function main() {
       if (undersizedOperationNode) {
         throw new Error(`operations node ${undersizedOperationNode.key} is smaller than 44x44: ${undersizedOperationNode.width}x${undersizedOperationNode.height}`);
       }
+      await page.addStyleTag({ content: '[data-ops-node="agents"] { --ops-x: 0.25; --ops-y: 0.3; }' });
+      await operationsNavigation.evaluate((map) => map.classList.add('is-projected'));
+      const projectedNodeStyle = await page.locator('[data-ops-node="agents"]').evaluate((node) => {
+        const style = getComputedStyle(node);
+        return { left: style.left, top: style.top, transform: style.transform };
+      });
+      const operationsMapRect = await operationsNavigation.evaluate((map) => map.getBoundingClientRect());
+      const projectedLeft = Number.parseFloat(projectedNodeStyle.left);
+      const projectedTop = Number.parseFloat(projectedNodeStyle.top);
+      if (Math.abs(projectedLeft - operationsMapRect.width * 0.25) > 1 || Math.abs(projectedTop - operationsMapRect.height * 0.3) > 1 || projectedNodeStyle.transform === 'none') {
+        throw new Error(`operations projected positioning inactive: ${JSON.stringify(projectedNodeStyle)}`);
+      }
+      await page.locator('[data-ops-node="agents"]').evaluate((node) => node.classList.add('is-projection-hidden'));
+      const hiddenNodeStyle = await page.locator('[data-ops-node="agents"]').evaluate((node) => {
+        const style = getComputedStyle(node);
+        return { opacity: style.opacity, visibility: style.visibility, pointerEvents: style.pointerEvents };
+      });
+      if (hiddenNodeStyle.opacity !== '0' || hiddenNodeStyle.visibility !== 'hidden' || hiddenNodeStyle.pointerEvents !== 'none') {
+        throw new Error(`operations projection hidden state inactive: ${JSON.stringify(hiddenNodeStyle)}`);
+      }
+      await operationsNavigation.evaluate((map) => {
+        map.classList.remove('is-projected');
+        map.classList.add('is-fallback');
+      });
+      const fallbackNodeStyle = await page.locator('[data-ops-node="agents"]').evaluate((node) => {
+        const style = getComputedStyle(node);
+        return { opacity: style.opacity, visibility: style.visibility, pointerEvents: style.pointerEvents };
+      });
+      if (fallbackNodeStyle.opacity !== '1' || fallbackNodeStyle.visibility !== 'visible' || fallbackNodeStyle.pointerEvents !== 'auto') {
+        throw new Error(`operations fallback state inactive: ${JSON.stringify(fallbackNodeStyle)}`);
+      }
+      await page.locator('[data-ops-node="agents"]').evaluate((node) => node.classList.remove('is-projection-hidden'));
+      await operationsNavigation.evaluate((map) => map.classList.remove('is-fallback'));
+      const actionLayout = await page.locator('#hero-ops-action').evaluate((action) => {
+        const destination = action.querySelector('#hero-ops-destination');
+        const label = action.querySelector('[data-ops-action-label]');
+        const arrow = action.querySelector('[aria-hidden="true"]');
+        const style = getComputedStyle(action);
+        const destinationStyle = getComputedStyle(destination);
+        const labelStyle = getComputedStyle(label);
+        const arrowStyle = getComputedStyle(arrow);
+        return {
+          display: style.display,
+          columns: style.gridTemplateColumns.split(' ').filter(Boolean),
+          destinationColumn: `${destinationStyle.gridColumnStart}/${destinationStyle.gridColumnEnd}`,
+          labelRow: labelStyle.gridRowStart,
+          arrowRow: arrowStyle.gridRowStart,
+          arrowColumn: arrowStyle.gridColumnStart
+        };
+      });
+      if (actionLayout.display !== 'grid' || actionLayout.columns.length !== 2) {
+        throw new Error(`operations action must use a two-column grid: ${JSON.stringify(actionLayout)}`);
+      }
+      if (actionLayout.destinationColumn !== '1/-1' || actionLayout.labelRow !== actionLayout.arrowRow || actionLayout.arrowColumn !== '2') {
+        throw new Error(`operations action directional rows incorrect: ${JSON.stringify(actionLayout)}`);
+      }
       const keyboardOperationKeys = [];
       await page.locator('[data-ops-node="jobbot"]').focus();
       keyboardOperationKeys.push(await page.evaluate(() => document.activeElement?.dataset.opsNode));
