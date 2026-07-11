@@ -179,6 +179,31 @@ async function main() {
       if (await operationsNavigation.locator('#ai-ops-canvas[aria-hidden="true"]').count() !== 1) {
         throw new Error('operations canvas missing from navigation');
       }
+      const operationsCanvasSizing = await page.locator('#ai-ops-canvas').evaluate((canvas) => {
+        const map = canvas.parentElement;
+        const mapStyle = getComputedStyle(map);
+        const mapRect = map.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        const contentWidth = mapRect.width - Number.parseFloat(mapStyle.borderLeftWidth) - Number.parseFloat(mapStyle.borderRightWidth) - Number.parseFloat(mapStyle.paddingLeft) - Number.parseFloat(mapStyle.paddingRight);
+        const contentHeight = mapRect.height - Number.parseFloat(mapStyle.borderTopWidth) - Number.parseFloat(mapStyle.borderBottomWidth) - Number.parseFloat(mapStyle.paddingTop) - Number.parseFloat(mapStyle.paddingBottom);
+        const ratio = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+        return {
+          intrinsicWidth: canvas.width,
+          intrinsicHeight: canvas.height,
+          expectedWidth: Math.round(contentWidth * ratio),
+          expectedHeight: Math.round(contentHeight * ratio),
+          cssWidth: canvasRect.width,
+          cssHeight: canvasRect.height,
+          contentWidth,
+          contentHeight
+        };
+      });
+      if (operationsCanvasSizing.intrinsicWidth !== operationsCanvasSizing.expectedWidth || operationsCanvasSizing.intrinsicHeight !== operationsCanvasSizing.expectedHeight) {
+        throw new Error(`operations canvas renderer dimensions do not match map: ${JSON.stringify(operationsCanvasSizing)}`);
+      }
+      if (Math.abs(operationsCanvasSizing.cssWidth - operationsCanvasSizing.contentWidth) > 1 || Math.abs(operationsCanvasSizing.cssHeight - operationsCanvasSizing.contentHeight) > 1) {
+        throw new Error(`operations canvas CSS rect does not match map: ${JSON.stringify(operationsCanvasSizing)}`);
+      }
       const operationNodes = operationsNavigation.locator('[data-ops-node]');
       const operationNodeCount = await operationNodes.count();
       if (operationNodeCount !== 5) {
@@ -269,10 +294,9 @@ async function main() {
         await page.keyboard.press('Tab');
         keyboardOperationKeys.push(await page.evaluate(() => document.activeElement?.dataset.opsNode));
       }
-      const uniqueKeyboardOperationKeys = [...new Set(keyboardOperationKeys.filter(Boolean))].sort();
-      const expectedKeyboardOperationKeys = ['agents', 'jobbot', 'labs', 'prode', 'proof'];
-      if (JSON.stringify(uniqueKeyboardOperationKeys) !== JSON.stringify(expectedKeyboardOperationKeys)) {
-        throw new Error(`operations keyboard reachability mismatch: ${JSON.stringify(uniqueKeyboardOperationKeys)}`);
+      const expectedKeyboardOperationKeys = ['jobbot', 'agents', 'prode', 'labs', 'proof'];
+      if (JSON.stringify(keyboardOperationKeys) !== JSON.stringify(expectedKeyboardOperationKeys)) {
+        throw new Error(`operations keyboard sequence mismatch: ${JSON.stringify(keyboardOperationKeys)}`);
       }
       await page.locator('[data-ops-node="jobbot"]').click();
       await page.waitForFunction(() => {
@@ -377,6 +401,44 @@ async function main() {
       if (state.errors.length) throw new Error(`pageerror mobile: ${state.errors[0].message}`);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
       if (!overflow) throw new Error('horizontal overflow detected on mobile');
+      const mobileOperationsLayout = await page.evaluate(() => {
+        const map = document.querySelector('.hero-agent-map');
+        const detail = document.querySelector('.hero-ops-detail');
+        const action = document.querySelector('#hero-ops-action');
+        const mapRect = map.getBoundingClientRect();
+        const detailRect = detail.getBoundingClientRect();
+        const actionRect = action.getBoundingClientRect();
+        const nodes = Array.from(map.querySelectorAll('[data-ops-node]')).map((node) => {
+          const rect = node.getBoundingClientRect();
+          return {
+            key: node.dataset.opsNode,
+            width: rect.width,
+            height: rect.height,
+            left: rect.left,
+            right: rect.right,
+            top: rect.top,
+            bottom: rect.bottom
+          };
+        });
+        return {
+          mapHeight: mapRect.height,
+          mapMinHeight: getComputedStyle(map).minHeight,
+          map: { left: mapRect.left, right: mapRect.right, top: mapRect.top, bottom: mapRect.bottom },
+          detail: { left: detailRect.left, right: detailRect.right },
+          action: { left: actionRect.left, right: actionRect.right, width: actionRect.width, height: actionRect.height, visibility: getComputedStyle(action).visibility },
+          nodes
+        };
+      });
+      if (mobileOperationsLayout.mapMinHeight !== '220px' || mobileOperationsLayout.mapHeight < 220) {
+        throw new Error(`mobile operations map does not honor 220px minimum: ${JSON.stringify(mobileOperationsLayout)}`);
+      }
+      if (mobileOperationsLayout.action.visibility !== 'visible' || mobileOperationsLayout.action.height <= 0 || mobileOperationsLayout.action.left < mobileOperationsLayout.detail.left - 1 || mobileOperationsLayout.action.right > mobileOperationsLayout.detail.right + 1) {
+        throw new Error(`mobile operations cue is hidden or clipped: ${JSON.stringify(mobileOperationsLayout.action)}`);
+      }
+      const clippedMobileNode = mobileOperationsLayout.nodes.find((node) => node.width < 44 || node.height < 44 || node.left < mobileOperationsLayout.map.left || node.right > mobileOperationsLayout.map.right || node.top < mobileOperationsLayout.map.top || node.bottom > mobileOperationsLayout.map.bottom);
+      if (clippedMobileNode) {
+        throw new Error(`mobile operations node is undersized or clipped: ${JSON.stringify(clippedMobileNode)}`);
+      }
 
       await page.goto(`${baseUrl}/#/agents`, { waitUntil: 'networkidle' });
       await page.waitForSelector('#agents-section.view-section.active');
@@ -387,6 +449,47 @@ async function main() {
       if (!agentsOverflow) throw new Error('horizontal overflow detected on mobile agents');
       const mobileNodes = await page.locator('#eco-graph-wrapper .eco-node').count();
       if (mobileNodes < 10) throw new Error(`expected mobile graph list nodes, got ${mobileNodes}`);
+    });
+
+    await withPage(browser, { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }, async (page, state) => {
+      await page.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
+      await page.waitForSelector('.hero-agent-map');
+      await page.locator('[data-ops-node="agents"]').evaluate((node) => node.classList.add('is-projection-hidden'));
+      const reducedOperations = await page.evaluate(() => {
+        const parseDuration = (value) => Math.max(...value.split(',').map((duration) => {
+          const parsed = Number.parseFloat(duration);
+          return duration.trim().endsWith('ms') ? parsed : parsed * 1000;
+        }));
+        const map = document.querySelector('.hero-agent-map');
+        const nodes = Array.from(map.querySelectorAll('[data-ops-node]'));
+        const mapStyle = getComputedStyle(map);
+        return {
+          mapAnimationMs: parseDuration(mapStyle.animationDuration),
+          nodes: nodes.map((node) => {
+            const style = getComputedStyle(node);
+            const rect = node.getBoundingClientRect();
+            return {
+              key: node.dataset.opsNode,
+              animationMs: parseDuration(style.animationDuration),
+              transitionMs: parseDuration(style.transitionDuration),
+              opacity: style.opacity,
+              visibility: style.visibility,
+              pointerEvents: style.pointerEvents,
+              disabled: node.disabled,
+              width: rect.width,
+              height: rect.height
+            };
+          })
+        };
+      });
+      if (reducedOperations.mapAnimationMs > 0.01) {
+        throw new Error(`reduced-motion operations map still animates: ${reducedOperations.mapAnimationMs}ms`);
+      }
+      const unusableReducedNode = reducedOperations.nodes.find((node) => node.animationMs > 0.01 || node.transitionMs > 0.01 || node.opacity !== '1' || node.visibility !== 'visible' || node.pointerEvents !== 'auto' || node.disabled || node.width < 44 || node.height < 44);
+      if (unusableReducedNode) {
+        throw new Error(`reduced-motion operations control unusable: ${JSON.stringify(unusableReducedNode)}`);
+      }
+      if (state.errors.length) throw new Error(`pageerror reduced-motion: ${state.errors[0].message}`);
     });
 
     await withPage(browser, { viewport: { width: 1280, height: 720 } }, async (page, state) => {

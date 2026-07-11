@@ -1217,16 +1217,17 @@ function setupThreeAiOpsHero(canvas, hero, nodes, reduceMotion) {
   }
 
   function resize() {
-    const rect = hero.getBoundingClientRect();
-    width = Math.max(1, rect.width);
-    height = Math.max(420, rect.height);
+    const container = canvas.parentElement;
+    const style = getComputedStyle(container);
+    width = Math.max(1, container.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight));
+    height = Math.max(1, container.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom));
     renderer.setPixelRatio(Math.min(2, Math.max(1, window.devicePixelRatio || 1)));
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    group.position.x = width < 900 ? 1.55 : 4.05;
-    group.position.y = width < 760 ? 0.65 : -0.05;
-    group.scale.setScalar(width < 760 ? 0.6 : 0.86);
+    group.position.x = 0;
+    group.position.y = 0;
+    group.scale.setScalar(width < 500 ? 0.62 : 0.76);
   }
 
   function shouldRun() {
@@ -1303,9 +1304,10 @@ function setupAiOpsHero() {
   let running = false;
 
   function resize() {
-    const rect = hero.getBoundingClientRect();
-    width = Math.max(1, rect.width);
-    height = Math.max(420, rect.height);
+    const container = canvas.parentElement;
+    const style = getComputedStyle(container);
+    width = Math.max(1, container.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight));
+    height = Math.max(1, container.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom));
     const ratio = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
@@ -1325,8 +1327,8 @@ function setupAiOpsHero() {
 
   function getCore() {
     return {
-      x: width < 900 ? width * 0.54 : width * 0.66,
-      y: width < 900 ? height * 0.38 : height * 0.46,
+      x: width * 0.5,
+      y: height * 0.5,
       r: Math.min(width, height) * (width < 760 ? 0.11 : 0.13)
     };
   }
