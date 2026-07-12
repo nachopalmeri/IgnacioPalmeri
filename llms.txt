@@ -1,0 +1,28 @@
+# Ignacio Palmeri — Junior AI Automation & Product Engineer
+
+> Junior AI Automation & Product Engineer based in Buenos Aires, Argentina. Studying IT Management at UADE. Building automation, products, and AI-assisted workflows with real deployments and verifiable evidence. Available for internships and trainee roles.
+
+## About
+- [Portfolio](https://ignaciopalmeri.com): Full portfolio with projects, agent system, certifications, and contact information
+- [GitHub](https://github.com/nachopalmeri): Open source projects, repos, and contribution activity
+
+## Featured Projects
+- [JobBot](https://jobbot-lime.vercel.app): Full-stack job application automation prototype with Next.js frontend, FastAPI backend, PostgreSQL persistence, authentication, webhooks, Telegram notifications, and payment integration. [Repo](https://github.com/nachopalmeri/jobbot)
+- [Agents System](https://github.com/nachopalmeri/agents-system): Local AI agent workflow system with documented routes, verification steps, Playwright tests, and README handoffs. 19 workflow modules with Plan → Build → Review → Test → Ship pipeline.
+- [Sports Probability Dashboard](https://prode-mundial-2026-ten-omega.vercel.app): Python-based probability model for sports scenarios with simulation engine and deployed dashboard for non-technical users. [Repo](https://github.com/nachopalmeri/prode-mundial-2026)
+- [Pisculichi Labs](https://polytools-omega.vercel.app): Experimental product lab for bots, alerts, and tools for predictive markets. Rapid prototyping without overpromising.
+
+## Skills & Stack
+- **Core**: Python, FastAPI, JavaScript, TypeScript, Linux, Git
+- **Product & Data**: Dashboards, Telegram Bots, SQL, Automation, Business Process Modeling
+- **AI-Assisted Development**: AI-assisted workflows, Playwright, Obsidian, README handoffs, Prompted code review
+
+## Certifications
+- [Red Hat Systems Administration](https://www.credly.com/badges/761f7f8d-41c7-4e1e-8dda-1e29830e4e85): Linux, terminal, permissions, and systems administration
+- [Claude Code](https://verify.skilljar.com/c/tco79gkq8a9k): AI assistants for development, review, repo context, and verifiable implementation flows
+- Cisco CCNA 1: Networking fundamentals, addressing, connectivity, and troubleshooting
+
+## Contact
+- [Email](mailto:ignaciopalmeri1@gmail.com): Direct contact
+- [LinkedIn](https://www.linkedin.com/in/ignacio-palmeri-64035b378/): Professional profile
+- [GitHub](https://github.com/nachopalmeri): Code and projects

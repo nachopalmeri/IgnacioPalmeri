@@ -1,0 +1,25 @@
+# === AI Search & Retrieval Bots (ALLOW for visibility) ===
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# === AI Training Bots (BLOCK if you don't want training) ===
+User-agent: GPTBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# === Standard ===
+User-agent: *
+Allow: /
+
+Sitemap: https://ignaciopalmeri.com/sitemap.xml

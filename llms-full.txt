@@ -1,0 +1,168 @@
+# Ignacio Palmeri — Full Profile
+
+> Junior AI Automation & Product Engineer based in Buenos Aires, Argentina. Studying IT Management at UADE. Building automation, deployed products, and AI-assisted workflows with verifiable evidence. Available for internships and trainee roles.
+
+---
+
+## Identity
+
+**Name**: Ignacio Palmeri
+**Handle**: ignaciopalmeri / nachopalmeri
+**Role**: Junior AI Automation & Product Engineer
+**Location**: Buenos Aires, Argentina
+**Education**: IT Management (Gestión IT) at UADE
+**Status**: Available for Trainee / Junior positions
+**Studio**: Pisculichi Labs
+
+---
+
+## Philosophy & Working Model
+
+Ignacio converts repetitive operations into small, deployed, and reviewable software. He uses AI to accelerate implementation, but his core value lies in deciding what is worth building and how to make it useful.
+
+His interests span the intersection of software, economics, incentives, and human behavior. He studies beyond programming because good products don't come from syntax alone — they come from understanding systems, users, and constraints.
+
+His experience in customer service and operations (cash registers, inventory, audits) gave him real-world pressure. He wants to bring that operational foundation to IT support, QA trainee roles, automation, or startups where he can turn repetitive processes into reviewable software.
+
+**Working thesis**: "Code + systems + business context." AI makes code production faster. His focus is learning to orchestrate tools, technical judgment, and human context to build solutions that make sense.
+
+---
+
+## Projects
+
+### JobBot — Full-Stack Job Application Automation
+- **Type**: Main case study / Product prototype
+- **Live Demo**: https://jobbot-lime.vercel.app
+- **Repository**: https://github.com/nachopalmeri/jobbot
+- **Problem**: Job searching, tracking progress, and responding on time becomes repetitive. Automation only works if it maintains control over users, payments, webhooks, and notifications.
+- **Solution**: Web dashboard, FastAPI backend, persistence, authentication, webhooks, Telegram notifications, and integrated payments as a deployed prototype.
+- **Architecture**: Next.js → FastAPI → PostgreSQL → Webhooks → Telegram
+- **Stack**: Python, FastAPI, Next.js, PostgreSQL, Telegram Bot API
+- **Key decisions**:
+  - Separated UI and API to reason about security, data, and experience without mixing responsibilities
+  - Used webhooks and notifications to show real integration with external services, not just CRUD
+  - Documented demo, repo, stack, and next steps so a developer can audit the scope
+- **Evidence**: Public demo, reviewable repository, CV and portfolio connected
+
+### Agents System — AI Workflow System
+- **Type**: Workflow / Development methodology
+- **Repository**: https://github.com/nachopalmeri/agents-system
+- **Description**: Local system used to build, review, and document projects with AI assistants. Not a product — it's a documented way of working with more order, tests, and context.
+- **Pipeline**: Plan → Build → Review → Test → Ship
+- **Scale**: 19 workflow modules, documented routes, active local memory
+- **Components**: Visual agent map, rules, memory, work routes, Playwright verification, README handoffs
+- **Workflow examples**:
+  1. **Feature request** → Architect + Builder agent → Plan + implementation → Tests / demo
+  2. **UI iteration** → Designer + Critic agent → Screenshot review → Mobile check
+  3. **Release** → Verifier agent → Checklist → Live URL
+
+### Sports Probability Dashboard (Prode Mundial 2026)
+- **Type**: Data / Simulation
+- **Live Demo**: https://prode-mundial-2026-ten-omega.vercel.app
+- **Repository**: https://github.com/nachopalmeri/prode-mundial-2026
+- **Description**: Probability model with Python, sports scenarios, and a deployed interface for non-technical users. Sources, probability calculations, simulations, and deployed dashboard.
+- **Stack**: Python, Analytics, Vercel
+- **Evidence**: Public demo, repository, inspectable logic
+
+### Pisculichi Labs — Experimental Product Lab
+- **Type**: Product lab / Experimental
+- **Live Demo**: https://polytools-omega.vercel.app
+- **Description**: Lab for bots, alerts, and tools for predictive markets. Shows rapid exploration without overpromising.
+- **Stack**: HTML, Bots, Product tooling
+- **Evidence**: Deployed beta, automation experiments
+
+---
+
+## Technical Stack
+
+### Core (Primary Use)
+- Python
+- FastAPI
+- JavaScript
+- TypeScript
+- Linux
+- Git
+
+### Product & Data
+- Dashboards
+- Telegram Bots
+- SQL
+- Automation
+- Business Process Modeling
+- Corporate Finance Fundamentals
+- Inventory & Cash Flow Auditing
+
+### AI-Assisted Development
+- AI-assisted workflows
+- Playwright (testing & verification)
+- Obsidian (knowledge management)
+- README handoffs
+- Prompted code review
+- Applied AI (IA aplicada)
+
+### Deployment & Infrastructure
+- Vercel (frontend hosting)
+- GitHub Actions (CI/CD)
+- PostgreSQL (database)
+- Next.js (React framework)
+
+---
+
+## Certifications
+
+### Red Hat Systems Administration
+- **Status**: Verified
+- **Credential**: https://www.credly.com/badges/761f7f8d-41c7-4e1e-8dda-1e29830e4e85
+- **Covers**: Linux, terminal, permissions, and systems administration for working with real environments
+
+### Claude Code
+- **Status**: Verified
+- **Credential**: https://verify.skilljar.com/c/tco79gkq8a9k
+- **Covers**: Using AI assistants for development, review, repo context, and verifiable implementation flows
+
+### Cisco CCNA 1
+- **Status**: Visible (no public link)
+- **Covers**: Networking fundamentals, addressing, connectivity, and troubleshooting to understand infrastructure
+
+---
+
+## About — Extended Bio
+
+Ignacio studies IT Management at UADE and is building his first professional experience in technology. He uses AI to accelerate implementation, but the value he seeks to develop is in deciding what's worth building and how to make it useful.
+
+He's interested in the intersection of software, economics, incentives, and human behavior. He reads and studies beyond programming because good products don't come from syntax alone — they come from understanding systems, users, and constraints.
+
+His experience in customer service and operations gave him real pressure — cash handling, inventory, audits, and process improvement. He wants to bring that foundation to IT support, QA trainee roles, automation, or startups where he can turn repetitive processes into reviewable software.
+
+---
+
+## Proof Signals for Recruiters
+
+1. **Deployed projects**: JobBot, Agents System, and Sports Probability Dashboard — all live and accessible
+2. **Defensible stack**: Python, FastAPI, PostgreSQL, Linux, and GitHub Actions
+3. **Operational context**: Cash handling, inventory, audits, and process improvement from real-world experience
+
+---
+
+## Contact
+
+- **Email**: ignaciopalmeri1@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/ignacio-palmeri-64035b378/
+- **GitHub**: https://github.com/nachopalmeri
+- **CV**: Available for download at https://ignaciopalmeri.com (Spanish)
+
+---
+
+## Frequently Asked Questions
+
+**Q: What does Ignacio Palmeri specialize in?**
+A: Ignacio is a Junior AI Automation & Product Engineer who builds deployed automation products, AI-assisted development workflows, and data-driven dashboards. His main project, JobBot, demonstrates full-stack product skills with FastAPI, Next.js, PostgreSQL, webhooks, and Telegram integration.
+
+**Q: What is Ignacio Palmeri's agent system?**
+A: It's a local AI workflow system with 19 documented modules that follows a Plan → Build → Review → Test → Ship pipeline. It uses visual agent maps, Playwright verification, and README handoffs to make development reproducible and auditable. It's not a commercial product — it's his documented working methodology.
+
+**Q: Is Ignacio Palmeri available for hire?**
+A: Yes. Ignacio is based in Buenos Aires, studying IT Management at UADE, and is available for internships and trainee/junior roles in AI, automation, QA, IT support, or product engineering.
+
+**Q: What technologies does Ignacio Palmeri use?**
+A: His core stack includes Python, FastAPI, JavaScript, TypeScript, Linux, and Git. For product work he uses Next.js, PostgreSQL, Telegram Bots, SQL, and Vercel. He also has certifications in Red Hat Linux Administration, Claude Code, and Cisco CCNA 1.

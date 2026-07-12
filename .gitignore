@@ -2,3 +2,5 @@
 node_modules/
 output/
 .superpowers/
+# Local AI runtime state
+.atl/
