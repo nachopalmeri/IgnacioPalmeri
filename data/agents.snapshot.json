@@ -1,0 +1,2228 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-19T13:20:09.398Z",
+  "source": {
+    "repo": "nachopalmeri/agents-system",
+    "githubUrl": "https://github.com/nachopalmeri/agents-system",
+    "commit": "a25ecb1f33a9edd812af28871c6e3712d87f48e6",
+    "commitShort": "a25ecb1",
+    "commitDate": "2026-07-18T16:02:39-03:00",
+    "branch": "main",
+    "capabilitiesSchemaVersion": 2,
+    "routingSchemaVersion": 2
+  },
+  "counts": {
+    "agents": 19,
+    "skills": 60,
+    "workflows": 15,
+    "rules": 10,
+    "lanes": 4,
+    "routingProfiles": 8,
+    "adapters": 9,
+    "capabilities": 79,
+    "highRiskRules": 6,
+    "specialists": 9
+  },
+  "lanes": [
+    {
+      "id": "SIMPLE",
+      "maxIterations": 3,
+      "maxReplans": 1,
+      "maxAgents": 1,
+      "description": {
+        "es": "Cambio chico o explicación. Un agente, sin fan-out.",
+        "en": "Small change or explanation. One agent, no fan-out."
+      }
+    },
+    {
+      "id": "SPECIALIZED",
+      "maxIterations": 6,
+      "maxReplans": 2,
+      "maxAgents": 1,
+      "description": {
+        "es": "El dominio cambia la ejecución. Un especialista.",
+        "en": "Domain changes execution. One specialist."
+      }
+    },
+    {
+      "id": "PARALLEL",
+      "maxIterations": 8,
+      "maxReplans": 2,
+      "maxAgents": 4,
+      "description": {
+        "es": "Trabajos independientes con ownership separado.",
+        "en": "Independent work with separate ownership."
+      }
+    },
+    {
+      "id": "HIGH_RISK",
+      "maxIterations": 5,
+      "maxReplans": 1,
+      "maxAgents": 2,
+      "description": {
+        "es": "Credenciales, pagos, producción o destrucción. Gate humano.",
+        "en": "Credentials, payments, production, or destruction. Human gate."
+      }
+    }
+  ],
+  "loadLevels": [
+    {
+      "id": "T0",
+      "label": {
+        "es": "Core",
+        "en": "Core"
+      },
+      "body": {
+        "es": "Solo la política canónica.",
+        "en": "Canonical policy only."
+      }
+    },
+    {
+      "id": "T1",
+      "label": {
+        "es": "Route",
+        "en": "Route"
+      },
+      "body": {
+        "es": "Índice de workflows + routing rules.",
+        "en": "Workflow index + routing rules."
+      }
+    },
+    {
+      "id": "T2",
+      "label": {
+        "es": "Execute",
+        "en": "Execute"
+      },
+      "body": {
+        "es": "Una skill/workflow y sus referencias directas.",
+        "en": "One skill/workflow and direct refs."
+      }
+    },
+    {
+      "id": "T3",
+      "label": {
+        "es": "Escalate",
+        "en": "Escalate"
+      },
+      "body": {
+        "es": "Paralelismo, research profundo o alto riesgo con evidencia.",
+        "en": "Parallelism, deep research, or high risk with evidence."
+      }
+    }
+  ],
+  "pipeline": [
+    {
+      "id": "request",
+      "label": {
+        "es": "Pedido",
+        "en": "Request"
+      }
+    },
+    {
+      "id": "routing",
+      "label": {
+        "es": "Routing",
+        "en": "Routing"
+      }
+    },
+    {
+      "id": "lane",
+      "label": {
+        "es": "Lane",
+        "en": "Lane"
+      }
+    },
+    {
+      "id": "capability",
+      "label": {
+        "es": "Capacidad",
+        "en": "Capability"
+      }
+    },
+    {
+      "id": "work",
+      "label": {
+        "es": "Trabajo",
+        "en": "Work"
+      }
+    },
+    {
+      "id": "validation",
+      "label": {
+        "es": "Validación",
+        "en": "Validation"
+      }
+    },
+    {
+      "id": "memory",
+      "label": {
+        "es": "Memoria",
+        "en": "Memory"
+      }
+    },
+    {
+      "id": "result",
+      "label": {
+        "es": "Resultado",
+        "en": "Result"
+      }
+    }
+  ],
+  "routing": {
+    "precedence": [
+      "risk",
+      "explicit-agent",
+      "explicit-parallel",
+      "specialist",
+      "SIMPLE"
+    ],
+    "profiles": [
+      {
+        "id": "general-implementation",
+        "default": true,
+        "mode": "single-agent-first"
+      },
+      {
+        "id": "current-research",
+        "mode": "on-demand",
+        "requiresFreshSources": true
+      },
+      {
+        "id": "frontend-design",
+        "mode": "on-demand",
+        "requiresDistinctiveDirection": true
+      },
+      {
+        "id": "seo-geo-aeo",
+        "mode": "on-demand",
+        "requiresFreshSources": true
+      },
+      {
+        "id": "academic-tutoring",
+        "mode": "on-demand"
+      },
+      {
+        "id": "obsidian-knowledge",
+        "mode": "on-demand"
+      },
+      {
+        "id": "security-review",
+        "mode": "high-risk",
+        "requiresApproval": true
+      },
+      {
+        "id": "release-publication",
+        "mode": "high-risk",
+        "requiresApproval": true
+      }
+    ],
+    "highRiskReasons": [
+      "risk-release",
+      "risk-credentials",
+      "risk-production-write",
+      "risk-payment",
+      "risk-external-message",
+      "risk-destructive"
+    ],
+    "specialistReasons": [
+      {
+        "reason": "specialist-academic",
+        "primary": "agente-academic-tutor",
+        "priority": 10
+      },
+      {
+        "reason": "specialist-obsidian",
+        "primary": "agente-obsidian-brain",
+        "priority": 20
+      },
+      {
+        "reason": "specialist-growth-search",
+        "primary": "agente-growth-seo-geo",
+        "priority": 30
+      },
+      {
+        "reason": "specialist-technical-seo",
+        "primary": "agente-seo",
+        "priority": 40
+      },
+      {
+        "reason": "specialist-product",
+        "primary": "agente-product-founder",
+        "priority": 50
+      },
+      {
+        "reason": "specialist-ai-architecture",
+        "primary": "agente-ai-architect",
+        "priority": 60
+      },
+      {
+        "reason": "specialist-frontend-design",
+        "primary": "agente-design",
+        "priority": 70
+      },
+      {
+        "reason": "specialist-current-research",
+        "primary": "agente-researcher",
+        "priority": 80
+      },
+      {
+        "reason": "specialist-code-review",
+        "primary": "agente-code-reviewer",
+        "priority": 90
+      }
+    ]
+  },
+  "groups": [
+    {
+      "id": "core",
+      "label": {
+        "es": "Política central",
+        "en": "Core policy"
+      },
+      "kinds": [
+        "agent",
+        "rule"
+      ],
+      "count": 3
+    },
+    {
+      "id": "routing",
+      "label": {
+        "es": "Routing y lanes",
+        "en": "Routing and lanes"
+      },
+      "kinds": [],
+      "count": 13
+    },
+    {
+      "id": "execution",
+      "label": {
+        "es": "Ejecución",
+        "en": "Execution"
+      },
+      "kinds": [
+        "agent"
+      ],
+      "count": 4
+    },
+    {
+      "id": "specialists",
+      "label": {
+        "es": "Especialistas",
+        "en": "Specialists"
+      },
+      "kinds": [
+        "agent"
+      ],
+      "count": 9
+    },
+    {
+      "id": "gates",
+      "label": {
+        "es": "Gates y revisión",
+        "en": "Gates and review"
+      },
+      "kinds": [
+        "agent"
+      ],
+      "count": 3
+    },
+    {
+      "id": "skills",
+      "label": {
+        "es": "Skills on demand",
+        "en": "On-demand skills"
+      },
+      "kinds": [
+        "skill"
+      ],
+      "count": 45
+    },
+    {
+      "id": "design",
+      "label": {
+        "es": "Diseño",
+        "en": "Design"
+      },
+      "kinds": [
+        "skill"
+      ],
+      "count": 6
+    },
+    {
+      "id": "product-growth",
+      "label": {
+        "es": "Producto y growth",
+        "en": "Product and growth"
+      },
+      "kinds": [
+        "skill"
+      ],
+      "count": 4
+    },
+    {
+      "id": "validation-memory",
+      "label": {
+        "es": "Validación y memoria",
+        "en": "Validation and memory"
+      },
+      "kinds": [
+        "skill"
+      ],
+      "count": 5
+    },
+    {
+      "id": "workflows",
+      "label": {
+        "es": "Workflows",
+        "en": "Workflows"
+      },
+      "kinds": [
+        "workflow"
+      ],
+      "count": 14
+    },
+    {
+      "id": "rules",
+      "label": {
+        "es": "Reglas",
+        "en": "Rules"
+      },
+      "kinds": [
+        "rule"
+      ],
+      "count": 10
+    },
+    {
+      "id": "adapters",
+      "label": {
+        "es": "Adapters de IDE",
+        "en": "IDE adapters"
+      },
+      "kinds": [
+        "adapter"
+      ],
+      "count": 9
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "academic_tutor",
+      "name": "Academic Tutor",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Academic Tutor.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/academic_tutor.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/academic_tutor.md",
+      "status": null
+    },
+    {
+      "id": "active-recall-engine",
+      "name": "Active Recall Engine",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Active Recall Engine.",
+      "triggers": [
+        "active recall"
+      ],
+      "sourcePath": ".agents/skills/active-recall-engine/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/active-recall-engine/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "adapt",
+      "name": "Adapt",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "On-demand skill: Adapt.",
+      "triggers": [
+        "responsive adaptation"
+      ],
+      "sourcePath": ".agents/skills/adapt/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/adapt/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "agent_coordination",
+      "name": "Agent Coordination",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Agent Coordination.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/agent_coordination.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/agent_coordination.md",
+      "status": null
+    },
+    {
+      "id": "agente-academic-tutor",
+      "name": "Agente Academic Tutor",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Tutors university subjects with deep explanations, honest evaluation, exercises, exam preparation, and delegation to Obsidian for vault edits.",
+      "triggers": [
+        "study or exam"
+      ],
+      "sourcePath": ".agents/agents/agente-academic-tutor.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-academic-tutor.md",
+      "status": "KEEP_EXPLICIT_AGENT"
+    },
+    {
+      "id": "agente-ai-architect",
+      "name": "Agente AI Architect",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Designs production AI and RAG systems with separated services, agents, prompts, security, evaluation, observability, and cost controls.",
+      "triggers": [
+        "AI RAG architecture"
+      ],
+      "sourcePath": ".agents/agents/agente-ai-architect.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-ai-architect.md",
+      "status": "CANDIDATE_FOR_EVAL"
+    },
+    {
+      "id": "agente-code-reviewer",
+      "name": "Agente Code Reviewer",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "gates",
+      "description": "Reviews diffs, PRs, implementation plans, and completed changes for bugs, regressions, edge cases, maintainability, and validation gaps.",
+      "triggers": [
+        "explicit code review"
+      ],
+      "sourcePath": ".agents/agents/agente-code-reviewer.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-code-reviewer.md",
+      "status": "KEEP_AUTOMATIC_AGENT"
+    },
+    {
+      "id": "agente-design",
+      "name": "Agente Design",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "execution",
+      "description": "Handles CSS, responsive design, visual polish, accessibility details, dark mode, animations, and UI component presentation.",
+      "triggers": [
+        "frontend design"
+      ],
+      "sourcePath": ".agents/agents/agente-design.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-design.md",
+      "status": "CANDIDATE_FOR_EVAL"
+    },
+    {
+      "id": "agente-docs",
+      "name": "Agente Docs",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "execution",
+      "description": "Writes technical documentation, README sections, API docs, changelogs, docstrings, usage guides, and implementation handoffs.",
+      "triggers": [
+        "documentation deliverable"
+      ],
+      "sourcePath": ".agents/agents/agente-docs.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-docs.md",
+      "status": "SAFE_AS_SKILL"
+    },
+    {
+      "id": "agente-growth-seo-geo",
+      "name": "Agente Growth SEO GEO",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Builds organic acquisition plans across SEO, GEO, AEO, local SEO, programmatic SEO, backlinks, Search Console, and AI search visibility.",
+      "triggers": [
+        "SEO GEO growth"
+      ],
+      "sourcePath": ".agents/agents/agente-growth-seo-geo.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-growth-seo-geo.md",
+      "status": "SHADOW_REPLACEMENT"
+    },
+    {
+      "id": "agente-marketing-strategist",
+      "name": "Agente Marketing Strategist",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Plans positioning, go-to-market strategy, audience research, launch messaging, campaigns, and marketing systems without executing paid actions.",
+      "triggers": [
+        "marketing strategy"
+      ],
+      "sourcePath": ".agents/agents/agente-marketing-strategist.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-marketing-strategist.md",
+      "status": "BLOCKED_G2"
+    },
+    {
+      "id": "agente-mcp-architect",
+      "name": "Agente MCP Architect",
+      "kind": "agent",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "specialists",
+      "description": "Designs, evaluates, and documents MCP integrations, MCP catalogs, OpenCode MCP configuration, and tool permission boundaries.",
+      "triggers": [
+        "MCP integration"
+      ],
+      "sourcePath": ".agents/agents/agente-mcp-architect.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-mcp-architect.md",
+      "status": "SHADOW_REPLACEMENT"
+    },
+    {
+      "id": "agente-obsidian-brain",
+      "name": "Agente Obsidian Brain",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Maintains Obsidian vault workflows, class notes, flashcards, inbox triage, Zettelkasten links, MOCs, and dashboards.",
+      "triggers": [
+        "Obsidian vault"
+      ],
+      "sourcePath": ".agents/agents/agente-obsidian-brain.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-obsidian-brain.md",
+      "status": "KEEP_EXPLICIT_AGENT"
+    },
+    {
+      "id": "agente-principal",
+      "name": "Agente Principal",
+      "kind": "agent",
+      "mode": "automatic",
+      "loadLevel": "T0-T1",
+      "group": "core",
+      "description": "Implements application logic, integrations, auth, APIs, database work, routing, middleware, and general production code outside specialist scopes.",
+      "triggers": [
+        "default implementation"
+      ],
+      "sourcePath": ".agents/agents/agente-principal.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-principal.md",
+      "status": "SAFE_AS_SKILL"
+    },
+    {
+      "id": "agente-product-founder",
+      "name": "Agente Product Founder",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "execution",
+      "description": "Shapes product ideas, MVP scope, indie hacking bets, validation criteria, launch sequencing, AI-first opportunities, and kill keep scale decisions.",
+      "triggers": [
+        "product MVP"
+      ],
+      "sourcePath": ".agents/agents/agente-product-founder.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-product-founder.md",
+      "status": "SHADOW_REPLACEMENT"
+    },
+    {
+      "id": "agente-release-manager",
+      "name": "Agente Release Manager",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "gates",
+      "description": "Prepares commits, changelogs, release checklists, repo publication, cross-machine installation validation, and release hygiene.",
+      "triggers": [
+        "release publication"
+      ],
+      "sourcePath": ".agents/agents/agente-release-manager.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-release-manager.md",
+      "status": "KEEP_EXPLICIT_AGENT"
+    },
+    {
+      "id": "agente-researcher",
+      "name": "Agente Researcher",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Researches current documentation, libraries, MCPs, plugins, competitors, and implementation approaches before recommendations.",
+      "triggers": [
+        "current research"
+      ],
+      "sourcePath": ".agents/agents/agente-researcher.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-researcher.md",
+      "status": "KEEP_AUTOMATIC_AGENT"
+    },
+    {
+      "id": "agente-security-auditor",
+      "name": "Agente Security Auditor",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "gates",
+      "description": "Reviews secrets, unsafe commands, dependency risk, MCP and plugin permissions, auth handling, publication safety, and automation blast radius.",
+      "triggers": [
+        "security or sensitive action"
+      ],
+      "sourcePath": ".agents/agents/agente-security-auditor.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-security-auditor.md",
+      "status": "KEEP_AUTOMATIC_AGENT"
+    },
+    {
+      "id": "agente-seo",
+      "name": "Agente SEO",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Handles technical and on-page SEO including metadata, Open Graph, headings, schema, canonical URLs, sitemap, robots, and alt text.",
+      "triggers": [
+        "technical SEO"
+      ],
+      "sourcePath": ".agents/agents/agente-seo.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-seo.md",
+      "status": "BLOCKED_G2"
+    },
+    {
+      "id": "agente-tests",
+      "name": "Agente Tests",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "execution",
+      "description": "Designs and reviews unit tests, integration tests, E2E tests, coverage, fixtures, mocks, and regression evidence.",
+      "triggers": [
+        "test design"
+      ],
+      "sourcePath": ".agents/agents/agente-tests.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-tests.md",
+      "status": "SAFE_AS_SKILL"
+    },
+    {
+      "id": "agente-x-content-strategist",
+      "name": "Agente X Content Strategist",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "specialists",
+      "description": "Plans and drafts X/Twitter, LinkedIn, Substack, threads, replies, quote tweets, and personal branding content without ad spend or DMs.",
+      "triggers": [
+        "social content"
+      ],
+      "sourcePath": ".agents/agents/agente-x-content-strategist.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/agente-x-content-strategist.md",
+      "status": "CANDIDATE_FOR_EVAL"
+    },
+    {
+      "id": "agentic-pentester",
+      "name": "Agentic Pentester",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Agentic Pentester.",
+      "triggers": [
+        "active security audit",
+        "pentest"
+      ],
+      "sourcePath": ".agents/skills/agentic-pentester/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/agentic-pentester/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "ai-permissions",
+      "name": "Ai Permissions",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Ai Permissions.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/ai-permissions.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/ai-permissions.md",
+      "status": null
+    },
+    {
+      "id": "ai-production-architecture",
+      "name": "Ai Production Architecture",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Ai Production Architecture.",
+      "triggers": [
+        "production AI architecture"
+      ],
+      "sourcePath": ".agents/skills/ai-production-architecture/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/ai-production-architecture/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "aider",
+      "name": "Aider",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): read list config.",
+      "triggers": [],
+      "sourcePath": ".aider.conf.yml",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.aider.conf.yml",
+      "status": "stable"
+    },
+    {
+      "id": "animate",
+      "name": "Animate",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "On-demand skill: Animate.",
+      "triggers": [
+        "purposeful UI motion"
+      ],
+      "sourcePath": ".agents/skills/animate/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/animate/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "anti-cemetery",
+      "name": "Anti Cemetery",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Anti Cemetery.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/anti-cemetery.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/anti-cemetery.md",
+      "status": null
+    },
+    {
+      "id": "anti-hallucination",
+      "name": "Anti Hallucination",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Anti Hallucination.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/anti-hallucination.mdc",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/anti-hallucination.mdc",
+      "status": null
+    },
+    {
+      "id": "anti-slop-design",
+      "name": "Anti Slop Design",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "Avoid generic AI-looking interfaces; enforce craft and specificity.",
+      "triggers": [
+        "anti-slop",
+        "premium ui design"
+      ],
+      "sourcePath": ".agents/skills/anti-slop-design/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/anti-slop-design/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Astro.",
+      "triggers": [
+        "Astro project"
+      ],
+      "sourcePath": ".agents/skills/astro/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/astro/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "audit",
+      "name": "Audit",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "On-demand skill: Audit.",
+      "triggers": [
+        "interface audit"
+      ],
+      "sourcePath": ".agents/skills/audit/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/audit/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "bolder",
+      "name": "Bolder",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Bolder.",
+      "triggers": [
+        "stronger visual direction"
+      ],
+      "sourcePath": ".agents/skills/bolder/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/bolder/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "brainstorming",
+      "name": "Brainstorming",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Brainstorming.",
+      "triggers": [
+        "ambiguous creative behavior"
+      ],
+      "sourcePath": ".agents/skills/brainstorming/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/brainstorming/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "case-analysis",
+      "name": "Case Analysis",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Case Analysis.",
+      "triggers": [
+        "theory case analysis"
+      ],
+      "sourcePath": ".agents/skills/case-analysis/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/case-analysis/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "chat-first",
+      "name": "Chat First",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Chat First.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/chat-first.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/chat-first.md",
+      "status": null
+    },
+    {
+      "id": "clarify",
+      "name": "Clarify",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Clarify.",
+      "triggers": [
+        "unclear UX copy"
+      ],
+      "sourcePath": ".agents/skills/clarify/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/clarify/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): CLAUDE.md discovery.",
+      "triggers": [],
+      "sourcePath": null,
+      "githubUrl": null,
+      "status": "stable"
+    },
+    {
+      "id": "cli",
+      "name": "Cli",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): PowerShell route and doctor commands.",
+      "triggers": [],
+      "sourcePath": ".agents/AGENTS.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/AGENTS.md",
+      "status": "stable"
+    },
+    {
+      "id": "client-work",
+      "name": "Client Work",
+      "kind": "skill",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "product-growth",
+      "description": "On-demand skill: Client Work.",
+      "triggers": [
+        "client delivery"
+      ],
+      "sourcePath": ".agents/skills/client-work/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/client-work/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "code-style",
+      "name": "Code Style",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Code Style.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/code-style.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/code-style.md",
+      "status": null
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): AGENTS.md discovery.",
+      "triggers": [],
+      "sourcePath": null,
+      "githubUrl": null,
+      "status": "stable"
+    },
+    {
+      "id": "coding-exercises",
+      "name": "Coding Exercises",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Coding Exercises.",
+      "triggers": [
+        "coding practice"
+      ],
+      "sourcePath": ".agents/skills/coding-exercises/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/coding-exercises/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "colorize",
+      "name": "Colorize",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Colorize.",
+      "triggers": [
+        "strategic interface color"
+      ],
+      "sourcePath": ".agents/skills/colorize/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/colorize/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "context_check",
+      "name": "Context Check",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Context Check.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/context_check.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/context_check.md",
+      "status": null
+    },
+    {
+      "id": "critique",
+      "name": "Critique",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Critique.",
+      "triggers": [
+        "UX design critique"
+      ],
+      "sourcePath": ".agents/skills/critique/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/critique/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "css-animations",
+      "name": "Css Animations",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Css Animations.",
+      "triggers": [
+        "CSS animation"
+      ],
+      "sourcePath": ".agents/skills/css-animations/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/css-animations/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (experimental): project rules file.",
+      "triggers": [],
+      "sourcePath": ".cursorrules",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.cursorrules",
+      "status": "experimental"
+    },
+    {
+      "id": "delight",
+      "name": "Delight",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Delight.",
+      "triggers": [
+        "interface delight"
+      ],
+      "sourcePath": ".agents/skills/delight/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/delight/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "devin",
+      "name": "Devin",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (experimental): repository AGENTS.md discovery.",
+      "triggers": [],
+      "sourcePath": null,
+      "githubUrl": null,
+      "status": "experimental"
+    },
+    {
+      "id": "dispatching-parallel-agents",
+      "name": "Dispatching Parallel Agents",
+      "kind": "skill",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "skills",
+      "description": "On-demand skill: Dispatching Parallel Agents.",
+      "triggers": [
+        "independent parallel tasks"
+      ],
+      "sourcePath": ".agents/skills/dispatching-parallel-agents/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/dispatching-parallel-agents/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "distill",
+      "name": "Distill",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Distill.",
+      "triggers": [
+        "simplify interface"
+      ],
+      "sourcePath": ".agents/skills/distill/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/distill/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "doc-coauthoring",
+      "name": "Doc Coauthoring",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Doc Coauthoring.",
+      "triggers": [
+        "structured document coauthoring"
+      ],
+      "sourcePath": ".agents/skills/doc-coauthoring/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/doc-coauthoring/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "exam-simulator",
+      "name": "Exam Simulator",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Exam Simulator.",
+      "triggers": [
+        "exam simulation"
+      ],
+      "sourcePath": ".agents/skills/exam-simulator/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/exam-simulator/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "executing-plans",
+      "name": "Executing Plans",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "Execute written plans with review checkpoints.",
+      "triggers": [
+        "execute written plan"
+      ],
+      "sourcePath": ".agents/skills/executing-plans/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/executing-plans/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "extract",
+      "name": "Extract",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Extract.",
+      "triggers": [
+        "design system extraction"
+      ],
+      "sourcePath": ".agents/skills/extract/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/extract/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "feedback_loop",
+      "name": "Feedback Loop",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Feedback Loop.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/feedback_loop.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/feedback_loop.md",
+      "status": null
+    },
+    {
+      "id": "find-skills",
+      "name": "Find Skills",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Find Skills.",
+      "triggers": [
+        "discover capability"
+      ],
+      "sourcePath": ".agents/skills/find-skills/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/find-skills/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "finishing-a-development-branch",
+      "name": "Finishing A Development Branch",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Finishing A Development Branch.",
+      "triggers": [
+        "branch completion"
+      ],
+      "sourcePath": ".agents/skills/finishing-a-development-branch/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/finishing-a-development-branch/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "frontend-design",
+      "name": "Frontend Design",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "Production frontend direction, hierarchy, and distinctive UI systems.",
+      "triggers": [
+        "production frontend"
+      ],
+      "sourcePath": ".agents/skills/frontend-design/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/frontend-design/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): GEMINI.md discovery.",
+      "triggers": [],
+      "sourcePath": null,
+      "githubUrl": null,
+      "status": "stable"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Git.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/git.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/git.md",
+      "status": null
+    },
+    {
+      "id": "harden",
+      "name": "Harden",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Harden.",
+      "triggers": [
+        "interface resilience"
+      ],
+      "sourcePath": ".agents/skills/harden/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/harden/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "hooks",
+      "name": "Hooks",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Hooks.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/hooks.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/hooks.md",
+      "status": null
+    },
+    {
+      "id": "identity",
+      "name": "Identity",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Identity.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/identity.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/identity.md",
+      "status": null
+    },
+    {
+      "id": "kickoff-architect",
+      "name": "Kickoff Architect",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "core",
+      "description": "Creates concise project or feature kickoff plans with first milestone, minimum viable structure, and appropriate process intensity.",
+      "triggers": [
+        "new project kickoff"
+      ],
+      "sourcePath": ".agents/agents/kickoff-architect.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/kickoff-architect.md",
+      "status": "SAFE_AS_SKILL"
+    },
+    {
+      "id": "lean-project-kickoff",
+      "name": "Lean Project Kickoff",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Lean Project Kickoff.",
+      "triggers": [
+        "lean kickoff"
+      ],
+      "sourcePath": ".agents/skills/lean-project-kickoff/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/lean-project-kickoff/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "mcp_adoption",
+      "name": "Mcp Adoption",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Mcp Adoption.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/mcp_adoption.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/mcp_adoption.md",
+      "status": null
+    },
+    {
+      "id": "mcp_catalog",
+      "name": "Mcp Catalog",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Mcp Catalog.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/mcp_catalog.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/mcp_catalog.md",
+      "status": null
+    },
+    {
+      "id": "mcp_security",
+      "name": "Mcp Security",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Mcp Security.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/mcp_security.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/mcp_security.md",
+      "status": null
+    },
+    {
+      "id": "mcts-planner",
+      "name": "Mcts Planner",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "Branch exploration for complex architecture decisions.",
+      "triggers": [
+        "monte carlo tree search",
+        "complex refactor"
+      ],
+      "sourcePath": ".agents/skills/mcts-planner/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/mcts-planner/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "model_routing",
+      "name": "Model Routing",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Model Routing.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/model_routing.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/model_routing.md",
+      "status": null
+    },
+    {
+      "id": "monetization-architect",
+      "name": "Monetization Architect",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "product-growth",
+      "description": "On-demand skill: Monetization Architect.",
+      "triggers": [
+        "stripe integration",
+        "billing"
+      ],
+      "sourcePath": ".agents/skills/monetization-architect/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/monetization-architect/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "multiagent_review_loop",
+      "name": "Multiagent Review Loop",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Multiagent Review Loop.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/multiagent_review_loop.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/multiagent_review_loop.md",
+      "status": null
+    },
+    {
+      "id": "next",
+      "name": "Next",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Next.",
+      "triggers": [
+        "Next.js project"
+      ],
+      "sourcePath": ".agents/skills/next/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/next/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "normalize",
+      "name": "Normalize",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Normalize.",
+      "triggers": [
+        "design system consistency"
+      ],
+      "sourcePath": ".agents/skills/normalize/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/normalize/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "obsidian-vault",
+      "name": "Obsidian Vault",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Obsidian Vault.",
+      "triggers": [
+        "Obsidian vault work"
+      ],
+      "sourcePath": ".agents/skills/obsidian-vault/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/obsidian-vault/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "onboard",
+      "name": "Onboard",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Onboard.",
+      "triggers": [
+        "onboarding flow"
+      ],
+      "sourcePath": ".agents/skills/onboard/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/onboard/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "opencode",
+      "name": "Opencode",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (stable): instructions list.",
+      "triggers": [],
+      "sourcePath": "config/opencode/AGENTS.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/config/opencode/AGENTS.md",
+      "status": "stable"
+    },
+    {
+      "id": "openship-architect",
+      "name": "Openship Architect",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Openship Architect.",
+      "triggers": [
+        "openship deployment",
+        "vps infrastructure"
+      ],
+      "sourcePath": ".agents/skills/openship-architect/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/openship-architect/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "optimize",
+      "name": "Optimize",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Optimize.",
+      "triggers": [
+        "interface performance"
+      ],
+      "sourcePath": ".agents/skills/optimize/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/optimize/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "parallel_agents",
+      "name": "Parallel Agents",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Parallel Agents.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/parallel_agents.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/parallel_agents.md",
+      "status": null
+    },
+    {
+      "id": "polish",
+      "name": "Polish",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "design",
+      "description": "On-demand skill: Polish.",
+      "triggers": [
+        "final UI quality"
+      ],
+      "sourcePath": ".agents/skills/polish/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/polish/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "procedural-memory",
+      "name": "Procedural Memory",
+      "kind": "skill",
+      "mode": "automatic",
+      "loadLevel": "T0-T1",
+      "group": "validation-memory",
+      "description": "Capture durable lessons after completed work.",
+      "triggers": [
+        "task completed",
+        "lesson learned"
+      ],
+      "sourcePath": ".agents/skills/procedural-memory/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/procedural-memory/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "product-foundry",
+      "name": "Product Foundry",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "product-growth",
+      "description": "MVP scoping, product validation, and venture decisions.",
+      "triggers": [
+        "product ideation and MVP"
+      ],
+      "sourcePath": ".agents/skills/product-foundry/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/product-foundry/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "prompting",
+      "name": "Prompting",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Prompting.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/prompting.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/prompting.md",
+      "status": null
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Python.",
+      "triggers": [
+        "Python project"
+      ],
+      "sourcePath": ".agents/skills/python/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/python/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "quieter",
+      "name": "Quieter",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Quieter.",
+      "triggers": [
+        "reduce visual intensity"
+      ],
+      "sourcePath": ".agents/skills/quieter/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/quieter/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "receiving-code-review",
+      "name": "Receiving Code Review",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Receiving Code Review.",
+      "triggers": [
+        "review feedback"
+      ],
+      "sourcePath": ".agents/skills/receiving-code-review/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/receiving-code-review/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "remembering-conversations",
+      "name": "Remembering Conversations",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Remembering Conversations.",
+      "triggers": [
+        "past work context"
+      ],
+      "sourcePath": ".agents/skills/remembering-conversations/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/remembering-conversations/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "requesting-code-review",
+      "name": "Requesting Code Review",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Requesting Code Review.",
+      "triggers": [
+        "request independent review"
+      ],
+      "sourcePath": ".agents/skills/requesting-code-review/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/requesting-code-review/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "self-healing-ci",
+      "name": "Self Healing Ci",
+      "kind": "skill",
+      "mode": "automatic",
+      "loadLevel": "T0-T1",
+      "group": "validation-memory",
+      "description": "Repair broken tests from current app state.",
+      "triggers": [
+        "broken test",
+        "ci failure"
+      ],
+      "sourcePath": ".agents/skills/self-healing-ci/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/self-healing-ci/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "seo-geo-growth",
+      "name": "Seo Geo Growth",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "product-growth",
+      "description": "SEO/GEO/AEO acquisition strategy with measurable plans.",
+      "triggers": [
+        "organic acquisition"
+      ],
+      "sourcePath": ".agents/skills/seo-geo-growth/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/seo-geo-growth/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "session_checkpoint",
+      "name": "Session Checkpoint",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Session Checkpoint.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/session_checkpoint.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/session_checkpoint.md",
+      "status": null
+    },
+    {
+      "id": "skill-creator",
+      "name": "Skill Creator",
+      "kind": "skill",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "skills",
+      "description": "On-demand skill: Skill Creator.",
+      "triggers": [
+        "create or edit skill"
+      ],
+      "sourcePath": ".agents/skills/skill-creator/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/skill-creator/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "skills_routing",
+      "name": "Skills Routing",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Skills Routing.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/skills_routing.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/skills_routing.md",
+      "status": null
+    },
+    {
+      "id": "spec-kit",
+      "name": "Spec Kit",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Spec Kit.",
+      "triggers": [
+        "large feature specification"
+      ],
+      "sourcePath": ".agents/skills/spec-kit/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/spec-kit/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "start",
+      "name": "Start",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Start.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/start.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/start.md",
+      "status": null
+    },
+    {
+      "id": "study-progress-tracker",
+      "name": "Study Progress Tracker",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Study Progress Tracker.",
+      "triggers": [
+        "study progress"
+      ],
+      "sourcePath": ".agents/skills/study-progress-tracker/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/study-progress-tracker/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "subagent-driven-development",
+      "name": "Subagent Driven Development",
+      "kind": "skill",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "skills",
+      "description": "On-demand skill: Subagent Driven Development.",
+      "triggers": [
+        "independent implementation tasks"
+      ],
+      "sourcePath": ".agents/skills/subagent-driven-development/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/subagent-driven-development/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "systematic-debugging",
+      "name": "Systematic Debugging",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "validation-memory",
+      "description": "Root-cause debugging before proposing fixes.",
+      "triggers": [
+        "bug or failing test"
+      ],
+      "sourcePath": ".agents/skills/systematic-debugging/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/systematic-debugging/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "telemetry-pm",
+      "name": "Telemetry Pm",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Telemetry Pm.",
+      "triggers": [
+        "analytics instrumentation",
+        "posthog",
+        "feature flags"
+      ],
+      "sourcePath": ".agents/skills/telemetry-pm/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/telemetry-pm/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "test-driven-development",
+      "name": "Test Driven Development",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "validation-memory",
+      "description": "Write failing tests before implementation.",
+      "triggers": [
+        "feature or bugfix"
+      ],
+      "sourcePath": ".agents/skills/test-driven-development/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/test-driven-development/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "testing",
+      "name": "Testing",
+      "kind": "rule",
+      "mode": "automatic",
+      "loadLevel": "T0",
+      "group": "rules",
+      "description": "Canonical rule module: Testing.",
+      "triggers": [],
+      "sourcePath": ".agents/rules/testing.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/rules/testing.md",
+      "status": null
+    },
+    {
+      "id": "token-efficiency-check",
+      "name": "Token Efficiency Check",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Token Efficiency Check.",
+      "triggers": [
+        "context reduction"
+      ],
+      "sourcePath": ".agents/skills/token-efficiency-check/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/token-efficiency-check/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "using-git-worktrees",
+      "name": "Using Git Worktrees",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Using Git Worktrees.",
+      "triggers": [
+        "isolated feature work"
+      ],
+      "sourcePath": ".agents/skills/using-git-worktrees/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/using-git-worktrees/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "using-superpowers",
+      "name": "Using Superpowers",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "On-demand skill: Using Superpowers.",
+      "triggers": [
+        "skill discovery protocol"
+      ],
+      "sourcePath": ".agents/skills/using-superpowers/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/using-superpowers/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "validation",
+      "name": "Validation",
+      "kind": "workflow",
+      "mode": "on-demand",
+      "loadLevel": "T1-T2",
+      "group": "workflows",
+      "description": "Specialized workflow: Validation.",
+      "triggers": [],
+      "sourcePath": ".agents/workflows/validation.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/workflows/validation.md",
+      "status": null
+    },
+    {
+      "id": "verification-before-completion",
+      "name": "Verification Before Completion",
+      "kind": "skill",
+      "mode": "automatic",
+      "loadLevel": "T0-T1",
+      "group": "validation-memory",
+      "description": "Require fresh evidence before claiming done.",
+      "triggers": [
+        "completion claim"
+      ],
+      "sourcePath": ".agents/skills/verification-before-completion/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/verification-before-completion/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "workflow-pruner",
+      "name": "Workflow Pruner",
+      "kind": "agent",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "core",
+      "description": "Simplifies bloated prompts, workflows, skills, agent setups, and operating models by reducing token cost and removing low-value process.",
+      "triggers": [
+        "runtime simplification"
+      ],
+      "sourcePath": ".agents/agents/workflow-pruner.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/agents/workflow-pruner.md",
+      "status": "SAFE_AS_SKILL"
+    },
+    {
+      "id": "writing-plans",
+      "name": "Writing Plans",
+      "kind": "skill",
+      "mode": "on-demand",
+      "loadLevel": "T2",
+      "group": "skills",
+      "description": "Multi-step implementation plans before coding.",
+      "triggers": [
+        "multi-step implementation plan"
+      ],
+      "sourcePath": ".agents/skills/writing-plans/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/writing-plans/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "writing-skills",
+      "name": "Writing Skills",
+      "kind": "skill",
+      "mode": "explicit-only",
+      "loadLevel": "T2-T3",
+      "group": "skills",
+      "description": "On-demand skill: Writing Skills.",
+      "triggers": [
+        "skill authoring"
+      ],
+      "sourcePath": ".agents/skills/writing-skills/SKILL.md",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.agents/skills/writing-skills/SKILL.md",
+      "status": null
+    },
+    {
+      "id": "zed",
+      "name": "Zed",
+      "kind": "adapter",
+      "mode": "on-demand",
+      "loadLevel": "T0",
+      "group": "adapters",
+      "description": "IDE/runtime adapter (experimental): assistant context config.",
+      "triggers": [],
+      "sourcePath": ".zed/settings.json",
+      "githubUrl": "https://github.com/nachopalmeri/agents-system/blob/a25ecb1f33a9edd812af28871c6e3712d87f48e6/.zed/settings.json",
+      "status": "experimental"
+    }
+  ],
+  "cases": [
+    {
+      "id": "portfolio-evidence",
+      "label": {
+        "es": "Portfolio verificable",
+        "en": "Verifiable portfolio"
+      },
+      "request": {
+        "es": "Necesito un portfolio con evidencia real y pruebas Playwright antes de publicarlo.",
+        "en": "I need a portfolio with real evidence and Playwright checks before publishing."
+      },
+      "intent": {
+        "es": "Frontend + verificación",
+        "en": "Frontend + verification"
+      },
+      "risk": "low",
+      "lane": "SPECIALIZED",
+      "tLevel": "T2",
+      "budget": {
+        "maxIterations": 6,
+        "maxReplans": 2,
+        "maxAgents": 1
+      },
+      "loaded": {
+        "agents": [
+          "agente-design",
+          "agente-tests"
+        ],
+        "skills": [
+          "frontend-design",
+          "verification-before-completion",
+          "anti-slop-design"
+        ],
+        "workflows": [
+          "validation"
+        ]
+      },
+      "tools": [
+        "Read",
+        "Edit",
+        "Bash",
+        "Playwright"
+      ],
+      "validation": {
+        "es": "Syntax check + unit + E2E desktop/mobile + reduced-motion.",
+        "en": "Syntax check + unit + desktop/mobile E2E + reduced-motion."
+      },
+      "memory": {
+        "es": "Lección: evidencia antes de claims; no inventar métricas.",
+        "en": "Lesson: evidence before claims; never invent metrics."
+      },
+      "result": {
+        "es": "Portfolio local verificable con rutas de evidencia y CTAs claros.",
+        "en": "Local verifiable portfolio with evidence paths and clear CTAs."
+      },
+      "evidence": {
+        "repo": "https://github.com/nachopalmeri/IgnacioPalmeri",
+        "note": {
+          "es": "Representación explicativa basada en commits reales del portfolio (operations surface + verification).",
+          "en": "Explanatory representation based on real portfolio commits (operations surface + verification)."
+        }
+      }
+    },
+    {
+      "id": "runtime-budgets",
+      "label": {
+        "es": "Budgets del runtime",
+        "en": "Runtime budgets"
+      },
+      "request": {
+        "es": "Necesito contratos portables de capacidades y budgets entre varios IDEs.",
+        "en": "I need portable capability and budget contracts across multiple IDEs."
+      },
+      "intent": {
+        "es": "Arquitectura de runtime",
+        "en": "Runtime architecture"
+      },
+      "risk": "medium",
+      "lane": "SPECIALIZED",
+      "tLevel": "T2",
+      "budget": {
+        "maxIterations": 6,
+        "maxReplans": 2,
+        "maxAgents": 1
+      },
+      "loaded": {
+        "agents": [
+          "agente-principal",
+          "workflow-pruner"
+        ],
+        "skills": [
+          "token-efficiency-check",
+          "writing-plans",
+          "verification-before-completion"
+        ],
+        "workflows": [
+          "skills_routing",
+          "validation"
+        ]
+      },
+      "tools": [
+        "Read",
+        "Edit",
+        "Bash"
+      ],
+      "validation": {
+        "es": "JSON schemas + conteos cruzados agents/skills/workflows + adapters render.",
+        "en": "JSON schemas + cross-counts for agents/skills/workflows + adapter render."
+      },
+      "memory": {
+        "es": "Lección: no precargar toda la biblioteca; T0→T3 con budgets por lane.",
+        "en": "Lesson: never preload the full library; T0→T3 with per-lane budgets."
+      },
+      "result": {
+        "es": "capabilities.json + routing-rules.json + runtime-manifest sincronizados.",
+        "en": "Synced capabilities.json + routing-rules.json + runtime-manifest."
+      },
+      "evidence": {
+        "repo": "https://github.com/nachopalmeri/agents-system",
+        "commitHint": "9bfabfc",
+        "note": {
+          "es": "Basado en el trabajo real de contratos portables del runtime (julio 2026).",
+          "en": "Based on real portable runtime contract work (July 2026)."
+        }
+      }
+    },
+    {
+      "id": "security-review-loop",
+      "label": {
+        "es": "Revisión de seguridad",
+        "en": "Security review"
+      },
+      "request": {
+        "es": "Revisá el multiagent review loop por riesgos de seguridad y robustez.",
+        "en": "Review the multiagent review loop for security and robustness risks."
+      },
+      "intent": {
+        "es": "Seguridad + robustez",
+        "en": "Security + robustness"
+      },
+      "risk": "high",
+      "lane": "HIGH_RISK",
+      "tLevel": "T3",
+      "budget": {
+        "maxIterations": 5,
+        "maxReplans": 1,
+        "maxAgents": 2
+      },
+      "loaded": {
+        "agents": [
+          "agente-security-auditor",
+          "agente-code-reviewer"
+        ],
+        "skills": [
+          "agentic-pentester",
+          "systematic-debugging",
+          "verification-before-completion"
+        ],
+        "workflows": [
+          "multiagent_review_loop",
+          "validation"
+        ]
+      },
+      "tools": [
+        "Read",
+        "Grep",
+        "Bash"
+      ],
+      "validation": {
+        "es": "Diff review + gates de aprobación humana + sin secretos expuestos.",
+        "en": "Diff review + human approval gates + no exposed secrets."
+      },
+      "memory": {
+        "es": "Lección: HIGH_RISK requiere aprobación explícita y no auto-merge.",
+        "en": "Lesson: HIGH_RISK requires explicit approval and no auto-merge."
+      },
+      "result": {
+        "es": "Parches de seguridad/robustez documentados en el runtime.",
+        "en": "Documented security/robustness patches in the runtime."
+      },
+      "evidence": {
+        "repo": "https://github.com/nachopalmeri/agents-system",
+        "commitHint": "b3d8aeb",
+        "note": {
+          "es": "Basado en el commit de parches de seguridad del review loop.",
+          "en": "Based on the security patch commit for the review loop."
+        }
+      }
+    }
+  ],
+  "honesty": {
+    "es": "Esto es un snapshot público generado offline. No ejecuta agentes en vivo ni implica que las 19 capacidades agent se activen siempre.",
+    "en": "This is a public offline-generated snapshot. It does not run live agents and does not imply all 19 agent capabilities always activate."
+  }
+}
