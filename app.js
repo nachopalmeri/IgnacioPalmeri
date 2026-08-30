@@ -52,6 +52,13 @@ const UI_COPY = {
       p2: 'Trabajo con Python, FastAPI, SQL, Linux, Git y asistentes de IA para construir dashboards, bots, automatizaciones y prototipos desplegados. Me importa más entregar trabajo revisable que parecer senior.',
       p3: 'Mi experiencia en atención al cliente y operaciones me dio presión real, caja, inventario y auditorías. Quiero llevar esa base a soporte IT, QA trainee, automatización o startups.'
     },
+    certifications: {
+      title: 'Certificaciones',
+      cta: 'Ver credencial',
+      rh: { title: 'RH124 / System Administrator', issuer: 'Red Hat' },
+      cisco: { title: 'CCNA 1', issuer: 'Cisco Networking Academy' },
+      anthropic: { title: 'Claude Code in Action', issuer: 'Anthropic' }
+    },
     stack: { title: 'Stack y herramientas', core: 'Core técnico', product: 'Producto y operaciones', ai: 'IA aplicada' },
     projects: {
       title: 'Proyectos destacados',
@@ -155,6 +162,13 @@ const UI_COPY = {
       p1: 'I am an IT Management student at UADE building my first professional path in technology. I combine product judgment and operational context to turn repetitive processes into useful software.',
       p2: 'I work with Python, FastAPI, SQL, Linux, Git and AI assistants to build dashboards, bots, automations and deployed prototypes. I care more about shipping reviewable work than looking senior.',
       p3: 'My customer service and operations background gave me real pressure, cash handling, inventory and audits. I want to bring that base into IT support, QA trainee, automation or startups.'
+    },
+    certifications: {
+      title: 'Certifications',
+      cta: 'View credential',
+      rh: { title: 'RH124 / System Administrator', issuer: 'Red Hat' },
+      cisco: { title: 'CCNA 1', issuer: 'Cisco Networking Academy' },
+      anthropic: { title: 'Claude Code in Action', issuer: 'Anthropic' }
     },
     stack: { title: 'Stack and tools', core: 'Technical core', product: 'Product and operations', ai: 'Applied AI' },
     projects: {
@@ -388,6 +402,7 @@ const FEATURED_PROJECTS = [
     repo: 'https://github.com/nachopalmeri/jobbot',
     href: 'https://jobbot-lime.vercel.app',
     media: 'project-assets/job-bot.png',
+    video: 'project-assets/video/jobbot-demo.mp4',
     status: 'ACTIVE',
     kind: { es: 'Automation SaaS', en: 'Automation SaaS' },
     description: {
@@ -713,7 +728,7 @@ function projectImage(project, index, variant = 'mission') {
 function renderProjectPreview(project, index, mode = 'active') {
   const previewClass = mode === 'hover' ? 'hover' : 'active';
   return `
-    <article class="project-preview ${previewClass}" data-project-id="${project.id}">
+    <article class="project-preview ${previewClass}" data-project-id="${project.id}"${project.video ? ` data-video="${project.video}"` : ''}>
       <figure class="project-preview-media">
         ${projectImage(project, index, 'preview')}
       </figure>
@@ -749,7 +764,7 @@ function renderProjectCarousel() {
 
   if (archive) {
     archive.innerHTML = FEATURED_PROJECTS.map((project, index) => `
-      <a class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>
+      <a class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${project.video ? ` data-video="${project.video}"` : ''} href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
         <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
@@ -763,6 +778,49 @@ function renderProjectCarousel() {
       </a>
     `).join('');
   }
+
+  setupProjectVideoReveal();
+}
+
+const projectVideoRevealState = { canReveal: null };
+
+function setupProjectVideoReveal() {
+  const overlay = document.getElementById('project-video-reveal');
+  const video = document.getElementById('project-video-reveal-video');
+  if (!overlay || !video) return;
+
+  if (projectVideoRevealState.canReveal === null) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    projectVideoRevealState.canReveal = canHover && !reduceMotion;
+  }
+  if (!projectVideoRevealState.canReveal) return;
+
+  let activeEl = null;
+
+  function show(el) {
+    const src = el.dataset.video;
+    if (!src) return;
+    activeEl = el;
+    if (video.getAttribute('src') !== src) video.setAttribute('src', src);
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    overlay.classList.add('is-visible');
+  }
+
+  function hide(el) {
+    if (activeEl !== el) return;
+    activeEl = null;
+    overlay.classList.remove('is-visible');
+    video.pause();
+  }
+
+  document.querySelectorAll('[data-video]').forEach((el) => {
+    el.addEventListener('mouseenter', () => show(el));
+    el.addEventListener('mouseleave', () => hide(el));
+    el.addEventListener('focus', () => show(el));
+    el.addEventListener('blur', () => hide(el));
+  });
 }
 
 function setupProjectCarousel() {
