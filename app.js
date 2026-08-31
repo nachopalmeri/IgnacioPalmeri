@@ -578,6 +578,35 @@ const FEATURED_PROJECTS = [
     stack: ['Agents', 'Playwright', 'Docs', 'Workflow']
   },
   {
+    id: 'darter',
+    title: 'Darter',
+    media: 'project-assets/darter.webp',
+    video: 'project-assets/video/darter-demo.mp4',
+    status: 'PRIVATE',
+    kind: { es: 'Sistema financiero personal', en: 'Personal finance OS' },
+    description: {
+      es: 'Command center personal para patrimonio, cartera de CEDEARs y research, con brief diario generado por IA.',
+      en: 'A personal command center for net worth, CEDEAR portfolio and research, with an AI-generated daily brief.'
+    },
+    value: {
+      es: 'Consolida patrimonio, alertas de rebalanceo y research desk en un solo dashboard, sin depender de planillas sueltas.',
+      en: 'Consolidates net worth, rebalancing alerts and a research desk in one dashboard instead of scattered spreadsheets.'
+    },
+    problem: {
+      es: 'Perdía visión real de mi cartera entre varias apps y planillas; quería un solo lugar con contexto y prioridades del día.',
+      en: 'I was losing a real view of my portfolio across apps and spreadsheets; I wanted one place with context and daily priorities.'
+    },
+    role: {
+      es: 'Diseño y desarrollo full-stack, integración de datos de mercado y lógica de alertas.',
+      en: 'Full-stack design and development, market data integration and alert logic.'
+    },
+    evidence: {
+      es: 'Proyecto personal en uso diario, sin demo pública: la evidencia es el video de producto.',
+      en: 'A personal project in daily use, no public demo: the product video is the evidence.'
+    },
+    stack: ['Next.js', 'Dashboard', 'Fintech', 'AI']
+  },
+  {
     id: 'motor-estadistico',
     title: 'Motor Estadístico Predictivo',
     repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
@@ -862,8 +891,8 @@ function renderProjectPreview(project, index, mode = 'active') {
         </dl>
         <div class="project-preview-tags">${project.stack.slice(0, 4).map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
         <div class="project-preview-links">
-          <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
-          <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
+          ${project.href ? `<a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>` : ''}
+          ${project.repo ? `<a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>` : ''}
           ${project.video ? `<button type="button" class="carousel-proof subtle video-trigger" data-video-trigger="${project.video}">${escapeHtml(getCopy('projects.watchVideo'))}</button>` : ''}
         </div>
       </div>
@@ -885,8 +914,13 @@ function renderProjectCarousel() {
   }
 
   if (archive) {
-    archive.innerHTML = FEATURED_PROJECTS.map((project, index) => `
-      <a class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${project.video ? ` data-video="${project.video}"` : ''} href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>
+    archive.innerHTML = FEATURED_PROJECTS.map((project, index) => {
+      const tag = project.href ? 'a' : 'div';
+      const hrefAttr = project.href ? ` href="${project.href}"` : '';
+      const targetAttr = project.href && !project.href.startsWith('#') ? ' target="_blank" rel="noopener noreferrer"' : '';
+      const videoAttr = project.video ? ` data-video="${project.video}"` : '';
+      return `
+      <${tag} class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${videoAttr}${hrefAttr}${targetAttr}>
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
         <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
@@ -896,9 +930,10 @@ function renderProjectCarousel() {
           <span class="archive-problem">${escapeHtml(projectField(project, 'problem'))}</span>
         </span>
         <span class="archive-tags">${project.stack.slice(0, 3).map(item => `<em>${escapeHtml(item)}</em>`).join('')}</span>
-        <span class="archive-open">${escapeHtml(getCopy('projects.open'))}</span>
-      </a>
-    `).join('');
+        ${project.href ? `<span class="archive-open">${escapeHtml(getCopy('projects.open'))}</span>` : ''}
+      </${tag}>
+    `;
+    }).join('');
   }
 
   setupProjectVideoReveal();

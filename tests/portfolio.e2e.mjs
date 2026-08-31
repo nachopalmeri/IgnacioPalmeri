@@ -127,7 +127,7 @@ async function main() {
       await page.getByRole('button', { name: 'Proyectos' }).click();
       await page.waitForSelector('#projects-section.view-section.active');
       const archiveRows = await page.locator('#project-archive .archive-row').count();
-      if (archiveRows !== 9) throw new Error(`expected 9 archive rows, got ${archiveRows}`);
+      if (archiveRows !== 10) throw new Error(`expected 10 archive rows, got ${archiveRows}`);
       const archiveImages = await page.locator('#project-archive img').evaluateAll((images) =>
         images.map((img) => ({
           src: img.getAttribute('src'),
@@ -136,7 +136,7 @@ async function main() {
           naturalHeight: img.naturalHeight
         }))
       );
-      if (archiveImages.length !== 9) throw new Error(`expected 9 archive images, got ${archiveImages.length}`);
+      if (archiveImages.length !== 10) throw new Error(`expected 10 archive images, got ${archiveImages.length}`);
       const brokenArchiveImage = archiveImages.find((image) => !image.complete || image.naturalWidth <= 0 || image.naturalHeight <= 0);
       if (brokenArchiveImage) throw new Error(`archive image did not load: ${JSON.stringify(brokenArchiveImage)}`);
       const bodyText = await page.locator('body').textContent();
