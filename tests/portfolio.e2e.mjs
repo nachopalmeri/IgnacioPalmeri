@@ -109,14 +109,14 @@ async function main() {
         throw new Error(`unexpected hero text: ${heroText}`);
       }
 
-      await page.getByRole('button', { name: 'EN' }).click();
+      await page.getByRole('button', { name: 'EN', exact: true }).click();
       await page.waitForFunction(() => document.documentElement.lang === 'en');
       const englishHero = await page.locator('[data-i18n="hero.description"]').textContent();
       if (!englishHero || !englishHero.includes('trainee role')) {
         throw new Error(`unexpected English hero copy: ${englishHero}`);
       }
 
-      await page.getByRole('button', { name: 'ES' }).click();
+      await page.getByRole('button', { name: 'ES', exact: true }).click();
       await page.waitForFunction(() => document.documentElement.lang === 'es');
 
       await page.getByRole('button', { name: 'Toggle theme' }).click();
@@ -206,7 +206,7 @@ async function main() {
       });
       await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
       await page.waitForSelector('#overview-section .hero h1');
-      await page.getByRole('button', { name: 'EN' }).click();
+      await page.getByRole('button', { name: 'EN', exact: true }).click();
       await page.waitForFunction(() => document.documentElement.lang === 'en');
       if (state.errors.length) throw new Error(`pageerror storage-blocked: ${state.errors[0].message}`);
       await wait(100);

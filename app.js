@@ -24,9 +24,11 @@ const UI_COPY = {
     },
     console: {
       title: 'ignacio@portfolio',
+      launcher: 'Terminal',
       welcome: 'Escribí help para explorar mi perfil.',
       prompt: 'Comandos: about, skills, projects, agents, contact, clear',
       unknown: 'Comando no encontrado',
+      help: 'Comandos: about, skills, projects, agents, contact, clear',
       about: 'ignaciopalmeri - estudiante de Gestión IT en UADE que combina experiencia operativa, producto y automatización para construir software útil.',
       skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos y desarrollo asistido por IA.',
       projects: 'Proyectos principales: JobBot, Agents System, Motor Estadístico Predictivo y Pisculichi Labs. El archivo completo muestra 9 piezas desplegadas o revisables.',
@@ -66,6 +68,7 @@ const UI_COPY = {
       featuredBody: 'Cuatro piezas: producto, trabajo, analytics y lab.',
       archiveBody: 'El archivo completa el rango: CLI, deportes, comercio local y landings.',
       github: 'Ver GitHub',
+      watchVideo: 'Ver video',
       status: { active: 'Activo', public: 'Público', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Sistema de trabajo - flujo con IA',
@@ -110,7 +113,8 @@ const UI_COPY = {
       validated: 'Ecosistema visualizado: evidencia revisada',
       system: 'Sistema'
     },
-      footer: { text: '2026 ignaciopalmeri.', contact: 'Contacto' }
+      footer: { text: '2026 ignaciopalmeri.', contact: 'Contacto' },
+      sideQuests: { toggle: 'Side Quests', eyebrow: 'Fuera del código', heading: 'Side Quests' }
   },
   en: {
     nav: { overview: 'Overview', projects: 'Projects', agents: 'Workflow System' },
@@ -135,11 +139,13 @@ const UI_COPY = {
     },
     console: {
       title: 'ignacio@portfolio',
+      launcher: 'Terminal',
       welcome: 'Type help to explore my profile.',
       prompt: 'Commands: about, skills, projects, agents, contact, clear',
       unknown: 'Command not found',
+      help: 'Commands: about, skills, projects, agents, contact, clear',
       about: 'ignaciopalmeri - IT Management student at UADE combining operations, product and automation to build useful software.',
-      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, automatización de procesos e IA aplicada.',
+      skills: 'Python, FastAPI, TypeScript, SQL, Linux, Git, Playwright, process automation and applied AI.',
       projects: 'Main projects: JobBot, Agents System, Sports Predictive Analytics Engine and Pisculichi Labs. The full archive shows 9 deployed or reviewable pieces.',
       agents: 'I use AI assistants inside an ordered workflow: planning, building, review, tests, documentation and shipping.',
       contact: 'GitHub: @nachopalmeri | LinkedIn: ignaciopalmeri | Email: ignaciopalmeri1@gmail.com'
@@ -177,6 +183,7 @@ const UI_COPY = {
       featuredBody: 'Four main pieces: product, workflow system, analytics and experimental lab.',
       archiveBody: 'The first four are the core. The rest shows range: CLI, sports, local commerce and deployed landing pages.',
       github: 'View GitHub',
+      watchVideo: 'Watch video',
       status: { active: 'Active', public: 'Public', demo: 'Demo', local: 'Local' },
       jobbotTitle: 'JobBot - Asynchronous Automation SaaS',
       agentsTitle: 'Workflow system - AI-fluent process',
@@ -221,7 +228,8 @@ const UI_COPY = {
       validated: 'Ecosystem visualized: evidence reviewed',
       system: 'System'
     },
-      footer: { text: '2026 ignaciopalmeri.', contact: 'Contact' }
+      footer: { text: '2026 ignaciopalmeri.', contact: 'Contact' },
+      sideQuests: { toggle: 'Side Quests', eyebrow: 'Beyond the code', heading: 'Side Quests' }
   }
 };
 
@@ -372,10 +380,121 @@ function setupFloatingConsole() {
   });
 }
 
+// Personal picks, not scraped poster art - color + typography only, drafts open to editing.
+const SIDE_QUESTS = [
+  { title: 'When Harry Met Sally...', color: '#dc2626', cat: { es: 'Película', en: 'Film' }, meta: 'Rob Reiner, 1989',
+    why: { es: 'La prueba de que una comedia romántica puede envejecer sin un solo chiste forzado.', en: 'Proof a romantic comedy can age without a single forced joke.' } },
+  { title: 'El Señor de los Anillos: Las Dos Torres', color: '#2563eb', cat: { es: 'Película', en: 'Film' }, meta: 'Peter Jackson, 2002',
+    why: { es: 'Escala real, sin atajos digitales. Me enseñó qué es construir un mundo que se sostiene solo.', en: 'Real scale, no digital shortcuts. Taught me what a world that holds together actually looks like.' } },
+  { title: 'Pusher II', color: '#52525b', cat: { es: 'Película', en: 'Film' }, meta: 'Nicolas Winding Refn, 2004',
+    why: { es: 'Cruda, sin red de seguridad narrativa. Lo opuesto exacto a un blockbuster prolijo.', en: 'Raw, with no narrative safety net. The exact opposite of a polished blockbuster.' } },
+  { title: 'The Sopranos', color: '#166534', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+    why: { es: 'El personaje más humano que vi en TV, contradicciones incluidas.', en: "The most human character I've seen on TV, contradictions included." } },
+  { title: 'Silicon Valley', color: '#f97316', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+    why: { es: 'La sátira más precisa sobre el mundo tech que quiero habitar.', en: 'The sharpest satire of the tech world I actually want to work in.' } },
+  { title: 'El sueño de los héroes', color: '#7c3aed', cat: { es: 'Libro', en: 'Book' }, meta: 'Adolfo Bioy Casares',
+    why: { es: 'La mejor novela argentina sobre el tiempo y las segundas oportunidades que nunca son iguales.', en: 'The best Argentine novel about time and second chances that are never the same.' } },
+  { title: 'Crimen y castigo', color: '#7f1d1d', cat: { es: 'Libro', en: 'Book' }, meta: 'Fiódor Dostoievski',
+    why: { es: 'Culpa y lógica al límite en 500 páginas que se sienten urgentes.', en: 'Guilt and logic pushed to the limit across 500 pages that still feel urgent.' } },
+  { title: 'The Almanack of Naval Ravikant', color: '#ca8a04', cat: { es: 'Libro', en: 'Book' }, meta: 'Eric Jorgenson',
+    why: { es: 'El resumen más denso de decisiones de vida que leí en formato de bolsillo.', en: "The densest life-decisions summary I've read in pocket-book form." } },
+  { title: 'The Perks of Being a Wallflower', color: '#0891b2', cat: { es: 'Libro', en: 'Book' }, meta: 'Stephen Chbosky',
+    why: { es: 'Adolescencia honesta, sin la nostalgia impostada del género.', en: "Honest teenage years, without the genre's usual fake nostalgia." } },
+  { title: 'Flowers for Algernon', color: '#db2777', cat: { es: 'Libro', en: 'Book' }, meta: 'Daniel Keyes',
+    why: { es: 'La ciencia ficción más triste y más humana que leí: inteligencia y pérdida en el mismo arco.', en: "The saddest, most human sci-fi I've read - intelligence and loss on the same arc." } }
+];
+
+function setupSideQuests() {
+  const toggle = document.getElementById('side-quests-toggle');
+  const reveal = document.getElementById('side-quests-reveal');
+  const closeBtn = document.getElementById('side-quests-close');
+  const track = document.getElementById('sq-track');
+  const dotsEl = document.getElementById('sq-dots');
+  const prevBtn = document.getElementById('sq-prev');
+  const nextBtn = document.getElementById('sq-next');
+  const detailTitle = document.getElementById('sq-detail-title');
+  const detailSub = document.getElementById('sq-detail-sub');
+  const detailWhy = document.getElementById('sq-detail-why');
+  if (!toggle || !reveal || !track) return;
+
+  const n = SIDE_QUESTS.length;
+  const angleStep = 360 / n;
+  let current = 0;
+
+  if (!track.dataset.built) {
+    track.dataset.built = 'true';
+    SIDE_QUESTS.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'sq-card';
+      card.style.background = `linear-gradient(160deg, ${item.color}, #0a0a0c 130%)`;
+      card.style.transform = `rotateY(${i * angleStep}deg) translateZ(var(--sq-radius))`;
+      card.innerHTML = `<strong>${escapeHtml(item.title)}</strong><em></em>`;
+      card.addEventListener('click', () => { current = i; render(); });
+      track.appendChild(card);
+    });
+  }
+
+  function localize(field) {
+    return typeof field === 'string' ? field : field[currentLang];
+  }
+
+  function render() {
+    track.style.transform = `rotateY(${-current * angleStep}deg)`;
+    track.querySelectorAll('.sq-card em').forEach((el, i) => {
+      el.textContent = localize(SIDE_QUESTS[i].cat);
+    });
+    const item = SIDE_QUESTS[current];
+    detailTitle.textContent = item.title;
+    detailSub.textContent = localize(item.meta);
+    detailWhy.textContent = localize(item.why);
+    if (dotsEl) {
+      dotsEl.innerHTML = SIDE_QUESTS.map((_, i) => `<span class="${i === current ? 'active' : ''}"></span>`).join('');
+    }
+  }
+
+  function step(delta) {
+    current = (current + delta + n) % n;
+    render();
+  }
+
+  function open() {
+    toggle.setAttribute('aria-expanded', 'true');
+    reveal.classList.add('is-visible');
+    reveal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    render();
+  }
+
+  function close() {
+    toggle.setAttribute('aria-expanded', 'false');
+    reveal.classList.remove('is-visible');
+    reveal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (!toggle.dataset.bound) {
+    toggle.dataset.bound = 'true';
+    toggle.addEventListener('click', open);
+    closeBtn && closeBtn.addEventListener('click', close);
+    prevBtn && prevBtn.addEventListener('click', () => step(-1));
+    nextBtn && nextBtn.addEventListener('click', () => step(1));
+    reveal.addEventListener('click', (event) => { if (event.target === reveal) close(); });
+    document.addEventListener('keydown', (event) => {
+      if (!reveal.classList.contains('is-visible')) return;
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft') step(-1);
+      if (event.key === 'ArrowRight') step(1);
+    });
+  }
+
+  render();
+}
+
 function setupPreferenceControls() {
   applyStaticCopy();
   setupTerminal();
   setupFloatingConsole();
+  setupSideQuests();
   document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
     btn.addEventListener('click', () => {
       currentLang = btn.dataset.langBtn;
@@ -401,7 +520,7 @@ const FEATURED_PROJECTS = [
     title: 'JobBot',
     repo: 'https://github.com/nachopalmeri/jobbot',
     href: 'https://jobbot-lime.vercel.app',
-    media: 'project-assets/job-bot.png',
+    media: 'project-assets/job-bot.webp',
     video: 'project-assets/video/jobbot-demo.mp4',
     status: 'ACTIVE',
     kind: { es: 'Automation SaaS', en: 'Automation SaaS' },
@@ -432,7 +551,8 @@ const FEATURED_PROJECTS = [
     title: 'Agents System',
     repo: 'https://github.com/nachopalmeri/agents-system',
     href: '#/agents',
-    media: 'project-assets/agents-system.png',
+    media: 'project-assets/agents-system.webp',
+    video: 'project-assets/video/agents-system-demo.mp4',
     status: 'LOCAL',
     kind: { es: 'Workflow system', en: 'Workflow system' },
     description: {
@@ -448,7 +568,7 @@ const FEATURED_PROJECTS = [
       en: 'Make visible a work process that usually stays hidden in prompts, notes and local decisions.'
     },
     role: {
-      es: 'Orquestacion, documentacion, UI del grafo, pruebas y narrativa del sistema.',
+      es: 'Orquestación, documentación, UI del grafo, pruebas y narrativa del sistema.',
       en: 'Orchestration, documentation, graph UI, tests and system narrative.'
     },
     evidence: {
@@ -462,7 +582,7 @@ const FEATURED_PROJECTS = [
     title: 'Motor Estadístico Predictivo',
     repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
     href: 'https://prode-mundial-2026-ten-omega.vercel.app',
-    media: 'project-assets/prode-mundial-2026.png',
+    media: 'project-assets/prode-mundial-2026.webp',
     status: 'LIVE',
     kind: { es: 'Analytics de deportes', en: 'Sports analytics' },
     description: {
@@ -492,7 +612,8 @@ const FEATURED_PROJECTS = [
     title: 'Pisculichi Labs',
     repo: 'https://github.com/nachopalmeri/a',
     href: 'https://polytools-omega.vercel.app',
-    media: 'project-assets/polymarktporyect.PNG',
+    media: 'project-assets/polymarktporyect.webp',
+    video: 'project-assets/video/polytools-demo.mp4',
     status: 'BETA',
     kind: { es: 'Product lab', en: 'Product lab' },
     description: {
@@ -522,7 +643,7 @@ const FEATURED_PROJECTS = [
     title: 'PISKU CLI',
     repo: 'https://github.com/nachopalmeri/pisku-',
     href: 'https://pisku-cli.vercel.app',
-    media: 'project-assets/pisku-cli-correct.png',
+    media: 'project-assets/pisku-cli-correct.webp',
     status: 'PUBLIC',
     kind: { es: 'CLI Product Interface', en: 'CLI Product Interface' },
     description: {
@@ -552,7 +673,7 @@ const FEATURED_PROJECTS = [
     title: 'FulboTracker',
     repo: 'https://github.com/nachopalmeri/fulbotracker',
     href: 'https://fulbotracker.vercel.app',
-    media: 'project-assets/futtracker.PNG',
+    media: 'project-assets/futtracker.webp',
     status: 'PUBLIC',
     kind: { es: 'Sports Product', en: 'Sports Product' },
     description: {
@@ -582,7 +703,7 @@ const FEATURED_PROJECTS = [
     title: 'Comida de Barrio',
     repo: 'https://github.com/nachopalmeri/comidadebarrio',
     href: 'https://comidadebarrio.vercel.app',
-    media: 'project-assets/comidadebarrio.PNG',
+    media: 'project-assets/comidadebarrio.webp',
     status: 'PUBLIC',
     kind: { es: 'Local Commerce', en: 'Local Commerce' },
     description: {
@@ -612,7 +733,7 @@ const FEATURED_PROJECTS = [
     title: 'DOM',
     repo: 'https://github.com/nachopalmeri/dom',
     href: 'https://dom-two.vercel.app',
-    media: 'project-assets/dom.PNG',
+    media: 'project-assets/dom.webp',
     status: 'PUBLIC',
     kind: { es: 'Sports Landing', en: 'Sports Landing' },
     description: {
@@ -642,7 +763,7 @@ const FEATURED_PROJECTS = [
     title: 'Dulces Creaciones',
     repo: 'https://github.com/nachopalmeri/dulcescreaciones',
     href: 'https://dulcescreaciones.vercel.app',
-    media: 'project-assets/dulcescreaciones.png',
+    media: 'project-assets/dulcescreaciones.webp',
     status: 'PUBLIC',
     kind: { es: 'Commerce Landing', en: 'Commerce Landing' },
     description: {
@@ -705,7 +826,7 @@ window.handleProjectMediaError = function handleProjectMediaError(img) {
 
 function projectImage(project, index, variant = 'mission') {
   const alt = `${project.title} screenshot`;
-  const loading = variant === 'preview' || variant === 'archive' || index === 0 ? 'eager' : 'lazy';
+  const loading = variant === 'preview' && index === 0 ? 'eager' : 'lazy';
   const dataset = [
     `data-project-title="${escapeHtml(project.title)}"`,
     `data-project-kind="${escapeHtml(projectField(project, 'kind'))}"`,
@@ -728,7 +849,7 @@ function projectImage(project, index, variant = 'mission') {
 function renderProjectPreview(project, index, mode = 'active') {
   const previewClass = mode === 'hover' ? 'hover' : 'active';
   return `
-    <article class="project-preview ${previewClass}" data-project-id="${project.id}"${project.video ? ` data-video="${project.video}"` : ''}>
+    <article class="project-preview ${previewClass}" data-project-id="${project.id}">
       <figure class="project-preview-media">
         ${projectImage(project, index, 'preview')}
       </figure>
@@ -743,6 +864,7 @@ function renderProjectPreview(project, index, mode = 'active') {
         <div class="project-preview-links">
           <a class="carousel-proof" href="${project.href}" ${project.href.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${escapeHtml(getCopy('projects.open'))}</a>
           <a class="carousel-proof subtle" href="${project.repo}" target="_blank" rel="noopener noreferrer">${escapeHtml(getCopy('projects.repo'))}</a>
+          ${project.video ? `<button type="button" class="carousel-proof subtle video-trigger" data-video-trigger="${project.video}">${escapeHtml(getCopy('projects.watchVideo'))}</button>` : ''}
         </div>
       </div>
     </article>
@@ -787,6 +909,7 @@ const projectVideoRevealState = { canReveal: null };
 function setupProjectVideoReveal() {
   const overlay = document.getElementById('project-video-reveal');
   const video = document.getElementById('project-video-reveal-video');
+  const closeBtn = document.getElementById('project-video-reveal-close');
   if (!overlay || !video) return;
 
   if (projectVideoRevealState.canReveal === null) {
@@ -794,33 +917,60 @@ function setupProjectVideoReveal() {
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     projectVideoRevealState.canReveal = canHover && !reduceMotion;
   }
-  if (!projectVideoRevealState.canReveal) return;
 
   let activeEl = null;
+  let pinned = false;
 
-  function show(el) {
-    const src = el.dataset.video;
+  function show(el, opts = {}) {
+    const src = el.dataset.video || el.dataset.videoTrigger;
     if (!src) return;
     activeEl = el;
+    pinned = !!opts.pinned;
     if (video.getAttribute('src') !== src) video.setAttribute('src', src);
     video.currentTime = 0;
     video.play().catch(() => {});
     overlay.classList.add('is-visible');
+    overlay.classList.toggle('is-pinned', pinned);
   }
 
   function hide(el) {
-    if (activeEl !== el) return;
+    if (el && activeEl !== el) return;
+    if (pinned && el) return;
     activeEl = null;
-    overlay.classList.remove('is-visible');
+    pinned = false;
+    overlay.classList.remove('is-visible', 'is-pinned');
     video.pause();
   }
 
-  document.querySelectorAll('[data-video]').forEach((el) => {
-    el.addEventListener('mouseenter', () => show(el));
-    el.addEventListener('mouseleave', () => hide(el));
-    el.addEventListener('focus', () => show(el));
-    el.addEventListener('blur', () => hide(el));
+  // Hover reveal: only the "Proyectos" archive list, never the home preview cards.
+  if (projectVideoRevealState.canReveal) {
+    document.querySelectorAll('.archive-row[data-video]').forEach((el) => {
+      el.addEventListener('mouseenter', () => show(el));
+      el.addEventListener('mouseleave', () => hide(el));
+      el.addEventListener('focus', () => show(el));
+      el.addEventListener('blur', () => hide(el));
+    });
+  }
+
+  // Click reveal: the "Ver video" button on home preview cards, works on touch too.
+  document.querySelectorAll('[data-video-trigger]').forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      show(btn, { pinned: true });
+    });
   });
+
+  if (!projectVideoRevealState.globalListenersBound) {
+    projectVideoRevealState.globalListenersBound = true;
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) hide();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', () => hide());
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && overlay.classList.contains('is-visible')) hide();
+    });
+  }
 }
 
 function setupProjectCarousel() {
@@ -1257,7 +1407,6 @@ const ACCENT_COLORS = {
   architect:  { c: '#f97316', s: 'rgba(249, 115, 22, 0.15)' },  // Orange
   design:     { c: '#a855f7', s: 'rgba(168, 85, 247, 0.15)' }, // Purple
   growth:     { c: '#10b981', s: 'rgba(16, 185, 129, 0.15)' }, // Green
-  seo:        { c: '#38bdf8', s: 'rgba(56, 189, 248, 0.15)' },  // Light Blue
   security:   { c: '#ef4444', s: 'rgba(239, 68, 68, 0.15)' },   // Red
   tests:      { c: '#22c55e', s: 'rgba(34, 197, 94, 0.15)' },   // Emerald
   docs:       { c: '#facc15', s: 'rgba(250, 204, 21, 0.15)' },   // Yellow
@@ -1268,10 +1417,7 @@ const ACCENT_COLORS = {
   obsidian:   { c: '#c084fc', s: 'rgba(192, 132, 252, 0.15)' }, // Purple
   release:    { c: '#fbbf24', s: 'rgba(251, 191, 36, 0.15)' },  // Gold
   content:    { c: '#fb7185', s: 'rgba(251, 113, 133, 0.15)' }, // Rose
-  academic:   { c: '#818cf8', s: 'rgba(129, 140, 248, 0.15)' }, // Indigo
   marketing:  { c: '#fb923c', s: 'rgba(251, 146, 60, 0.15)' },  // Orange
-  kickoff:    { c: '#34d399', s: 'rgba(52, 211, 153, 0.15)' },  // Mint
-  pruner:     { c: '#eab308', s: 'rgba(234, 179, 8, 0.15)' },   // Yellow
   system:     { c: '#71717a', s: 'rgba(113, 113, 122, 0.15)' }, // Gray
   gate:       { c: '#f59e0b', s: 'rgba(245, 158, 11, 0.15)' },   // Amber
   harness:    { c: '#a855f7', s: 'rgba(168, 85, 247, 0.15)' }  // Purple
@@ -1289,6 +1435,109 @@ const SYSTEM_ICONS = {
   harness: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
   check: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8"/></svg>`,
   layout: `<svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`
+};
+
+// Original illustrated bust avatars. Each of the 14 agent roles is coded as a distinct,
+// recognizable Middle-earth character (Gandalf, Aragorn, Legolas...) so no two nodes look
+// alike, while every shape below is hand-authored artwork for this project, not a trace
+// or reproduction of any studio's licensed costume/character design.
+function fantasyBust(o) {
+  const ear = o.ears === 'point'
+    ? `<path d="M20 38 L6 30 L18 50 Z" fill="${o.skin}"/><path d="M80 38 L94 30 L82 50 Z" fill="${o.skin}"/>`
+    : o.ears === 'round'
+    ? `<circle cx="23" cy="46" r="5.5" fill="${o.skin}"/><circle cx="77" cy="46" r="5.5" fill="${o.skin}"/>`
+    : '';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8 100 Q8 70 28 64 L72 64 Q92 70 92 100 Z" fill="${o.cloak}"/>${o.cloakTrim || ''}<rect x="41" y="52" width="18" height="18" rx="5" fill="${o.skin}"/>${ear}<circle cx="50" cy="38" r="23" fill="${o.skin}"/>${o.hair || ''}${o.gearBack || ''}<circle cx="41.5" cy="38" r="2.4" fill="#2b2320"/><circle cx="58.5" cy="38" r="2.4" fill="#2b2320"/>${o.beard || ''}${o.gear || ''}</svg>`;
+}
+
+const AGENT_ICONS = {
+  // Gandalf the Grey
+  principal: fantasyBust({
+    cloak:'#4b5563', skin:'#e8b98a', ears:'none',
+    beard:`<path d="M32 44 Q30 66 40 80 Q50 86 60 80 Q70 66 68 44 Q64 56 50 58 Q36 56 32 44Z" fill="#e8e9ec"/>`,
+    gear:`<path d="M50 2 L66 30 Q50 24 34 30 Z" fill="#6b7280"/><ellipse cx="50" cy="30" rx="18" ry="4" fill="#334155"/><line x1="80" y1="62" x2="87" y2="16" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/><path d="M84 12 Q87 8 90 12 Q90 17 87 20 Q84 17 84 12Z" fill="#93c5fd"/>`
+  }),
+  // Gimli, son of Glóin
+  mcp: fantasyBust({
+    cloak:'#5b3a1f', skin:'#d99a6c', ears:'none',
+    beard:`<path d="M28 42 Q22 70 32 86 Q42 94 50 90 Q58 94 68 86 Q78 70 72 42 Q64 60 50 62 Q36 60 28 42Z" fill="#8b5e34"/><path d="M34 66 Q30 78 36 88" stroke="#6b4423" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M66 66 Q70 78 64 88" stroke="#6b4423" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+    gear:`<path d="M27 32 Q27 12 50 12 Q73 12 73 32 L73 24 Q50 15 27 24Z" fill="#71717a"/><path d="M27 24 Q16 20 15 8 Q24 10 30 22Z" fill="#a1a1aa"/><path d="M73 24 Q84 20 85 8 Q76 10 70 22Z" fill="#a1a1aa"/><rect x="78" y="58" width="6" height="26" rx="2" fill="#78350f" transform="rotate(38 81 71)"/><path d="M68 46 Q78 34 92 40 Q94 52 82 58 Q72 56 68 46Z" fill="#cbd5e1"/>`
+  }),
+  // Aragorn, son of Arathorn
+  architect: fantasyBust({
+    cloak:'#374151', skin:'#c98a5e', ears:'none',
+    hair:`<path d="M27 30 Q27 14 50 14 Q73 14 73 30 Q73 20 50 20 Q27 20 27 30Z" fill="#2b2320"/>`,
+    beard:`<path d="M36 50 Q34 60 40 66 Q50 70 60 66 Q66 60 64 50 Q56 58 50 58 Q44 58 36 50Z" fill="#2b2320"/>`,
+    gear:`<line x1="74" y1="44" x2="90" y2="86" stroke="#e5e7eb" stroke-width="4" stroke-linecap="round"/><path d="M78 42 L92 40 L94 48 L80 50Z" fill="#94a3b8"/><rect x="76" y="52" width="16" height="5" rx="1.5" fill="#78350f" transform="rotate(66 84 54)"/><rect x="30" y="20" width="40" height="5" rx="2.5" fill="#a1a1aa"/>`
+  }),
+  // Elrond of Rivendell
+  researcher: fantasyBust({
+    cloak:'#4c1d95', skin:'#e7c9a9', ears:'point',
+    hair:`<path d="M26 34 Q24 18 50 15 Q76 18 74 34 Q78 60 70 66 L68 40 Q68 22 50 21 Q32 22 32 40 L30 66 Q22 60 26 34Z" fill="#2e1065"/>`,
+    gear:`<rect x="31" y="19" width="38" height="4" rx="2" fill="#c4b5fd"/><rect x="76" y="58" width="14" height="10" rx="1.5" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/><line x1="83" y1="58" x2="83" y2="68" stroke="#8b5cf6" stroke-width="1"/>`
+  }),
+  // Legolas Greenleaf
+  design: fantasyBust({
+    cloak:'#166534', skin:'#f0d3b3', ears:'point',
+    hair:`<path d="M27 32 Q26 15 50 13 Q74 15 73 32 Q69 20 61 24 Q56 12 50 20 Q44 12 39 24 Q31 20 27 32Z" fill="#eab308"/><path d="M70 30 Q82 34 79 52 Q74 46 70 38Z" fill="#eab308"/>`,
+    gear:`<path d="M80 22 Q98 48 80 76" stroke="#78350f" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="80" y1="22" x2="80" y2="76" stroke="#e5e7eb" stroke-width="1.2"/><rect x="60" y="46" width="24" height="4" rx="2" fill="#fbbf24" transform="rotate(-8 72 48)"/>`
+  }),
+  // Frodo Baggins, Ring-bearer
+  product: fantasyBust({
+    cloak:'#166534', skin:'#e8b98a', ears:'round',
+    hair:`<path d="M27 32 Q24 12 50 12 Q76 12 73 32 Q68 18 60 24 Q54 14 50 22 Q46 14 40 24 Q32 18 27 32Z" fill="#92400e"/>`,
+    gear:`<line x1="50" y1="64" x2="50" y2="80" stroke="#cbd5e1" stroke-width="1.5"/><circle cx="50" cy="83" r="4.5" fill="none" stroke="#fbbf24" stroke-width="2.5"/>`
+  }),
+  // Bilbo Baggins, author of the Red Book
+  docs: fantasyBust({
+    cloak:'#78350f', skin:'#d9a066', ears:'round',
+    hair:`<path d="M28 30 Q28 16 50 15 Q72 16 72 30 Q72 22 50 21 Q28 22 28 30Z" fill="#d1d5db"/>`,
+    gear:`<circle cx="41.5" cy="38" r="7" fill="none" stroke="#d4a017" stroke-width="1.6"/><circle cx="58.5" cy="38" r="7" fill="none" stroke="#d4a017" stroke-width="1.6"/><line x1="48.5" y1="38" x2="51.5" y2="38" stroke="#d4a017" stroke-width="1.6"/><rect x="78" y="56" width="3.2" height="24" rx="1.5" fill="#facc15" transform="rotate(24 80 56)"/>`
+  }),
+  // Samwise Gamgee
+  tests: fantasyBust({
+    cloak:'#a16207', skin:'#c17a4d', ears:'round',
+    hair:`<path d="M27 32 Q25 13 50 12 Q75 13 73 32 Q70 20 63 22 Q56 12 50 20 Q44 12 37 22 Q30 20 27 32Z" fill="#b45309"/>`,
+    gear:`<path d="M30 66 Q50 76 70 66 L70 72 Q50 82 30 72Z" fill="#78350f"/><circle cx="40" cy="69" r="2" fill="#fde68a"/><circle cx="60" cy="69" r="2" fill="#fde68a"/>`
+  }),
+  // Boromir, Captain of the White Tower
+  security: fantasyBust({
+    cloak:'#7f1d1d', skin:'#c98a5e', ears:'none',
+    gear:`<path d="M26 36 Q24 12 50 10 Q76 12 74 36 L74 46 L64 46 L64 34 L36 34 L36 46 L26 46Z" fill="#a3a3a3"/><rect x="47" y="30" width="6" height="30" fill="#525252"/><circle cx="50" cy="12" r="4" fill="#d4d4d4"/><path d="M76 50 Q88 54 90 44 Q94 56 82 62 Q76 60 76 50Z" fill="#eab308"/>`
+  }),
+  // Éowyn, Shieldmaiden of Rohan
+  growth: fantasyBust({
+    cloak:'#15803d', skin:'#f0d3b3', ears:'none',
+    hair:`<path d="M27 30 Q25 15 50 14 Q75 15 73 30 L70 68 Q66 50 68 34 Q60 20 50 20 Q40 20 32 34 Q34 50 30 68Z" fill="#eab308"/>`,
+    gear:`<circle cx="80" cy="64" r="10" fill="none" stroke="#e5e7eb" stroke-width="3"/><line x1="80" y1="57" x2="80" y2="71" stroke="#e5e7eb" stroke-width="1.6"/><line x1="73" y1="64" x2="87" y2="64" stroke="#e5e7eb" stroke-width="1.6"/><line x1="18" y1="82" x2="26" y2="40" stroke="#e5e7eb" stroke-width="3" stroke-linecap="round"/><rect x="16" y="76" width="14" height="5" rx="1.5" fill="#78350f" transform="rotate(-10 23 78)"/>`
+  }),
+  // Meriadoc Brandybuck, blower of the Horn of the Mark
+  marketing: fantasyBust({
+    cloak:'#c2410c', skin:'#d9a066', ears:'round',
+    hair:`<path d="M28 30 Q26 13 50 12 Q74 13 72 30 Q68 18 60 22 Q54 12 50 20 Q46 12 40 22 Q32 18 28 30Z" fill="#b91c1c"/>`,
+    gear:`<path d="M72 48 Q88 44 90 32 Q95 44 86 54 Q78 56 72 48Z" fill="#eab308"/><circle cx="90" cy="33" r="2.3" fill="#eab308"/>`
+  }),
+  // Galadriel, Lady of Lothlórien
+  content: fantasyBust({
+    cloak:'#a16207', skin:'#f0d3b3', ears:'point',
+    hair:`<path d="M27 34 Q23 14 50 13 Q77 14 73 34 Q76 60 68 70 L67 40 Q67 22 50 21 Q33 22 33 40 L32 70 Q24 60 27 34Z" fill="#f5f0dc"/>`,
+    gear:`<rect x="30" y="19" width="40" height="4" rx="2" fill="#fef9c3"/><path d="M84 66 L88 76 L98 78 L90 85 L92 96 L84 90 L76 96 L78 85 L70 78 L80 76Z" fill="#fef08a"/>`
+  }),
+  // Saruman the White
+  reviewer: fantasyBust({
+    cloak:'#e5e7eb', skin:'#e0c3a3', ears:'none',
+    cloakTrim:`<path d="M28 64 L72 64 L72 72 L28 72Z" fill="#94a3b8"/>`,
+    hair:`<path d="M29 28 Q29 16 50 16 Q71 16 71 28 Q65 20 50 20 Q35 20 29 28Z" fill="#f9fafb"/>`,
+    beard:`<path d="M34 46 Q32 62 40 72 Q50 78 60 72 Q68 62 66 46 Q60 56 50 56 Q40 56 34 46Z" fill="#f9fafb"/>`,
+    gear:`<line x1="18" y1="80" x2="24" y2="14" stroke="#d1d5db" stroke-width="2.5" stroke-linecap="round"/><path d="M21 10 Q24 6 27 10 Q27 15 24 18 Q21 15 21 10Z" fill="#f9fafb"/>`
+  }),
+  // Théoden, King of Rohan
+  release: fantasyBust({
+    cloak:'#1e3a5f', skin:'#c98a5e', ears:'none',
+    hair:`<path d="M28 30 Q28 16 50 15 Q72 16 72 30 Q70 20 50 19 Q30 20 28 30Z" fill="#d1d5db"/>`,
+    beard:`<path d="M38 48 Q36 56 42 60 Q50 63 58 60 Q64 56 62 48 Q56 54 50 54 Q44 54 38 48Z" fill="#d1d5db"/>`,
+    gear:`<path d="M26 26 Q26 10 50 8 Q74 10 74 26 Q74 18 50 15 Q26 18 26 26Z" fill="#78350f"/><ellipse cx="50" cy="26" rx="26" ry="4" fill="#fbbf24"/><path d="M40 8 Q44 -6 48 8Z" fill="#e5e7eb"/><path d="M60 8 Q56 -6 52 8Z" fill="#e5e7eb"/>`
+  })
 };
 
 function initEcosystem() {
@@ -1374,153 +1623,127 @@ function setupCurrentAgentPortfolioData() {
     obsidian: es ? 'Memoria local, MOCs, notas y captura durable de conocimiento.' : 'Local memory, MOCs, notes and durable knowledge capture.',
     product: es ? 'Define alcance, usuario, prueba mínima y próximos pasos concretos.' : 'Defines scope, user, minimum proof and concrete next steps.',
     growth: es ? 'Ajusta posicionamiento, claridad de oferta y canales de búsqueda.' : 'Improves positioning, offer clarity and search channels.',
-    seo: es ? 'Revisa estructura, metadata, Open Graph y accesibilidad básica.' : 'Reviews structure, metadata, Open Graph and basic accessibility.',
     marketing: es ? 'Posicionamiento, GTM y research de audiencia.' : 'Positioning, GTM and audience research.',
     content: es ? 'Contenido multiplataforma con voz propia y consistencia.' : 'Multi-platform content with a consistent voice.',
-    academic: es ? 'Apoyo de estudio, conceptos y material para repasar.' : 'Study support, concepts and review material.',
     reviewer: es ? 'Revisión de código, riesgos y calidad antes de integrar cambios.' : 'Code review, risks and quality before merging changes.',
     release: es ? 'Changelog, validación de instalación y publicación reproducible.' : 'Changelog, install validation and reproducible publishing.',
-    kickoff: es ? 'Arranque liviano de proyectos con primer hito claro.' : 'Lightweight project kickoff with a clear first milestone.',
-    pruner: es ? 'Reduce complejidad y costo de contexto sin perder calidad.' : 'Reduces complexity and context cost without losing quality.',
     user: es ? 'Entrada externa y pedidos en lenguaje natural.' : 'External input and requests in natural language.',
     rules: es ? 'Reglas globales, permisos y estilo del sistema.' : 'Global rules, permissions and system style.',
     memory: es ? 'Notas locales para no perder decisiones, lecciones y patrones útiles.' : 'Local notes for preserving decisions, lessons and useful patterns.',
     gate: es ? 'Criterios de validación y evidencia antes de cerrar una tarea.' : 'Validation criteria and evidence before closing a task.',
-    harness: es ? 'Captura correcciones y mejora el sistema con feedback.' : 'Captures corrections and improves the system with feedback.',
-    techradar: es ? 'Radar ADOPT/TRIAL/ASSESS/HOLD para decisiones de stack.' : 'ADOPT/TRIAL/ASSESS/HOLD radar for stack decisions.'
+    harness: es ? 'Captura correcciones y mejora el sistema con feedback.' : 'Captures corrections and improves the system with feedback.'
   };
 
   nodesData = [
-    agentNode('principal', es ? 'Plan' : 'Plan', 'workflow-planning', g.director, 'agent-assets/director.jpg', 50, 48, 'principal', [
-      sub('workflows/index.md', 'workflow'), sub('Agent Routing', 'workflow'), sub('validation.md', 'rules'), sub('session_checkpoint.md', 'memory'), sub('Release Manager', 'workflow')
+    agentNode('principal', es ? 'Plan' : 'Plan', 'workflow-planning', g.director, 50, 48, 'principal', [
+      sub('workflows/index.md', 'workflow'), sub('Agent Routing', 'workflow'), sub('validation.md', 'rules'), sub('session_checkpoint.md', 'memory'), sub('Release Manager', 'workflow'), sub('project_kickoff_lean.md', 'workflow')
     ]),
-    agentNode('mcp', es ? 'Tools' : 'Tools', 'tooling-check', g.mcp, 'agent-assets/mcp.jpg', 50, 15, 'mcp', [
+    agentNode('mcp', es ? 'Tools' : 'Tools', 'tooling-check', g.mcp, 50, 15, 'mcp', [
       sub('mcp_catalog.md', 'workflow'), sub('mcp_adoption.md', 'workflow'), sub('mcp_security.md', 'rules'), sub('Tool Schemas', 'tool')
     ]),
-    agentNode('architect', es ? 'Architecture' : 'Architecture', 'simple-architecture', g.architect, 'agent-assets/architect.jpg', 67, 21, 'architect', [
-      sub('ai_production.md', 'workflow'), sub('Prompt Registry', 'memory'), sub('Evaluations', 'rules'), sub('Cost Control', 'rules')
+    agentNode('architect', es ? 'Architecture' : 'Architecture', 'simple-architecture', g.architect, 67, 21, 'architect', [
+      sub('ai_production.md', 'workflow'), sub('Prompt Registry', 'memory'), sub('Evaluations', 'rules'), sub('Cost Control', 'rules'), sub('Tech Radar', 'rules')
     ]),
-    agentNode('researcher', 'Researcher', 'agente-researcher.md', g.researcher, 'agent-assets/researcher.jpg', 81, 33, 'researcher', [
+    agentNode('researcher', 'Researcher', 'agente-researcher.md', g.researcher, 81, 33, 'researcher', [
       sub('Current Docs', 'tool'), sub('Library Research', 'workflow'), sub('Repo Grep', 'tool'), sub('Options Brief', 'memory')
     ]),
-    agentNode('design', 'Designer', 'agente-design.md', g.design, 'agent-assets/designer.jpg', 32, 24, 'design', [
+    agentNode('design', 'Designer', 'agente-design.md', g.design, 32, 24, 'design', [
       sub('Responsive Gate', 'rules'), sub('AI Slop Test', 'rules'), sub('world-class-web.md', 'workflow'), sub('Accessibility Gate', 'rules')
     ]),
-    agentNode('product', 'Product', 'product-scope', g.product, 'agent-assets/product.jpg', 18, 42, 'product', [
+    agentNode('product', 'Product', 'product-scope', g.product, 18, 42, 'product', [
       sub('venture_loop.md', 'workflow'), sub('MVP Scope', 'rules'), sub('Kill / Keep / Scale', 'rules'), sub('Product Evidence', 'memory')
     ]),
-    agentNode('docs', 'Docs', 'agente-docs.md', g.docs, 'agent-assets/docs.jpg', 22, 64, 'docs', [
+    agentNode('docs', 'Docs', 'agente-docs.md', g.docs, 22, 64, 'docs', [
       sub('README', 'tool'), sub('API Docs', 'workflow'), sub('Changelog', 'memory'), sub('Handoff', 'workflow')
     ]),
-    agentNode('obsidian', 'Notes', 'local-notes', g.obsidian, 'agent-assets/content.jpg', 18, 63, 'obsidian', [
-      sub('obsidian_sync.md', 'workflow'), sub('vault_review.md', 'workflow'), sub('MOCs', 'memory'), sub('Lessons', 'memory')
-    ]),
-    agentNode('tests', 'QA', 'agente-tests.md', g.tests, 'agent-assets/qa.jpg', 40, 83, 'tests', [
+    agentNode('tests', 'QA', 'agente-tests.md', g.tests, 40, 83, 'tests', [
       sub('Playwright E2E', 'tool'), sub('Unit Tests', 'tool'), sub('Coverage', 'rules'), sub('Regression Evidence', 'memory')
     ]),
-    agentNode('security', 'Security', 'agente-security-auditor.md', g.security, 'agent-assets/security.jpg', 63, 74, 'security', [
+    agentNode('security', 'Security', 'agente-security-auditor.md', g.security, 63, 74, 'security', [
       sub('Secret Scan', 'tool'), sub('mcp_security.md', 'workflow'), sub('Permission Boundaries', 'rules'), sub('Repo Safety', 'workflow')
     ]),
-    agentNode('growth', 'Positioning', 'positioning', g.growth, 'agent-assets/growth.jpg', 82, 60, 'growth', [
-      sub('seo_geo_growth.md', 'workflow'), sub('AEO / GEO', 'rules'), sub('Opportunity Map', 'memory'), sub('Programmatic SEO', 'workflow')
+    agentNode('growth', 'Positioning', 'positioning', g.growth, 82, 60, 'growth', [
+      sub('seo_geo_growth.md', 'workflow'), sub('AEO / GEO', 'rules'), sub('Opportunity Map', 'memory'), sub('Programmatic SEO', 'workflow'), sub('SEO / Metadata', 'tool')
     ]),
-    agentNode('seo', 'SEO', 'seo-check', g.seo, 'agent-assets/seo.jpg', 90, 48, 'seo', [
-      sub('Meta Tags', 'tool'), sub('Open Graph', 'tool'), sub('Schema Markup', 'tool'), sub('Canonical URLs', 'rules')
-    ]),
-    agentNode('marketing', 'Marketing', 'agente-marketing-strategist.md', g.marketing, 'agent-assets/marketing.jpg', 88, 70, 'marketing', [
+    agentNode('marketing', 'Marketing', 'agente-marketing-strategist.md', g.marketing, 88, 70, 'marketing', [
       sub('marketing.md', 'workflow'), sub('GTM', 'workflow'), sub('GO / NO-GO / PIVOT', 'rules'), sub('Audience Research', 'memory')
     ]),
-    agentNode('content', 'X Content', 'agente-x-content-strategist.md', g.content, 'agent-assets/x-content.jpg', 75, 85, 'content', [
+    agentNode('content', 'X Content', 'agente-x-content-strategist.md', g.content, 75, 85, 'content', [
       sub('x_content_system.md', 'workflow'), sub('LinkedIn', 'tool'), sub('Substack', 'tool'), sub('Authentic Voice', 'rules')
     ]),
-    agentNode('academic', 'Academic Tutor', 'agente-academic-tutor.md', g.academic, 'agent-assets/academic-tutor.jpg', 11, 73, 'academic', [
-      sub('academic_tutor.md', 'workflow'), sub('Exam Prep', 'workflow'), sub('Flashcards', 'memory'), sub('Obsidian Sync', 'workflow')
+    agentNode('reviewer', 'Review', 'code-review', g.reviewer, 46, 89, 'reviewer', [
+      sub('pr_code_review.md', 'workflow'), sub('Residual Risks', 'rules'), sub('Scope Check', 'rules'), sub('Review Verdict', 'memory'), sub('Simplify System', 'workflow')
     ]),
-    agentNode('reviewer', 'Review', 'code-review', g.reviewer, 'agent-assets/code-reviewer.jpg', 46, 89, 'reviewer', [
-      sub('pr_code_review.md', 'workflow'), sub('Residual Risks', 'rules'), sub('Scope Check', 'rules'), sub('Review Verdict', 'memory')
-    ]),
-    agentNode('release', 'Ship', 'release-check', g.release, 'agent-assets/release-manager.jpg', 28, 90, 'release', [
+    agentNode('release', 'Ship', 'release-check', g.release, 28, 90, 'release', [
       sub('pr_policy.md', 'workflow'), sub('Changelog', 'memory'), sub('Install Checks', 'tool'), sub('Release Checklist', 'rules')
-    ]),
-    agentNode('kickoff', 'Kickoff', 'project-kickoff', g.kickoff, 'agent-assets/kickoff-architect.jpg', 15, 15, 'kickoff', [
-      sub('project_kickoff_lean.md', 'workflow'), sub('First Milestone', 'rules'), sub('Intensity Level', 'rules')
-    ]),
-    agentNode('pruner', 'Simplify', 'workflow-pruning', g.pruner, 'agent-assets/workflow-pruner.jpg', 63, 87, 'pruner', [
-      sub('Simplify System', 'workflow'), sub('Token Cost', 'memory'), sub('Delete / Keep', 'rules')
     ]),
     systemNode('user', 'User', es ? 'Entrada externa' : 'External input', g.user, 'user', 92, 22, 'system', []),
     systemNode('rules', 'AGENTS.md', es ? 'Reglas globales' : 'Global rules', g.rules, 'rules', 41, 38, 'system', [
       sub('rules/*.md', 'rules'), sub('workflows/index.md', 'workflow'), sub('Permissions', 'rules'), sub('Chat-first', 'rules')
     ]),
-    systemNode('memory', 'Memory', es ? 'Lessons / Tech Radar' : 'Lessons / Tech Radar', g.memory, 'memory', 42, 60, 'obsidian', [
-      sub('Local Lessons', 'memory'), sub('Global Lessons', 'memory'), sub('promote_lesson.md', 'workflow'), sub('developer_growth.md', 'memory')
+    systemNode('memory', 'Memory', es ? 'Lessons / Notas / Tech Radar' : 'Lessons / Notes / Tech Radar', g.memory, 'memory', 42, 60, 'obsidian', [
+      sub('Local Lessons', 'memory'), sub('Global Lessons', 'memory'), sub('promote_lesson.md', 'workflow'), sub('developer_growth.md', 'memory'), sub('Obsidian Vault Sync', 'workflow')
     ]),
     systemNode('gate', 'Validation', 'validation.md', g.gate, 'gate', 58, 58, 'gate', [
       sub('Evidence Levels', 'rules'), sub('Scope Check', 'workflow'), sub('Residual Risks', 'rules'), sub('Human Verdict', 'rules')
     ]),
     systemNode('harness', 'Harness', es ? 'Feedback loop' : 'Feedback loop', g.harness, 'harness', 50, 68, 'harness', [
       sub('feedback_loop.md', 'workflow'), sub('Capture', 'workflow'), sub('Analyze', 'workflow'), sub('Promote Proposal', 'workflow')
-    ]),
-    systemNode('techradar', 'Tech Radar', 'memory/tech_radar.md', g.techradar, 'rules', 62, 38, 'system', [
-      sub('ADOPT', 'rules'), sub('TRIAL', 'rules'), sub('ASSESS', 'rules'), sub('HOLD', 'rules')
     ])
   ];
 
   linksData = [
     link('user', 'principal', 'core'), link('rules', 'principal', 'core'), link('memory', 'principal', 'core'),
     link('principal', 'architect', 'primary'), link('principal', 'design', 'primary'), link('principal', 'tests', 'primary'), link('principal', 'security', 'primary'),
-    link('principal', 'docs', 'primary'), link('principal', 'obsidian', 'secondary'), link('principal', 'growth', 'secondary'), link('principal', 'mcp', 'secondary'),
+    link('principal', 'docs', 'primary'), link('principal', 'growth', 'secondary'), link('principal', 'mcp', 'secondary'),
     link('principal', 'researcher', 'secondary'), link('principal', 'product', 'primary'), link('principal', 'reviewer', 'secondary'), link('principal', 'release', 'secondary'),
-    link('principal', 'kickoff', 'secondary'), link('principal', 'pruner', 'secondary'), link('growth', 'seo', 'primary'), link('growth', 'marketing', 'primary'),
-    link('marketing', 'content', 'primary'), link('product', 'marketing', 'secondary'), link('product', 'design', 'primary'), link('docs', 'obsidian', 'secondary'),
-    link('academic', 'obsidian', 'secondary'), link('architect', 'researcher', 'primary'), link('architect', 'techradar', 'secondary'), link('mcp', 'security', 'primary'),
+    link('growth', 'marketing', 'primary'), link('marketing', 'content', 'primary'), link('product', 'marketing', 'secondary'), link('product', 'design', 'primary'),
+    link('docs', 'memory', 'secondary'), link('architect', 'researcher', 'primary'), link('mcp', 'security', 'primary'),
     link('tests', 'gate', 'core'), link('security', 'gate', 'core'), link('reviewer', 'gate', 'secondary'), link('release', 'gate', 'secondary'),
-    link('gate', 'harness', 'core'), link('harness', 'memory', 'core'), link('memory', 'obsidian', 'secondary')
+    link('gate', 'harness', 'core'), link('harness', 'memory', 'core')
   ];
 
   workflowsData = [
     workflow('feature', es ? 'Implementacion de feature' : 'Feature Implementation', false, es ? 'User -> Director -> Architect -> Design -> QA -> Security -> Validation' : 'User -> Director -> Architect -> Design -> QA -> Security -> Validation', [
-      step('user', 'principal', '[Intent]', es ? 'Leyendo pedido y seleccionando el workflow minimo util' : 'Parsing request and selecting the smallest useful workflow'),
-      step('principal', 'architect', '[Architecture]', es ? 'Definiendo profundidad tecnica para la tarea' : 'Choosing technical depth for the task'),
+      step('user', 'principal', '[Intent]', es ? 'Leyendo pedido y seleccionando el workflow mínimo útil' : 'Parsing request and selecting the smallest useful workflow'),
+      step('principal', 'architect', '[Architecture]', es ? 'Definiendo profundidad técnica para la tarea' : 'Choosing technical depth for the task'),
       step('architect', 'researcher', '[Docs]', es ? 'Verificando docs actuales y alternativas' : 'Checking current docs and alternatives'),
-      step('principal', 'design', '[UI]', es ? 'Refinando interaccion responsive y estados visuales' : 'Refining responsive interaction and visual states'),
+      step('principal', 'design', '[UI]', es ? 'Refinando interacción responsive y estados visuales' : 'Refining responsive interaction and visual states'),
       step('design', 'tests', '[QA path]', es ? 'Preparando superficie de validación visible' : 'Preparing user-facing validation surface'),
-      step('tests', 'security', '[Risk]', es ? 'Chequeando regresion, secretos y comportamiento riesgoso' : 'Checking regression, secrets and risky behavior'),
+      step('tests', 'security', '[Risk]', es ? 'Chequeando regresión, secretos y comportamiento riesgoso' : 'Checking regression, secrets and risky behavior'),
       step('security', 'gate', '[Evidence]', es ? 'Enviando evidencia a validation.md' : 'Sending evidence to validation.md'),
       step('gate', 'principal', '[Report]', es ? 'Reportando resultado verificado y riesgos residuales' : 'Reporting verified outcome and residual risks', '#10b981')
     ]),
     workflow('validation', es ? 'Validation Gate' : 'Validation Gate', false, es ? 'Diff / tests / build / logs / screenshot -> reporte honesto' : 'Diff / tests / build / logs / screenshot -> honest report', [
-      step('principal', 'tests', '[Checks]', es ? 'Ejecutando verificacion relevante para el cambio' : 'Running relevant verification for the change'),
-      step('tests', 'security', '[Risk]', es ? 'Revisando regresion y riesgos del cambio' : 'Reviewing regression and change risk'),
+      step('principal', 'tests', '[Checks]', es ? 'Ejecutando verificación relevante para el cambio' : 'Running relevant verification for the change'),
+      step('tests', 'security', '[Risk]', es ? 'Revisando regresión y riesgos del cambio' : 'Reviewing regression and change risk'),
       step('security', 'gate', '[Evidence]', es ? 'Consolidando evidencia en validation.md' : 'Consolidating evidence in validation.md'),
-      step('gate', 'principal', '[Report]', es ? 'Reportando resultado y limitaciones explicitas' : 'Reporting result and explicit limitations', '#10b981')
+      step('gate', 'principal', '[Report]', es ? 'Reportando resultado y limitaciones explícitas' : 'Reporting result and explicit limitations', '#10b981')
     ]),
-    workflow('learning-loop', es ? 'Harness Learning Loop' : 'Harness Learning Loop', true, es ? 'Correccion -> Harness -> Lessons -> Patron -> promocion humana' : 'Correction -> Harness -> Lessons -> Pattern -> human promotion', [
-      step('user', 'principal', '[Correction]', es ? 'La correccion del usuario se convierte en senal de aprendizaje' : 'User correction becomes a learning signal'),
-      step('principal', 'harness', '[Watch]', es ? 'Harness detecta senal de routing, output, scope o calidad' : 'Harness detects routing, output, scope or quality signals'),
+    workflow('learning-loop', es ? 'Harness Learning Loop' : 'Harness Learning Loop', true, es ? 'Corrección -> Harness -> Lessons -> Patrón -> promoción humana' : 'Correction -> Harness -> Lessons -> Pattern -> human promotion', [
+      step('user', 'principal', '[Correction]', es ? 'La corrección del usuario se convierte en señal de aprendizaje' : 'User correction becomes a learning signal'),
+      step('principal', 'harness', '[Watch]', es ? 'Harness detecta señal de routing, output, scope o calidad' : 'Harness detects routing, output, scope or quality signals'),
       step('harness', 'memory', '[Capture]', es ? 'Guardando lesson local en markdown' : 'Writing local lesson to markdown', '#a855f7'),
       step('memory', 'harness', '[Analyze]', es ? 'Buscando patrones repetidos y estado candidato' : 'Checking repeated patterns and candidate status', '#a855f7'),
       step('harness', 'principal', '[Proposal]', es ? 'Preparando propuesta promote_lesson.md si hay evidencia' : 'Preparing promote_lesson.md proposal when evidence exists'),
-      step('principal', 'user', '[Human OK]', es ? 'La promocion global espera confirmacion humana explicita' : 'Global promotion waits for explicit human confirmation', '#10b981')
+      step('principal', 'user', '[Human OK]', es ? 'La promoción global espera confirmación humana explícita' : 'Global promotion waits for explicit human confirmation', '#10b981')
     ]),
     workflow('review-loop', es ? 'Review Loop multiagente' : 'Multiagent Review Loop', true, es ? 'Crear -> Criticar -> Red Team -> Roadmap -> Re-evaluar' : 'Create -> Critique -> Red Team -> Roadmap -> Re-evaluate', [
       step('principal', 'architect', '[Create]', es ? 'Borrador inicial con contexto real' : 'Drafting initial solution with real context'),
       step('architect', 'reviewer', '[Critique]', es ? 'Buscando contradicciones, riesgos y falta de tests' : 'Finding contradictions, risks and missing tests'),
       step('reviewer', 'security', '[Red Team]', es ? 'Atacando modos de falla y automatización insegura' : 'Attacking failure modes and unsafe automation', '#ef4444'),
-      step('security', 'pruner', '[Simplify]', es ? 'Quitando proceso que no cambia el resultado' : 'Removing process that does not change the outcome'),
-      step('pruner', 'principal', '[Roadmap]', es ? 'Devolviendo fases ejecutables y criterios de exito' : 'Returning executable phases and success criteria'),
+      step('security', 'reviewer', '[Simplify]', es ? 'Quitando proceso que no cambia el resultado' : 'Removing process that does not change the outcome'),
+      step('reviewer', 'principal', '[Roadmap]', es ? 'Devolviendo fases ejecutables y criterios de exito' : 'Returning executable phases and success criteria'),
       step('principal', 'gate', '[Re-evaluate]', es ? 'Verificando si las criticas originales quedaron resueltas' : 'Checking whether original critiques are resolved')
     ]),
     workflow('obsidian-flow', es ? 'Obsidian Knowledge Sync' : 'Obsidian Knowledge Sync', false, es ? 'Decision -> Docs -> Obsidian Brain -> MOC / Retro / Lesson' : 'Decision -> Docs -> Obsidian Brain -> MOC / Retro / Lesson', [
       step('principal', 'docs', '[Decision]', es ? 'Capturando decisión, retro o aprendizaje técnico' : 'Capturing decision, retro or technical learning'),
-      step('docs', 'obsidian', '[Vault]', es ? 'Eligiendo tipo de nota y ruta en Obsidian' : 'Choosing Obsidian note type and path'),
-      step('obsidian', 'memory', '[Learning]', es ? 'Conectando lesson local con conocimiento durable' : 'Connecting local lesson with durable knowledge'),
-      step('academic', 'obsidian', '[Study]', es ? 'Guardando material academico cuando aplica' : 'Saving academic material when it applies'),
-      step('obsidian', 'principal', '[Handoff]', es ? 'Devolviendo ruta de nota y proxima accion' : 'Returning note path and next action', '#10b981')
+      step('docs', 'memory', '[Vault]', es ? 'Eligiendo tipo de nota y ruta en Obsidian' : 'Choosing Obsidian note type and path'),
+      step('memory', 'principal', '[Handoff]', es ? 'Devolviendo ruta de nota y próxima acción' : 'Returning note path and next action', '#10b981')
     ]),
     workflow('parallel-agents', es ? 'Parallel Agents' : 'Parallel Agents', true, es ? 'Director -> tareas independientes -> revisión -> integración' : 'Director -> independent tasks -> review -> integration', [
-      step('principal', 'researcher', '[Research]', es ? 'Investigacion independiente de opciones' : 'Independent options research'),
-      step('principal', 'design', '[Design]', es ? 'Exploracion visual independiente' : 'Independent visual exploration'),
+      step('principal', 'researcher', '[Research]', es ? 'Investigación independiente de opciones' : 'Independent options research'),
+      step('principal', 'design', '[Design]', es ? 'Exploración visual independiente' : 'Independent visual exploration'),
       step('principal', 'security', '[Risk]', es ? 'Revisión de riesgos en paralelo' : 'Parallel risk review'),
       step('reviewer', 'principal', '[Integrate]', es ? 'Integrando conclusiones con criterio humano' : 'Integrating conclusions with human judgment', '#10b981')
     ]),
@@ -1552,7 +1775,7 @@ function getNodeLayer(id) {
   return 'specialist';
 }
 
-function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null) {
+function agentNode(id, name, role, desc, x, y, col, subs) {
   const roleLabels = currentLang === 'es'
     ? {
       principal: 'PLAN / EVIDENCIA',
@@ -1560,20 +1783,15 @@ function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null)
       architect: 'API / DATOS / RIESGO',
       researcher: 'RESEARCH / DOCS',
       growth: 'POSICIONAMIENTO',
-      seo: 'SEO / METADATA',
       security: 'SEGURIDAD / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
       reviewer: 'REVISIÓN / CALIDAD',
-      obsidian: 'NOTAS / MEMORIA',
       docs: 'DOCUMENTACIÓN TÉCNICA',
       product: 'PRODUCTO / MVP',
       design: 'UI / VISUAL / CSS',
       marketing: 'MARKETING / GTM',
       content: 'CONTENIDO / PERSONAL BRAND',
-      academic: 'TUTOR ACADEMICO',
-      release: 'PUBLICACIÓN',
-      kickoff: 'KICKOFF / MILESTONE',
-      pruner: 'SIMPLIFICACION / TOKENS'
+      release: 'PUBLICACIÓN'
     }
     : {
       principal: 'PLANNING / EVIDENCE',
@@ -1581,36 +1799,21 @@ function agentNode(id, name, role, desc, img, x, y, col, subs, badgeIcon = null)
       architect: 'API / DATA / RISK',
       researcher: 'RESEARCH / DOCS',
       growth: 'POSITIONING',
-      seo: 'SEO / METADATA',
       security: 'GUARDIAN / AUDIT',
       tests: 'TESTING / E2E / COVERAGE',
       reviewer: 'PR REVIEW / QUALITY',
-      obsidian: 'NOTES / MEMORY',
       docs: 'TECHNICAL DOCUMENTATION',
       product: 'FOUNDER / MVP BUILDER',
       design: 'UI / VISUAL / CSS',
       marketing: 'MARKETING / GTM',
       content: 'CONTENT / PERSONAL BRAND',
-      academic: 'ACADEMIC TUTOR',
-      release: 'PUBLISHING',
-      kickoff: 'KICKOFF / MILESTONE',
-      pruner: 'SIMPLIFICATION / TOKENS'
+      release: 'PUBLISHING'
     };
-  return { id, type: 'agent', layer: getNodeLayer(id), name, role: roleLabels[id] || role, source: role, desc, img, x, y, col, subs, badgeIcon };
+  return { id, type: 'agent', layer: getNodeLayer(id), name, role: roleLabels[id] || role, source: role, desc, x, y, col, subs };
 }
 
 function systemNode(id, name, role, desc, icon, x, y, col, subs) {
   return { id, type: 'system', layer: getNodeLayer(id), name, role, desc, icon, x, y, col, subs };
-}
-
-function getNodeInitials(name) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map(part => part[0])
-    .join('')
-    .toUpperCase();
 }
 
 function buildNodes() {
@@ -1632,9 +1835,7 @@ function buildNodes() {
     
     let bubbleContent = '';
     if (node.type === 'agent') {
-      bubbleContent = node.img
-        ? `<div class="node-bubble"><img src="${node.img}" alt="${node.name}" onerror="handleImgError(this, '${col.c}')"></div>`
-        : `<div class="node-bubble node-badge" style="color:${col.c}; border-color:${col.c}55;">${SYSTEM_ICONS[node.badgeIcon] || `<strong>${escapeHtml(getNodeInitials(node.name))}</strong>`}</div>`;
+      bubbleContent = `<div class="node-bubble" style="border-color:${col.c}33;">${AGENT_ICONS[node.id] || ''}</div>`;
     } else {
       bubbleContent = `<div class="node-bubble" style="color:${col.c}; border-color:${col.c}33;">${SYSTEM_ICONS[node.icon]}</div>`;
     }
@@ -1743,18 +1944,6 @@ function buildNodes() {
     }
   });
 }
-
-window.handleImgError = function(img, backupColor) {
-  // If an avatar image is missing, replace it with a styled SVG container
-  img.parentElement.innerHTML = `
-    <svg viewBox="0 0 80 80" fill="none">
-      <rect x="12" y="12" width="56" height="56" rx="16" fill="${backupColor}" opacity="0.12"/>
-      <circle cx="28" cy="30" r="4" fill="${backupColor}" opacity="0.5"/>
-      <circle cx="52" cy="30" r="4" fill="${backupColor}" opacity="0.5"/>
-      <path d="M24 50 C 32 58, 48 58, 56 50" stroke="${backupColor}" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-    </svg>
-  `;
-};
 
 function resizeCanvas() {
   if (!ecoVp) return;
@@ -2139,7 +2328,6 @@ function renderEcosystem(timestamp) {
     const focusId = selectedNodeId || hoveredNodeId;
     linksData.forEach((linkDef) => {
       const { from: fromId, to: toId, tier } = linkDef;
-      if (tier === 'secondary' && !focusId) return;
       const p1 = getNodeCoords(fromId);
       const p2 = getNodeCoords(toId);
       const cps = getControlPoints(p1, p2);
@@ -2159,7 +2347,7 @@ function renderEcosystem(timestamp) {
       ctxUnder.strokeStyle = grad;
       ctxUnder.lineWidth = isHoveredLink ? 2.2 : tier === 'core' ? 1.35 : tier === 'primary' ? 1.08 : 0.78;
       
-      const baseAlpha = isHoveredLink ? 0.56 : tier === 'core' ? 0.24 : tier === 'primary' ? 0.14 : 0.06;
+      const baseAlpha = isHoveredLink ? 0.56 : tier === 'core' ? 0.24 : tier === 'primary' ? 0.2 : 0.14;
       const breathingPulse = Math.sin(timestamp * 0.0012 + (p1.x + p1.y) * 0.001) * (tier === 'core' ? 0.04 : 0.025);
       ctxUnder.globalAlpha = Math.max(0.04, baseAlpha + breathingPulse);
       
