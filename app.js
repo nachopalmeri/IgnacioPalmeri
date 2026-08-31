@@ -382,25 +382,25 @@ function setupFloatingConsole() {
 
 // Personal picks, not scraped poster art - color + typography only, drafts open to editing.
 const SIDE_QUESTS = [
-  { title: 'When Harry Met Sally...', color: '#dc2626', cat: { es: 'Película', en: 'Film' }, meta: 'Rob Reiner, 1989',
+  { title: 'When Harry Met Sally...', poster: 'project-assets/side-quests/when-harry-met-sally.jpg', color: '#dc2626', cat: { es: 'Película', en: 'Film' }, meta: 'Rob Reiner, 1989',
     why: { es: 'La prueba de que una comedia romántica puede envejecer sin un solo chiste forzado.', en: 'Proof a romantic comedy can age without a single forced joke.' } },
-  { title: 'El Señor de los Anillos: Las Dos Torres', color: '#2563eb', cat: { es: 'Película', en: 'Film' }, meta: 'Peter Jackson, 2002',
+  { title: 'El Señor de los Anillos: Las Dos Torres', poster: 'project-assets/side-quests/two-towers.jpg', color: '#2563eb', cat: { es: 'Película', en: 'Film' }, meta: 'Peter Jackson, 2002',
     why: { es: 'Escala real, sin atajos digitales. Me enseñó qué es construir un mundo que se sostiene solo.', en: 'Real scale, no digital shortcuts. Taught me what a world that holds together actually looks like.' } },
-  { title: 'Pusher II', color: '#52525b', cat: { es: 'Película', en: 'Film' }, meta: 'Nicolas Winding Refn, 2004',
+  { title: 'Pusher II', poster: 'project-assets/side-quests/pusher-ii.jpg', color: '#52525b', cat: { es: 'Película', en: 'Film' }, meta: 'Nicolas Winding Refn, 2004',
     why: { es: 'Cruda, sin red de seguridad narrativa. Lo opuesto exacto a un blockbuster prolijo.', en: 'Raw, with no narrative safety net. The exact opposite of a polished blockbuster.' } },
-  { title: 'The Sopranos', color: '#166534', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+  { title: 'The Sopranos', poster: 'project-assets/side-quests/sopranos-logo.svg', color: '#166534', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
     why: { es: 'El personaje más humano que vi en TV, contradicciones incluidas.', en: "The most human character I've seen on TV, contradictions included." } },
-  { title: 'Silicon Valley', color: '#f97316', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+  { title: 'Silicon Valley', poster: 'project-assets/side-quests/silicon-valley-title.png', color: '#f97316', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
     why: { es: 'La sátira más precisa sobre el mundo tech que quiero habitar.', en: 'The sharpest satire of the tech world I actually want to work in.' } },
-  { title: 'El sueño de los héroes', color: '#7c3aed', cat: { es: 'Libro', en: 'Book' }, meta: 'Adolfo Bioy Casares',
+  { title: 'El sueño de los héroes', poster: 'project-assets/side-quests/el-sueno-de-los-heroes.jpg', color: '#7c3aed', cat: { es: 'Libro', en: 'Book' }, meta: 'Adolfo Bioy Casares',
     why: { es: 'La mejor novela argentina sobre el tiempo y las segundas oportunidades que nunca son iguales.', en: 'The best Argentine novel about time and second chances that are never the same.' } },
-  { title: 'Crimen y castigo', color: '#7f1d1d', cat: { es: 'Libro', en: 'Book' }, meta: 'Fiódor Dostoievski',
+  { title: 'Crimen y castigo', poster: 'project-assets/side-quests/crimen-y-castigo.jpg', color: '#7f1d1d', cat: { es: 'Libro', en: 'Book' }, meta: 'Fiódor Dostoievski',
     why: { es: 'Culpa y lógica al límite en 500 páginas que se sienten urgentes.', en: 'Guilt and logic pushed to the limit across 500 pages that still feel urgent.' } },
-  { title: 'The Almanack of Naval Ravikant', color: '#ca8a04', cat: { es: 'Libro', en: 'Book' }, meta: 'Eric Jorgenson',
+  { title: 'The Almanack of Naval Ravikant', poster: 'project-assets/side-quests/naval-almanack.jpg', color: '#ca8a04', cat: { es: 'Libro', en: 'Book' }, meta: 'Eric Jorgenson',
     why: { es: 'El resumen más denso de decisiones de vida que leí en formato de bolsillo.', en: "The densest life-decisions summary I've read in pocket-book form." } },
-  { title: 'The Perks of Being a Wallflower', color: '#0891b2', cat: { es: 'Libro', en: 'Book' }, meta: 'Stephen Chbosky',
+  { title: 'The Perks of Being a Wallflower', poster: 'project-assets/side-quests/perks-wallflower.jpg', color: '#0891b2', cat: { es: 'Libro', en: 'Book' }, meta: 'Stephen Chbosky',
     why: { es: 'Adolescencia honesta, sin la nostalgia impostada del género.', en: "Honest teenage years, without the genre's usual fake nostalgia." } },
-  { title: 'Flowers for Algernon', color: '#db2777', cat: { es: 'Libro', en: 'Book' }, meta: 'Daniel Keyes',
+  { title: 'Flowers for Algernon', poster: 'project-assets/side-quests/flowers-algernon.jpg', color: '#db2777', cat: { es: 'Libro', en: 'Book' }, meta: 'Daniel Keyes',
     why: { es: 'La ciencia ficción más triste y más humana que leí: inteligencia y pérdida en el mismo arco.', en: "The saddest, most human sci-fi I've read - intelligence and loss on the same arc." } }
 ];
 
@@ -426,9 +426,9 @@ function setupSideQuests() {
     SIDE_QUESTS.forEach((item, i) => {
       const card = document.createElement('div');
       card.className = 'sq-card';
-      card.style.background = `linear-gradient(160deg, ${item.color}, #0a0a0c 130%)`;
+      card.style.background = '#0a0a0c';
       card.style.transform = `rotateY(${i * angleStep}deg) translateZ(var(--sq-radius))`;
-      card.innerHTML = `<strong>${escapeHtml(item.title)}</strong><em></em>`;
+      card.innerHTML = `<img class="sq-poster" src="${item.poster}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async"><span class="sq-scrim" aria-hidden="true"></span><strong>${escapeHtml(item.title)}</strong><em></em>`;
       card.addEventListener('click', () => { current = i; render(); });
       track.appendChild(card);
     });
