@@ -547,35 +547,35 @@ const FEATURED_PROJECTS = [
     stack: ['Python', 'FastAPI', 'Next.js', 'PostgreSQL', 'Webhooks']
   },
   {
-    id: 'agents-system',
-    title: 'Agents System',
-    repo: 'https://github.com/nachopalmeri/agents-system',
-    href: '#/agents',
-    media: 'project-assets/agents-system.webp',
-    video: 'project-assets/video/agents-system-demo.mp4',
-    status: 'LOCAL',
-    kind: { es: 'Workflow system', en: 'Workflow system' },
+    id: 'pisculichi',
+    title: 'Pisculichi Labs',
+    repo: 'https://github.com/nachopalmeri/a',
+    href: 'https://polytools-omega.vercel.app',
+    media: 'project-assets/polymarktporyect.webp',
+    video: 'project-assets/video/polytools-demo.mp4',
+    status: 'BETA',
+    kind: { es: 'Product lab', en: 'Product lab' },
     description: {
-      es: 'Mapa visual de mi sistema local con agentes, reglas y memoria.',
-      en: 'Visual map of my local system with agents, rules and memory.'
+      es: 'Laboratorio para bots, alertas y herramientas web.',
+      en: 'Lab for bots, alerts and web tools.'
     },
     value: {
-      es: 'Explica como uso IA para planear, revisar, verificar y documentar sin venderlo como producto falso.',
-      en: 'Explains how I use AI to plan, review, verify and document without selling it as a fake product.'
+      es: 'Conecta finanzas, automatización e interfaces web con alcance explícito de prototipo.',
+      en: 'Connects finance, automation and web interfaces with explicit prototype scope.'
     },
     problem: {
-      es: 'Hacer visible un proceso de trabajo que normalmente queda escondido en prompts, notas y decisiones locales.',
-      en: 'Make visible a work process that usually stays hidden in prompts, notes and local decisions.'
+      es: 'Convertir información de mercados predictivos en herramientas accionables.',
+      en: 'Turn prediction-market information into actionable tools.'
     },
     role: {
-      es: 'Orquestación, documentación, UI del grafo, pruebas y narrativa del sistema.',
-      en: 'Orchestration, documentation, graph UI, tests and system narrative.'
+      es: 'Producto experimental, automatización, bots y experiencia web.',
+      en: 'Experimental product, automation, bots and web experience.'
     },
     evidence: {
-      es: 'Grafo interactivo, rutas seleccionables, capturas y tests de navegador del portfolio.',
-      en: 'Interactive graph, selectable routes, screenshots and browser tests in the portfolio.'
+      es: 'Demo beta desplegada y repositorio de experimentos con bots, alertas e interfaces de mercado.',
+      en: 'Deployed beta demo and experiment repository with bots, alerts and market interfaces.'
     },
-    stack: ['Agents', 'Playwright', 'Docs', 'Workflow']
+    stack: ['HTML', 'Telegram Bot', 'Prediction Markets', 'Alerts']
   },
   {
     id: 'darter',
@@ -607,6 +607,98 @@ const FEATURED_PROJECTS = [
     stack: ['Next.js', 'Dashboard', 'Fintech', 'AI']
   },
   {
+    id: 'agents-system',
+    title: 'Agents System',
+    repo: 'https://github.com/nachopalmeri/agents-system',
+    href: '#/agents',
+    media: 'project-assets/agents-system.webp',
+    video: 'project-assets/video/agents-system-demo.mp4',
+    status: 'LOCAL',
+    kind: { es: 'Workflow system', en: 'Workflow system' },
+    description: {
+      es: 'Mapa visual de mi sistema local con agentes, reglas y memoria.',
+      en: 'Visual map of my local system with agents, rules and memory.'
+    },
+    value: {
+      es: 'Explica como uso IA para planear, revisar, verificar y documentar sin venderlo como producto falso.',
+      en: 'Explains how I use AI to plan, review, verify and document without selling it as a fake product.'
+    },
+    problem: {
+      es: 'Hacer visible un proceso de trabajo que normalmente queda escondido en prompts, notas y decisiones locales.',
+      en: 'Make visible a work process that usually stays hidden in prompts, notes and local decisions.'
+    },
+    role: {
+      es: 'Orquestación, documentación, UI del grafo, pruebas y narrativa del sistema.',
+      en: 'Orchestration, documentation, graph UI, tests and system narrative.'
+    },
+    evidence: {
+      es: 'Grafo interactivo, rutas seleccionables, capturas y tests de navegador del portfolio.',
+      en: 'Interactive graph, selectable routes, screenshots and browser tests in the portfolio.'
+    },
+    stack: ['Agents', 'Playwright', 'Docs', 'Workflow']
+  },
+  {
+    id: 'franquiya',
+    title: 'FranquiYA',
+    repo: 'https://github.com/nachopalmeri/FranquiYA',
+    href: 'https://franqui-ya.vercel.app',
+    media: 'project-assets/franquiya.webp',
+    video: 'project-assets/video/franqui-demo.mp4',
+    status: 'LIVE',
+    kind: { es: 'Gestión de franquicias', en: 'Franchise operations OS' },
+    description: {
+      es: 'Panel operativo para franquicias Grido: stock, facturas, turnos, personal, caja y auditorías en un solo dashboard.',
+      en: 'Operations panel for Grido franchises: stock, invoices, shifts, staff, cash register and audits in one dashboard.'
+    },
+    value: {
+      es: 'Consolida 6 áreas operativas con alertas de stock crítico y extracción automática de facturas en PDF.',
+      en: 'Consolidates 6 operational areas with critical-stock alerts and automatic PDF invoice extraction.'
+    },
+    problem: {
+      es: 'Los franquiciados gestionaban stock, facturas y turnos en herramientas sueltas, sin visión unificada ni alertas.',
+      en: 'Franchise owners managed stock, invoices and shifts in disconnected tools, with no unified view or alerts.'
+    },
+    role: {
+      es: 'Diseño y desarrollo full-stack (FastAPI + Next.js), extracción de PDFs y lógica de alertas de stock.',
+      en: 'Full-stack design and development (FastAPI + Next.js), PDF extraction and stock-alert logic.'
+    },
+    evidence: {
+      es: 'Producto en uso real por una franquicia, con dashboard desplegado, repositorio público y suite de tests.',
+      en: 'A product in real use by a franchise, with a deployed dashboard, a public repository and a test suite.'
+    },
+    stack: ['FastAPI', 'Next.js', 'Recharts', 'Groq AI']
+  },
+  {
+    id: 'dulces',
+    title: 'Dulces Creaciones',
+    repo: 'https://github.com/nachopalmeri/dulcescreaciones',
+    href: 'https://dulcescreaciones.vercel.app',
+    media: 'project-assets/dulcescreaciones.webp',
+    status: 'PUBLIC',
+    kind: { es: 'Commerce Landing', en: 'Commerce Landing' },
+    description: {
+      es: 'Sitio comercial desplegado para una marca de productos dulces, dentro de la línea de landing/producto para negocios reales.',
+      en: 'Deployed commercial site for a sweets brand, part of the landing/product line for real businesses.'
+    },
+    value: {
+      es: 'Práctica de empaquetado visual, mensaje y despliegue rápido.',
+      en: 'Practice in visual packaging, messaging and fast deployment.'
+    },
+    problem: {
+      es: 'Convertir una marca de productos dulces en una vidriera web clara.',
+      en: 'Turn a sweets brand into a clear web storefront.'
+    },
+    role: {
+      es: 'Brand landing, copy comercial, presentación visual y deploy.',
+      en: 'Brand landing, commercial copy, visual presentation and deploy.'
+    },
+    evidence: {
+      es: 'Muestra velocidad para entregar sitios simples con criterio comercial.',
+      en: 'Shows speed delivering simple sites with commercial judgment.'
+    },
+    stack: ['HTML', 'Commerce', 'Brand', 'Vercel']
+  },
+  {
     id: 'motor-estadistico',
     title: 'Motor Estadístico Predictivo',
     repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
@@ -635,37 +727,6 @@ const FEATURED_PROJECTS = [
       en: 'Deployed dashboard, public repository and prediction logic that can be inspected in code.'
     },
     stack: ['Python', 'Analytics', 'Vercel', 'Game Logic']
-  },
-  {
-    id: 'pisculichi',
-    title: 'Pisculichi Labs',
-    repo: 'https://github.com/nachopalmeri/a',
-    href: 'https://polytools-omega.vercel.app',
-    media: 'project-assets/polymarktporyect.webp',
-    video: 'project-assets/video/polytools-demo.mp4',
-    status: 'BETA',
-    kind: { es: 'Product lab', en: 'Product lab' },
-    description: {
-      es: 'Laboratorio para bots, alertas y herramientas web.',
-      en: 'Lab for bots, alerts and web tools.'
-    },
-    value: {
-      es: 'Conecta finanzas, automatización e interfaces web con alcance explícito de prototipo.',
-      en: 'Connects finance, automation and web interfaces with explicit prototype scope.'
-    },
-    problem: {
-      es: 'Convertir información de mercados predictivos en herramientas accionables.',
-      en: 'Turn prediction-market information into actionable tools.'
-    },
-    role: {
-      es: 'Producto experimental, automatización, bots y experiencia web.',
-      en: 'Experimental product, automation, bots and web experience.'
-    },
-    evidence: {
-      es: 'Demo beta desplegada y repositorio de experimentos con bots, alertas e interfaces de mercado.',
-      en: 'Deployed beta demo and experiment repository with bots, alerts and market interfaces.'
-    },
-    stack: ['HTML', 'Telegram Bot', 'Prediction Markets', 'Alerts']
   },
   {
     id: 'pisku',
@@ -786,36 +847,6 @@ const FEATURED_PROJECTS = [
       en: 'Shows range for building interfaces beyond technical dashboards.'
     },
     stack: ['HTML', 'Sports', 'Landing', 'Vercel']
-  },
-  {
-    id: 'dulces',
-    title: 'Dulces Creaciones',
-    repo: 'https://github.com/nachopalmeri/dulcescreaciones',
-    href: 'https://dulcescreaciones.vercel.app',
-    media: 'project-assets/dulcescreaciones.webp',
-    status: 'PUBLIC',
-    kind: { es: 'Commerce Landing', en: 'Commerce Landing' },
-    description: {
-      es: 'Sitio comercial desplegado para una marca de productos dulces, dentro de la línea de landing/producto para negocios reales.',
-      en: 'Deployed commercial site for a sweets brand, part of the landing/product line for real businesses.'
-    },
-    value: {
-      es: 'Práctica de empaquetado visual, mensaje y despliegue rápido.',
-      en: 'Practice in visual packaging, messaging and fast deployment.'
-    },
-    problem: {
-      es: 'Convertir una marca de productos dulces en una vidriera web clara.',
-      en: 'Turn a sweets brand into a clear web storefront.'
-    },
-    role: {
-      es: 'Brand landing, copy comercial, presentación visual y deploy.',
-      en: 'Brand landing, commercial copy, visual presentation and deploy.'
-    },
-    evidence: {
-      es: 'Muestra velocidad para entregar sitios simples con criterio comercial.',
-      en: 'Shows speed delivering simple sites with commercial judgment.'
-    },
-    stack: ['HTML', 'Commerce', 'Brand', 'Vercel']
   }
 ];
 
