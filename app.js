@@ -1921,8 +1921,9 @@ function buildNodes() {
     let bubbleContent = '';
     if (node.type === 'agent') {
       const avatar = AGENT_AVATARS[node.id];
+      const fallbackIcon = (AGENT_ICONS[node.id] || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
       const inner = avatar
-        ? `<img src="${avatar}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='${(AGENT_ICONS[node.id] || '').replace(/'/g, "\\'")}'">`
+        ? `<img src="${avatar}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='${fallbackIcon}'">`
         : (AGENT_ICONS[node.id] || '');
       bubbleContent = `<div class="node-bubble" style="border-color:${col.c}33;">${inner}</div>`;
     } else {
