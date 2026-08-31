@@ -1575,6 +1575,25 @@ const AGENT_ICONS = {
   })
 };
 
+// Personal-use only (not public): real movie-still photos, one per role, mapped to the same
+// characters as AGENT_ICONS above. AGENT_ICONS remains as the onerror fallback.
+const AGENT_AVATARS = {
+  principal: 'project-assets/agent-avatars/principal.jpg',
+  mcp: 'project-assets/agent-avatars/mcp.jpg',
+  architect: 'project-assets/agent-avatars/architect.jpg',
+  researcher: 'project-assets/agent-avatars/researcher.jpg',
+  design: 'project-assets/agent-avatars/design.jpg',
+  product: 'project-assets/agent-avatars/product.jpg',
+  docs: 'project-assets/agent-avatars/docs.jpg',
+  tests: 'project-assets/agent-avatars/tests.jpg',
+  security: 'project-assets/agent-avatars/security.jpg',
+  growth: 'project-assets/agent-avatars/growth.jpg',
+  marketing: 'project-assets/agent-avatars/marketing.jpg',
+  content: 'project-assets/agent-avatars/content.jpg',
+  reviewer: 'project-assets/agent-avatars/reviewer.jpg',
+  release: 'project-assets/agent-avatars/release.jpg'
+};
+
 function initEcosystem() {
   if (ecoInitialized) {
     resizeCanvas();
@@ -1870,7 +1889,11 @@ function buildNodes() {
     
     let bubbleContent = '';
     if (node.type === 'agent') {
-      bubbleContent = `<div class="node-bubble" style="border-color:${col.c}33;">${AGENT_ICONS[node.id] || ''}</div>`;
+      const avatar = AGENT_AVATARS[node.id];
+      const inner = avatar
+        ? `<img src="${avatar}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='${(AGENT_ICONS[node.id] || '').replace(/'/g, "\\'")}'">`
+        : (AGENT_ICONS[node.id] || '');
+      bubbleContent = `<div class="node-bubble" style="border-color:${col.c}33;">${inner}</div>`;
     } else {
       bubbleContent = `<div class="node-bubble" style="color:${col.c}; border-color:${col.c}33;">${SYSTEM_ICONS[node.icon]}</div>`;
     }
