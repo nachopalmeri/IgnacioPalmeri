@@ -3,7 +3,10 @@ import { createReadStream, existsSync } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { chromium } from 'playwright';
+
+const require = createRequire(import.meta.url);
 
 const rootDir = path.dirname(fileURLToPath(new URL('../package.json', import.meta.url)));
 const port = 4173;
@@ -211,6 +214,152 @@ async function main() {
       if (state.errors.length) throw new Error(`pageerror storage-blocked: ${state.errors[0].message}`);
       await wait(100);
     });
+
+    // ---- Slice 1 (portfolio-video-enrichment, infra-only, zero new videos) ----
+    // PVP-1/2/3/4/6/7 probes: zero-mp4-on-load, hover/focus assign + leave
+    // pause-and-src-release, row-switch release, reduced-motion gate, pinned
+    // close release, poster pre-paint, CLS aspect reserve, dev-server mime+206,
+    // LCP baseline print. No new video files are introduced by this block.
+    await withPage(browser, { viewport: { width: 1280, height: 720 } }, async (page, state) => {
+      const mp4Requests = [];
+      page.on('request', (request) => {
+        if (/\.mp4($|\?)/.test(request.url())) mp4Requests.push(request.url());
+      });
+      await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
+      await page.waitForSelector('#overview-section .hero h1');
+      if (mp4Requests.length !== 0) {
+        throw new Error(`PVP-1: expected zero .mp4 on load, got ${JSON.stringify(mp4Requests)}`);
+      }
+
+      await page.getByRole('button', { name: 'Proyectos' }).click();
+      await page.waitForSelector('#projects-section.view-section.active');
+      const rows = page.locator('.archive-row[data-video]');
+      const rowCount = await rows.count();
+      if (rowCount < 2) throw new Error(`S1: need 2+ rows with data-video, got ${rowCount}`);
+      const firstSrc = await rows.nth(0).getAttribute('data-video');
+      const secondSrc = await rows.nth(1).getAttribute('data-video');
+      if (!firstSrc || !secondSrc) throw new Error('S1: rows must carry data-video');
+
+      // Poster pre-paint wiring (T3): staged via dataset, no asset committed.
+      const posterPixel = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+      await rows.nth(0).evaluate((el, poster) => { el.dataset.poster = poster; }, posterPixel);
+
+      // CLS reserve guard (PVP-2): frame keeps its box with no video loaded.
+      const reserve = await page.evaluate(() => {
+        const frame = document.querySelector('.project-video-frame');
+        if (!frame) return null;
+        const rect = frame.getBoundingClientRect();
+        return { ratio: getComputedStyle(frame).aspectRatio, height: rect.height, width: rect.width };
+      });
+      if (!reserve) throw new Error('S1: .project-video-frame missing');
+      if (reserve.ratio !== '16 / 9') throw new Error(`PVP-2: expected 16/9 reserve, got ${reserve.ratio}`);
+      if (!(reserve.height > 0 && reserve.width > 0)) throw new Error('PVP-2: frame box collapsed');
+
+      // Hover assigns src + shows overlay; detector proves real download intent.
+      await rows.nth(0).hover();
+      await page.waitForSelector('.project-video-reveal.is-visible');
+      const shownSrc = await page.locator('#project-video-reveal-video').getAttribute('src');
+      if (shownSrc !== firstSrc) throw new Error(`PVP-1: hover src ${shownSrc} !== ${firstSrc}`);
+      if (mp4Requests.length === 0) throw new Error('PVP-1: hover fired zero .mp4 requests');
+      const paintedPoster = await page.locator('#project-video-reveal-video').evaluate((video) => video.poster);
+      if (paintedPoster !== posterPixel) throw new Error(`T3: poster not pre-painted, got ${paintedPoster}`);
+
+      // Row switch releases the previous decoder and assigns the next src.
+      await rows.nth(1).hover();
+      await page.waitForFunction(
+        (expected) => document.getElementById('project-video-reveal-video')?.getAttribute('src') === expected,
+        secondSrc
+      );
+
+      // Leave pauses AND releases src (PVP-1/PVP-4: decoder released on leave).
+      await page.mouse.move(5, 5);
+      await page.waitForSelector('.project-video-reveal:not(.is-visible)');
+      const afterLeave = await page.locator('#project-video-reveal-video').evaluate((video) => ({
+        paused: video.paused,
+        src: video.getAttribute('src')
+      }));
+      if (!afterLeave.paused) throw new Error('PVP-1: video not paused after leave');
+      if (afterLeave.src !== null) throw new Error(`PVP-1: src not released after leave, got ${afterLeave.src}`);
+
+      // Keyboard parity (PVP-3): focus shows the same panel, blur hides + releases.
+      await rows.nth(0).focus();
+      await page.waitForSelector('.project-video-reveal.is-visible');
+      await page.evaluate(() => { if (document.activeElement) document.activeElement.blur(); });
+      await page.waitForSelector('.project-video-reveal:not(.is-visible)');
+      const afterBlur = await page.locator('#project-video-reveal-video').getAttribute('src');
+      if (afterBlur !== null) throw new Error(`PVP-3: src not released after blur, got ${afterBlur}`);
+
+      // Pinned (click/Enter) reveal + close release; Escape path included.
+      await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
+      const trigger = page.locator('[data-video-trigger]').first();
+      if ((await trigger.count()) === 0) throw new Error('S1: no [data-video-trigger] on home');
+      await trigger.click();
+      await page.waitForSelector('.project-video-reveal.is-visible.is-pinned');
+      await page.keyboard.press('Escape');
+      await page.waitForSelector('.project-video-reveal:not(.is-visible)');
+      const afterEsc = await page.locator('#project-video-reveal-video').evaluate((video) => ({
+        paused: video.paused,
+        src: video.getAttribute('src')
+      }));
+      if (!afterEsc.paused || afterEsc.src !== null) {
+        throw new Error(`S1: Escape must pause + release, got ${JSON.stringify(afterEsc)}`);
+      }
+      if (state.errors.length) throw new Error(`pageerror s1: ${state.errors[0].message}`);
+
+      // LCP baseline capture (PVP-7): measured value printed for the S1 PR record.
+      const lcpMs = await page.evaluate(() => new Promise((resolve) => {
+        let value = -1;
+        try {
+          const observer = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) value = entry.startTime;
+          });
+          observer.observe({ type: 'largest-contentful-paint', buffered: true });
+          setTimeout(() => { observer.disconnect(); resolve(value); }, 1500);
+        } catch {
+          resolve(value);
+        }
+      }));
+      console.log(`__LCP_BASELINE_MS__=${lcpMs >= 0 ? Math.round(lcpMs) : 'n/a'}`);
+      if (!Number.isFinite(lcpMs)) throw new Error('PVP-7: LCP baseline measurement failed');
+    });
+
+    await withPage(browser, { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }, async (page, state) => {
+      await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
+      await page.getByRole('button', { name: 'Proyectos' }).click();
+      await page.waitForSelector('#projects-section.view-section.active');
+      await page.locator('.archive-row[data-video]').first().hover({ force: true });
+      await wait(400);
+      const visible = await page.locator('.project-video-reveal.is-visible').count();
+      if (visible !== 0) throw new Error('PVP-3: reduced-motion must not autoplay the reveal');
+      if (state.errors.length) throw new Error(`pageerror s1-reduced: ${state.errors[0].message}`);
+    });
+
+    // Dev-server media contract (PVP-6) against real production server code.
+    {
+      const devServerModule = require('../scripts/dev-server.cjs');
+      const mediaPort = 4179;
+      const mediaServer = devServerModule.createDevServer({ rootDir, port: mediaPort });
+      await new Promise((resolve) => mediaServer.listen(mediaPort, resolve));
+      try {
+        const fixture = `http://127.0.0.1:${mediaPort}/project-assets/video/jobbot-demo.mp4`;
+        const head = await fetch(fixture, { method: 'HEAD' });
+        if (head.status !== 200) throw new Error(`PVP-6: HEAD status ${head.status}`);
+        if (head.headers.get('content-type') !== 'video/mp4') {
+          throw new Error(`PVP-6: HEAD mime ${head.headers.get('content-type')}`);
+        }
+        const total = Number(head.headers.get('content-length'));
+        if (!(total > 0)) throw new Error('PVP-6: HEAD missing content-length');
+        const partial = await fetch(fixture, { headers: { Range: 'bytes=0-99' } });
+        if (partial.status !== 206) throw new Error(`PVP-6: Range status ${partial.status}`);
+        if (partial.headers.get('content-range') !== `bytes 0-99/${total}`) {
+          throw new Error(`PVP-6: content-range ${partial.headers.get('content-range')}`);
+        }
+        const chunk = Buffer.from(await partial.arrayBuffer());
+        if (chunk.length !== 100) throw new Error(`PVP-6: partial body ${chunk.length} !== 100`);
+      } finally {
+        await new Promise((resolve) => mediaServer.close(resolve));
+      }
+    }
 
     console.log('E2E checks passed');
   } finally {

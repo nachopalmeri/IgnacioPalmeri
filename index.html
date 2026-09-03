@@ -416,7 +416,8 @@
 
   <div id="project-video-reveal" class="project-video-reveal" aria-hidden="true">
     <div class="project-video-frame">
-      <video id="project-video-reveal-video" muted loop playsinline preload="none"></video>
+      <!-- S1 poster slot (PVP-2): populated per-row from data-poster by app.js pre-paint -->
+      <video id="project-video-reveal-video" muted loop playsinline preload="none" poster=""></video>
       <button type="button" id="project-video-reveal-close" class="project-video-reveal-close" aria-label="Cerrar video">✕</button>
     </div>
   </div>

@@ -987,13 +987,31 @@ function setupProjectVideoReveal() {
   let activeEl = null;
   let pinned = false;
 
+  // S1 (PVP-1/PVP-4): release the decoder + network resource. Removing src
+  // and calling load() returns the element to a pristine poster-capable state.
+  function releasePanelVideo(videoEl) {
+    if (!videoEl) return;
+    try { videoEl.pause(); } catch { /* already paused */ }
+    videoEl.removeAttribute('src');
+    try { videoEl.load(); } catch { /* no resource to reset */ }
+  }
+
   function show(el, opts = {}) {
     const src = el.dataset.video || el.dataset.videoTrigger;
     if (!src) return;
+    const switching = activeEl !== el;
     activeEl = el;
     pinned = !!opts.pinned;
-    if (video.getAttribute('src') !== src) video.setAttribute('src', src);
-    video.currentTime = 0;
+    if (video.getAttribute('src') !== src) {
+      if (switching) releasePanelVideo(video);
+      video.setAttribute('src', src);
+    }
+    // S1 (PVP-2/T3): poster pre-paint fills the reserved frame before the
+    // first video frame arrives, so slow loops cause zero layout shift.
+    const poster = el.dataset.poster || '';
+    if (poster) video.setAttribute('poster', poster);
+    else video.removeAttribute('poster');
+    try { video.currentTime = 0; } catch { /* metadata not ready yet */ }
     video.play().catch(() => {});
     overlay.classList.add('is-visible');
     overlay.classList.toggle('is-pinned', pinned);
@@ -1005,7 +1023,7 @@ function setupProjectVideoReveal() {
     activeEl = null;
     pinned = false;
     overlay.classList.remove('is-visible', 'is-pinned');
-    video.pause();
+    releasePanelVideo(video);
   }
 
   // Hover reveal: only the "Proyectos" archive list, never the home preview cards.
