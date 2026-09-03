@@ -829,6 +829,8 @@ const FEATURED_PROJECTS = [
     repo: 'https://github.com/nachopalmeri/dulcescreaciones',
     href: 'https://dulcescreaciones.vercel.app',
     media: 'project-assets/dulcescreaciones.webp',
+    video: 'project-assets/video/dulces-demo.mp4',
+    loop: 'project-assets/video/dulces-loop.mp4',
     status: 'PUBLIC',
     kind: { es: 'Commerce Landing', en: 'Commerce Landing' },
     description: {
@@ -859,6 +861,8 @@ const FEATURED_PROJECTS = [
     repo: 'https://github.com/nachopalmeri/prode-mundial-2026',
     href: 'https://prode-mundial-2026-ten-omega.vercel.app',
     media: 'project-assets/prode-mundial-2026.webp',
+    video: 'project-assets/video/prode-demo.mp4',
+    loop: 'project-assets/video/prode-loop.mp4',
     status: 'LIVE',
     kind: { es: 'Analytics de deportes', en: 'Sports analytics' },
     description: {
@@ -882,6 +886,38 @@ const FEATURED_PROJECTS = [
       en: 'Deployed dashboard, public repository and prediction logic that can be inspected in code.'
     },
     stack: ['Python', 'Analytics', 'Vercel', 'Game Logic']
+  },
+  {
+    id: 'piscubi',
+    title: 'Piscubi Store',
+    repo: 'https://github.com/nachopalmeri/piscubi-store',
+    href: 'https://piscubi-store.vercel.app',
+    media: 'project-assets/piscubi.webp',
+    video: 'project-assets/video/piscubi-demo.mp4',
+    loop: 'project-assets/video/piscubi-loop.mp4',
+    status: 'PUBLIC',
+    kind: { es: 'E-commerce libros', en: 'E-commerce bookstore' },
+    description: {
+      es: 'E-commerce para libros digitales y físicos con estética synthwave neón, catálogo TOP 30 y pasarela de pago.',
+      en: 'E-commerce bookstore for digital and physical books with synthwave aesthetics, TOP 30 catalog and checkout.'
+    },
+    value: {
+      es: 'Combina identidad visual fuerte (synthwave neón, grid 3D) con catálogo funcional y conversión clara.',
+      en: 'Combines a strong visual identity (neon synthwave, 3D grid) with a functional catalog and clear conversion.'
+    },
+    problem: {
+      es: 'Crear una librería online con experiencia memorable de navegación sin perder velocidad de carga.',
+      en: 'Create an online bookstore with a memorable browsing experience without sacrificing speed.'
+    },
+    role: {
+      es: 'Diseño frontend, catálogo interactivo, estética synthwave y despliegue en Vercel.',
+      en: 'Frontend design, interactive catalog, synthwave aesthetic and Vercel deployment.'
+    },
+    evidence: {
+      es: 'Demo desplegada, video de producto y repositorio público.',
+      en: 'Deployed demo, product video and public repository.'
+    },
+    stack: ['Next.js', 'E-commerce', 'Tailwind', 'Stripe']
   },
   {
     id: 'pisku',
@@ -1063,10 +1099,13 @@ function projectImage(project, index, variant = 'mission') {
 
 function renderProjectPreview(project, index, mode = 'active') {
   const previewClass = mode === 'hover' ? 'hover' : 'active';
+  const videoSrc = project.loop || project.video;
   return `
     <article class="project-preview ${previewClass}" data-project-id="${project.id}">
-      <figure class="project-preview-media">
+      <figure class="project-preview-media project-media-container" data-project-id="${project.id}" ${project.video ? `data-video="${project.video}" tabindex="0" role="button" aria-label="${escapeHtml(project.title)} video preview"` : ''}>
         ${projectImage(project, index, 'preview')}
+        ${videoSrc ? `<video class="project-media-video" muted loop playsinline preload="none" src="${videoSrc}"></video>` : ''}
+        ${project.video ? `<span class="project-video-badge" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg> <span>Preview</span></span>` : ''}
       </figure>
       <div class="project-preview-copy">
         <div class="project-preview-kicker">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</div>
@@ -1104,11 +1143,15 @@ function renderProjectCarousel() {
       const tag = project.href ? 'a' : 'div';
       const hrefAttr = project.href ? ` href="${project.href}"` : '';
       const targetAttr = project.href && !project.href.startsWith('#') ? ' target="_blank" rel="noopener noreferrer"' : '';
-      const videoAttr = project.video ? ` data-video="${project.video}"` : '';
+      const videoSrc = project.loop || project.video;
       return `
-      <${tag} class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${videoAttr}${hrefAttr}${targetAttr}>
+      <${tag} class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${hrefAttr}${targetAttr}>
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
-        <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
+        <span class="archive-thumb project-media-container" tabindex="0" ${project.video ? `data-video="${project.video}" role="button" aria-label="${escapeHtml(project.title)} video preview"` : ''}>
+          ${projectImage(project, index, 'archive')}
+          ${videoSrc ? `<video class="project-media-video" muted loop playsinline preload="none" src="${videoSrc}"></video>` : ''}
+          ${project.video ? `<span class="project-video-badge" aria-hidden="true"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg></span>` : ''}
+        </span>
         <span class="archive-main">
           <span class="archive-meta">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</span>
           <strong>${escapeHtml(project.title)}</strong>
@@ -1131,7 +1174,6 @@ function setupProjectVideoReveal() {
   const overlay = document.getElementById('project-video-reveal');
   const video = document.getElementById('project-video-reveal-video');
   const closeBtn = document.getElementById('project-video-reveal-close');
-  if (!overlay || !video) return;
 
   if (projectVideoRevealState.canReveal === null) {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1139,75 +1181,93 @@ function setupProjectVideoReveal() {
     projectVideoRevealState.canReveal = canHover && !reduceMotion;
   }
 
-  let activeEl = null;
-  let pinned = false;
-
-  // S1 (PVP-1/PVP-4): release the decoder + network resource. Removing src
-  // and calling load() returns the element to a pristine poster-capable state.
-  function releasePanelVideo(videoEl) {
-    if (!videoEl) return;
-    try { videoEl.pause(); } catch { /* already paused */ }
-    videoEl.removeAttribute('src');
-    try { videoEl.load(); } catch { /* no resource to reset */ }
-  }
-
-  function show(el, opts = {}) {
-    const src = el.dataset.video || el.dataset.videoTrigger;
-    if (!src) return;
-    const switching = activeEl !== el;
-    activeEl = el;
-    pinned = !!opts.pinned;
-    if (video.getAttribute('src') !== src) {
-      if (switching) releasePanelVideo(video);
-      video.setAttribute('src', src);
-    }
-    // S1 (PVP-2/T3): poster pre-paint fills the reserved frame before the
-    // first video frame arrives, so slow loops cause zero layout shift.
-    const poster = el.dataset.poster || '';
-    if (poster) video.setAttribute('poster', poster);
-    else video.removeAttribute('poster');
-    try { video.currentTime = 0; } catch { /* metadata not ready yet */ }
-    video.play().catch(() => {});
-    overlay.classList.add('is-visible');
-    overlay.classList.toggle('is-pinned', pinned);
-  }
-
-  function hide(el) {
-    if (el && activeEl !== el) return;
-    if (pinned && el) return;
-    activeEl = null;
-    pinned = false;
-    overlay.classList.remove('is-visible', 'is-pinned');
-    releasePanelVideo(video);
-  }
-
-  // Hover reveal: only the "Proyectos" archive list, never the home preview cards.
+  // 1. Silent Inline Hover Loop: activates ONLY when cursor is directly over project image
   if (projectVideoRevealState.canReveal) {
-    document.querySelectorAll('.archive-row[data-video]').forEach((el) => {
-      el.addEventListener('mouseenter', () => show(el));
-      el.addEventListener('mouseleave', () => hide(el));
-      el.addEventListener('focus', () => show(el));
-      el.addEventListener('blur', () => hide(el));
+    document.querySelectorAll('.project-media-container').forEach((container) => {
+      const mediaVideo = container.querySelector('video.project-media-video');
+      if (!mediaVideo) return;
+
+      let hoverTimer = null;
+
+      container.addEventListener('mouseenter', () => {
+        hoverTimer = setTimeout(() => {
+          container.classList.add('is-playing');
+          mediaVideo.play().catch(() => {});
+        }, 75);
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        container.classList.remove('is-playing');
+        try {
+          mediaVideo.pause();
+          mediaVideo.currentTime = 0;
+        } catch (_e) {}
+      });
+
+      container.addEventListener('focusin', () => {
+        container.classList.add('is-playing');
+        mediaVideo.play().catch(() => {});
+      });
+
+      container.addEventListener('focusout', () => {
+        container.classList.remove('is-playing');
+        try {
+          mediaVideo.pause();
+          mediaVideo.currentTime = 0;
+        } catch (_e) {}
+      });
     });
   }
 
-  // Click reveal: the "Ver video" button on home preview cards, works on touch too.
+  // 2. Full Lightbox Player with audio & native controls (clicks only)
+  function showModal(src) {
+    if (!overlay || !video || !src) return;
+    video.pause();
+    video.setAttribute('src', src);
+    video.muted = false;
+    video.controls = true;
+    overlay.classList.add('is-visible', 'is-pinned');
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  }
+
+  function hideModal() {
+    if (!overlay || !video) return;
+    overlay.classList.remove('is-visible', 'is-pinned');
+    video.pause();
+    video.removeAttribute('src');
+    try { video.load(); } catch (_e) {}
+  }
+
   document.querySelectorAll('[data-video-trigger]').forEach((btn) => {
     btn.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
-      show(btn, { pinned: true });
+      showModal(btn.dataset.videoTrigger);
     });
   });
 
-  if (!projectVideoRevealState.globalListenersBound) {
+  // Clicking directly on project media opens the full lightbox with sound
+  document.querySelectorAll('.project-media-container[data-video]').forEach((container) => {
+    container.addEventListener('click', (event) => {
+      if (event.target.tagName === 'A') return;
+      event.preventDefault();
+      event.stopPropagation();
+      showModal(container.dataset.video);
+    });
+  });
+
+  if (!projectVideoRevealState.globalListenersBound && overlay) {
     projectVideoRevealState.globalListenersBound = true;
     overlay.addEventListener('click', (event) => {
-      if (event.target === overlay) hide();
+      if (event.target === overlay) hideModal();
     });
-    if (closeBtn) closeBtn.addEventListener('click', () => hide());
+    if (closeBtn) closeBtn.addEventListener('click', hideModal);
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && overlay.classList.contains('is-visible')) hide();
+      if (event.key === 'Escape' && overlay.classList.contains('is-visible')) hideModal();
     });
   }
 }
