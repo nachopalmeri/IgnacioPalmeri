@@ -37,8 +37,22 @@ const UI_COPY = {
     },
     github: {
       eyebrow: 'Actividad verificable',
-      title: 'Repos que se pueden revisar',
-      body: 'Prueba pública de trabajo: demos, repositorios, decisiones técnicas y continuidad visible.'
+      title: 'GitHub como bitácora de trabajo',
+      body: 'Actividad pública del perfil nachopalmeri: demos, repositorios, decisiones técnicas y continuidad visible.',
+      profileLink: 'Ver perfil de GitHub',
+      fallback: 'La actividad pública se muestra cuando está disponible.',
+      loading: 'Cargando actividad pública de GitHub…',
+      unavailable: 'La actividad pública no está disponible ahora. Podés revisar el perfil.',
+      total: 'contribuciones en el último año',
+      contribution: 'contribución',
+      contributions: 'contribuciones',
+      months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      less: 'Menos',
+      more: 'Más',
+      scrollHint: 'Deslizá el calendario para ver el año completo.',
+      calendarLabel: 'Calendario de contribuciones públicas',
+      legendLabel: 'De menos a más contribuciones',
+      updated: 'Actualizado'
     },
     orchestration: {
       body: 'Evidencia visible.'
@@ -153,7 +167,21 @@ const UI_COPY = {
     github: {
       eyebrow: 'Verifiable activity',
       title: 'Repos you can review',
-      body: 'Public proof of work: demos, repos and visible continuity.'
+      body: 'Public proof of work: demos, repos and visible continuity.',
+      profileLink: 'View GitHub profile',
+      fallback: 'Public activity appears when GitHub is available.',
+      loading: 'Loading public GitHub activity…',
+      unavailable: 'Public activity is temporarily unavailable.',
+      total: 'contributions in the last year',
+      contribution: 'contribution',
+      contributions: 'contributions',
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      less: 'Less',
+      more: 'More',
+      scrollHint: 'Swipe the calendar to view the full year.',
+      calendarLabel: 'Public contribution calendar',
+      legendLabel: 'Less to more contributions',
+      updated: 'Updated'
     },
     orchestration: {
       body: 'Visible proof.'
@@ -288,6 +316,133 @@ function applyStaticCopy() {
   secureExternalLinks(document);
   resetTerminal();
   if (document.getElementById('project-carousel')) renderProjectCarousel();
+  if (githubContributionData) renderGithubCalendar(githubContributionData);
+}
+
+let githubContributionData = null;
+
+function isContributionDate(value) {
+  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value);
+}
+
+function isValidGithubContributionData(data) {
+  if (
+    !data ||
+    data.login !== 'nachopalmeri' ||
+    data.profileUrl !== 'https://github.com/nachopalmeri' ||
+    !Number.isInteger(data.totalContributions) ||
+    data.totalContributions < 0 ||
+    Number.isNaN(Date.parse(data.updatedAt)) ||
+    !Array.isArray(data.weeks) ||
+    data.weeks.length < 52 ||
+    data.weeks.length > 53
+  ) return false;
+
+  return data.weeks.every((week) => isContributionDate(week?.firstDay) && Array.isArray(week.days) && week.days.every((day) => (
+    isContributionDate(day?.date) &&
+    Number.isInteger(day.weekday) && day.weekday >= 0 && day.weekday <= 6 &&
+    Number.isInteger(day.count) && day.count >= 0 &&
+    Number.isInteger(day.level) && day.level >= 0 && day.level <= 4
+  )));
+}
+
+function githubLocale() {
+  return currentLang === 'es' ? 'es-AR' : 'en-US';
+}
+
+function formatGithubDate(value, options) {
+  return new Intl.DateTimeFormat(githubLocale(), { timeZone: 'UTC', ...options }).format(new Date(`${value}T00:00:00.000Z`));
+}
+
+function setGithubFallback() {
+  const calendar = document.querySelector('[data-github-calendar]');
+  const fallback = document.querySelector('[data-github-fallback]');
+  const status = document.querySelector('[data-github-status]');
+  if (!calendar || !fallback || !status) return;
+  calendar.hidden = true;
+  calendar.dataset.state = 'fallback';
+  fallback.hidden = false;
+  status.textContent = getCopy('github.unavailable');
+}
+
+function renderGithubCalendar(data) {
+  const calendar = document.querySelector('[data-github-calendar]');
+  const fallback = document.querySelector('[data-github-fallback]');
+  const status = document.querySelector('[data-github-status]');
+  const profileLink = document.querySelector('[data-github-profile-link]');
+  const total = document.querySelector('[data-github-total]');
+  const updated = document.querySelector('[data-github-updated]');
+  const months = document.querySelector('[data-github-months]');
+  const weeks = document.querySelector('[data-github-weeks]');
+  if (!calendar || !fallback || !status || !total || !months || !weeks) return;
+
+  const totalCount = Number(data.totalContributions).toLocaleString(githubLocale());
+  const totalLabel = `${totalCount} ${getCopy('github.total')}`;
+  total.textContent = totalLabel;
+  if (updated) {
+    const updatedDate = formatGithubDate(data.updatedAt.slice(0, 10), { month: 'short', day: 'numeric', year: 'numeric' });
+    updated.textContent = `${getCopy('github.updated')}: ${updatedDate}`;
+  }
+  status.textContent = totalLabel;
+  if (profileLink) profileLink.href = data.profileUrl;
+
+  months.replaceChildren();
+  months.style.gridTemplateColumns = `repeat(${data.weeks.length}, var(--github-cell-size))`;
+  let previousMonth = '';
+  data.weeks.forEach((week, index) => {
+    const monthKey = week.firstDay.slice(0, 7);
+    if (monthKey === previousMonth) return;
+    previousMonth = monthKey;
+    const month = document.createElement('span');
+    month.style.gridColumn = String(index + 1);
+    month.textContent = formatGithubDate(week.firstDay, { month: 'short' }).replace('.', '');
+    months.append(month);
+  });
+
+  weeks.replaceChildren();
+  weeks.style.gridTemplateColumns = `repeat(${data.weeks.length}, var(--github-cell-size))`;
+  data.weeks.forEach((week) => {
+    const weekElement = document.createElement('div');
+    weekElement.className = 'github-calendar-week';
+    weekElement.setAttribute('role', 'group');
+    weekElement.setAttribute('aria-label', week.firstDay);
+    week.days.forEach((day) => {
+      const cell = document.createElement('span');
+      const contributionLabel = `${formatGithubDate(day.date, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}: ${day.count} ${getCopy(day.count === 1 ? 'github.contribution' : 'github.contributions')}`;
+      cell.className = `github-contribution-cell level-${day.level}`;
+      cell.dataset.githubCell = '';
+      cell.style.gridRow = String(day.weekday + 1);
+      cell.setAttribute('role', 'img');
+      cell.setAttribute('aria-label', contributionLabel);
+      cell.setAttribute('title', contributionLabel);
+      cell.tabIndex = -1;
+      weekElement.append(cell);
+    });
+    weeks.append(weekElement);
+  });
+
+  calendar.hidden = false;
+  calendar.dataset.state = 'ready';
+  fallback.hidden = true;
+}
+
+async function setupGithubContributions() {
+  const calendar = document.querySelector('[data-github-calendar]');
+  const status = document.querySelector('[data-github-status]');
+  if (!calendar || !status) return;
+  calendar.dataset.state = 'loading';
+  status.textContent = getCopy('github.loading');
+
+  try {
+    const response = await fetch('/api/github-contributions', { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error('GitHub activity unavailable');
+    const data = await response.json();
+    if (!isValidGithubContributionData(data)) throw new Error('Invalid GitHub activity response');
+    githubContributionData = data;
+    renderGithubCalendar(data);
+  } catch (_error) {
+    setGithubFallback();
+  }
 }
 
 function rebuildLocalizedEcosystem() {
@@ -1410,6 +1565,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupPreferenceControls();
   setupProjectCarousel();
   setupAiOpsHero();
+  setupGithubContributions();
   // Navigation tabs
   const navTabs = document.querySelectorAll('.nav-tab');
   const viewSections = document.querySelectorAll('.view-section');

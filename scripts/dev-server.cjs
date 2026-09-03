@@ -68,6 +68,11 @@ function createDevServer({ rootDir, port = 4174 } = {}) {
   const server = http.createServer(async (req, res) => {
     try {
       const requestUrl = new URL(req.url || '/', `http://127.0.0.1:${port}`);
+      if (requestUrl.pathname === '/api/github-contributions') {
+        const handler = require('../api/github-contributions.js');
+        await handler(req, res);
+        return;
+      }
       const resolved = resolveFilePath(rootResolved, requestUrl);
       if (resolved.status !== 200) {
         res.statusCode = resolved.status;
