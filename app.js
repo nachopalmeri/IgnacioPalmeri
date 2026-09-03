@@ -1226,6 +1226,7 @@ function setupProjectVideoReveal() {
     video.pause();
     video.setAttribute('src', src);
     video.muted = false;
+    video.volume = 0.5; // Comfortable default volume
     video.controls = true;
     overlay.classList.add('is-visible', 'is-pinned');
     video.play().catch(() => {
