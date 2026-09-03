@@ -1108,10 +1108,10 @@ function renderProjectCarousel() {
       return `
       <${tag} class="archive-row ${index < 4 ? 'archive-row-featured' : 'archive-row-secondary'}" data-project-id="${project.id}"${videoAttr}${hrefAttr}${targetAttr}>
         <span class="archive-number">${String(index + 1).padStart(2, '0')}</span>
-        <span class="archive-thumb">${projectImage(project, index, 'archive')}</span>
+        <span class="archive-thumb project-media-zone" tabindex="0">${projectImage(project, index, 'archive')}</span>
         <span class="archive-main">
           <span class="archive-meta">${escapeHtml(project.status)} / ${escapeHtml(projectField(project, 'kind'))}</span>
-          <strong>${escapeHtml(project.title)}</strong>
+          <strong class="project-media-zone" tabindex="0">${escapeHtml(project.title)}</strong>
           <small>${escapeHtml(projectField(project, 'description'))}</small>
           <span class="archive-problem">${escapeHtml(projectField(project, 'problem'))}</span>
         </span>
@@ -1181,13 +1181,17 @@ function setupProjectVideoReveal() {
     releasePanelVideo(video);
   }
 
-  // Hover reveal: only the "Proyectos" archive list, never the home preview cards.
+  // Hover/focus reveal: ONLY the thumbnail/title media zone inside each
+  // "Proyectos" archive row fires the preview. Passing the mouse across the
+  // row body stays silent (no src assign, no cursor-follow stage).
   if (projectVideoRevealState.canReveal) {
-    document.querySelectorAll('.archive-row[data-video]').forEach((el) => {
-      el.addEventListener('mouseenter', () => show(el));
-      el.addEventListener('mouseleave', () => hide(el));
-      el.addEventListener('focus', () => show(el));
-      el.addEventListener('blur', () => hide(el));
+    document.querySelectorAll('.archive-row[data-video]').forEach((row) => {
+      row.querySelectorAll('.project-media-zone').forEach((zone) => {
+        zone.addEventListener('mouseenter', () => show(row));
+        zone.addEventListener('mouseleave', () => hide(row));
+        zone.addEventListener('focusin', () => show(row));
+        zone.addEventListener('focusout', () => hide(row));
+      });
     });
   }
 

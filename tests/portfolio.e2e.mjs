@@ -32,6 +32,33 @@ const server = http.createServer(async (req, res) => {
   try {
     const requestUrl = new URL(req.url || '/', `http://127.0.0.1:${port}`);
     const pathname = decodeURIComponent(requestUrl.pathname);
+    // Hermetic stub (S1): the GitHub calendar fetch must resolve 200 with a
+    // valid payload so the suite never depends on network or on a dev server.
+    // Served from the on-disk cache fixture; falls back to a minimal valid
+    // calendar when the fixture is absent.
+    if (pathname === '/api/github-contributions') {
+      const fixturePath = path.join(rootDir, 'api', 'github-contributions-cache.json');
+      if (existsSync(fixturePath)) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        createReadStream(fixturePath).pipe(res);
+        return;
+      }
+      const weeks = Array.from({ length: 53 }, (_, w) => ({
+        firstDay: `2026-${String(1 + Math.floor(w / 4.4)).padStart(2, '0')}-01`,
+        days: Array.from({ length: 7 }, () => ({
+          date: '2026-01-01', weekday: 0, count: 0, level: 0
+        }))
+      }));
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify({
+        login: 'nachopalmeri',
+        profileUrl: 'https://github.com/nachopalmeri',
+        totalContributions: 0,
+        updatedAt: new Date().toISOString(),
+        weeks
+      }));
+      return;
+    }
     const relativePath = pathname === '/' ? 'index.html' : pathname.slice(1);
     const filePath = path.join(rootDir, relativePath);
     const rootResolved = path.resolve(rootDir);
@@ -256,7 +283,28 @@ async function main() {
       if (!(reserve.height > 0 && reserve.width > 0)) throw new Error('PVP-2: frame box collapsed');
 
       // Hover assigns src + shows overlay; detector proves real download intent.
-      await rows.nth(0).hover();
+      // Zone-gated trigger (user decision): the preview fires ONLY on the
+      // thumbnail/title media zone. Passing over the row BODY (outside the
+      // zone) must fire ZERO mp4 requests and open no stage.
+      const zoneOf = (n) => rows.nth(n).locator('.project-media-zone').first();
+      await rows.nth(0).scrollIntoViewIfNeeded();
+      const bodyBox = await rows.nth(0).locator('.archive-tags').boundingBox();
+      if (!bodyBox) throw new Error('S1: row body box missing');
+      const bodyX = bodyBox.x + bodyBox.width / 2;
+      const bodyY = bodyBox.y + bodyBox.height / 2;
+      await page.mouse.move(bodyX, Math.max(20, bodyY - 160), { steps: 5 });
+      await page.mouse.move(bodyX, bodyY, { steps: 5 });
+      await wait(400);
+      if (mp4Requests.length !== 0) {
+        throw new Error(`S1 zone-gate: row body fired .mp4: ${JSON.stringify(mp4Requests)}`);
+      }
+      if ((await page.locator('.project-video-reveal.is-visible').count()) !== 0) {
+        throw new Error('S1 zone-gate: row body opened the video stage');
+      }
+      const zoneCount = await rows.nth(0).locator('.project-media-zone').count();
+      if (zoneCount < 1) throw new Error('S1: row 0 has no .project-media-zone trigger');
+
+      await zoneOf(0).hover();
       await page.waitForSelector('.project-video-reveal.is-visible');
       const shownSrc = await page.locator('#project-video-reveal-video').getAttribute('src');
       if (shownSrc !== firstSrc) throw new Error(`PVP-1: hover src ${shownSrc} !== ${firstSrc}`);
@@ -265,14 +313,18 @@ async function main() {
       if (paintedPoster !== posterPixel) throw new Error(`T3: poster not pre-painted, got ${paintedPoster}`);
 
       // Row switch releases the previous decoder and assigns the next src.
-      await rows.nth(1).hover();
+      await zoneOf(1).hover();
       await page.waitForFunction(
         (expected) => document.getElementById('project-video-reveal-video')?.getAttribute('src') === expected,
         secondSrc
       );
 
       // Leave pauses AND releases src (PVP-1/PVP-4: decoder released on leave).
-      await page.mouse.move(5, 5);
+      // Exit left at the same height (number column, not a zone), then park top-left.
+      const zoneBox1 = await zoneOf(1).boundingBox();
+      if (!zoneBox1) throw new Error('S1: zone box missing');
+      await page.mouse.move(5, zoneBox1.y + zoneBox1.height / 2, { steps: 5 });
+      await page.mouse.move(5, 5, { steps: 5 });
       await page.waitForSelector('.project-video-reveal:not(.is-visible)');
       const afterLeave = await page.locator('#project-video-reveal-video').evaluate((video) => ({
         paused: video.paused,
@@ -281,8 +333,8 @@ async function main() {
       if (!afterLeave.paused) throw new Error('PVP-1: video not paused after leave');
       if (afterLeave.src !== null) throw new Error(`PVP-1: src not released after leave, got ${afterLeave.src}`);
 
-      // Keyboard parity (PVP-3): focus shows the same panel, blur hides + releases.
-      await rows.nth(0).focus();
+      // Keyboard parity (PVP-3): focus on the ZONE shows the same panel, blur hides + releases.
+      await zoneOf(0).focus();
       await page.waitForSelector('.project-video-reveal.is-visible');
       await page.evaluate(() => { if (document.activeElement) document.activeElement.blur(); });
       await page.waitForSelector('.project-video-reveal:not(.is-visible)');
@@ -327,7 +379,7 @@ async function main() {
       await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle' });
       await page.getByRole('button', { name: 'Proyectos' }).click();
       await page.waitForSelector('#projects-section.view-section.active');
-      await page.locator('.archive-row[data-video]').first().hover({ force: true });
+      await page.locator('.archive-row[data-video] .project-media-zone').first().hover({ force: true });
       await wait(400);
       const visible = await page.locator('.project-video-reveal.is-visible').count();
       if (visible !== 0) throw new Error('PVP-3: reduced-motion must not autoplay the reveal');

@@ -2184,6 +2184,26 @@ button.carousel-proof {
   padding: 10px;
 }
 
+/* Media-zone trigger: the video preview fires ONLY on the thumbnail/title
+   zone inside the row — the zone gets a pointer affordance + subtle highlight. */
+.archive-row .project-media-zone {
+  cursor: pointer;
+  border-radius: 6px;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+  transition: box-shadow var(--transition-fast), outline-color var(--transition-fast);
+}
+
+.archive-row .project-media-zone:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-green) 45%, transparent);
+}
+
+.archive-row .project-media-zone:focus-visible {
+  outline-color: var(--accent-green);
+  outline-style: solid;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-green) 45%, transparent);
+}
+
 .archive-meta {
   display: block;
   margin-bottom: 7px;
