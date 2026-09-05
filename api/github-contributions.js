@@ -111,6 +111,24 @@ function resolveToken() {
   return null;
 }
 
+function mergeCalendars(list, updatedAt) {
+  const seen = new Set();
+  const weeks = [];
+  let total = 0;
+  for (const cal of list) {
+    for (const week of cal.weeks) {
+      const days = week.days.filter((day) => {
+        if (seen.has(day.date)) return false;
+        seen.add(day.date);
+        total += day.count;
+        return true;
+      });
+      if (days.length) weeks.push({ firstDay: week.firstDay, days });
+    }
+  }
+  return { login: list[0].login, profileUrl: list[0].profileUrl, totalContributions: total, updatedAt, weeks };
+}
+
 function readCache() {
   try {
     if (fs.existsSync(CACHE_FILE)) {
@@ -152,15 +170,62 @@ function createHandler({
     }
 
     const token = getToken();
-    const currentTime = now();
-    const to = new Date(currentTime);
-    const from = new Date(currentTime);
-    from.setUTCFullYear(from.getUTCFullYear() - 1);
-
-    if (token) {
+    const scrapeYear = async (year) => {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const url = 'https://github.com/users/' + GITHUB_LOGIN + '/contributions?from=' + year + '-01-01&to=' + year + '-12-31';
+        const upstreamResponse = await fetchImpl(url, {
+          headers: { 'User-Agent': 'nachopalmeri-portfolio' },
+          signal: controller.signal
+        });
+        if (!upstreamResponse?.ok) { console.log('scrape !ok:', upstreamResponse.status); return null; }
+        const html = await upstreamResponse.text();
+        console.log('scrape ok, days=', (html.match(/data-date=/g) || []).length);
+        const counts = {};
+        const tipRe = /<tool-tip[^>]*for="(contribution-day-component-[\d-]+)"[^>]*>([^<]*)<\/tool-tip>/g;
+        let tip;
+        while ((tip = tipRe.exec(html))) {
+          const text = tip[2].trim();
+          counts[tip[1]] = /^No /i.test(text) ? 0 : parseInt(text, 10) || 0;
+        }
+        const days = [];
+        const rectRe = /<(?:td|rect)[^>]*>/g;
+        let rect;
+        while ((rect = rectRe.exec(html))) {
+          const tag = rect[0];
+          const date = (tag.match(/data-date="(\d{4}-\d{2}-\d{2})"/) || [])[1];
+          if (!date || !date.startsWith(String(year))) continue;
+          const key = (tag.match(/id="(contribution-day-component-[\d-]+)"/) || [])[1];
+          days.push({
+            date,
+            count: counts[key] || 0,
+            level: Math.max(0, Math.min(4, parseInt((tag.match(/data-level="(\d+)"/) || [])[1] || '0', 10))),
+            weekday: new Date(date + 'T00:00:00Z').getUTCDay()
+          });
+        }
+        days.sort((a, b) => (a.date < b.date ? -1 : 1));
+        if (days.length < 300) return null;
+        const weeks = [];
+        for (const day of days) {
+          if (day.weekday === 0 || !weeks.length) weeks.push({ firstDay: day.date, days: [] });
+          weeks[weeks.length - 1].days.push(day);
+        }
+        return {
+          login: GITHUB_LOGIN,
+          profileUrl: 'https://github.com/' + GITHUB_LOGIN,
+          totalContributions: days.reduce((acc, d) => acc + d.count, 0),
+          weeks
+        };
+      } catch (_error) { console.log('SCRAPE ERR:', _error && _error.message); return null; } finally {
+        clearTimeout(timeout);
+      }
+    };
 
+    const graphqlYear = async (fromDate, toDate) => {
+      if (!token) return null;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
       try {
         const upstreamResponse = await fetchImpl(GITHUB_GRAPHQL_URL, {
           method: 'POST',
@@ -172,26 +237,39 @@ function createHandler({
           },
           body: JSON.stringify({
             query: contributionQuery,
-            variables: { login: GITHUB_LOGIN, from: from.toISOString(), to: to.toISOString() }
+            variables: { login: GITHUB_LOGIN, from: fromDate.toISOString(), to: toDate.toISOString() }
           }),
           signal: controller.signal
         });
-
-        if (upstreamResponse?.ok) {
-          const upstreamBody = await upstreamResponse.json();
-          const normalized = normalizeCalendar(upstreamBody, to.toISOString());
-          writeCache(normalized);
-          sendJson(response, 200, normalized, {
-            'Cache-Control': BROWSER_CACHE_CONTROL,
-            'Vercel-CDN-Cache-Control': CDN_CACHE_CONTROL
-          });
-          return;
-        }
+        if (!upstreamResponse?.ok) { console.log('graphql !ok:', upstreamResponse.status); return null; }
+        const upstreamBody = await upstreamResponse.json();
+        const norm = normalizeCalendar(upstreamBody, toDate.toISOString());
+        console.log('graphql ok, weeks=', norm.weeks.length);
+        return norm;
       } catch (_error) {
-        // Fallback to cache below
+        return null;
       } finally {
         clearTimeout(timeout);
       }
+    };
+
+    try {
+      const currentTime = now();
+      const to = new Date(currentTime);
+      const year = currentTime.getUTCFullYear();
+      const current = token
+        ? await graphqlYear(new Date(Date.UTC(year, 0, 1)), new Date(currentTime))
+        : await scrapeYear(year);
+      if (current) {
+        writeCache(current);
+        sendJson(response, 200, current, {
+          'Cache-Control': BROWSER_CACHE_CONTROL,
+          'Vercel-CDN-Cache-Control': CDN_CACHE_CONTROL
+        });
+        return;
+      }
+    } catch (_error) {
+      // Fallback to cache below
     }
 
     // Fallback: serve cached calendar if available

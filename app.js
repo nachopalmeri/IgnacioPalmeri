@@ -128,7 +128,7 @@ const UI_COPY = {
       system: 'Sistema'
     },
       footer: { text: '2026 ignaciopalmeri.', contact: 'Contacto' },
-      sideQuests: { toggle: 'Side Quests', eyebrow: 'Fuera del código', heading: 'Side Quests' }
+      sideQuests: { toggle: 'Side Quests', eyebrow: 'Fuera del código', heading: 'Side Quests', routeSummary: 'ver ruta técnica' }
   },
   en: {
     nav: { overview: 'Overview', projects: 'Projects', agents: 'Workflow System' },
@@ -257,7 +257,7 @@ const UI_COPY = {
       system: 'System'
     },
       footer: { text: '2026 ignaciopalmeri.', contact: 'Contact' },
-      sideQuests: { toggle: 'Side Quests', eyebrow: 'Beyond the code', heading: 'Side Quests' }
+      sideQuests: { toggle: 'Side Quests', eyebrow: 'Beyond the code', heading: 'Side Quests', routeSummary: 'view technical route' }
   }
 };
 
@@ -334,8 +334,8 @@ function isValidGithubContributionData(data) {
     data.totalContributions < 0 ||
     Number.isNaN(Date.parse(data.updatedAt)) ||
     !Array.isArray(data.weeks) ||
-    data.weeks.length < 52 ||
-    data.weeks.length > 53
+    data.weeks.length < 30 ||
+    data.weeks.length > 110
   ) return false;
 
   return data.weeks.every((week) => isContributionDate(week?.firstDay) && Array.isArray(week.days) && week.days.every((day) => (
@@ -559,58 +559,92 @@ const SIDE_QUESTS = [
     why: { es: 'La ciencia ficción más triste y más humana que leí: inteligencia y pérdida en el mismo arco.', en: "The saddest, most human sci-fi I've read - intelligence and loss on the same arc." } }
 ];
 
+// --- intel + skills registries (needed by the spotlight renderer) ---
+const SQ_INTEL = {
+  'When Harry Met Sally...': { tags: ['romance', 'comedia', 'clásico moderno', 'diálogo'], mood: { es: 'cálido y afilado', en: 'warm and sharp' }, time: '1h 36m', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Crimen y castigo', pairWhy: { es: 'dos máquinas de diálogo: una te hace reír, la otra no te perdona', en: 'two dialogue machines: one makes you laugh, the other does not forgive' }, signals: ['diálogo', 'oficio clásico'] },
+  'El Señor de los Anillos: Las Dos Torres': { tags: ['épico', 'worldbuilding', 'práctico', 'equipo'], mood: { es: 'grandioso y artesanal', en: 'grand and artisanal' }, time: '2h 59m', energy: { es: 'alta', en: 'high' }, pairWith: 'Silicon Valley', pairWhy: { es: 'el antídoto perfecto: equipos que construyen bajo presión', en: 'the perfect antidote: teams that ship under pressure' }, signals: ['escala', 'procesos', 'trabajo en equipo'] },
+  'Pusher II': { tags: ['crudo', 'character study', 'nórdico', 'riesgo'], mood: { es: 'opresivo y honesto', en: 'raw and honest' }, time: '1h 39m', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'The Sopranos', pairWhy: { es: 'mismo territorio: masculinidad al límite sin maquillaje moral', en: 'same territory: masculinity at the limit, no moral makeup' }, signals: ['crudeza', 'apuestas narrativas'] },
+  'The Sopranos': { tags: ['antihero', 'familiar', 'terapia', 'largo aliento'], mood: { es: 'humano y incómodo', en: 'human and uncomfortable' }, time: '6 temporadas', energy: { es: 'compromiso alto', en: 'high commitment' }, pairWith: 'Pusher II', pairWhy: { es: 'si te funciona Tony, Refn te va a gustar: crimen sin glamur', en: 'if Tony works for you, Refn will too: crime without glamour' }, signals: ['carácter', 'contradicciones', 'largo aliento'] },
+  'Silicon Valley': { tags: ['tech', 'sátira', 'startup', 'ritmo'], mood: { es: 'divertido y reconocible', en: 'funny and recognizable' }, time: '6 temporadas', energy: { es: 'baja', en: 'low' }, pairWith: 'The Almanack of Naval Ravikant', pairWhy: { es: 'la sátira y el manual: dos tomas del mismo ecosistema', en: 'the satire and the manual: two takes on the same ecosystem' }, signals: ['tech', 'sátira del oficio'] },
+  'El sueño de los héroes': { tags: ['fantástico', 'tiempo', 'argentino', 'breve'], mood: { es: 'onírico y preciso', en: 'dreamlike and precise' }, time: '200 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'dos novelas breves sobre identidades que mutan con el tiempo', en: 'two short novels about identities that mutate with time' }, signals: ['literatura argentina', 'estructuras de tiempo'] },
+  'Crimen y castigo': { tags: ['psicológico', 'culpa', 'denso', 'imprescindible'], mood: { es: 'urgente y claustrofóbico', en: 'urgent and claustrophobic' }, time: '500+ páginas', energy: { es: 'alta', en: 'high' }, pairWith: 'The Perks of Being a Wallflower', pairWhy: { es: 'contrapunto liviano después de la avalancha: honestidad como descompresión', en: 'light counterpoint after the avalanche: honesty as decompression' }, signals: ['psicología', 'ambición literaria'] },
+  'The Almanack of Naval Ravikant': { tags: ['no-ficción', 'decisiones', 'denso', 'bolsillo'], mood: { es: 'compacto y pragmático', en: 'compact and pragmatic' }, time: '242 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Silicon Valley', pairWhy: { es: 'teoría y sátira del mismo mundo, en ese orden', en: 'theory and satire of the same world, in that order' }, signals: ['decisiones', 'apalancamiento'] },
+  'The Perks of Being a Wallflower': { tags: ['coming of age', 'honesto', 'breve', 'emocional'], mood: { es: 'tierno y directo', en: 'tender and direct' }, time: '213 páginas', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'cisne emocional: inteligencia, vulnerabilidad y pérdida', en: 'emotional swan song: intelligence, vulnerability and loss' }, signals: ['honestidad', 'voz narrativa'] },
+  'Flowers for Algernon': { tags: ['ciencia ficción', 'triste', 'breve', 'estructura'], mood: { es: 'devastador y limpio', en: 'devastating and clean' }, time: '311 páginas', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'El sueño de los héroes', pairWhy: { es: 'cerrar el círculo argentino: memoria y segunda oportunidades', en: 'close the Argentine circle: memory and second chances' }, signals: ['ciencia ficción humana', 'arcos de pérdida'] }
+};
+
+const SQ_SKILLS = {
+  'intent.parse': { es: 'Parsea la intención y la mapea a un quest', en: 'Parses query intent and maps it to a quest' },
+  'context.load': { es: 'Carga el perfil del visitante', en: 'Loads the visitor profile' },
+  'quality.gate': { es: 'Chequea el estándar antes de publicar', en: 'Gates the standard before publishing' },
+  'memory.recall': { es: 'Recupera señales de gusto del perfil', en: 'Recalls taste signals from the profile' },
+  'signals.match': { es: 'Cruza señales del quest con el perfil', en: 'Cross-matches quest signals with the profile' },
+  'catalog.index': { es: 'Indexa el catálogo con metadatos', en: 'Indexes the catalog with metadata' },
+  'genre.classify': { es: 'Clasifica género, tono y energía', en: 'Classifies genre, tone and energy' },
+  'pair.graph': { es: 'Construye el grafo de emparejados', en: 'Builds the pairing graph' },
+  'tone.analysis': { es: 'Analiza el tono del veredicto', en: 'Analyzes verdict tone' },
+  'verdict.draft': { es: 'Redacta el veredicto en una pasada', en: 'Drafts the verdict in one pass' },
+  'marathon.plan': { es: 'Ordena una cadena de quests', en: 'Orders a quest chain' },
+  'timebox.estimate': { es: 'Estima tiempo y energía totales', en: 'Estimates total time and energy' }
+};
+
 function setupSideQuests() {
   const toggle = document.getElementById('side-quests-toggle');
   const reveal = document.getElementById('side-quests-reveal');
   const closeBtn = document.getElementById('side-quests-close');
-  const track = document.getElementById('sq-track');
-  const dotsEl = document.getElementById('sq-dots');
+  const posterImg = document.getElementById('sq-poster');
+  const glow = document.getElementById('sq-glow');
+  const catBadge = document.getElementById('sq-cat');
+  const catChip = document.getElementById('sq-cat-chip');
+  const titleEl = document.getElementById('sq-detail-title');
+  const subEl = document.getElementById('sq-detail-sub');
+  const whyEl = document.getElementById('sq-detail-why');
+  const tagRow = document.getElementById('sq-tagrow');
+  const strip = document.getElementById('sq-strip');
   const prevBtn = document.getElementById('sq-prev');
   const nextBtn = document.getElementById('sq-next');
-  const detailTitle = document.getElementById('sq-detail-title');
-  const detailSub = document.getElementById('sq-detail-sub');
-  const detailWhy = document.getElementById('sq-detail-why');
-  if (!toggle || !reveal || !track) return;
+  if (!toggle || !reveal || !posterImg) return;
 
   const n = SIDE_QUESTS.length;
-  const angleStep = 360 / n;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let current = 0;
 
-  if (!track.dataset.built) {
-    track.dataset.built = 'true';
+  if (!strip.dataset.built) {
+    strip.dataset.built = 'true';
     SIDE_QUESTS.forEach((item, i) => {
-      const card = document.createElement('div');
-      card.className = 'sq-card';
-      card.style.background = '#0a0a0c';
-      card.style.transform = `rotateY(${i * angleStep}deg) translateZ(var(--sq-radius))`;
-      card.innerHTML = `<img class="sq-poster" src="${item.poster}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async"><span class="sq-scrim" aria-hidden="true"></span><strong>${escapeHtml(item.title)}</strong><em></em>`;
-      card.addEventListener('click', () => { current = i; render(); });
-      track.appendChild(card);
+      const t = document.createElement('button');
+      t.type = 'button'; t.className = 'sq-thumb';
+      t.innerHTML = '<img src="' + item.poster + '" alt="" loading="lazy" decoding="async">';
+      t.addEventListener('click', () => { current = i; render(); });
+      strip.appendChild(t);
     });
   }
 
-  function localize(field) {
-    return typeof field === 'string' ? field : field[currentLang];
-  }
+  function localize(field) { return typeof field === 'string' ? field : field[currentLang]; }
 
   function render() {
-    track.style.transform = `rotateY(${-current * angleStep}deg)`;
-    track.querySelectorAll('.sq-card em').forEach((el, i) => {
-      el.textContent = localize(SIDE_QUESTS[i].cat);
-    });
     const item = SIDE_QUESTS[current];
-    detailTitle.textContent = item.title;
-    detailSub.textContent = localize(item.meta);
-    detailWhy.textContent = localize(item.why);
-    if (dotsEl) {
-      dotsEl.innerHTML = SIDE_QUESTS.map((_, i) => `<span class="${i === current ? 'active' : ''}"></span>`).join('');
-    }
+    const intel = SQ_INTEL[item.title] || { tags: [] };
+    const accent = item.color || '#8ab4ff';
+    posterImg.style.opacity = 0;
+    setTimeout(() => {
+      posterImg.src = item.poster;
+      posterImg.alt = item.title;
+      posterImg.style.opacity = 1;
+    }, reduceMotion ? 0 : 150);
+    glow.style.background = 'radial-gradient(closest-side, ' + accent + ', transparent 72%)';
+    catBadge.textContent = localize(item.cat);
+    catChip.textContent = localize(item.cat);
+    catChip.style.color = accent;
+    titleEl.textContent = item.title;
+    subEl.textContent = localize(item.meta);
+    whyEl.textContent = localize(item.why);
+    tagRow.innerHTML = intel.tags.map(t => '<span>' + escapeHtml(t) + '</span>').join('');
+    strip.querySelectorAll('.sq-thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+    if (window.SQAgentHook) window.SQAgentHook(current);
   }
 
-  function step(delta) {
-    current = (current + delta + n) % n;
-    render();
-  }
+  function step(delta) { current = (current + delta + n) % n; render(); }
 
   function open() {
     toggle.setAttribute('aria-expanded', 'true');
@@ -955,6 +989,8 @@ const FEATURED_PROJECTS = [
     repo: 'https://github.com/nachopalmeri/fulbotracker',
     href: 'https://fulbotracker.vercel.app',
     media: 'project-assets/futtracker.webp',
+    video: 'project-assets/video/fulbotracker-demo.mp4',
+    loop: 'project-assets/video/fulbotracker-loop.mp4',
     status: 'PUBLIC',
     kind: { es: 'Sports Product', en: 'Sports Product' },
     description: {
@@ -985,6 +1021,8 @@ const FEATURED_PROJECTS = [
     repo: 'https://github.com/nachopalmeri/comidadebarrio',
     href: 'https://comidadebarrio.vercel.app',
     media: 'project-assets/comidadebarrio.webp',
+    video: 'project-assets/video/comidadebarrio-demo.mp4',
+    loop: 'project-assets/video/comidadebarrio-loop.mp4',
     status: 'PUBLIC',
     kind: { es: 'Local Commerce', en: 'Local Commerce' },
     description: {
@@ -2844,3 +2882,192 @@ function stopEcosystemLoop() {
   animationFrameId = null;
   stopWorkflow();
 }
+
+
+// ═══════════════════ SIDE QUESTS × AGENT CREW ═══════════════════
+// The multiagent runtime behind the spotlight: 3 agents review the selected
+// quest per workflow. Technical route stays collapsed inside <details>.
+
+function sqL(field) { return typeof field === 'string' ? field : field[currentLang] || field.es; }
+function sqHash(str) { let h = 7; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0; return h; }
+const SQ_AGENTS = [
+  { id: 'curador', name: 'curador', role: { es: 'Curador de catálogo', en: 'Catalog curator' }, avatar: 'project-assets/agent-avatars/content.jpg', skills: ['catalog.index', 'genre.classify', 'pair.graph'] },
+  { id: 'critico', name: 'critico', role: { es: 'Crítico residente', en: 'Resident critic' }, avatar: 'project-assets/agent-avatars/reviewer.jpg', skills: ['tone.analysis', 'verdict.draft'] },
+  { id: 'estratega', name: 'estratega', role: { es: 'Estratega de maratones', en: 'Marathon strategist' }, avatar: 'project-assets/agent-avatars/growth.jpg', skills: ['marathon.plan', 'timebox.estimate'] }
+];
+
+const SQ_WORKFLOWS = [
+  { id: 'deep', label: { es: 'Análisis', en: 'Deep' }, seq: ['memoria', 'curador', 'critico'] },
+  { id: 'match', label: { es: 'Match', en: 'Match' }, seq: ['memoria', 'estratega', 'critico'] },
+  { id: 'marathon', label: { es: 'Maratón', en: 'Marathon' }, seq: ['memoria', 'curador', 'estratega'] }
+];
+
+function sqRouteLog() { return document.getElementById('sq-route-log'); }
+
+function setupSideQuestAgents() {
+  const crewEl = document.getElementById('sq-crew');
+  if (!crewEl || crewEl.dataset.built) return;
+  crewEl.dataset.built = 'true';
+
+  const modesEl = document.getElementById('sq-crew-modes');
+  const cardsEl = document.getElementById('sq-crew-cards');
+  const lineEl = document.getElementById('sq-crew-line');
+  const logEl = sqRouteLog();
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let currentQuest = 0;
+  let currentWf = 'deep';
+  let runSeq = 0;
+
+  SQ_WORKFLOWS.forEach(wf => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'sq-mode'; b.dataset.wf = wf.id;
+    b.textContent = sqL(wf.label);
+    b.title = (currentLang === 'en' ? 'Agent route: ' : 'Ruta de agentes: ') + wf.seq.join(' → ');
+    b.addEventListener('click', () => { currentWf = wf.id; syncModes(); run(currentQuest); });
+    modesEl.appendChild(b);
+  });
+
+  function syncModes() {
+    modesEl.querySelectorAll('.sq-mode').forEach(b => b.classList.toggle('active', b.dataset.wf === currentWf));
+  }
+
+  function log(html) {
+    if (!logEl) return;
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    logEl.appendChild(d);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  const esc = s => escapeHtml(String(s));
+
+  function reviewCard(ag, quote, score) {
+    return '<div class="sq-review in">' +
+      '<div class="rq-top"><img src="' + ag.avatar + '" alt="" loading="lazy">' +
+      '<div><div class="rq-name">' + ag.name + '</div><div class="rq-role">' + esc(sqL(ag.role)) + '</div></div></div>' +
+      (score ? '<span class="rq-score">' + score + '</span>' : '') +
+      '<p class="rq-quote">' + quote + '</p></div>';
+  }
+
+  function shimmerCards(count) {
+    cardsEl.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const ag = SQ_AGENTS[i % SQ_AGENTS.length];
+      const d = document.createElement('div');
+      d.className = 'sq-review loading';
+      d.innerHTML = '<div class="rq-top"><img src="' + ag.avatar + '" alt=""><div><div class="rq-name">' + ag.name + '</div><div class="rq-role">' + esc(sqL(ag.role)) + '</div></div></div><p class="rq-quote"></p>';
+      cardsEl.appendChild(d);
+    }
+  }
+
+  function marathonChain(quest) {
+    const chain = [quest];
+    let cur = quest.title;
+    for (let i = 0; i < 2; i++) {
+      const intel = SQ_INTEL[cur];
+      if (!intel || !intel.pairWith || intel.pairWith === cur) break;
+      const next = SIDE_QUESTS.find(q => q.title === intel.pairWith);
+      if (!next || chain.includes(next)) break;
+      chain.push(next); cur = next.title;
+    }
+    return chain;
+  }
+
+  function totalHours(chain) {
+    let mins = 0;
+    for (const q of chain) {
+      const it = SQ_INTEL[q.title] || { time: '' };
+      const mh = it.time.match(/([\d.,]+)\s*(h|páginas|paginas)/i);
+      if (!mh) continue;
+      const n = parseFloat(mh[1].replace(',', '.'));
+      mins += mh[2].toLowerCase().startsWith('h') ? n * 60 : n * 1.4;
+    }
+    return Math.round(mins / 60 * 10) / 10;
+  }
+
+  function buildReviews(wf, quest) {
+    const intel = SQ_INTEL[quest.title] || { tags: [], mood: { es: '', en: '' }, time: '—', energy: { es: '', en: '' }, pairWith: '', pairWhy: { es: '', en: '' }, signals: [] };
+    const h = sqHash(quest.title + wf.id);
+    const score = (7.6 + (h % 24) / 10).toFixed(1);
+    const cards = [];
+
+    if (wf.id === 'marathon') {
+      const chain = marathonChain(quest);
+      const names = chain.map(q => '<b>' + esc(q.title) + '</b>').join(' → ');
+      cards.push(reviewCard(SQ_AGENTS[0],
+        (currentLang === 'en' ? 'Chain for this quest: ' : 'Cadena para esta quest: ') + names + '. ' + esc(sqL(intel.pairWhy)), null));
+      cards.push(reviewCard(SQ_AGENTS[1],
+        (currentLang === 'en'
+          ? 'Opening with "' + esc(quest.title) + '" is the right call: ' + sqL(quest.why).toLowerCase()
+          : 'Arrancar con "' + esc(quest.title) + '" es la decisión correcta: ' + sqL(quest.why).toLowerCase()), score + '/10'));
+      cards.push(reviewCard(SQ_AGENTS[2],
+        (currentLang === 'en'
+          ? 'Total estimate for the chain: ~' + totalHours(chain) + ' h. Best pace: one per weekend.'
+          : 'Estimación total de la cadena: ~' + totalHours(chain) + ' h. Mejor ritmo: uno por finde.'), null));
+    } else {
+      cards.push(reviewCard(SQ_AGENTS[0],
+        (currentLang === 'en'
+          ? 'Classified as <b>' + esc(sqL(intel.mood)) + '</b> — ' + intel.tags.join(', ') + '. Closest pair in the catalog: <b>' + esc(intel.pairWith) + '</b>.'
+          : 'Clasificada como <b>' + esc(sqL(intel.mood)) + '</b> — ' + intel.tags.join(', ') + '. El par más cercano del catálogo: <b>' + esc(intel.pairWith) + '</b>.'), null));
+      cards.push(reviewCard(SQ_AGENTS[1],
+        (currentLang === 'en'
+          ? 'Verdict: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + ' Would not change a single scene.'
+          : 'Veredicto: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + ' No cambiaría una sola escena.'), score + '/10'));
+      cards.push(reviewCard(SQ_AGENTS[2],
+        (currentLang === 'en'
+          ? 'Time: <b>' + esc(intel.time) + '</b> · energy: ' + esc(sqL(intel.energy)) + '. Signals matched with your profile: ' + intel.signals.join(', ') + '.'
+          : 'Tiempo: <b>' + esc(intel.time) + '</b> · energía: ' + esc(sqL(intel.energy)) + '. Señales que matchean con tu perfil: ' + intel.signals.join(', ') + '.'), null));
+    }
+    return cards;
+  }
+
+  const sleep = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
+
+  async function run(questIndex) {
+    const seq = ++runSeq;
+    const quest = SIDE_QUESTS[questIndex];
+    if (!quest) return;
+    const wf = SQ_WORKFLOWS.find(w => w.id === currentWf) || SQ_WORKFLOWS[0];
+    const intel = SQ_INTEL[quest.title];
+    const t0 = performance.now();
+    const alive = () => { if (seq !== runSeq) throw 'cancelled'; };
+
+    lineEl.innerHTML = '<span class="dot"></span>' + (currentLang === 'en'
+      ? 'agents reviewing <b>' + esc(quest.title) + '</b> · route T0\u2192T3\u2026'
+      : 'agentes analizando <b>' + esc(quest.title) + '</b> · ruta T0\u2192T3\u2026');
+    if (logEl) logEl.innerHTML = '';
+    shimmerCards(3);
+
+    const my = () => ((performance.now() - t0) / 1000).toFixed(1);
+    const step = async ms => { await sleep(ms); alive(); };
+
+    try {
+      log(my() + 's T0 route \u25b8 intent.parse("' + esc(quest.title) + '") <span class="ok">\u2713</span>');
+      await step(500); alive();
+      log(my() + 's T1 memoria \u25b8 signals.match(profile) \u2192 ' + (intel ? intel.signals.length : 0) + ' señales <span class="ok">\u2713</span>');
+      await step(450); alive();
+      for (const aid of wf.seq) {
+        log(my() + 's T2 ' + aid + ' \u25b8 ' + aid + '.run("' + esc(quest.title) + '") <span class="ok">\u2713</span>');
+        await step(reduceMotion ? 30 : 420); alive();
+      }
+      log(my() + 's T3 synthesize \u25b8 quality.gate \u2192 briefing <span class="ok">\u2713</span>');
+
+      const secs = (performance.now() - t0) / 1000;
+      lineEl.innerHTML = '<span class="dot"></span>' +
+        (currentLang === 'en'
+          ? wf.seq.length + ' agents reviewed this quest · route T0\u2192T3 · ' + secs.toFixed(1) + 's'
+          : wf.seq.length + ' agentes revisaron esta quest · ruta T0\u2192T3 · ' + secs.toFixed(1) + 's');
+      cardsEl.innerHTML = buildReviews(wf, quest).join('');
+      const cards = cardsEl.querySelectorAll('.sq-review');
+      cards.forEach((c, i) => setTimeout(() => c.classList.add('in'), reduceMotion ? 0 : 90 * i));
+    } catch (e) { if (e !== 'cancelled') throw e; }
+  }
+
+  window.SQAgentHook = function (questIndex) {
+    currentQuest = questIndex;
+    if (document.getElementById('side-quests-reveal')?.classList.contains('is-visible')) run(questIndex);
+  };
+
+  syncModes();
+}
+setupSideQuestAgents();

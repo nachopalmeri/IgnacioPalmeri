@@ -295,6 +295,12 @@
           </div>
         </div>
         <p class="github-scroll-hint" data-github-scroll-hint data-i18n="github.scrollHint">Deslizá el calendario para ver el año completo.</p>
+      <div class="github-snake" data-github-snake>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nachopalmeri/nachopalmeri/output/snake-dark.svg" />
+          <img src="https://raw.githubusercontent.com/nachopalmeri/nachopalmeri/output/snake.svg" alt="La viborita comiéndose las contribuciones del año" loading="lazy" decoding="async" />
+        </picture>
+      </div>
       </div>
       <div class="github-activity-grid">
         <a class="github-card" href="https://github.com/nachopalmeri/jobbot" target="_blank" rel="noopener noreferrer">
@@ -421,19 +427,36 @@
       <span class="sq-eyebrow" data-i18n="sideQuests.eyebrow">Fuera del código</span>
       <h3 data-i18n="sideQuests.heading">Side Quests</h3>
     </div>
-    <div class="sq-stage" id="sq-stage">
-      <button type="button" class="sq-nav prev" id="sq-prev" aria-label="Anterior">‹</button>
-      <div class="sq-track" id="sq-track"></div>
-      <button type="button" class="sq-nav next" id="sq-next" aria-label="Siguiente">›</button>
-    </div>
-    <div class="sq-detail">
-      <div class="sq-detail-head">
-        <strong id="sq-detail-title"></strong>
-        <span id="sq-detail-sub"></span>
+    <div class="sq-layout">
+      <div class="sq-poster-side">
+        <button type="button" class="sq-nav" id="sq-prev" aria-label="Anterior">‹</button>
+        <div class="sq-poster-wrap">
+          <div class="sq-glow" id="sq-glow"></div>
+          <img class="sq-poster-main" id="sq-poster" src="" alt="">
+          <span class="sq-cat" id="sq-cat"></span>
+        </div>
+        <button type="button" class="sq-nav" id="sq-next" aria-label="Siguiente">›</button>
       </div>
-      <p id="sq-detail-why"></p>
+      <div class="sq-info">
+        <span class="sq-cat-chip" id="sq-cat-chip"></span>
+        <h4 id="sq-detail-title"></h4>
+        <p class="sq-meta" id="sq-detail-sub"></p>
+        <blockquote class="sq-why" id="sq-detail-why"></blockquote>
+        <div class="sq-tagrow" id="sq-tagrow"></div>
+      </div>
     </div>
-    <div class="sq-dots" id="sq-dots"></div>
+    <div class="sq-strip" id="sq-strip"></div>
+    <div class="sq-crew" id="sq-crew">
+      <div class="sq-crew-head">
+        <span class="sq-crew-line" id="sq-crew-line"></span>
+        <div class="sq-crew-modes" id="sq-crew-modes"></div>
+      </div>
+      <div class="sq-crew-cards" id="sq-crew-cards"></div>
+      <details class="sq-route-details" id="sq-route-details">
+        <summary data-i18n="sideQuests.routeSummary">ver ruta técnica</summary>
+        <div class="sq-route-log" id="sq-route-log" aria-live="polite"></div>
+      </details>
+    </div>
   </div>
 
   <button id="console-launcher" class="console-launcher" type="button" aria-expanded="false" aria-controls="console-chat" aria-label="Abrir consola">
