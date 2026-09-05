@@ -295,7 +295,7 @@ function secureExternalLinks(root = document) {
 }
 
 let currentLang = safeStorageGet('portfolio-lang', 'es');
-let currentTheme = safeStorageGet('portfolio-theme', 'dark');
+let currentTheme = safeStorageGet('portfolio-theme', 'light');
 
 function getCopy(path, lang = currentLang) {
   return path.split('.').reduce((value, key) => value && value[key], UI_COPY[lang]) || path;
