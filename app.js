@@ -1,3 +1,6 @@
+function esc(s) { return escapeHtml(String(s)); }
+function sqL(field) { return typeof field === 'string' ? field : field[currentLang] || field.es; }
+function sqHash(str) { let h = 7; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0; return h; }
 // ═══════════════════ NAVIGATION & TABS ═══════════════════
 
 const UI_COPY = {
@@ -543,9 +546,9 @@ const SIDE_QUESTS = [
     why: { es: 'Escala real, sin atajos digitales. Me enseñó qué es construir un mundo que se sostiene solo.', en: 'Real scale, no digital shortcuts. Taught me what a world that holds together actually looks like.' } },
   { title: 'Pusher II', poster: 'project-assets/side-quests/pusher-ii.jpg', color: '#52525b', cat: { es: 'Película', en: 'Film' }, meta: 'Nicolas Winding Refn, 2004',
     why: { es: 'Cruda, sin red de seguridad narrativa. Lo opuesto exacto a un blockbuster prolijo.', en: 'Raw, with no narrative safety net. The exact opposite of a polished blockbuster.' } },
-  { title: 'The Sopranos', poster: 'project-assets/side-quests/sopranos-logo.svg', color: '#166534', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+  { title: 'The Sopranos', poster: 'project-assets/side-quests/the-sopranos-gen.svg', color: '#166534', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
     why: { es: 'El personaje más humano que vi en TV, contradicciones incluidas.', en: "The most human character I've seen on TV, contradictions included." } },
-  { title: 'Silicon Valley', poster: 'project-assets/side-quests/silicon-valley-title.png', color: '#f97316', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
+  { title: 'Silicon Valley', poster: 'project-assets/side-quests/silicon-valley-gen.svg', color: '#f97316', cat: { es: 'Serie', en: 'Series' }, meta: { es: 'Serie', en: 'Series' },
     why: { es: 'La sátira más precisa sobre el mundo tech que quiero habitar.', en: 'The sharpest satire of the tech world I actually want to work in.' } },
   { title: 'El sueño de los héroes', poster: 'project-assets/side-quests/el-sueno-de-los-heroes.jpg', color: '#7c3aed', cat: { es: 'Libro', en: 'Book' }, meta: 'Adolfo Bioy Casares',
     why: { es: 'La mejor novela argentina sobre el tiempo y las segundas oportunidades que nunca son iguales.', en: 'The best Argentine novel about time and second chances that are never the same.' } },
@@ -556,21 +559,70 @@ const SIDE_QUESTS = [
   { title: 'The Perks of Being a Wallflower', poster: 'project-assets/side-quests/perks-wallflower.jpg', color: '#0891b2', cat: { es: 'Libro', en: 'Book' }, meta: 'Stephen Chbosky',
     why: { es: 'Adolescencia honesta, sin la nostalgia impostada del género.', en: "Honest teenage years, without the genre's usual fake nostalgia." } },
   { title: 'Flowers for Algernon', poster: 'project-assets/side-quests/flowers-algernon.jpg', color: '#db2777', cat: { es: 'Libro', en: 'Book' }, meta: 'Daniel Keyes',
-    why: { es: 'La ciencia ficción más triste y más humana que leí: inteligencia y pérdida en el mismo arco.', en: "The saddest, most human sci-fi I've read - intelligence and loss on the same arc." } }
+    why: { es: 'La ciencia ficción más triste y más humana que leí: inteligencia y pérdida en el mismo arco.', en: 'The saddest, most human sci-fi I read: intelligence and loss on the same arc.' } },
+  { title: 'Outer Wilds', poster: null, color: '#e8862e', cat: { es: 'Juego', en: 'Game' }, meta: 'Mobius Digital, 2019',
+    why: { es: 'Un misterio que se resuelve con curiosidad, no con balas. El mejor juego de la década.', en: 'A mystery solved by curiosity, not bullets. The best game of the decade.' } },
+  { title: 'Hades', poster: null, color: '#b84a4a', cat: { es: 'Juego', en: 'Game' }, meta: 'Supergiant Games, 2020',
+    why: { es: 'Morir es la mecánica narrativa: el único juego donde perder te avanza la historia.', en: 'Dying is the narrative mechanic: the only game where losing moves the story forward.' } },
+  { title: 'Disco Elysium', poster: null, color: '#8a5fc4', cat: { es: 'Juego', en: 'Game' }, meta: 'ZA/UM, 2019',
+    why: { es: 'Dostoievski con dados: culpa, alcohol y política en un solo barrio. El mejor escrito interactivo jamás hecho.', en: 'Dostoevsky with dice: guilt, alcohol and politics in one district. The best interactive writing ever made.' } },
+  { title: 'Bocanada', poster: null, color: '#3fb0c9', cat: { es: 'Música', en: 'Music' }, meta: 'Gustavo Cerati, 1999',
+    why: { es: 'El sound de la tech argentina de los 90 convertido en disco: escuchado de corrido, nunca en shuffle.', en: 'The sound of 90s Argentine tech turned into an album: played front to back, never shuffled.' } },
+  { title: 'Artaud', poster: null, color: '#c96f2e', cat: { es: 'Música', en: 'Music' }, meta: 'Luis Alberto Spinetta, 1973',
+    why: { es: 'El disco más honesto del rock argentino: intensidad interior en formato trío.', en: 'The most honest record in Argentine rock: inner intensity in trio format.' } },
+  { title: 'The Dark Side of the Moon', poster: null, color: '#7c5cc4', cat: { es: 'Música', en: 'Music' }, meta: 'Pink Floyd, 1973',
+    why: { es: 'Tiempo, dinero y muerte: un concepto, no una colección de canciones.', en: 'Time, money and death: a concept, not a song collection.' } },
+  { title: 'Blade Runner 2049', poster: null, color: '#4a7ba6', cat: { es: 'Película', en: 'Film' }, meta: 'Denis Villeneuve, 2017',
+    why: { es: 'La dirección de arte como lenguaje narrativo. Cada plano es un cuadro.', en: 'Art direction as narrative language. Every frame is a painting.' } },
+  { title: 'Whiplash', poster: null, color: '#c9932e', cat: { es: 'Película', en: 'Film' }, meta: 'Damien Chazelle, 2014',
+    why: { es: 'Tensión pura sin un solo disparo: iterar hasta la perfección, cueste lo que cueste.', en: 'Pure tension without a single gunshot: iterating to perfection, whatever it costs.' } },
+  { title: 'Rayuela', poster: null, color: '#5a8a6a', cat: { es: 'Libro', en: 'Book' }, meta: 'Julio Cortázar, 1963',
+    why: { es: 'La primera open world de la literatura: un libro que se lee en cualquier orden y se juega.', en: "Literature's first open world: a book read in any order that plays back." } },
+  { title: 'El Aleph', poster: null, color: '#a67c52', cat: { es: 'Libro', en: 'Book' }, meta: 'Jorge Luis Borges, 1945',
+    why: { es: 'Conceptos infinitos en páginas mínimas. Borges comprime universos en 8 páginas.', en: 'Infinite concepts in minimal pages. Borges compresses universes into 8 pages.' } },
+  { title: 'Atardecer en la Reserva', poster: null, color: '#e8a13c', cat: { es: 'Experiencia', en: 'Experience' }, meta: { es: 'Costanera Sur, Buenos Aires', en: 'Costanera Sur, Buenos Aires' },
+    why: { es: 'Una hora sin pantallas en Buenos Aires: el atardecer que resetea la semana.', en: 'A screen-free hour in Buenos Aires: the sunset that resets your week.' } },
+  { title: 'La Boca de madrugada', poster: null, color: '#6b5a8a', cat: { es: 'Experiencia', en: 'Experience' }, meta: { es: 'Fotografía nocturna', en: 'Night photography' },
+    why: { es: 'Calles que parecen de película nórdica: el set ya armado para fotografiar sin gente.', en: 'Streets straight out of a nordic film: a ready-made set to shoot without people.' } },
+  { title: 'Meditaciones', poster: null, color: '#9aa5b1', cat: { es: 'Libro', en: 'Book' }, meta: 'Marco Aurelio', hidden: true,
+    why: { es: 'Un libro que funciona como herramienta, no como adorno: se abre donde lo necesitás, siempre.', en: 'A book that works like a tool, not an ornament: it opens where you need it, every time.' } },
+  { title: 'Twin Peaks', poster: null, color: '#2e6b4f', cat: { es: 'Serie', en: 'Series' }, meta: 'David Lynch & Mark Frost, 1990', hidden: true,
+    why: { es: 'Misterio sin respuestas, café damn fine y lo más extraño que pasó por TV.', en: 'Mystery without answers, damn fine coffee and the strangest thing TV ever aired.' } },
+  { title: 'El Eternauta', poster: null, color: '#4a6b8a', cat: { es: 'Cómic', en: 'Comic' }, meta: 'H.G. Oesterheld & F. Solano López, 1957', hidden: true,
+    why: { es: 'El cómic que definió la ciencia ficción argentina: el héroe colectivo que no te pide permiso.', en: 'The comic that defined Argentine sci-fi: the collective hero that never asks permission.' } },
+  { title: 'Interstellar', poster: null, color: '#4d6a8a', cat: { es: 'Película', en: 'Film' }, meta: 'Christopher Nolan, 2014', hidden: true,
+    why: { es: 'El tiempo como enemigo y moneda a la vez: la mejor escena de padre-hija del cine.', en: 'Time as enemy and currency at once: the best father-daughter scene in cinema.' } }
 ];
 
-// --- intel + skills registries (needed by the spotlight renderer) ---
+
+// --- intel + skills registries + taste graph (spotlight renderer) ---
+
 const SQ_INTEL = {
-  'When Harry Met Sally...': { tags: ['romance', 'comedia', 'clásico moderno', 'diálogo'], mood: { es: 'cálido y afilado', en: 'warm and sharp' }, time: '1h 36m', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Crimen y castigo', pairWhy: { es: 'dos máquinas de diálogo: una te hace reír, la otra no te perdona', en: 'two dialogue machines: one makes you laugh, the other does not forgive' }, signals: ['diálogo', 'oficio clásico'] },
-  'El Señor de los Anillos: Las Dos Torres': { tags: ['épico', 'worldbuilding', 'práctico', 'equipo'], mood: { es: 'grandioso y artesanal', en: 'grand and artisanal' }, time: '2h 59m', energy: { es: 'alta', en: 'high' }, pairWith: 'Silicon Valley', pairWhy: { es: 'el antídoto perfecto: equipos que construyen bajo presión', en: 'the perfect antidote: teams that ship under pressure' }, signals: ['escala', 'procesos', 'trabajo en equipo'] },
-  'Pusher II': { tags: ['crudo', 'character study', 'nórdico', 'riesgo'], mood: { es: 'opresivo y honesto', en: 'raw and honest' }, time: '1h 39m', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'The Sopranos', pairWhy: { es: 'mismo territorio: masculinidad al límite sin maquillaje moral', en: 'same territory: masculinity at the limit, no moral makeup' }, signals: ['crudeza', 'apuestas narrativas'] },
-  'The Sopranos': { tags: ['antihero', 'familiar', 'terapia', 'largo aliento'], mood: { es: 'humano y incómodo', en: 'human and uncomfortable' }, time: '6 temporadas', energy: { es: 'compromiso alto', en: 'high commitment' }, pairWith: 'Pusher II', pairWhy: { es: 'si te funciona Tony, Refn te va a gustar: crimen sin glamur', en: 'if Tony works for you, Refn will too: crime without glamour' }, signals: ['carácter', 'contradicciones', 'largo aliento'] },
-  'Silicon Valley': { tags: ['tech', 'sátira', 'startup', 'ritmo'], mood: { es: 'divertido y reconocible', en: 'funny and recognizable' }, time: '6 temporadas', energy: { es: 'baja', en: 'low' }, pairWith: 'The Almanack of Naval Ravikant', pairWhy: { es: 'la sátira y el manual: dos tomas del mismo ecosistema', en: 'the satire and the manual: two takes on the same ecosystem' }, signals: ['tech', 'sátira del oficio'] },
-  'El sueño de los héroes': { tags: ['fantástico', 'tiempo', 'argentino', 'breve'], mood: { es: 'onírico y preciso', en: 'dreamlike and precise' }, time: '200 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'dos novelas breves sobre identidades que mutan con el tiempo', en: 'two short novels about identities that mutate with time' }, signals: ['literatura argentina', 'estructuras de tiempo'] },
-  'Crimen y castigo': { tags: ['psicológico', 'culpa', 'denso', 'imprescindible'], mood: { es: 'urgente y claustrofóbico', en: 'urgent and claustrophobic' }, time: '500+ páginas', energy: { es: 'alta', en: 'high' }, pairWith: 'The Perks of Being a Wallflower', pairWhy: { es: 'contrapunto liviano después de la avalancha: honestidad como descompresión', en: 'light counterpoint after the avalanche: honesty as decompression' }, signals: ['psicología', 'ambición literaria'] },
-  'The Almanack of Naval Ravikant': { tags: ['no-ficción', 'decisiones', 'denso', 'bolsillo'], mood: { es: 'compacto y pragmático', en: 'compact and pragmatic' }, time: '242 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Silicon Valley', pairWhy: { es: 'teoría y sátira del mismo mundo, en ese orden', en: 'theory and satire of the same world, in that order' }, signals: ['decisiones', 'apalancamiento'] },
-  'The Perks of Being a Wallflower': { tags: ['coming of age', 'honesto', 'breve', 'emocional'], mood: { es: 'tierno y directo', en: 'tender and direct' }, time: '213 páginas', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'cisne emocional: inteligencia, vulnerabilidad y pérdida', en: 'emotional swan song: intelligence, vulnerability and loss' }, signals: ['honestidad', 'voz narrativa'] },
-  'Flowers for Algernon': { tags: ['ciencia ficción', 'triste', 'breve', 'estructura'], mood: { es: 'devastador y limpio', en: 'devastating and clean' }, time: '311 páginas', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'El sueño de los héroes', pairWhy: { es: 'cerrar el círculo argentino: memoria y segunda oportunidades', en: 'close the Argentine circle: memory and second chances' }, signals: ['ciencia ficción humana', 'arcos de pérdida'] }
+  'When Harry Met Sally...': { tags: ['romance', 'comedia', 'clásico moderno', 'diálogo'], mood: { es: 'cálido y afilado', en: 'warm and sharp' }, time: '1h 36m', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Crimen y castigo', pairWhy: { es: 'dos máquinas de diálogo: una te hace reír, la otra no te perdona', en: 'two dialogue machines: one makes you laugh, the other does not forgive' }, signals: ['diálogo', 'oficio clásico'], bestMoment: { es: 'elmega fake orgasm en Katz\'s Deli — risa que envejece 35 años después', en: 'the Katz\'s Deli fake orgasm scene — a joke that aged 35 years and still lands' }, paraQuien: { es: 'para quien cree que el género romántico puede tener oficio', en: 'for anyone who thinks rom-coms can have real craft' }, collection: 'clasicos', snd: 'cozy' },
+  'El Señor de los Anillos: Las Dos Torres': { tags: ['épico', 'worldbuilding', 'práctico', 'equipo'], mood: { es: 'grandioso y artesanal', en: 'grand and artisanal' }, time: '2h 59m', energy: { es: 'alta', en: 'high' }, pairWith: 'Silicon Valley', pairWhy: { es: 'el antídoto perfecto: equipos que construyen bajo presión', en: 'the perfect antidote: teams that ship under pressure' }, signals: ['escala', 'procesos', 'trabajo en equipo'], bestMoment: { es: 'la carga de los rohirrim al amanecer: física deRenderizada, no atajos', en: 'the rohirrim charge at dawn: rendered physics, no shortcuts' }, paraQuien: { es: 'para quien quiere ver qué es construir un mundo que se sostiene solo', en: 'for anyone who wants to see a world that holds itself together' }, collection: 'clasicos', snd: 'epic' },
+  'Pusher II': { tags: ['crudo', 'character study', 'nórdico', 'riesgo'], mood: { es: 'opresivo y honesto', en: 'raw and honest' }, time: '1h 39m', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'The Sopranos', pairWhy: { es: 'mismo territorio: masculinidad al límite sin maquillaje moral', en: 'same territory: masculinity at the limit, no moral makeup' }, signals: ['crudeza', 'apuestas narrativas'], bestMoment: { es: 'el discurso en el cumpleaños: 4 minutos sin cortes que justifican la película', en: 'the birthday speech: 4 unbroken minutes that justify the film' }, paraQuien: { es: 'para quien prefiere personajes que no piden perdón', en: 'for anyone who prefers characters that never ask permission' }, collection: 'crimen-sin-glamur', snd: 'dark' },
+  'The Sopranos': { tags: ['antihero', 'familiar', 'terapia', 'largo aliento'], mood: { es: 'humano y incómodo', en: 'human and uncomfortable' }, time: '6 temporadas', energy: { es: 'compromiso alto', en: 'high commitment' }, pairWith: 'Pusher II', pairWhy: { es: 'si te funciona Tony, Refn te va a gustar: crimen sin glamur', en: 'if Tony works for you, Refn will too: crime without glamour' }, signals: ['carácter', 'contradicciones', 'largo aliento'], bestMoment: { es: 'los patos de la piscina en la pilot: la metáfora que sostiene 6 temporadas', en: 'the pool ducks in the pilot: the metaphor that holds 6 seasons' }, paraQuien: { es: 'para quien quiere al personaje más humano de la TV, contradicciones incluidas', en: 'for anyone who wants TV\'s most human character, contradictions included' }, collection: 'crimen-sin-glamur', snd: 'dark' },
+  'Silicon Valley': { tags: ['tech', 'sátira', 'startup', 'ritmo'], mood: { es: 'divertido y reconocible', en: 'funny and recognizable' }, time: '6 temporadas', energy: { es: 'baja', en: 'low' }, pairWith: 'The Almanack of Naval Ravikant', pairWhy: { es: 'la sátira y el manual: dos tomas del mismo ecosistema', en: 'the satire and the manual: two takes on the same ecosystem' }, signals: ['tech', 'sátira del oficio'], bestMoment: { es: 'la demo del compression algorithm en la temporada 1', en: 'the compression algorithm demo in season 1' }, paraQuien: { es: 'para quien trabaja en tech y necesita reírse de sí mismo', en: 'for anyone in tech who needs to laugh at themselves' }, collection: 'tech-y-poder', snd: 'focus' },
+  'El sueño de los héroes': { tags: ['fantástico', 'tiempo', 'argentino', 'breve'], mood: { es: 'onírico y preciso', en: 'dreamlike and precise' }, time: '200 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'dos novelas breves sobre identidades que mutan con el tiempo', en: 'two short novels about identities that mutate with time' }, signals: ['literatura argentina', 'estructuras de tiempo'], bestMoment: { es: 'la primera vuelta al tablero de ajedrez: el tiempo empezando a doblarse', en: 'the first lap around the chessboard: time starting to fold' }, paraQuien: { es: 'para quien quiere la mejor novela argentina de tiempo y segundas oportunidades', en: 'for anyone who wants the best Argentine novel about time and second chances' }, collection: 'argentinos', snd: 'cozy' },
+  'Crimen y castigo': { tags: ['psicológico', 'culpa', 'denso', 'imprescindible'], mood: { es: 'urgente y claustrofóbico', en: 'urgent and claustrophobic' }, time: '500+ páginas', energy: { es: 'alta', en: 'high' }, pairWith: 'The Perks of Being a Wallflower', pairWhy: { es: 'contrapunto liviano después de la avalancha: honestidad como descompresión', en: 'light counterpoint after the avalanche: honesty as decompression' }, signals: ['psicología', 'ambición literaria'], bestMoment: { es: 'el interrogatorio de Porfiry: un juego de ajedrez verbal 100 páginas antes del final', en: 'Porfiry\'s interrogation: a verbal chess game 100 pages before the end' }, paraQuien: { es: 'para quien quiere culpa y lógica al límite en 500 páginas urgentes', en: 'for anyone who wants guilt and logic pushed to the limit' }, collection: 'clasicos', snd: 'dark' },
+  'The Almanack of Naval Ravikant': { tags: ['no-ficción', 'decisiones', 'denso', 'bolsillo'], mood: { es: 'compacto y pragmático', en: 'compact and pragmatic' }, time: '242 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'Silicon Valley', pairWhy: { es: 'teoría y sátira del mismo mundo, en ese orden', en: 'theory and satire of the same world, in that order' }, signals: ['decisiones', 'apalancamiento'], bestMoment: { es: 'la sección de apalancamiento: 40 páginas que reordenan cómo laburas', en: 'the leverage section: 40 pages that rewire how you work' }, paraQuien: { es: 'para quien quiere el resumen más denso de decisiones de vida en bolsillo', en: 'for anyone who wants the densest life-decisions summary in pocket form' }, collection: 'tech-y-poder', snd: 'focus' },
+  'The Perks of Being a Wallflower': { tags: ['coming of age', 'honesto', 'breve', 'emocional'], mood: { es: 'tierno y directo', en: 'tender and direct' }, time: '213 páginas', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'cisne emocional: inteligencia, vulnerabilidad y pérdida', en: 'emotional swan song: intelligence, vulnerability and loss' }, signals: ['honestidad', 'voz narrativa'], bestMoment: { es: 'we are infinite en el túnel: la escena que define al género', en: 'we are infinite in the tunnel: the scene that defines the genre' }, paraQuien: { es: 'para quien quiere adolescencia honesta, sin nostalgia impostada', en: 'for anyone who wants honest adolescence without fake nostalgia' }, collection: 'clasicos', snd: 'cozy' },
+  'Flowers for Algernon': { tags: ['ciencia ficción', 'triste', 'breve', 'estructura'], mood: { es: 'devastador y limpio', en: 'devastating and clean' }, time: '311 páginas', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'El sueño de los héroes', pairWhy: { es: 'cerrar el círculo argentino: memoria y segunda oportunidades', en: 'close the Argentine circle: memory and second chances' }, signals: ['ciencia ficción humana', 'arcos de pérdida'], bestMoment: { es: 'las primeras faltas de ortizaje al final: el idioma derrumbándose', en: 'the spelling errors creeping back at the end: a language falling apart' }, paraQuien: { es: 'para quien quiere la ciencia ficción más triste y más humana', en: 'for anyone who wants the saddest, most human sci-fi' }, collection: 'sci-fi-que-duele', snd: 'cozy' },
+  'Outer Wilds': { tags: ['juego', 'curiosidad', 'bucle', 'sin combate'], mood: { es: 'curioso y melancólico', en: 'curious and melancholic' }, time: '20-25 h', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'Flowers for Algernon', pairWhy: { es: 'dos obras sobre qué hacés sabiendo que el tiempo se acaba', en: 'two works about what you do knowing time runs out' }, signals: ['curiosidad', 'exploración', 'tiempo'], bestMoment: { es: 'la primera vez que entendés qué pasa cada 22 minutos', en: 'the first time you understand what happens every 22 minutes' }, paraQuien: { es: 'para quien quiere un misterio que se resuelve con curiosidad, no con balas', en: 'for anyone who wants a mystery solved by curiosity, not bullets' }, collection: 'sci-fi-que-duele', snd: 'epic' },
+  'Hades': { tags: ['juego', 'roguelite', 'narrativa en el fracaso', 'ritmo'], mood: { es: 'energético y generoso', en: 'energetic and generous' }, time: '25-30 h', energy: { es: 'alta', en: 'high' }, pairWith: 'Silicon Valley', pairWhy: { es: 'morir como mecánica narrativa: iterar hasta que el producto funciona', en: 'dying as narrative mechanics: iterating until the product ships' }, signals: ['iteración', 'ritmo', 'narrativa'], bestMoment: { es: 'que el juego te cuente una historia cada vez que perdés', en: 'the game telling you a story every single time you lose' }, paraQuien: { es: 'para quien quiere que perder sea parte de la historia', en: 'for anyone who wants losing to be part of the story' }, collection: 'tech-y-poder', snd: 'neon' },
+  'Disco Elysium': { tags: ['juego', 'detective', 'texto', 'político'], mood: { es: 'brillante y devastating', en: 'brilliant and devastating' }, time: '30-40 h', energy: { es: 'alta', en: 'high' }, pairWith: 'Crimen y castigo', pairWhy: { es: 'Dostoievski con dados: culpa, alcohol y política en un solo barrio', en: 'Dostoevsky with dice: guilt, alcohol and politics in one district' }, signals: ['escritura', 'política', 'detective'], bestMoment: { es: 'discutir con tu propia corbata y perder el debate', en: 'arguing with your own necktie and losing the debate' }, paraQuien: { es: 'para quien quiere el mejor escrito interactivo jamás hecho', en: 'for anyone who wants the best interactive writing ever made' }, collection: 'crimen-sin-glamur', snd: 'dark' },
+  'Bocanada': { tags: ['música', 'argentino', 'electrónica', 'atmosférico'], mood: { es: 'nocturno y expansivo', en: 'nocturnal and expansive' }, time: '54 min', energy: { es: 'baja', en: 'low' }, pairWith: 'Silicon Valley', pairWhy: { es: 'el sound de la tech argentina de los 90, escuchado de corrido', en: 'the sound of 90s Argentine tech culture, played front to back' }, signals: ['producción', 'atmósfera'], bestMoment: { es: 'puente: 5 minutos de build que no bajan', en: 'puente: 5 minutes of build that never comes down' }, paraQuien: { es: 'para quien quiere escuchar un disco como se deben escuchar los discos', en: 'for anyone who wants to hear an album the way albums should be heard' }, collection: 'argentinos', snd: 'neon' },
+  'Artaud': { tags: ['música', 'argentino', 'crudo', 'imprescindible'], mood: { es: 'intenso y honesto', en: 'intense and honest' }, time: '44 min', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'Crimen y castigo', pairWhy: { es: 'mismo nivel de exigencia interna, en formato trío', en: 'the same inner intensity, in trio format' }, signals: ['letra', 'crudeza sonora'], bestMoment: { es: 'todas las hojas son del viento: la apertura que no te da tregua', en: 'todas las hojas son del viento: an opening that gives no quarter' }, paraQuien: { es: 'para quien quiere el disco más honesto del rock argentino', en: 'for anyone who wants the most honest record in Argentine rock' }, collection: 'argentinos', snd: 'dark' },
+  'The Dark Side of the Moon': { tags: ['música', 'conceptual', 'atmosférico', 'clásico'], mood: { es: 'hipnótico y preciso', en: 'hypnotic and precise' }, time: '43 min', energy: { es: 'baja', en: 'low' }, pairWith: 'Outer Wilds', pairWhy: { es: 'tiempo, dinero y muerte: el juego y el disco hacen las mismas preguntas', en: 'time, money and death: the game and the album ask the same questions' }, signals: ['producción', 'concepto'], bestMoment: { es: 'the great gig in the sky: 4 minutos sin letras que dicen todo', en: 'the great gig in the sky: 4 wordless minutes that say everything' }, paraQuien: { es: 'para quien quiere escuchar un concepto, no una colección de canciones', en: 'for anyone who wants to hear a concept, not a song collection' }, collection: 'clasicos', snd: 'neon' },
+  'Blade Runner 2049': { tags: ['ciencia ficción', 'visual', 'lento', 'contemplativo'], mood: { es: 'inmenso y solitario', en: 'immense and lonely' }, time: '2h 44m', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'Las Dos Torres', pairWhy: { es: 'escala real: dos mundos construidos con oficio y sin atajos', en: 'real scale: two worlds built with craft and no shortcuts' }, signals: ['dirección de arte', 'fotografía'], bestMoment: { es: 'la pelea en la sala holográfica de Vegas: luz como lenguaje', en: 'the Vegas hologram fight: light as language' }, paraQuien: { es: 'para quien quiere ver qué es la dirección de arte como narrativa', en: 'for anyone who wants art direction as storytelling' }, collection: 'sci-fi-que-duele', snd: 'neon' },
+  'Whiplash': { tags: ['música', 'tensión', 'obsesión', 'ritmo'], mood: { es: 'tenso y adictivo', en: 'tense and addictive' }, time: '1h 46m', energy: { es: 'alta', en: 'high' }, pairWith: 'Hades', pairWhy: { es: 'iterar hasta la perfección cueste lo que cueste: el juego y la peli', en: 'iterate to perfection whatever it costs: the game and the film' }, signals: ['ritmo', 'obsesión'], bestMoment: { es: 'los últimos 8 minutos: un plano secuencia de puro magma', en: 'the last 8 minutes: an unbroken sequence of pure magma' }, paraQuien: { es: 'para quien quiere tensión pura sin un solo disparo', en: 'for anyone who wants pure tension without a single gunshot' }, collection: 'clasicos', snd: 'fun' },
+  'Rayuela': { tags: ['argentino', 'experimental', 'largo aliento', 'juego'], mood: { es: 'juguetón y laberíntico', en: 'playful and labyrinthine' }, time: '600 páginas', energy: { es: 'compromiso alto', en: 'high commitment' }, pairWith: 'Outer Wilds', pairWhy: { es: 'leerlo en cualquier orden: la primera open world de la literatura', en: 'read it in any order: literature\'s first open world' }, signals: ['estructura', 'juego narrativo'], bestMoment: { es: 'el capítulo 7: el que te enseña que podés leer el libro como quieras', en: 'chapter 7: the one that teaches you the book can be read your way' }, paraQuien: { es: 'para quien quiere un libro que se juega', en: 'for anyone who wants a book that plays back' }, collection: 'argentinos', snd: 'cozy' },
+  'El Aleph': { tags: ['argentino', 'cuentos', 'infinito', 'breve'], mood: { es: 'preciso y infinito', en: 'precise and infinite' }, time: '180 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'El sueño de los héroes', pairWhy: { es: 'Borges y Bioy: los dos lados del fantástico argentino', en: 'Borges and Bioy: both sides of the Argentine fantastic' }, signals: ['concepto', 'brevedad'], bestMoment: { es: 'el Aleph en la oficina de Zunino: ver todo y no poder explicarlo', en: 'the Aleph in Zunino\'s office: seeing everything, explaining nothing' }, paraQuien: { es: 'para quien quiere conceptos infinitos en páginas mínimas', en: 'for anyone who wants infinite concepts in minimal pages' }, collection: 'argentinos', snd: 'cozy' },
+  'Atardecer en la Reserva': { tags: ['lugar', 'gratis', 'buenos aires', 'una hora'], mood: { es: 'abierto y lento', en: 'open and slow' }, time: '1-2 h', energy: { es: 'baja', en: 'low' }, pairWith: 'The Dark Side of the Moon', pairWhy: { es: 'el disco correcto para el atardecer correcto', en: 'the right album for the right sunset' }, signals: ['aire libre', 'cerca'], bestMoment: { es: 'los últimos 20 minutos antes de que cierre: nadie más alrededor', en: 'the last 20 minutes before closing: nobody else around' }, paraQuien: { es: 'para quien necesita 1 hora sin pantallas en Buenos Aires', en: 'for anyone who needs 1 screen-free hour in Buenos Aires' }, collection: 'experiencias', snd: 'warm' },
+  'La Boca de madrugada': { tags: ['lugar', 'fotografía', 'buenos aires', 'nocturno'], mood: { es: 'silencioso y de otro siglo', en: 'quiet and from another century' }, time: '1 h', energy: { es: 'media-baja', en: 'medium-low' }, pairWith: 'Pusher II', pairWhy: { es: 'el set ya armado: calles que parecen de película nórdica', en: 'a ready-made set: streets straight out of a nordic film' }, signals: ['fotografía', 'nocturno'], bestMoment: { es: 'el puente cuando no pasa nadie: solo vos y los colores', en: 'the bridge when nobody passes: just you and the colors' }, paraQuien: { es: 'para quien quiere fotografiar Buenos Aires sin gente', en: 'for anyone who wants to shoot Buenos Aires without people' }, collection: 'experiencias', snd: 'dark' },
+  'Meditaciones': { tags: ['filosofía', 'estoico', 'breve', 'relectura'], mood: { es: 'sereno y cortante', en: 'serene and cutting' }, time: '254 páginas', energy: { es: 'media', en: 'medium' }, pairWith: 'The Almanack of Naval Ravikant', pairWhy: { es: 'el original y el remix moderno, back to back', en: 'the original and the modern remix, back to back' }, signals: ['estoicismo', 'relectura'], bestMoment: { es: 'al azar: se abre donde lo necesitás, siempre', en: 'at random: it opens where you need it, every time' }, paraQuien: { es: 'para quien quiere un libro que funcione como herramienta, no como adorno', en: 'for anyone who wants a book that works like a tool, not an ornament' }, collection: 'clasicos', hidden: true, snd: 'dark' },
+  'Twin Peaks': { tags: ['serie', 'surreal', 'misterio', 'largo aliento'], mood: { es: 'extraño y cálido', en: 'strange and warm' }, time: '3 temporadas', energy: { es: 'compromiso medio', en: 'medium commitment' }, pairWith: 'Silicon Valley', pairWhy: { es: 'dos series sobre lo que se esconde detrás del escritorio', en: 'two series about what hides behind the desk' }, signals: ['surreal', 'misterio'], bestMoment: { es: 'el baile del enano: el sueño que partió la TV en dos', en: 'the dancing dwarf: the dream that split TV in two' }, paraQuien: { es: 'para quien quiere misterio sin respuesta y café damn fine', en: 'for anyone who wants mystery without answers and damn fine coffee' }, collection: 'crimen-sin-glamur', hidden: true, snd: 'dark' },
+  'El Eternauta': { tags: ['cómic', 'argentino', 'invasión', 'imprescindible'], mood: { es: 'sombrío y colectivo', en: 'somber and collective' }, time: '350 páginas', energy: { es: 'media-alta', en: 'medium-high' }, pairWith: 'Las Dos Torres', pairWhy: { es: 'el héroe colectivo contra la escala de la invasión', en: 'the collective hero against the scale of the invasion' }, signals: ['cómic argentino', 'hito'], bestMoment: { es: 'la nevada mortal de la primera página: nadie sabía qué era', en: 'the deadly snowfall on page one: nobody knew what it was' }, paraQuien: { es: 'para quien quiere el cómic que definió la ciencia ficción argentina', en: 'for anyone who wants the comic that defined Argentine sci-fi' }, collection: 'argentinos', hidden: true, snd: 'dark' }
 };
 
 const SQ_SKILLS = {
@@ -585,7 +637,90 @@ const SQ_SKILLS = {
   'tone.analysis': { es: 'Analiza el tono del veredicto', en: 'Analyzes verdict tone' },
   'verdict.draft': { es: 'Redacta el veredicto en una pasada', en: 'Drafts the verdict in one pass' },
   'marathon.plan': { es: 'Ordena una cadena de quests', en: 'Orders a quest chain' },
-  'timebox.estimate': { es: 'Estima tiempo y energía totales', en: 'Estimates total time and energy' }
+  'timebox.estimate': { es: 'Estima tiempo y energía totales', en: 'Estimates total time and energy' },
+  'taste.graph.build': { es: 'Construye el grafo de gusto desde eventos', en: 'Builds the taste graph from events' },
+  'spoiler.guard': { es: 'Valida que el veredicto no contenga giros', en: 'Validates the verdict is spoiler-free' },
+  'og.render': { es: 'Renderiza la imagen para compartir por canvas', en: 'Renders the share image via canvas' }
+};
+
+// --- taste graph (localStorage) ---
+const SQ_TASTE_KEY = 'sq_taste', SQ_SEEN_KEY = 'sq_seen', SQ_UNLOCK_KEY = 'sq_unlock';
+function sqTasteGet() { try { return JSON.parse(localStorage.getItem(SQ_TASTE_KEY)) || { tags: {}, views: {} }; } catch (e) { return { tags: {}, views: {} }; } }
+function sqTasteBump(tags, w) { const t = sqTasteGet(); (tags || []).forEach(tag => { t.tags[tag] = Math.min(9, (t.tags[tag] || 0) + w); }); localStorage.setItem(SQ_TASTE_KEY, JSON.stringify(t)); }
+function sqMatch(quest) {
+  const t = sqTasteGet();
+  const intel = SQ_INTEL[quest.title] || { tags: [] };
+  let s = 42;
+  intel.tags.forEach(tag => { s += (t.tags[tag] || 0) * 9; });
+  if (t.views[quest.title]) s += 6;
+  return Math.min(98, Math.round(s + sqHash(quest.title) % 5));
+}
+function sqSeenGet() { try { return JSON.parse(localStorage.getItem(SQ_SEEN_KEY)) || []; } catch (e) { return []; } }
+function sqSeenToggle(title) {
+  const s = sqSeenGet();
+  const i = s.indexOf(title);
+  if (i >= 0) s.splice(i, 1); else s.push(title);
+  localStorage.setItem(SQ_SEEN_KEY, JSON.stringify(s));
+  return i < 0;
+}
+function sqUnlockGet() { try { return JSON.parse(localStorage.getItem(SQ_UNLOCK_KEY)) || []; } catch (e) { return []; } }
+function sqUnlockAdd(title) {
+  const u = sqUnlockGet();
+  if (u.includes(title)) return false;
+  u.push(title); localStorage.setItem(SQ_UNLOCK_KEY, JSON.stringify(u));
+  sqToast((currentLang === 'en' ? 'Secret quest unlocked: ' : 'Quest secreta desbloqueada: ') + title);
+  return true;
+}
+function sqToast(msg) {
+  let el = document.getElementById('sq-toast');
+  if (!el) { el = document.createElement('div'); el.id = 'sq-toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.classList.add('on');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('on'), 3200);
+}
+function sqCollections() {
+  const set = new Set();
+  SIDE_QUESTS.forEach(q => { const i = SQ_INTEL[q.title]; if (i && i.collection) set.add(i.collection); });
+  return Array.from(set);
+}
+function sqPosterArt(item) {
+  const h = sqHash(item.title);
+  const hue = h % 360;
+  const words = item.title.toUpperCase().split(' ');
+  const lines = []; let cur = '';
+  for (const w of words) { if ((cur + ' ' + w).trim().length > 11 && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }
+  lines.push(cur);
+  const show = lines.slice(-5);
+  const size = Math.min(88, Math.floor(560 / Math.max(...show.map(l => l.length))) + 6);
+  const y0 = 430 - (show.length - 1) * size * 0.52;
+  let t = '';
+  show.forEach((l, i) => { t += '<text x="46" y="' + Math.round(y0 + i * size * 1.05) + '" font-family="Impact,\'Arial Black\',sans-serif" font-size="' + size + '" fill="#f4f0e6" letter-spacing="1">' + esc(l) + '</text>'; });
+  const intel = SQ_INTEL[item.title] || {};
+  const creator = sqL(item.meta).slice(0, 34);
+  const cat = sqL(item.cat).toUpperCase();
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900">' +
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="hsl(' + hue + ',42%,17%)"/><stop offset="1" stop-color="hsl(' + ((hue + 40) % 360) + ',52%,8%)"/></linearGradient>' +
+    '<radialGradient id="gl" cx="0.72" cy="0.22" r="0.95"><stop offset="0" stop-color="' + item.color + '" stop-opacity="0.55"/><stop offset="1" stop-color="' + item.color + '" stop-opacity="0"/></radialGradient>' +
+    '<filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0"/></filter></defs>' +
+    '<rect width="600" height="900" fill="url(#g)"/><rect width="600" height="900" fill="url(#gl)"/>' +
+    '<rect x="24" y="24" width="552" height="852" fill="none" stroke="' + item.color + '" stroke-opacity="0.5" stroke-width="2"/>' + t +
+    '<text x="46" y="' + Math.round(y0 + show.length * size * 1.05 + 38) + '" font-family="\'IBM Plex Mono\',monospace" font-size="22" fill="' + item.color + '" letter-spacing="3">' + esc(creator) + '</text>' +
+    '<rect x="46" y="796" width="508" height="2" fill="' + item.color + '" fill-opacity="0.6"/>' +
+    '<text x="46" y="838" font-family="\'IBM Plex Mono\',monospace" font-size="19" fill="#f4f0e6" fill-opacity="0.75" letter-spacing="6">' + esc(cat) + '</text>' +
+    '<rect width="600" height="900" filter="url(#gr)"/></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+function sqPosterSrc(item) { return item.poster || sqPosterArt(item); }
+
+const SQ_COLLECTION_LABELS = {
+  'argentinos': { es: 'Argentinos', en: 'Argentine' },
+  'sci-fi-que-duele': { es: 'Sci-fi que duele', en: 'Sci-fi that hurts' },
+  'crimen-sin-glamur': { es: 'Crimen sin glamur', en: 'Crime, no glamour' },
+  'tech-y-poder': { es: 'Tech y poder', en: 'Tech and power' },
+  'clasicos': { es: 'Clásicos', en: 'Classics' },
+  'experiencias': { es: 'Experiencias', en: 'Experiences' }
 };
 
 function setupSideQuests() {
@@ -600,7 +735,9 @@ function setupSideQuests() {
   const subEl = document.getElementById('sq-detail-sub');
   const whyEl = document.getElementById('sq-detail-why');
   const tagRow = document.getElementById('sq-tagrow');
+  const actionRow = document.getElementById('sq-actions');
   const strip = document.getElementById('sq-strip');
+  const chipRow = document.getElementById('sq-col-chips');
   const prevBtn = document.getElementById('sq-prev');
   const nextBtn = document.getElementById('sq-next');
   if (!toggle || !reveal || !posterImg) return;
@@ -608,30 +745,53 @@ function setupSideQuests() {
   const n = SIDE_QUESTS.length;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let current = 0;
+  let collection = 'all';
+  let audioEl = null;
 
-  if (!strip.dataset.built) {
-    strip.dataset.built = 'true';
-    SIDE_QUESTS.forEach((item, i) => {
+  const unlocked = () => sqUnlockGet();
+  const isUnlocked = q => !q.hidden || unlocked().includes(q.title);
+  const visibleQuests = () => SIDE_QUESTS.filter(q => isUnlocked(q) && (collection === 'all' || (SQ_INTEL[q.title] || {}).collection === collection));
+
+  // collection chips
+  function buildChips() {
+    chipRow.innerHTML = '';
+    const all = document.createElement('button');
+    all.type = 'button'; all.className = 'sq-col-chip'; all.dataset.col = 'all';
+    all.textContent = currentLang === 'en' ? 'All' : 'Todas';
+    all.addEventListener('click', () => { collection = 'all'; buildChips(); render(); });
+    chipRow.appendChild(all);
+    sqCollections().forEach(col => {
+      const c = document.createElement('button');
+      c.type = 'button'; c.className = 'sq-col-chip'; c.dataset.col = col;
+      c.textContent = sqL(SQ_COLLECTION_LABELS[col] || { es: col, en: col });
+      c.addEventListener('click', () => { collection = col; const vis = visibleQuests(); if (vis.length && !vis.includes(SIDE_QUESTS[current])) current = SIDE_QUESTS.indexOf(vis[0]); buildChips(); render(); });
+      chipRow.appendChild(c);
+    });
+    chipRow.querySelectorAll('.sq-col-chip').forEach(c => c.classList.toggle('active', c.dataset.col === collection));
+  }
+
+  function buildStrip() {
+    strip.innerHTML = '';
+    visibleQuests().forEach(item => {
+      const i = SIDE_QUESTS.indexOf(item);
       const t = document.createElement('button');
       t.type = 'button'; t.className = 'sq-thumb';
-      t.innerHTML = '<img src="' + item.poster + '" alt="" loading="lazy" decoding="async">';
+      t.innerHTML = '<img src="' + sqPosterSrc(item) + '" alt="" loading="lazy" decoding="async">';
+      if (unlocked().includes(item.title)) t.classList.add('secret');
+      if (sqSeenGet().includes(item.title)) t.classList.add('seen');
       t.addEventListener('click', () => { current = i; render(); });
       strip.appendChild(t);
     });
   }
 
-  function localize(field) { return typeof field === 'string' ? field : field[currentLang]; }
-
   function render() {
     const item = SIDE_QUESTS[current];
-    const intel = SQ_INTEL[item.title] || { tags: [] };
+    if (!item) return;
+    const intel = SQ_INTEL[item.title] || { tags: [], bestMoment: null, paraQuien: null };
     const accent = item.color || '#8ab4ff';
+    const src = sqPosterSrc(item);
     posterImg.style.opacity = 0;
-    setTimeout(() => {
-      posterImg.src = item.poster;
-      posterImg.alt = item.title;
-      posterImg.style.opacity = 1;
-    }, reduceMotion ? 0 : 150);
+    setTimeout(() => { posterImg.src = src; posterImg.alt = item.title; posterImg.style.opacity = 1; }, reduceMotion ? 0 : 150);
     glow.style.background = 'radial-gradient(closest-side, ' + accent + ', transparent 72%)';
     catBadge.textContent = localize(item.cat);
     catChip.textContent = localize(item.cat);
@@ -640,18 +800,128 @@ function setupSideQuests() {
     subEl.textContent = localize(item.meta);
     whyEl.textContent = localize(item.why);
     tagRow.innerHTML = intel.tags.map(t => '<span>' + escapeHtml(t) + '</span>').join('');
-    strip.querySelectorAll('.sq-thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+    // actions: seen + share + sound
+    const seen = sqSeenGet().includes(item.title);
+    actionRow.innerHTML =
+      '<button type="button" class="sq-act' + (seen ? ' on' : '') + '" id="sq-seen-btn">' + (seen ? '✓ ' : '') + (currentLang === 'en' ? (seen ? 'completed' : 'mark as done') : (seen ? 'completada' : 'marcar como hecha')) + '</button>' +
+      '<button type="button" class="sq-act" id="sq-share-btn">' + (currentLang === 'en' ? '⤓ share' : '⤓ compartir') + '</button>' +
+      '<button type="button" class="sq-act sq-snd-btn" id="sq-snd-btn" title="' + (currentLang === 'en' ? 'ambient sound' : 'sonido ambiental') + '">♪</button>';
+    document.getElementById('sq-seen-btn').addEventListener('click', () => {
+      const added = sqSeenToggle(item.title);
+      (intel.tags || []).forEach(tag => sqTasteBump([tag], added ? 2 : -1));
+      sqTasteBump([item.title], added ? 1 : -1);
+      render();
+    });
+    document.getElementById('sq-share-btn').addEventListener('click', () => sqShareQuest(item, intel));
+    const sndBtn = document.getElementById('sq-snd-btn');
+    if (intel.snd) {
+      sndBtn.classList.add('has');
+      sndBtn.addEventListener('click', () => {
+        if (audioEl && !audioEl.paused) { audioEl.pause(); sndBtn.classList.remove('playing'); return; }
+        if (!audioEl || audioEl.dataset.mood !== intel.snd) {
+          if (audioEl) audioEl.pause();
+          audioEl = new Audio('project-assets/side-quests/audio/' + intel.snd + '.mp3');
+          audioEl.dataset.mood = intel.snd; audioEl.loop = true; audioEl.volume = 0.35;
+        }
+        sndBtn.classList.add('playing');
+        audioEl.play().catch(() => {});
+      });
+    } else sndBtn.style.display = 'none';
+    // taste: visiting a quest feeds the graph
+    sqTasteBump(intel.tags, 0.4);
+    const taste = sqTasteGet();
+    const views = taste.views || {};
+    views[item.title] = (views[item.title] || 0) + 1;
+    taste.views = views;
+    localStorage.setItem(SQ_TASTE_KEY, JSON.stringify(taste));
+    buildStrip();
+    strip.querySelectorAll('.sq-thumb').forEach((t, i) => {
+      const q = visibleQuests()[i];
+      t.classList.toggle('active', q && q.title === item.title);
+      if (q && q.title === item.title) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+    // para vos badge
+    const best = sqBestForYou();
+    const forYou = best && best.title === item.title;
+    catChip.textContent = forYou ? (currentLang === 'en' ? 'FOR YOU' : 'PARA VOS') : localize(item.cat);
+    if (forYou) catChip.style.color = '#f5c04e'; else catChip.style.color = accent;
+    window.SQAgentSelect = function (qi) { current = qi; render(); };
     if (window.SQAgentHook) window.SQAgentHook(current);
   }
 
-  function step(delta) { current = (current + delta + n) % n; render(); }
+  function localize(field) { return typeof field === 'string' ? field : field[currentLang]; }
+
+  function sqBestForYou() {
+    let best = null, bestM = -1;
+    visibleQuests().forEach(q => { const m = sqMatch(q); if (m > bestM) { bestM = m; best = q; } });
+    return best;
+  }
+
+  function sqShareQuest(item, intel) {
+    const W = 1200, H = 630;
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    const grd = x.createLinearGradient(0, 0, W, H);
+    grd.addColorStop(0, '#0c0a14'); grd.addColorStop(1, '#05050a');
+    x.fillStyle = grd; x.fillRect(0, 0, W, H);
+    x.save(); x.globalAlpha = 0.5; x.filter = 'blur(60px)';
+    x.fillStyle = item.color; x.fillRect(W - 480, -120, 560, 420);
+    x.restore();
+    const img = new Image();
+    img.onload = () => {
+      x.drawImage(img, 70, 90, 300, 450);
+      drawText();
+      download();
+    };
+    img.onerror = () => { drawText(); download(); };
+    img.src = sqPosterSrc(item);
+    function drawText() {
+      x.fillStyle = '#ffffff';
+      x.font = '700 54px Georgia, serif';
+      x.fillText(item.title.slice(0, 28), 430, 190);
+      x.fillStyle = item.color;
+      x.font = '600 22px "IBM Plex Mono", monospace';
+      x.fillText((sqL(item.cat) + ' · ' + (intel.time || '')).toUpperCase(), 430, 235);
+      x.fillStyle = 'rgba(255,255,255,.85)';
+      x.font = 'italic 500 26px Georgia, serif';
+      const why = sqL(item.why).slice(0, 110);
+      wrap(x, '"' + why + '"', 430, 300, 700, 36);
+      x.fillStyle = '#48d597';
+      x.font = '700 30px "IBM Plex Mono", monospace';
+      const h = sqHash(item.title); x.fillText((7.6 + (h % 24) / 10).toFixed(1) + ' / 10', 430, 480);
+      x.fillStyle = 'rgba(255,255,255,.55)';
+      x.font = '500 18px "IBM Plex Mono", monospace';
+      x.fillText('crew de 3 agentes · ruta T0→T3 · ignaciopalmeri.vercel.app', 430, 540);
+    }
+    function wrap(ctx, text, X, Y, maxW, lh) {
+      const words = text.split(' '); let line = '', yy = Y;
+      words.forEach(w => { const test = line + w + ' '; if (ctx.measureText(test).width > maxW && line) { ctx.fillText(line.trim(), X, yy); line = w + ' '; yy += lh; } else line = test; });
+      ctx.fillText(line.trim(), X, yy);
+    }
+    function download() {
+      const a = document.createElement('a');
+      a.download = 'side-quest-' + item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40) + '.png';
+      a.href = c.toDataURL('image/png');
+      a.click();
+      sqToast(currentLang === 'en' ? 'Share image downloaded' : 'Imagen para compartir descargada');
+    }
+  }
+
+  function step(delta) {
+    const vis = visibleQuests();
+    if (!vis.length) return;
+    const i = vis.indexOf(SIDE_QUESTS[current]);
+    const next = vis[(i + delta + vis.length) % vis.length];
+    current = SIDE_QUESTS.indexOf(next);
+    render();
+  }
 
   function open() {
     toggle.setAttribute('aria-expanded', 'true');
     reveal.classList.add('is-visible');
     reveal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    render();
+    buildChips(); buildStrip(); render();
   }
 
   function close() {
@@ -659,6 +929,7 @@ function setupSideQuests() {
     reveal.classList.remove('is-visible');
     reveal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (audioEl) audioEl.pause();
   }
 
   if (!toggle.dataset.bound) {
@@ -676,7 +947,7 @@ function setupSideQuests() {
     });
   }
 
-  render();
+  buildChips(); buildStrip(); render();
 }
 
 function setupPreferenceControls() {
@@ -2194,7 +2465,7 @@ function buildNodes() {
     let bubbleContent = '';
     if (node.type === 'agent') {
       const avatar = AGENT_AVATARS[node.id];
-      const fallbackIcon = (AGENT_ICONS[node.id] || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      const fallbackIcon = (AGENT_ICONS[node.id] || '').replace(/'/g, "\'").replace(/"/g, '&quot;');
       const inner = avatar
         ? `<img src="${avatar}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML='${fallbackIcon}'">`
         : (AGENT_ICONS[node.id] || '');
@@ -2884,22 +3155,21 @@ function stopEcosystemLoop() {
 }
 
 
-// ═══════════════════ SIDE QUESTS × AGENT CREW ═══════════════════
-// The multiagent runtime behind the spotlight: 3 agents review the selected
-// quest per workflow. Technical route stays collapsed inside <details>.
 
-function sqL(field) { return typeof field === 'string' ? field : field[currentLang] || field.es; }
-function sqHash(str) { let h = 7; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0; return h; }
+// ═══════════════════ SIDE QUESTS × AGENT CREW (v3) ═══════════════════
+// Reviews with debate, hidden-quest unlocks, share OG image hook and
+// a conversational router. The technical route stays collapsed in <details>.
+
 const SQ_AGENTS = [
   { id: 'curador', name: 'curador', role: { es: 'Curador de catálogo', en: 'Catalog curator' }, avatar: 'project-assets/agent-avatars/content.jpg', skills: ['catalog.index', 'genre.classify', 'pair.graph'] },
-  { id: 'critico', name: 'critico', role: { es: 'Crítico residente', en: 'Resident critic' }, avatar: 'project-assets/agent-avatars/reviewer.jpg', skills: ['tone.analysis', 'verdict.draft'] },
+  { id: 'critico', name: 'critico', role: { es: 'Crítico residente', en: 'Resident critic' }, avatar: 'project-assets/agent-avatars/reviewer.jpg', skills: ['tone.analysis', 'verdict.draft', 'spoiler.guard'] },
   { id: 'estratega', name: 'estratega', role: { es: 'Estratega de maratones', en: 'Marathon strategist' }, avatar: 'project-assets/agent-avatars/growth.jpg', skills: ['marathon.plan', 'timebox.estimate'] }
 ];
 
 const SQ_WORKFLOWS = [
-  { id: 'deep', label: { es: 'Análisis', en: 'Deep' }, seq: ['memoria', 'curador', 'critico'] },
-  { id: 'match', label: { es: 'Match', en: 'Match' }, seq: ['memoria', 'estratega', 'critico'] },
-  { id: 'marathon', label: { es: 'Maratón', en: 'Marathon' }, seq: ['memoria', 'curador', 'estratega'] }
+  { id: 'deep', label: { es: 'Análisis', en: 'Deep' }, seq: ['curador', 'critico'] },
+  { id: 'match', label: { es: 'Match', en: 'Match' }, seq: ['memoria', 'critico'] },
+  { id: 'marathon', label: { es: 'Maratón', en: 'Marathon' }, seq: ['curador', 'estratega'] }
 ];
 
 function sqRouteLog() { return document.getElementById('sq-route-log'); }
@@ -2918,6 +3188,7 @@ function setupSideQuestAgents() {
   let currentQuest = 0;
   let currentWf = 'deep';
   let runSeq = 0;
+  let konami = [];
 
   SQ_WORKFLOWS.forEach(wf => {
     const b = document.createElement('button');
@@ -2927,6 +3198,13 @@ function setupSideQuestAgents() {
     b.addEventListener('click', () => { currentWf = wf.id; syncModes(); run(currentQuest); });
     modesEl.appendChild(b);
   });
+
+  // conversational router row
+  const askRow = document.createElement('div');
+  askRow.className = 'sq-ask-row';
+  askRow.innerHTML = '<input type="text" id="sq-ask-input" placeholder="' + (currentLang === 'en' ? 'Tell the crew what you feel like… (e.g. \u201csomething that destroys you\u201d)' : 'Contale al crew qué te apetece… (ej. \u201calgo que te destruya\u201d)') + '" maxlength="80">' +
+    '<button type="button" id="sq-ask-btn">' + (currentLang === 'en' ? 'Route' : 'Enrutar') + '</button>';
+  cardsEl.parentNode.insertBefore(askRow, cardsEl);
 
   function syncModes() {
     modesEl.querySelectorAll('.sq-mode').forEach(b => b.classList.toggle('active', b.dataset.wf === currentWf));
@@ -2941,11 +3219,12 @@ function setupSideQuestAgents() {
   }
   const esc = s => escapeHtml(String(s));
 
-  function reviewCard(ag, quote, score) {
+  function reviewCard(ag, quote, score, debate) {
     return '<div class="sq-review in">' +
       '<div class="rq-top"><img src="' + ag.avatar + '" alt="" loading="lazy">' +
       '<div><div class="rq-name">' + ag.name + '</div><div class="rq-role">' + esc(sqL(ag.role)) + '</div></div></div>' +
       (score ? '<span class="rq-score">' + score + '</span>' : '') +
+      (debate ? '<p class="rq-debate">⚠ ' + esc(sqL(debate)) + '</p>' : '') +
       '<p class="rq-quote">' + quote + '</p></div>';
   }
 
@@ -2986,7 +3265,7 @@ function setupSideQuestAgents() {
   }
 
   function buildReviews(wf, quest) {
-    const intel = SQ_INTEL[quest.title] || { tags: [], mood: { es: '', en: '' }, time: '—', energy: { es: '', en: '' }, pairWith: '', pairWhy: { es: '', en: '' }, signals: [] };
+    const intel = SQ_INTEL[quest.title] || { tags: [], mood: { es: '', en: '' }, time: '—', energy: { es: '', en: '' }, pairWith: '', pairWhy: { es: '', en: '' }, signals: [], bestMoment: null, paraQuien: null, debate: null };
     const h = sqHash(quest.title + wf.id);
     const score = (7.6 + (h % 24) / 10).toFixed(1);
     const cards = [];
@@ -3005,23 +3284,38 @@ function setupSideQuestAgents() {
           ? 'Total estimate for the chain: ~' + totalHours(chain) + ' h. Best pace: one per weekend.'
           : 'Estimación total de la cadena: ~' + totalHours(chain) + ' h. Mejor ritmo: uno por finde.'), null));
     } else {
+      const debate = intel.debate && h % 3 === 0 ? intel.debate : null;
       cards.push(reviewCard(SQ_AGENTS[0],
         (currentLang === 'en'
           ? 'Classified as <b>' + esc(sqL(intel.mood)) + '</b> — ' + intel.tags.join(', ') + '. Closest pair in the catalog: <b>' + esc(intel.pairWith) + '</b>.'
           : 'Clasificada como <b>' + esc(sqL(intel.mood)) + '</b> — ' + intel.tags.join(', ') + '. El par más cercano del catálogo: <b>' + esc(intel.pairWith) + '</b>.'), null));
       cards.push(reviewCard(SQ_AGENTS[1],
         (currentLang === 'en'
-          ? 'Verdict: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + ' Would not change a single scene.'
-          : 'Veredicto: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + ' No cambiaría una sola escena.'), score + '/10'));
+          ? 'Verdict: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + (debate ? ' Curador disagrees, and that is fine.' : ' Would not change a single scene.')
+          : 'Veredicto: ' + sqL(intel.mood) + '. ' + sqL(quest.why) + (debate ? ' Discrepo con curador, y está bien.' : ' No cambiaría una sola escena.')) +
+        (intel.bestMoment ? '<br><span class="rq-bm">' + (currentLang === 'en' ? 'best moment: ' : 'mejor momento: ') + esc(sqL(intel.bestMoment)) + '</span>' : ''), score + '/10', debate));
       cards.push(reviewCard(SQ_AGENTS[2],
         (currentLang === 'en'
-          ? 'Time: <b>' + esc(intel.time) + '</b> · energy: ' + esc(sqL(intel.energy)) + '. Signals matched with your profile: ' + intel.signals.join(', ') + '.'
-          : 'Tiempo: <b>' + esc(intel.time) + '</b> · energía: ' + esc(sqL(intel.energy)) + '. Señales que matchean con tu perfil: ' + intel.signals.join(', ') + '.'), null));
+          ? 'Time: <b>' + esc(intel.time) + '</b> · energy: ' + esc(sqL(intel.energy)) + '. For: ' + esc(sqL(intel.paraQuien)) + '. Seen: ' + sqSeenGet().length + '/' + SIDE_QUESTS.length + '.'
+          : 'Tiempo: <b>' + esc(intel.time) + '</b> · energía: ' + esc(sqL(intel.energy)) + '. Para: ' + esc(sqL(intel.paraQuien)) + '. Vistas: ' + sqSeenGet().length + '/' + SIDE_QUESTS.length + '.'), null));
     }
     return cards;
   }
 
   const sleep = ms => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms));
+
+  function crewLine(running, quest, secs) {
+    if (running) {
+      lineEl.innerHTML = '<span class="dot"></span>' + (currentLang === 'en'
+        ? 'agents reviewing <b>' + esc(quest.title) + '</b> · route T0\u2192T3\u2026'
+        : 'agentes analizando <b>' + esc(quest.title) + '</b> · ruta T0\u2192T3\u2026');
+    } else {
+      lineEl.innerHTML = '<span class="dot"></span>' +
+        (currentLang === 'en'
+          ? '3 agents reviewed this quest · route T0\u2192T3 · ' + secs.toFixed(1) + 's · ' + sqSeenGet().length + '/' + SIDE_QUESTS.length + ' completed'
+          : '3 agentes revisaron esta quest · ruta T0\u2192T3 · ' + secs.toFixed(1) + 's · ' + sqSeenGet().length + '/' + SIDE_QUESTS.length + ' completadas');
+    }
+  }
 
   async function run(questIndex) {
     const seq = ++runSeq;
@@ -3032,40 +3326,109 @@ function setupSideQuestAgents() {
     const t0 = performance.now();
     const alive = () => { if (seq !== runSeq) throw 'cancelled'; };
 
-    lineEl.innerHTML = '<span class="dot"></span>' + (currentLang === 'en'
-      ? 'agents reviewing <b>' + esc(quest.title) + '</b> · route T0\u2192T3\u2026'
-      : 'agentes analizando <b>' + esc(quest.title) + '</b> · ruta T0\u2192T3\u2026');
+    crewLine(true, quest);
     if (logEl) logEl.innerHTML = '';
-    shimmerCards(3);
+    shimmerCards(wf.id === 'marathon' ? 3 : 3);
 
     const my = () => ((performance.now() - t0) / 1000).toFixed(1);
     const step = async ms => { await sleep(ms); alive(); };
 
     try {
       log(my() + 's T0 route \u25b8 intent.parse("' + esc(quest.title) + '") <span class="ok">\u2713</span>');
-      await step(500); alive();
+      await step(420); alive();
       log(my() + 's T1 memoria \u25b8 signals.match(profile) \u2192 ' + (intel ? intel.signals.length : 0) + ' señales <span class="ok">\u2713</span>');
-      await step(450); alive();
+      await step(400); alive();
       for (const aid of wf.seq) {
         log(my() + 's T2 ' + aid + ' \u25b8 ' + aid + '.run("' + esc(quest.title) + '") <span class="ok">\u2713</span>');
-        await step(reduceMotion ? 30 : 420); alive();
+        await step(reduceMotion ? 30 : 400); alive();
       }
       log(my() + 's T3 synthesize \u25b8 quality.gate \u2192 briefing <span class="ok">\u2713</span>');
 
       const secs = (performance.now() - t0) / 1000;
-      lineEl.innerHTML = '<span class="dot"></span>' +
-        (currentLang === 'en'
-          ? wf.seq.length + ' agents reviewed this quest · route T0\u2192T3 · ' + secs.toFixed(1) + 's'
-          : wf.seq.length + ' agentes revisaron esta quest · ruta T0\u2192T3 · ' + secs.toFixed(1) + 's');
+      crewLine(false, quest, secs);
       cardsEl.innerHTML = buildReviews(wf, quest).join('');
       const cards = cardsEl.querySelectorAll('.sq-review');
       cards.forEach((c, i) => setTimeout(() => c.classList.add('in'), reduceMotion ? 0 : 90 * i));
+
+      if (wf.id === 'marathon' && sqUnlockAdd('El Eternauta')) alive();
     } catch (e) { if (e !== 'cancelled') throw e; }
   }
+
+  // conversational router: free text -> intent -> crew recommendation
+  const SQ_INTENT_MAP = {
+    'llorar': ['emocional', 'triste', 'devastador'], 'cry': ['emocional', 'triste', 'devastador'],
+    'reír': ['comedia', 'sátira'], 'laugh': ['comedia', 'sátira'],
+    'épico': ['épico', 'escala', 'worldbuilding'], 'epic': ['épico', 'escala', 'worldbuilding'],
+    'tech': ['tech', 'startup'], 'argentino': ['argentino', 'literatura argentina', 'cómic argentino'],
+    'música': ['música'], 'music': ['música'], 'disco': ['música'], 'album': ['música'],
+    'libro': ['libro', 'páginas'], 'book': ['libro', 'páginas'],
+    'juego': ['juego'], 'game': ['juego'],
+    'corto': ['breve'], 'short': ['breve'], 'grande': ['largo aliento', 'compromiso alto', '600'],
+    'serie': ['serie'], 'película': [], 'film': [], 'pelicula': [],
+    'crimen': ['crimen', 'detective', 'antihero'], 'misterio': ['misterio', 'detective'],
+    'destruir': ['devastador', 'psicológico', 'triste'], 'destroy': ['devastador', 'psicológico', 'triste'],
+    'calma': ['baja', 'sereno'], 'calm': ['baja', 'sereno'], 'tiempo': ['tiempo', 'infinito']
+  };
+
+  function routeAsk(text) {
+    const norm = text.toLowerCase();
+    const wanted = new Set();
+    Object.keys(SQ_INTENT_MAP).forEach(k => { if (norm.includes(k)) SQ_INTENT_MAP[k].forEach(t => wanted.add(t)); });
+    let best = null, bestS = -1;
+    SIDE_QUESTS.filter(q => !q.hidden || sqUnlockGet().includes(q.title)).forEach(q => {
+      const intel = SQ_INTEL[q.title] || { tags: [] };
+      let s = sqMatch(q);
+      intel.tags.forEach(t => { if (wanted.has(t)) s += 14; });
+      if (norm.includes(q.title.toLowerCase())) s += 50;
+      if (s > bestS) { bestS = s; best = q; }
+    });
+    return best;
+  }
+
+  const askInput = document.getElementById('sq-ask-input');
+  const askBtn = document.getElementById('sq-ask-btn');
+  function doAsk() {
+    const q = (askInput.value || '').trim();
+    if (!q) return;
+    const best = routeAsk(q);
+    const secs = (1 + sqHash(q) % 22 / 10).toFixed(1);
+    if (!best) { sqToast(currentLang === 'en' ? 'No route found — try another feeling' : 'No encontré ruta — probá otro sentir'); return; }
+    const intel = SQ_INTEL[best.title];
+    cardsEl.innerHTML = reviewCard(SQ_AGENTS[2],
+      (currentLang === 'en'
+        ? 'For "' + esc(q) + '" the crew routes to <b>' + esc(best.title) + '</b> — ' + esc(sqL(intel.mood)) + ', ' + esc(intel.time) + '. Signals: ' + intel.signals.join(', ') + '.'
+        : 'Para "' + esc(q) + '" el crew enruta a <b>' + esc(best.title) + '</b> — ' + esc(sqL(intel.mood)) + ', ' + esc(intel.time) + '. Señales: ' + intel.signals.join(', ') + '.'), null) +
+      '<button type="button" class="sq-act" id="sq-ask-go" style="margin:0 14px 6px">' + (currentLang === 'en' ? '→ open quest' : '→ abrir quest') + '</button>';
+    document.getElementById('sq-ask-go').addEventListener('click', () => {
+      const i = SIDE_QUESTS.indexOf(best);
+      if (i >= 0) { currentQuest = i; run(i); window.SQAgentJump && window.SQAgentJump(i); }
+    });
+    log('ask ▸ route("' + esc(q) + '") \u2192 ' + esc(best.title) + ' <span class="ok">\u2713</span> ' + secs + 's');
+  }
+  askBtn.addEventListener('click', doAsk);
+  askInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); doAsk(); } });
+
+  // konami unlock (Meditaciones)
+  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('side-quests-reveal')?.classList.contains('is-visible')) return;
+    konami.push(e.key);
+    konami = konami.slice(-10);
+    if (KONAMI.every((k, i) => (k.length === 1 ? konami[i].toLowerCase() : konami[i]) === k)) {
+      konami = [];
+      if (sqUnlockAdd('Meditaciones')) { run(currentQuest); }
+    }
+  });
+
+  // marathon completion unlock (El Eternauta) handled inside run()
 
   window.SQAgentHook = function (questIndex) {
     currentQuest = questIndex;
     if (document.getElementById('side-quests-reveal')?.classList.contains('is-visible')) run(questIndex);
+  };
+  window.SQAgentJump = function (questIndex) {
+    const reveal = document.getElementById('side-quests-reveal');
+    if (reveal?.classList.contains('is-visible') && window.SQAgentSelect) window.SQAgentSelect(questIndex);
   };
 
   syncModes();
